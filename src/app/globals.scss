@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    background: linear-gradient(65deg, #d4145a, #fbb03b);
+    overflow-x: hidden;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-bg {
+    background-image: linear-gradient(-60deg, #d4145a 50%, #fbb03b 50%);
+    animation: slide 10s ease-in-out infinite alternate;
+    transform: scale(18000%);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -50%;
+    right: -50%;
+    opacity: 0.5;
+    z-index: -1;
+    filter: blur(35px);
+}
+
+.layer-1 {
+    background-image: linear-gradient(60deg, #ff512f 50%, #dd2476 50%);
+    animation-direction: alternate-reverse;
+    animation-duration: 15s;
+}
+
+.layer-2 {
+    background-image: linear-gradient(75deg, #ff61d2 50%, #fe9090 50%);
+    animation-duration: 12s;
+}
+
+.layer-3 {
+    background-image: linear-gradient(-75deg, #f5444490 50%, #f1272790 50%);
+    animation-direction: alternate-reverse;
+    animation-duration: 20s;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(25%);
+    }
+}
+.main {
+    display: grid;
+    place-items: center;
+    color: white;
+    padding: 2em;
+}
+
+.profile-img-border {
+    background: linear-gradient(
+        45deg,
+        #d4145a30,
+        #fbb03b30,
+        #ff512f30,
+        #dd247630,
+        #ff61d230
+    );
+    border-radius: 50em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55vh;
+    height: 55vh;
+    .profile-img {
+        border-radius: 50em;
+    }
+}
+
+.project-card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    row-gap: 1em;
+    column-gap: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    .project-card {
+        position: relative;
+        max-width: calc(50vw - 2em);
+        width: 45vw;
+        height: 35vh;
+        .project-card-floating {
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(15px);
+            display: flex;
+            border-radius: 1em;
+            background-clip: blur(10px);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            &:hover {
+                top: -0.5em;
+            }
+            img {
+                border-radius: 0 1em 1em 0;
+                height: 100%;
+                &.reversed {
+                    border-radius: 1em 0 0 1em;
+                }
+            }
+            .project-card-text {
+                margin-left: 1em;
+                margin-right: 1em;
+            }
+        }
+    }
+}
+.playground-project-card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    row-gap: 1em;
+    column-gap: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    .playground-project-card {
+        position: relative;
+        width: 22.5vw;
+        height: 22.5vw;
+        .playground-project-card-floating {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(15px);
+            border-radius: 1em;
+            background-clip: blur(10px);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            &:hover {
+                top: -0.5em;
+            }
+            img {
+                border-radius: 1em 1em 0 0;
+                height: 75%;
+                width: 100%;
+            }
+            .project-card-text {
+                margin-left: 1em;
+                margin-right: 1em;
+            }
+        }
+    }
+}
