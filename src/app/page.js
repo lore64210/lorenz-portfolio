@@ -1,6 +1,7 @@
 import PlaygroundProjectCard from "@/components/playgroundProjectCard";
 import ProfilePic from "@/components/profilePic";
 import ProjectCard from "@/components/projectCard";
+import "../styles/home.scss";
 
 export default function Home() {
     return (
@@ -13,55 +14,82 @@ export default function Home() {
                 This is a space dedicated to show what can i do, and a little
                 bit of the process of making all this stuff
             </p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1>My projects</h1>
             <div className="project-card-container">
                 <ProjectCard
                     title="Portfolio Express"
                     description="A tool to make your own portfolio with multiple pages and gallery types"
+                    tecnologies="Next.js, Firebase"
                     image="/static/images/profile.webp"
-                    href="/portfolio-express"
+                    href="https://portfolio-maker-ten.vercel.app/"
                 />
                 <ProjectCard
                     title="Reminder"
                     description="A TODO mobile app with many features. A classic developer project"
+                    tecnologies="React Native"
                     image="/static/images/profile.webp"
-                    href="/reminder"
+                    href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
                     reversed
                 />
                 <ProjectCard
                     title="Historia y Humo"
                     description="A blog dedicated to the most important people and events in Argentina through history"
                     image="/static/images/profile.webp"
+                    tecnologies="Django"
                     href="/historia-y-humo"
                 />
                 <ProjectCard
                     title="Planet Shop"
                     description="An ecommerce web page to place your products"
                     image="/static/images/profile.webp"
+                    tecnologies="React, Spring Boot"
                     href="/planet-shop"
                     reversed
                 />
             </div>
-            <p>grid with playground miniprojects</p>
+            <br />
+            <br />
+            <br />
+            <h1>Some mini-projects from my playground</h1>
             <div className="playground-project-card-container">
                 <PlaygroundProjectCard
                     title="Labrynth"
                     image="/static/images/profile.webp"
+                    href="/labrynth"
+                />
+                <PlaygroundProjectCard
+                    title="Balls"
+                    image="/static/images/profile.webp"
+                    href="/balls"
+                />
+                <PlaygroundProjectCard
+                    title="Path finder"
+                    image="/static/images/profile.webp"
+                    href="/path-finder"
                 />
                 <PlaygroundProjectCard
                     title="Labrynth"
                     image="/static/images/profile.webp"
+                    href="/labrynth"
                 />
                 <PlaygroundProjectCard
-                    title="Labrynth"
+                    title="Traveling Salesman"
                     image="/static/images/profile.webp"
+                    href="/traveling-salesman"
                 />
                 <PlaygroundProjectCard
-                    title="Labrynth"
+                    title="Linear regression"
                     image="/static/images/profile.webp"
+                    href="/linear-regression"
                 />
                 <PlaygroundProjectCard
-                    title="Labrynth"
+                    title="Terrain"
                     image="/static/images/profile.webp"
+                    href="/terrain"
                 />
             </div>
         </main>

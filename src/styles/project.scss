@@ -1,0 +1,40 @@
+.project-main {
+    .project-header {
+        display: flex;
+        justify-content: space-around;
+        margin: 2em;
+        align-items: start;
+        margin-top: 10vh;
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            margin-top: 3em;
+            left: 15%;
+            position: absolute;
+            background: rgb(0, 0, 0, 0.5);
+            padding: 1em;
+            border-radius: 1em;
+            a {
+                background: orangered;
+                width: fit-content;
+                padding: 1em;
+                border-radius: 2em;
+                transition: padding 0.25s ease-in-out,
+                    background 0.5s ease-in-out;
+                &:hover {
+                    padding: 1em 1.5em;
+                    background: orange;
+                }
+            }
+        }
+        .header-image {
+            width: 75vw;
+            height: 65vh;
+            margin: 2em;
+            border-radius: 2em;
+        }
+    }
+    .project-content-container {
+        margin: 0 10vw;
+    }
+}

@@ -6,16 +6,20 @@ export default function ProjectCard({
     title,
     description,
     reversed,
+    tecnologies,
     href,
 }) {
     return (
         <div className="project-card">
-            <Link href={href} className="project-card-floating">
+            <Link href={href} target="_blank" className="project-card-floating">
                 {reversed ? (
                     <>
                         <div className="project-card-text">
                             <h2>{title}</h2>
                             <p>{description}</p>
+                            <p>
+                                Stack: <b>{tecnologies}</b>
+                            </p>
                         </div>
                         <ProjectImage src={image} alt={title} />
                     </>
@@ -29,6 +33,9 @@ export default function ProjectCard({
                         <div className="project-card-text">
                             <h2>{title}</h2>
                             <p>{description}</p>
+                            <p>
+                                Stack: <b>{tecnologies}</b>
+                            </p>
                         </div>
                     </>
                 )}
