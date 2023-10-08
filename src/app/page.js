@@ -57,38 +57,33 @@ export default function Home() {
             <h1>Some mini-projects from my playground</h1>
             <div className="playground-project-card-container">
                 <PlaygroundProjectCard
-                    title="Labrynth"
-                    image="/static/images/profile.webp"
-                    href="/labrynth"
+                    title="Maze generator"
+                    image="/static/images/maze.gif"
+                    href="/maze"
                 />
                 <PlaygroundProjectCard
-                    title="Balls"
-                    image="/static/images/profile.webp"
+                    title="Balls Ecosystem"
+                    image="/static/images/balls.gif"
                     href="/balls"
                 />
                 <PlaygroundProjectCard
                     title="Path finder"
-                    image="/static/images/profile.webp"
+                    image="/static/images/path-finder.gif"
                     href="/path-finder"
                 />
                 <PlaygroundProjectCard
-                    title="Labrynth"
-                    image="/static/images/profile.webp"
-                    href="/labrynth"
-                />
-                <PlaygroundProjectCard
                     title="Traveling Salesman"
-                    image="/static/images/profile.webp"
+                    image="/static/images/traveling-salesman.gif"
                     href="/traveling-salesman"
                 />
                 <PlaygroundProjectCard
                     title="Linear regression"
-                    image="/static/images/profile.webp"
+                    image="/static/images/linear-regression.gif"
                     href="/linear-regression"
                 />
                 <PlaygroundProjectCard
                     title="Terrain"
-                    image="/static/images/profile.webp"
+                    image="/static/images/terrain.gif"
                     href="/terrain"
                 />
             </div>
