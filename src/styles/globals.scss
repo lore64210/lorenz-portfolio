@@ -3,12 +3,28 @@ body {
     background: linear-gradient(65deg, #d4145a, #fbb03b);
     overflow-x: hidden;
     color: gainsboro !important;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
 }
 
 a {
     color: gainsboro !important;
     text-decoration: none;
     outline: none;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 2em;
+    width: 20vw;
+}
+
+.main {
+    width: 80vw;
 }
 
 .main-bg {
@@ -40,6 +56,29 @@ a {
     background-image: linear-gradient(-75deg, #f5444490 50%, #f1272790 50%);
     animation-direction: alternate-reverse;
     animation-duration: 20s;
+}
+
+.profile-img-border {
+    background: linear-gradient(
+        45deg,
+        #d4145a30,
+        #fbb03b30,
+        #ff512f30,
+        #dd247630,
+        #ff61d230
+    );
+    border-radius: 50em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 15vw;
+    .profile-img {
+        width: 13vw;
+        height: 13vw;
+        border-radius: 50em;
+    }
 }
 
 @keyframes slide {

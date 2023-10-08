@@ -10,36 +10,38 @@ export default function ProjectCard({
     href,
 }) {
     return (
-        <div className="project-card">
-            <Link href={href} target="_blank" className="project-card-floating">
-                {reversed ? (
-                    <>
-                        <div className="project-card-text">
-                            <h2>{title}</h2>
-                            <p>{description}</p>
-                            <p>
-                                Stack: <b>{tecnologies}</b>
-                            </p>
-                        </div>
-                        <ProjectImage src={image} alt={title} />
-                    </>
-                ) : (
-                    <>
-                        <ProjectImage
-                            src={image}
-                            alt={title}
-                            className="reversed"
-                        />
-                        <div className="project-card-text">
-                            <h2>{title}</h2>
-                            <p>{description}</p>
-                            <p>
-                                Stack: <b>{tecnologies}</b>
-                            </p>
-                        </div>
-                    </>
-                )}
-            </Link>
-        </div>
+        <Link
+            href={href}
+            target="_blank"
+            className={`project-card ${reversed ? " reversed" : ""}`}
+        >
+            {reversed ? (
+                <>
+                    <div className="project-card-text">
+                        <h2>{title}</h2>
+                        <p>{description}</p>
+                        <p>
+                            Stack: <b>{tecnologies}</b>
+                        </p>
+                    </div>
+                    <ProjectImage src={image} alt={title} />
+                </>
+            ) : (
+                <>
+                    <ProjectImage
+                        src={image}
+                        alt={title}
+                        className="reversed"
+                    />
+                    <div className="project-card-text">
+                        <h2>{title}</h2>
+                        <p>{description}</p>
+                        <p>
+                            Stack: <b>{tecnologies}</b>
+                        </p>
+                    </div>
+                </>
+            )}
+        </Link>
     );
 }

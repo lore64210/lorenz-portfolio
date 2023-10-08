@@ -29,7 +29,6 @@ export default () => {
 
         p5.noFill();
         p5.rotateX(p5.PI / 2);
-        //p5.translate(windowSize.width / 5, -windowSize.height / 2, -500);
         p5.translate(-windowSize.width * 1.5, -windowSize.height * 4, -300);
         flying.current -= 0.05;
         let yoff = flying.current;

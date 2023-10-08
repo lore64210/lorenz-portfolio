@@ -1,21 +1,10 @@
 import PlaygroundProjectCard from "@/components/playgroundProjectCard";
-import ProfilePic from "@/components/profilePic";
 import ProjectCard from "@/components/projectCard";
 import "../styles/home.scss";
 
 export default function Home() {
     return (
-        <main className="main">
-            <ProfilePic />
-            <h1>Ladies and Gentleman, welcome</h1>
-            <h2>Lorenzo López Portfolio</h2>
-            <p>Who said that software should be boring?</p>
-            <p>
-                This is a space dedicated to show what can i do, and a little
-                bit of the process of making all this stuff
-            </p>
-            <br />
-            <br />
+        <div className="home">
             <br />
             <br />
             <h1>My projects</h1>
@@ -87,6 +76,6 @@ export default function Home() {
                     href="/terrain"
                 />
             </div>
-        </main>
+        </div>
     );
 }

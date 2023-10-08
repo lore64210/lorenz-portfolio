@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import "../styles/globals.scss";
 import { Montserrat } from "next/font/google";
 
@@ -12,11 +13,14 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={montserrat.className}>
-                <div className="main-bg"></div>
-                <div className="main-bg layer-1"></div>
-                <div className="main-bg layer-2"></div>
-                <div className="main-bg layer-3"></div>
-                {children}
+                <Header />
+                <main className="main">
+                    <div className="main-bg"></div>
+                    <div className="main-bg layer-1"></div>
+                    <div className="main-bg layer-2"></div>
+                    <div className="main-bg layer-3"></div>
+                    {children}
+                </main>
             </body>
         </html>
     );
