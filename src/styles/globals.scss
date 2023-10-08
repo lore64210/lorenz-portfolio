@@ -21,6 +21,9 @@ a {
     height: 100vh;
     padding: 2em;
     width: 20vw;
+    .header-title {
+        margin: 0.25em;
+    }
 }
 
 .main {
@@ -72,8 +75,8 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vh;
-    height: 20vh;
+    width: 21vh;
+    height: 21vh;
     .profile-img {
         width: 19vh;
         height: 19vh;
@@ -87,5 +90,43 @@ a {
     }
     100% {
         transform: translateX(25%);
+    }
+}
+
+h4.header-nav-item {
+    margin: 0;
+    padding: 0.25em;
+}
+.header-nav-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5em;
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+    &:hover {
+        padding: 0.5em;
+        background-color: orange;
+        color: #222831 !important;
+    }
+    transition: all 0.25s;
+}
+
+.accordeon-header {
+    padding: 0.5em;
+    transition: all 0.1s;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.accordeon-content {
+    transition: max-height ease-in-out 0.5s;
+    max-height: 0;
+    overflow: hidden;
+    margin-left: 2em;
+    &.open {
+        max-height: 30vh;
     }
 }
