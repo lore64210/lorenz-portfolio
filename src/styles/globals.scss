@@ -61,22 +61,22 @@ a {
 .profile-img-border {
     background: linear-gradient(
         45deg,
-        #d4145a30,
-        #fbb03b30,
-        #ff512f30,
-        #dd247630,
-        #ff61d230
+        #d4145a20,
+        #fbb03b20,
+        #ff512f20,
+        #dd247620,
+        #ff61d220
     );
     border-radius: 50em;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 15vw;
-    height: 15vw;
+    width: 20vh;
+    height: 20vh;
     .profile-img {
-        width: 13vw;
-        height: 13vw;
+        width: 19vh;
+        height: 19vh;
         border-radius: 50em;
     }
 }
