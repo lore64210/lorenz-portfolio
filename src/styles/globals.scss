@@ -19,10 +19,66 @@ a {
     position: sticky;
     top: 0;
     height: 90vh;
-    padding: 2em;
+    padding: 20px;
+    margin-bottom: 20px;
     width: 20vw;
     .header-title {
-        margin: 0.25em;
+        cursor: pointer;
+        position: absolute;
+        &:hover {
+            animation: shake 3s infinite;
+        }
+    }
+    nav {
+        margin-top: 4em;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+        color: #fe9090;
+        font-family: "Times New Roman", Times, serif;
+    }
+    12% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+        color: #d4145a;
+    }
+    22% {
+        transform: translate(-3px, 0px) rotate(1deg);
+        color: #ff512f;
+    }
+    33% {
+        transform: translate(3px, 2px) rotate(0deg);
+        color: #f5444490;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    44% {
+        transform: translate(1px, -1px) rotate(1deg);
+        color: #f1272790;
+    }
+    55% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+        color: #fbb03b;
+    }
+    66% {
+        transform: translate(-3px, 1px) rotate(0deg);
+        color: #ffff00;
+        font-family: fantasy;
+    }
+    77% {
+        transform: translate(3px, 1px) rotate(-1deg);
+        color: #ff8000;
+    }
+    89% {
+        transform: translate(-1px, -1px) rotate(1deg);
+        color: #ff4000;
+        font-family: cursive;
+    }
+    100% {
+        transform: translate(1px, 2px) rotate(0deg);
+        color: #ff0000;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     }
 }
 
