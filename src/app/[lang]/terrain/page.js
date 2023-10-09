@@ -1,5 +1,5 @@
 import TerrainPage from "@/components/miniprojects/terrain";
-import "../../styles/project.scss";
+import "../../../styles/project.scss";
 
 export default function Terrain() {
     return (

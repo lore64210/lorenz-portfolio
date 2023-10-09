@@ -2,7 +2,7 @@ import Link from "next/link";
 import ProfilePic from "./profilePic";
 import Accordeon from "./accordeon";
 
-export default function Header() {
+export default function Header({ dict }) {
     return (
         <header className="header">
             <div className="header-image">
@@ -13,56 +13,86 @@ export default function Header() {
                 <nav>
                     <div>
                         <Link href="/" className="header-nav-item">
-                            <h3>Home</h3>
+                            <h3>{dict.header.home}</h3>
                         </Link>
                         <Link href="/about-me" className="header-nav-item">
-                            <h3>About me</h3>
+                            <h3>{dict.header["about-me"]}</h3>
                         </Link>
                         <Accordeon
                             headerClassName="header-nav-item"
                             items={[
                                 {
                                     show: true,
-                                    header: <h3>Projects</h3>,
+                                    header: <h3>{dict.header.projects}</h3>,
                                     content: (
                                         <>
                                             <h4 className="header-nav-item">
-                                                Portfolio Maker
+                                                {
+                                                    dict.projects[
+                                                        "portfolio-maker"
+                                                    ].title
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Historia y Humo
+                                                {
+                                                    dict.projects[
+                                                        "historia-humo"
+                                                    ].title
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Organizer
+                                                {
+                                                    dict.projects["organizer"]
+                                                        .title
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                PlanetShop
+                                                {
+                                                    dict.projects["planet-shop"]
+                                                        .title
+                                                }
                                             </h4>
                                         </>
                                     ),
                                 },
                                 {
                                     show: true,
-                                    header: <h3>Playground</h3>,
+                                    header: <h3>{dict.header.playground}</h3>,
                                     content: (
                                         <>
                                             <h4 className="header-nav-item">
-                                                Maze Generator
+                                                {
+                                                    dict.playground[
+                                                        "maze-generator"
+                                                    ]
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Balls Ecosystem
+                                                {
+                                                    dict.playground[
+                                                        "balls-ecosystem"
+                                                    ]
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Path Finder
+                                                {dict.playground["path-finder"]}
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Traveling Salesman
+                                                {
+                                                    dict.playground[
+                                                        "traveling-salesman"
+                                                    ]
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Linear Regression
+                                                {
+                                                    dict.playground[
+                                                        "linear-regression"
+                                                    ]
+                                                }
                                             </h4>
                                             <h4 className="header-nav-item">
-                                                Terrain
+                                                {dict.playground["terrain"]}
                                             </h4>
                                         </>
                                     ),

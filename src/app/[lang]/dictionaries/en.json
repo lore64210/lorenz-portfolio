@@ -1,0 +1,36 @@
+{
+    "header": {
+        "home": "Home",
+        "about-me": "About Me",
+        "projects": "Projects",
+        "playground": "Playground"
+    },
+    "projects": {
+        "title": "My Projects",
+        "portfolio-maker": {
+            "title": "Portfolio Maker",
+            "description": "A tool to make your own portfolio with multiple pages and gallery types"
+        },
+        "historia-humo": {
+            "title": "Historia y Humo",
+            "description": "A blog dedicated to the most important people and events in Argentina through history"
+        },
+        "organizer": {
+            "title": "Organizer",
+            "description": "A TODO mobile app with many features like taking pictures, record audios, checklist and more. A classic developer project"
+        },
+        "planet-shop": {
+            "title": "Planet Shop",
+            "description": "An ecommerce web page to sell your products, manage stock, discounts, etc..."
+        }
+    },
+    "playground": {
+        "title": "Some mini-projects from my playground",
+        "maze-generator": "Maze Generator",
+        "balls-ecosystem": "Ball Ecosystem",
+        "path-finder": "Path Finder",
+        "traveling-salesman": "Traveling Salesman",
+        "linear-regression": "Linear Regression",
+        "terrain": "Terrain"
+    }
+}

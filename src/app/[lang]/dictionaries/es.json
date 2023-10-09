@@ -1,0 +1,36 @@
+{
+    "header": {
+        "home": "Home",
+        "about-me": "Sobre mi",
+        "projects": "Proyectos",
+        "playground": "Playground"
+    },
+    "projects": {
+        "title": "Mis Proyectos",
+        "portfolio-maker": {
+            "title": "Portfolio Maker",
+            "description": "Una herramienta para hacer tu propio Portfolio con multiples paginas, distintos tipos de galerias, y varias configuraciones de estilo"
+        },
+        "historia-humo": {
+            "title": "Historia y Humo",
+            "description": "Un blog dedicado a las personas y eventos mas importantes de la historia Argentina"
+        },
+        "organizer": {
+            "title": "Organizer",
+            "description": "Una app mobile que es el clasico del dev que esta aprendiendo a programar: Una TODO-app con varias funciones como sacar fotos, grabar audios entre otras"
+        },
+        "planet-shop": {
+            "title": "Planet Shop",
+            "description": "Una tienda ecommerce para mostrar tus productos, manejar stock, precios, descuentos, etc..."
+        }
+    },
+    "playground": {
+        "title": "Algunos mini-proyectitos que fui armando cada tanto",
+        "maze-generator": "Maze Generator",
+        "balls-ecosystem": "Ball Ecosystem",
+        "path-finder": "Path Finder",
+        "traveling-salesman": "Traveling Salesman",
+        "linear-regression": "Linear Regression",
+        "terrain": "Terrain"
+    }
+}

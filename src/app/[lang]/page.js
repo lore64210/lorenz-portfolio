@@ -1,39 +1,41 @@
 import PlaygroundProjectCard from "@/components/playgroundProjectCard";
 import ProjectCard from "@/components/projectCard";
-import "../styles/home.scss";
+import { getDictionary } from "./dictionaries";
+import "../../styles/home.scss";
 
-export default function Home() {
+export default async function Home({ params: { lang = "es" } }) {
+    const dict = await getDictionary(lang);
     return (
         <div className="home">
             <br />
             <br />
-            <h1>My projects</h1>
+            <h1>{dict.projects.title}</h1>
             <div className="project-card-container">
                 <ProjectCard
-                    title="Portfolio Express"
-                    description="A tool to make your own portfolio with multiple pages and gallery types"
+                    title={dict.projects["portfolio-maker"].title}
+                    description={dict.projects["portfolio-maker"].description}
                     tecnologies="Next.js, Firebase"
                     image="/static/images/profile.webp"
                     href="https://portfolio-maker-ten.vercel.app/"
                 />
                 <ProjectCard
-                    title="Reminder"
-                    description="A TODO mobile app with many features. A classic developer project"
+                    title={dict.projects["organizer"].title}
+                    description={dict.projects["organizer"].description}
                     tecnologies="React Native"
                     image="/static/images/profile.webp"
                     href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
                     reversed
                 />
                 <ProjectCard
-                    title="Historia y Humo"
-                    description="A blog dedicated to the most important people and events in Argentina through history"
+                    title={dict.projects["historia-humo"].title}
+                    description={dict.projects["historia-humo"].description}
                     image="/static/images/profile.webp"
                     tecnologies="Django"
                     href="/historia-y-humo"
                 />
                 <ProjectCard
-                    title="Planet Shop"
-                    description="An ecommerce web page to place your products"
+                    title={dict.projects["planet-shop"].title}
+                    description={dict.projects["planet-shop"].description}
                     image="/static/images/profile.webp"
                     tecnologies="React, Spring Boot"
                     href="/planet-shop"
@@ -43,35 +45,35 @@ export default function Home() {
             <br />
             <br />
             <br />
-            <h1>Some mini-projects from my playground</h1>
+            <h1>{dict.playground.title}</h1>
             <div className="playground-project-card-container">
                 <PlaygroundProjectCard
-                    title="Maze generator"
+                    title={dict.playground["maze-generator"]}
                     image="/static/images/maze.gif"
                     href="/maze"
                 />
                 <PlaygroundProjectCard
-                    title="Balls Ecosystem"
+                    title={dict.playground["balls-ecosystem"]}
                     image="/static/images/balls.gif"
                     href="/balls"
                 />
                 <PlaygroundProjectCard
-                    title="Path finder"
+                    title={dict.playground["path-finder"]}
                     image="/static/images/path-finder.gif"
                     href="/path-finder"
                 />
                 <PlaygroundProjectCard
-                    title="Traveling Salesman"
+                    title={dict.playground["traveling-salesman"]}
                     image="/static/images/traveling-salesman.gif"
                     href="/traveling-salesman"
                 />
                 <PlaygroundProjectCard
-                    title="Linear regression"
+                    title={dict.playground["linear-regression"]}
                     image="/static/images/linear-regression.gif"
                     href="/linear-regression"
                 />
                 <PlaygroundProjectCard
-                    title="Terrain"
+                    title={dict.playground["terrain"]}
                     image="/static/images/terrain.gif"
                     href="/terrain"
                 />
