@@ -13,7 +13,6 @@ export default function useWindowSize() {
                 height: screen.height,
             });
         }
-        console.log("asdasd");
         window.addEventListener("resize", handleResize);
 
         handleResize();
