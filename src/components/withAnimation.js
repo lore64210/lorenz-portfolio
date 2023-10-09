@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function WithAnimation({
     children,
     animationName = "opacity",
+    animationDuration = 2,
     className,
 }) {
     const [isIntersecting, setIsIntersecting] = useState(false);
@@ -28,7 +29,7 @@ export default function WithAnimation({
                 isIntersecting
                     ? {
                           animationName,
-                          animationDuration: "2s",
+                          animationDuration: animationDuration + "s",
                       }
                     : { opacity: 0 }
             }

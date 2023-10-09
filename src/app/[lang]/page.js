@@ -1,6 +1,7 @@
 import PlaygroundProjectCard from "@/components/playgroundProjectCard";
 import ProjectCard from "@/components/projectCard";
 import { getDictionary } from "./dictionaries";
+import WithAnimation from "@/components/withAnimation";
 import "../../styles/home.scss";
 
 export default async function Home({ params: { lang = "es" } }) {
@@ -9,7 +10,9 @@ export default async function Home({ params: { lang = "es" } }) {
         <div className="home">
             <br />
             <br />
-            <h1>{dict.projects.title}</h1>
+            <WithAnimation>
+                <h1>{dict.projects.title}</h1>
+            </WithAnimation>
             <div className="project-card-container">
                 <ProjectCard
                     title={dict.projects["portfolio-maker"].title}
@@ -45,7 +48,9 @@ export default async function Home({ params: { lang = "es" } }) {
             <br />
             <br />
             <br />
-            <h1>{dict.playground.title}</h1>
+            <WithAnimation>
+                <h1>{dict.playground.title}</h1>
+            </WithAnimation>
             <div className="playground-project-card-container">
                 <PlaygroundProjectCard
                     title={dict.playground["maze-generator"]}
