@@ -22,19 +22,35 @@ a {
     padding: 20px;
     margin-bottom: 20px;
     width: 20vw;
+    &:hover {
+        .header-title {
+            animation: shake 3s infinite;
+        }
+        .header-image {
+            .profile-img-border {
+                width: 30vh;
+                height: 30vh;
+                .profile-img {
+                    width: 27vh;
+                    height: 27vh;
+                }
+            }
+        }
+    }
+    .header-image {
+        margin-left: 2em;
+    }
     .header-title {
         cursor: pointer;
         position: absolute;
         display: flex;
         justify-content: center;
-        padding-left: 1em;
-        padding-right: 1em;
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+        width: 85%;
         height: 2em;
         align-items: center;
         border-radius: 1em;
-        &:hover {
-            animation: shake 3s infinite;
-        }
     }
     nav {
         margin-top: 6em;
@@ -160,6 +176,7 @@ a {
         #dd247620,
         #ff61d220
     );
+    transition: all 0.5s ease-in-out;
     border-radius: 50em;
     position: relative;
     display: flex;
@@ -168,6 +185,7 @@ a {
     width: 21vh;
     height: 21vh;
     .profile-img {
+        transition: all 1s ease-in-out;
         width: 19vh;
         height: 19vh;
         border-radius: 50em;
@@ -218,5 +236,14 @@ h4.header-nav-item {
     margin-left: 2em;
     &.open {
         max-height: 30vh;
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

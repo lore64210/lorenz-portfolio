@@ -5,7 +5,9 @@ import Accordeon from "./accordeon";
 export default function Header() {
     return (
         <header className="header">
-            <ProfilePic />
+            <div className="header-image">
+                <ProfilePic />
+            </div>
             <div>
                 <h1 className="header-title">Lorenzo Lopez</h1>
                 <nav>
