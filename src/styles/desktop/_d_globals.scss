@@ -133,6 +133,8 @@ a {
 
 .main {
     width: 80vw;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 .main-bg {

@@ -11,7 +11,7 @@ export default function ProjectCard({
     href,
 }) {
     return (
-        <WithAnimation>
+        <WithAnimation className="project-card-animation-container">
             <Link
                 href={href}
                 target="_blank"

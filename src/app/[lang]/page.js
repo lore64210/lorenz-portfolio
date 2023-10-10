@@ -8,8 +8,6 @@ export default async function Home({ params: { lang = "es" } }) {
     const dict = await getDictionary(lang);
     return (
         <div className="home">
-            <br />
-            <br />
             <WithAnimation>
                 <h1>{dict.projects.title}</h1>
             </WithAnimation>
@@ -45,9 +43,6 @@ export default async function Home({ params: { lang = "es" } }) {
                     reversed
                 />
             </div>
-            <br />
-            <br />
-            <br />
             <WithAnimation>
                 <h1>{dict.playground.title}</h1>
             </WithAnimation>
