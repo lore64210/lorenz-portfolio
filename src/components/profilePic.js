@@ -4,13 +4,13 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Image from "next/image";
 import WithAnimation from "./withAnimation";
 
-export default function ProfilePic() {
+export default function ProfilePic({ className }) {
     const isMobile = useIsMobile();
     const { width, height } = useWindowSize();
     const size = isMobile ? (width * 75) / 100 : (height * 40) / 100;
     return (
         !!size && (
-            <WithAnimation>
+            <WithAnimation className={className}>
                 <div className="profile-img-border">
                     <Image
                         src="/static/images/profile.webp"

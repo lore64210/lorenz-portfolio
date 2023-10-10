@@ -1,14 +1,18 @@
+"use client";
 import Link from "next/link";
-import ProfilePic from "./profilePic";
-import Accordeon from "./accordeon";
+import ProfilePic from "../profilePic";
+import Accordeon from "../accordeon";
+import useIsMobile from "@/hooks/useIsMobile";
+import MobileHeader from "./mobileHeader";
 
 export default function Header({ dict }) {
-    return (
+    const isMobile = useIsMobile();
+    return isMobile ? (
+        <MobileHeader dict={dict} />
+    ) : (
         <header className="header">
-            <div className="header-image">
-                <ProfilePic />
-            </div>
-            <div>
+            <ProfilePic className="header-image" />
+            <div className="header-content">
                 <h1 className="header-title">Lorenzo Lopez</h1>
                 <nav>
                     <div>

@@ -24,7 +24,7 @@ a {
     width: 20vw;
     &:hover {
         .header-title {
-            animation: shake 3s infinite;
+            animation: shake 1s;
         }
         .header-image {
             .profile-img-border {
@@ -125,9 +125,8 @@ a {
     }
     100% {
         transform: translate(1px, 1px) rotate(0deg);
-        color: #fe9090;
-        background-color: orange;
-        font-family: "Times New Roman", Times, serif;
+        color: white;
+        background-color: transparent;
         border-radius: 0;
     }
 }
@@ -147,7 +146,7 @@ a {
     right: -50%;
     opacity: 0.5;
     z-index: -1;
-    filter: blur(100px);
+    filter: blur(30px);
 }
 
 .layer-1 {
