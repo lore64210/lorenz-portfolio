@@ -3,6 +3,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    h1 {
+        text-align: center;
+    }
 }
 
 .project-card-container {
@@ -53,6 +56,54 @@
                 margin-left: 1em;
                 margin-right: 1em;
                 width: 90%;
+            }
+        }
+    }
+}
+
+.playground-project-card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    row-gap: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100vw;
+    margin-left: 5vw;
+    .playground-project-card {
+        position: relative;
+        width: 45vw;
+        height: 45vw;
+        .playground-project-card-floating {
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(15px);
+            border-radius: 1em;
+            background-clip: blur(10px);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            &:hover {
+                top: -0.5em;
+            }
+            img {
+                border-radius: 1em 1em 0 0;
+                width: 100%;
+                height: 60%;
+            }
+            h2 {
+                margin: 0;
+                margin-top: 0.5em;
+                text-align: center;
             }
         }
     }
