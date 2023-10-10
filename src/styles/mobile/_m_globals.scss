@@ -1,5 +1,11 @@
 body {
-    display: block;
+    grid-template-columns: 1fr;
+    align-items: center;
+}
+.main {
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 .header {
     position: sticky;
@@ -9,7 +15,6 @@ body {
     z-index: 1;
     height: 10vh;
     width: 100vw;
-
     .header-content {
         background-color: rgb(255, 69, 0);
         display: flex;
