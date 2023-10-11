@@ -50,32 +50,32 @@ export default async function Home({ params: { lang = "es" } }) {
                 <PlaygroundProjectCard
                     title={dict.playground["maze-generator"]}
                     image="/static/images/maze.gif"
-                    href="/maze"
+                    href={`/${lang}/maze`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["balls-ecosystem"]}
                     image="/static/images/balls.gif"
-                    href="/balls"
+                    href={`/${lang}/balls-ecosystem`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["path-finder"]}
                     image="/static/images/path-finder.gif"
-                    href="/path-finder"
+                    href={`/${lang}/path-finder`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["traveling-salesman"]}
                     image="/static/images/traveling-salesman.gif"
-                    href="/traveling-salesman"
+                    href={`/${lang}/traveling-salesman`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["linear-regression"]}
                     image="/static/images/linear-regression.gif"
-                    href="/linear-regression"
+                    href={`/${lang}/linear-regression`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["terrain"]}
                     image="/static/images/terrain.gif"
-                    href="/terrain"
+                    href={`/${lang}/terrain`}
                 />
             </div>
         </div>
