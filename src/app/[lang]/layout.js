@@ -19,7 +19,7 @@ export default async function RootLayout({
     return (
         <html lang={lang}>
             <body className={montserrat.className}>
-                <Header dict={dict} />
+                <Header dict={dict} lang={lang} />
                 <main className="main">
                     <div className="main-bg"></div>
                     <div className="main-bg layer-1"></div>

@@ -2,7 +2,7 @@ import HeaderMenuIcon from "./headerMenuIcon";
 import { useCallback, useRef, useState } from "react";
 import MobileHeaderDialog from "./mobileHeaderDialog";
 
-export default function MobileHeader({ dict }) {
+export default function MobileHeader({ dict, lang }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const ref = useRef();
     const handleModalOpen = useCallback(() => {
@@ -26,6 +26,7 @@ export default function MobileHeader({ dict }) {
                     handleClose={handleModalClose}
                     ref={ref}
                     dict={dict}
+                    lang={lang}
                 />
             </div>
         </header>
