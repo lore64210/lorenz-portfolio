@@ -1,0 +1,21 @@
+.project-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .project-description-container {
+        align-self: flex-start;
+        padding: 1em;
+        background-color: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        border-radius: 1em;
+        width: 90vw;
+        margin: 0;
+    }
+}
+
+.canvas-container {
+    display: flex;
+    justify-content: center;
+}

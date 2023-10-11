@@ -1,41 +1,17 @@
-.project-main {
-    .project-header {
-        display: flex;
-        justify-content: space-around;
+.project-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .project-description-container {
+        align-self: flex-start;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(15px);
+        border-radius: 1em;
+        padding: 1em;
         margin: 2em;
-        align-items: start;
-        margin-top: 10vh;
-        .header-text {
-            display: flex;
-            flex-direction: column;
-            margin-top: 3em;
-            left: 15%;
-            position: absolute;
-            background: rgb(0, 0, 0, 0.5);
-            padding: 1em;
-            border-radius: 1em;
-            a {
-                background: orangered;
-                width: fit-content;
-                padding: 1em;
-                border-radius: 2em;
-                transition: padding 0.25s ease-in-out,
-                    background 0.5s ease-in-out;
-                &:hover {
-                    padding: 1em 1.5em;
-                    background: orange;
-                }
-            }
-        }
-        .header-image {
-            width: 75vw;
-            height: 65vh;
-            margin: 2em;
-            border-radius: 2em;
-        }
-    }
-    .project-content-container {
-        margin: 0 10vw;
+        width: 50vw;
     }
 }
 

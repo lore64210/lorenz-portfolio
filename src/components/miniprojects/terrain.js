@@ -1,5 +1,6 @@
 "use client";
 import P5Container from "@/components/miniprojects/P5Container";
+import useIsMobile from "@/hooks/useIsMobile";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useRef } from "react";
 
@@ -12,9 +13,13 @@ export default () => {
     const canvasSize = 1000;
     const rows = canvasSize / scale;
     const cols = rows;
+    const isMobile = useIsMobile();
 
     const setup = (p5, canvasRef) => {
-        p5.createCanvas(600, 600, p5.WEBGL).parent(canvasRef);
+        const canvasSize = isMobile
+            ? windowSize.width - 20
+            : windowSize.height / 2;
+        p5.createCanvas(canvasSize, canvasSize, p5.WEBGL).parent(canvasRef);
 
         const terrain = new Array(rows);
         for (let i = 0; i < terrain.length; i++) {
