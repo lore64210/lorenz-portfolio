@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProjectImage from "./projectImage";
 import WithAnimation from "./withAnimation";
+import Blob from "./blob";
 
 export default function ProjectCard({
     image,
@@ -9,6 +10,7 @@ export default function ProjectCard({
     reversed,
     tecnologies,
     href,
+    portfolioMaker,
 }) {
     return (
         <WithAnimation className="project-card-animation-container">
@@ -30,11 +32,15 @@ export default function ProjectCard({
                     </>
                 ) : (
                     <>
-                        <ProjectImage
-                            src={image}
-                            alt={title}
-                            className="reversed"
-                        />
+                        {portfolioMaker ? (
+                            <Blob />
+                        ) : (
+                            <ProjectImage
+                                src={image}
+                                alt={title}
+                                className="reversed"
+                            />
+                        )}
                         <div className="project-card-text">
                             <h2>{title}</h2>
                             <p>{description}</p>

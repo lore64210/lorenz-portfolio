@@ -17,6 +17,7 @@ export default async function Home({ params: { lang = "es" } }) {
                     description={dict.projects["portfolio-maker"].description}
                     tecnologies="Next.js, Firebase"
                     image="/static/images/profile.webp"
+                    portfolioMaker
                     href="https://portfolio-maker-ten.vercel.app/"
                 />
                 <ProjectCard
