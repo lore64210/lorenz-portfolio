@@ -43,6 +43,14 @@
                     }
                 }
             }
+            .blob-container {
+                width: 45%;
+                .blob {
+                    top: 15%;
+                    left: 30%;
+                    width: 40%;
+                }
+            }
         }
         img {
             transition: all 0.35s ease-in-out;
@@ -132,6 +140,7 @@
     height: auto;
     position: relative;
     border-radius: 1em 0 0 1em;
+    transition: all 0.5s ease-in-out;
 }
 
 .radial-gradient-background {
@@ -142,12 +151,13 @@
 
 .blob {
     position: absolute;
-    top: 10%;
+    top: 13%;
     left: 25%;
     fill: #222831;
-    width: 50%;
+    width: 45%;
     animation: moveBlob 30s ease-in-out infinite, fill 20s ease-in-out infinite;
     transform-origin: 50% 50%;
+    transition: all 0.5s ease-in-out;
 }
 
 @keyframes fill {
