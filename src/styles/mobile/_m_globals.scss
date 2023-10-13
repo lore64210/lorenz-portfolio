@@ -111,3 +111,10 @@ body {
         stroke-width: 6;
     }
 }
+
+.accordeon-content {
+    margin-left: 1em;
+    &.open {
+        max-height: 90vh;
+    }
+}
