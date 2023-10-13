@@ -4,12 +4,12 @@ import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useRef } from "react";
 
-const CONSUMABLES_AMOUNT = 50;
-const CONSUMABLE_GENERATION_RATE = 0.9; // 0 to 1
-const VEHICLES_AMOUNT = 20;
+const CONSUMABLES_AMOUNT = 20;
+const CONSUMABLE_GENERATION_RATE = 0.3; // 0 to 1
+const VEHICLES_AMOUNT = 10;
 
-const ACCELERATION_RATE = 1; // the bigger the better the behaviours
-const MIN_ACCELERATION = 0.0001;
+const ACCELERATION_RATE = 2; // the bigger the better the behaviours
+const MIN_ACCELERATION = 0.001;
 const MAX_VELOCITY = 5;
 
 const CONSUMABLE_VALUE = 150;

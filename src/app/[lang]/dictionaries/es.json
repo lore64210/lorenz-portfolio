@@ -31,5 +31,77 @@
         "path-finder": "Path Finder",
         "traveling-salesman": "Traveling Salesman",
         "terrain": "Terrain"
+    },
+    "projects-content": {
+        "maze-generator": {
+            "title": "Laberintos aleatorios!",
+            "content": [
+                "Que mejor manera de aplicar algoritmos de busqueda que con un laberinto?",
+                "Con este algoritmo generamos un laberinto distinto en cada ocasion",
+                "Cada celda del laberinto es un nodo, y las \"paredes\" son booleanos para saber si hay una pared en alguna direccion",
+                "De esta forma, armamos un grafo con sus vertices, y lo representamos visualmente. Al ser un grafo, podemos aplicar un algoritmo sobre este de forma sencilla para ir recorriendo los nodos segun los vertices que tengamos al alcance"
+            ]
+        },
+        "balls": {
+            "title": "Pelotas locas",
+            "content": [
+                "Estudiando choques elasticos en un sistema de particulas en condiciones ideales cuando iba a la facultad me imaginaba algo asi",
+                "Pensando a una pelotita como un agente individual con velocidad y aceleracion, su unica responsabilidad es moverse conservando estos valores hasta que se choque con algo",
+                "En caso de que se encuentre con una pared, dependiendo de cual, su velocidad pasa a ser negativa en X o en Y",
+                "Algo similar pasa con el contacto con otro agente, pero \"transfiriendo\" la velocidad de una pelotita a otra, cambiando la direccion de ambas",
+                "Para que no sea tan aburrido, la aceleracion de las pelotitas va a ir dirigida hacia el mouse si se lo ubica sobre el canvas"
+            ]
+        },
+        "balls-ecosystem": {
+            "title": "Pelotas Inteligentes!",
+            "content": [
+                "Estas pelotas son mas especiales, porque estan vivas, y tienen hambre.",
+                "A medida que pasa el tiempo, su tamaño va disminuyendo, hasta que si son muy chiquititas, se mueren, desaparecen",
+                "Una pelota puede aumentar su tamaño comiendo puntitos verdes, o a otras pelotas que sean mas chicas que esta. Comer puntitos rojos (veneno) va a disminuir su tamaño",
+                "Cada pelota tiene un valor aleatorio por cada \"interes\" y por cada \"rechazo\" que tenga, este interes/rechazo puede ser sobre puntos verdes, rojos u otras pelotas, mas chicas o grandes",
+                "Mientras mayor sea el interes, su aceleracion rotara el movimiento del agente hacia su objetivo, y su rechazo lo alejará",
+                "Pero la mejor de este mini proyectito es que cada vez que quede una sola pelota viva en el coliseo multicolor, termina una iteracion",
+                "Y por cada iteracion, se aplica un algoritmo genetico, que se usa para la creacion de la siguiente ronda de pelotitas",
+                "Mientras mas tiempo haya durado una pelota en una iteracion, mayor la probabilidad de que sus genes (sus intereses y rechazos) sean elegidos para la creacion de una nueva pelotita",
+                "Esta evolucion genetica se puede ver representada por los colores de las pelotas: Iteracion tras iteracion, los colores son cada ves mas homogeneos, debido a que por una seleccion de genes del mas fuerte, las nuevas pelotas heredan sus caracteristicas",
+                "Por supuesto, hay pequeños cambios aleatorios (mutaciones) entre generacion y generacion, para que no se vuelva predecible lo que va a pasar",
+                "Si nos quedamos observando a los supervivientes en su pequeño, violento e injusto mundo, probablemente puedan ver a lo que me estoy refiriendo"
+            ]
+        },
+        "path-finder": {
+            "title": "Buscando el caminito",
+            "content": [
+                "Al igual que con otros ejemplos, la estructura que use para generar este tablero es un grafo",
+                "La idea es que el agente vaya desde la punta superior izquierda hasta la punta inferior derecha",
+                "Puede moverse en vertical, horizontal y en diagonales, por lo que en un gran porcentaje, puede hayar un camino",
+                "En caso de que sea imposible acceder a la meta, va seguir expandiendose por el terreno como si fuera un hongo hasta que no tenga mas espacio para moverse",
+                "El algoritmo que use para encontrar el camino mas corto es A*, uno conocido por su elegancia y eficiencia",
+                "Los puntos verdes son los recorridos, y los amarillos son los que el algoritmo puede elegir para moverse",
+                "Siempre va a elegir un punto amarillo que le convenga mas para llegar a la meta, y la decision de cual es el mas conveniente lo hace a travez de la heuristica, o sea, que sabiendo donde esta la meta respecto a su posicion actual, elije el punto amarillo que menor distancia represente el proximo movimiento (una decision tirada al azar si, pero informada y con fundamento)",
+                "Es decir, que si bien no sabe si el siguiente paso que va a tomar lo va a llevar a un callejon sin salida, en el mejor de los casos es el mejor camino posible"
+            ]
+        },
+        "traveling-salesman": {
+            "title": "La distancia mas corta",
+            "content": [
+                "Aca dejo una representacion visual de la solucion a un problema conocido de logica",
+                "El objetivo es encontrar, dada una X cantidad de puntos, el camino mas corto que los una a todos",
+                "La primera aproximacion, y las mas herratica, trata de contrar una solucion de forma aleatoria, usando fuerza bruta, cada vez que prueba almacena la distancia y si encuentra una distancia menor a la distancia actual, cambia la solucion encontrada y sigue buscando",
+                "La segunda aproximacion es recursiva, va de forma ordenada nodo por nodo probando todas las combinaciones posibles, es un proceso muy lento pero eventualmente va a encontrar la solucion. Es un tipo distinto de fuerza bruta",
+                "La tercera es la mas eficiente, donde usa un algoritmo genetico para ir buscando soluciones en paralelo, de todas las soluciones encontradas en una iteracion, se agarran las mejores para ser tenidas en cuenta en la siguiente etapa",
+                "El proceso se repite incontables veces pero en cada iteracion hay un progreso considerable, por lo que la hace una solucion mas rapida a la de la fuerza bruta"
+            ]
+        },
+        "terrain": {
+            "title": "Generador de terrenos!",
+            "content": [
+                "Este es especial, podria quedarme mirandolo para siempre",
+                "La idea es sencilla, es una matriz de vertices que tienen una posicion (x,y,z)",
+                "se usan los ejes x y z para dibujar los triangulos, y el eje z para elevar dichos triangulos",
+                "El canvas esta rotado y trasladado para que se pueda visualizar mejor como z sube y baja",
+                "La forma en que sube y baja z es a travez de \"El sonido de Perlin\", una forma especial de usar el algoritmo RANDOM, pero en lugar de ser una subida y bajada erratica donde se va de 0 a 100, la curva de cambio es muchisimo mas tenue",
+                "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z que va incrementandose un poquito despues de cada iteracion, lo que hace que parezca que estamos sobrevolando unas montañas en lugar de estar rebotando en una gelatina"
+            ]
+        }
     }
 }

@@ -31,5 +31,76 @@
         "path-finder": "Path Finder",
         "traveling-salesman": "Traveling Salesman",
         "terrain": "Terrain"
+    },
+    "projects-content": {
+        "maze-generator": {
+            "title": "Random Mazes!",
+            "content": [
+                "Mazes are the best way to apply search algorithms",
+                "In this example, a different maze is going to be created each time",
+                "Each cell of the maze is a node, and the walls are booleans that tells us if we can move in each direction",
+                "This way we created a graph with its verteces and conections between them. And being a graph, applying the search algorithm is easy, we just have to visualize it using some state that represents if the cell is being used or not"
+            ]
+        },
+        "balls": {
+            "title": "Crazy balls",
+            "content": [
+                "This is what i imagined when i studied particle systems in physics",
+                "Each ball is an agent with acceleration and velocity, and its only responsability is to keep those values until it collides with something",
+                "When it hits a wall, its velocity changes the ball's direction",
+                "Something similar happeens when colliding with another agent, only that it's transferring its velocity to the other ball and changing directions of both of them",
+                "Also, agents acceleration are slightly changing if you put your mouse over the canvas, every ball it's going to be headed to your cursor"
+            ]
+        },
+        "balls-ecosystem": {
+            "title": "Smart balls",
+            "content": [
+                "These balls are special, because they are alive, and also hungry",
+                "As time goes by, their size decreases, until if they are very small, they die, disappear",
+                "A ball can increase its size by eating green dots, or other balls that are smaller than this one. Eating red dots (poison) will reduce their size",
+                "Each ball has a random value for each \"interest\" and for each \"rejection\" it has, this interest/rejection can be on green, red dots or other balls, smaller or larger.",
+                "The greater the interest, its acceleration will rotate the agent's movement towards its objective, and its rejection will move it away",
+                "But the best thing about this mini project is that every time there is a single live ball left in the multicolored coliseum, an iteration ends",
+                "And for each iteration, a genetic algorithm is applied, which is used to create the next round of balls",
+                "The longer a ball has lasted in an iteration, the greater the probability that its genes (its interests and rejections) will be chosen for the creation of a new ball",
+                "This genetic evolution can be seen represented by the colors of the balls: Iteration after iteration, the colors are increasingly more homogeneous, because through a selection of genes from the strongest, the new balls inherit their characteristics",
+                "Of course, there are small random changes (mutations) between generations, so that what is going to happen does not become predictable",
+                "If we just watch the survivors in their small, violent, unjust world, you can probably see what I'm talking about"
+            ]
+        },
+        "path-finder": {
+            "title": "Finding a way",
+            "content": [
+                "As with other examples, the structure I used to generate this dashboard is a graph",
+                "The idea is that the agent goes from the top left to the bottom right",
+                "It can move vertically, horizontally and diagonally, so in a large percentage, there can be a path",
+                "If it is impossible to access the goal, it will continue to expand across the terrain as if it were a mushroom until it has no more room to move",
+                "The algorithm I used to find the shortest path is A*, one known for its elegance and efficiency",
+                "The green points are the routes, and the yellow ones are the ones that the algorithm can choose to move",
+                "You will always choose a yellow point that best suits you to reach the goal, and the decision of which is the most convenient is done through heuristics, that is, knowing where the goal is with respect to your current position",
+                "Choose the yellow dot that is the shortest distance away and represents the next move (a random decision, yes, but informed and well-founded)",
+                "That is, although he does not know if the next step he is going to take will lead him to a dead end, in the best of cases it is the best possible path"
+            ]
+        },
+        "traveling-salesman": {
+            "title": "The shortest distance",
+            "content": [
+                "Here I leave a visual representation of the solution to a known logic problem",
+                "The objective is to find, given an X number of points, the shortest path that unites them all",
+                "The first approach, and the most practical, tries to find a solution randomly, using brute force, each time it tries it stores the distance and if it finds a distance less than the current distance, it changes the solution found and continues searching",
+                "The second approach is recursive, it goes in an orderly manner node by node trying all possible combinations, it is a very slow process but eventually it will find the solution. It is a different type of brute force",
+                "The third is the most efficient, where a genetic algorithm is used to search for solutions in parallel, of all the solutions found in an iteration, the best ones are taken to be taken into account in the next stage",
+                "The process is repeated countless times but in each iteration there is considerable progress, which makes it a faster solution than brute force"
+            ]
+        },
+        "terrain": {
+            "title": "Terrain generator!",
+            "content": [
+                "This one is special, i could watch it for hours",
+                "I watched a guy do something like this in youtube and just had to replicate it, because i loved the concept and the simplicity",
+                "Is basically a grid with triangles, rotated in 3d. Each vertex (x,y coordinate) has a z value that is given with an algorithm called Perlin's Noise, similar to the classic random function but instead of being erratic, adds some smooth curves to the ecuation",
+                "Play around with the values to interact with the terrain, is just so aestethic"
+            ]
+        }
     }
 }
