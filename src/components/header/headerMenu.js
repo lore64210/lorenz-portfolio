@@ -53,7 +53,7 @@ export default function HeaderMenu({ dict, lang }) {
                                         {dict.playground["maze-generator"]}
                                     </h4>
                                 </Link>
-                                <Link href={`/${lang}/balls-ecosystem`}>
+                                <Link href={`/${lang}/balls`}>
                                     <h4 className="header-nav-item">
                                         {dict.playground["balls-ecosystem"]}
                                     </h4>

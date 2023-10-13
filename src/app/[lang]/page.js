@@ -55,7 +55,7 @@ export default async function Home({ params: { lang = "es" } }) {
                 <PlaygroundProjectCard
                     title={dict.playground["balls-ecosystem"]}
                     image="/static/images/balls.gif"
-                    href={`/${lang}/balls-ecosystem`}
+                    href={`/${lang}/balls`}
                 />
                 <PlaygroundProjectCard
                     title={dict.playground["path-finder"]}

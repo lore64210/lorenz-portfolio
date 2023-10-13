@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useState, useRef } from "react";
+import useIsMobile from "@/hooks/useIsMobile";
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
 const P5Container = ({ draw, setup, overrideSetup, ...props }) => {
@@ -8,12 +9,14 @@ const P5Container = ({ draw, setup, overrideSetup, ...props }) => {
     const [initializedState, setInitializedState] = useState(false);
     const p5Ref = useRef();
     const canvasRef = useRef();
+    const isMobile = useIsMobile();
+    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
 
     useEffect(() => {
         if (initializedState) {
             !overrideSetup &&
                 p5Ref.current
-                    .createCanvas(windowSize.width, windowSize.height)
+                    .createCanvas(canvasSize, canvasSize)
                     .parent(canvasRef.current);
             setup?.(p5Ref.current, canvasRef.current);
         }
@@ -31,7 +34,7 @@ const P5Container = ({ draw, setup, overrideSetup, ...props }) => {
     };
 
     const windowResized = (p5) =>
-        !overrideSetup && p5.resizeCanvas(windowSize.width, windowSize.height);
+        !overrideSetup && p5.resizeCanvas(canvasSize, canvasSize);
     return (
         <Sketch
             setup={defaultSetup}

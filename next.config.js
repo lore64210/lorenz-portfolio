@@ -24,8 +24,8 @@ module.exports = {
                 permanent: true,
             },
             {
-                source: "/balls-ecosystem",
-                destination: "/es/balls-ecosystem",
+                source: "/balls",
+                destination: "/es/balls",
                 permanent: true,
             },
             {
