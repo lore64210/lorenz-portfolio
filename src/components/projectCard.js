@@ -1,23 +1,19 @@
 import Link from "next/link";
-import ProjectImage from "./projectImage";
 import WithAnimation from "./withAnimation";
-import Blob from "./blob";
 
 export default function ProjectCard({
-    image,
     title,
     description,
     reversed,
     tecnologies,
     href,
-    portfolioMaker,
     imageComponent,
 }) {
     return (
         <WithAnimation className="project-card-animation-container">
             <Link
-                href={href}
-                target="_blank"
+                href={href ?? ""}
+                target={href ? "_blank" : "_self"}
                 className={`project-card ${reversed ? " reversed" : ""}`}
             >
                 {reversed ? (
@@ -29,7 +25,7 @@ export default function ProjectCard({
                                 Stack: <b>{tecnologies}</b>
                             </p>
                         </div>
-                        <ProjectImage src={image} alt={title} />
+                        {imageComponent}
                     </>
                 ) : (
                     <>

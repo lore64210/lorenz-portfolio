@@ -50,6 +50,18 @@
                 &.reversed {
                     border-radius: 1em 1em 0 0;
                 }
+                &.organizer-logo {
+                    width: 100%;
+                    height: 100%;
+                    filter: invert(100%);
+                }
+            }
+            .historia-humo-logo-container {
+                width: 100%;
+                border-radius: 1em 1em 0 0;
+                .historia-humo-logo {
+                    padding: 1em;
+                }
             }
             .project-card-text {
                 transition: all 1s ease-in-out;
@@ -76,7 +88,6 @@
         height: 45vw;
         .playground-project-card-floating {
             background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(15px);
             border-radius: 1em;
             background-clip: blur(10px);
@@ -119,4 +130,8 @@
     top: 15%;
     left: 35%;
     width: 30%;
+}
+
+.coming-soon {
+    justify-content: center;
 }

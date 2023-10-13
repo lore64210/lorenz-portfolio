@@ -25,12 +25,11 @@ export default async function Home({ params: { lang = "es" } }) {
                     title={dict.projects["organizer"].title}
                     description={dict.projects["organizer"].description}
                     tecnologies="React Native"
-                    image="/static/images/profile.webp"
                     imageComponent={
                         <ProjectImage
-                            src="/static/images/profile.webp"
+                            src="/static/images/organizer.jpeg"
                             alt={dict.projects["organizer"].title}
-                            className="reversed"
+                            className="organizer-logo"
                         />
                     }
                     href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
@@ -60,14 +59,11 @@ export default async function Home({ params: { lang = "es" } }) {
                     description={dict.projects["planet-shop"].description}
                     image="/static/images/profile.webp"
                     tecnologies="React, Spring Boot"
-                    href="/planet-shop"
                     reversed
                     imageComponent={
-                        <ProjectImage
-                            src="/static/images/profile.webp"
-                            alt={dict.projects["organizer"].title}
-                            className="reversed"
-                        />
+                        <div className="coming-soon">
+                            <h1>Coming Soon!</h1>
+                        </div>
                     }
                 />
             </div>
