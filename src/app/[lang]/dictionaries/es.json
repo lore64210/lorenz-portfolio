@@ -30,7 +30,6 @@
         "balls-ecosystem": "Ball Ecosystem",
         "path-finder": "Path Finder",
         "traveling-salesman": "Traveling Salesman",
-        "linear-regression": "Linear Regression",
         "terrain": "Terrain"
     }
 }

@@ -38,11 +38,6 @@ module.exports = {
                 destination: "/es/traveling-salesman",
                 permanent: true,
             },
-            {
-                source: "/linear-regression",
-                destination: "/es/linear-regression",
-                permanent: true,
-            },
         ];
     },
 };
