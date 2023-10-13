@@ -11,6 +11,7 @@ export default function ProjectCard({
     tecnologies,
     href,
     portfolioMaker,
+    imageComponent,
 }) {
     return (
         <WithAnimation className="project-card-animation-container">
@@ -32,15 +33,7 @@ export default function ProjectCard({
                     </>
                 ) : (
                     <>
-                        {portfolioMaker ? (
-                            <Blob />
-                        ) : (
-                            <ProjectImage
-                                src={image}
-                                alt={title}
-                                className="reversed"
-                            />
-                        )}
+                        {imageComponent}
                         <div className="project-card-text">
                             <h2>{title}</h2>
                             <p>{description}</p>

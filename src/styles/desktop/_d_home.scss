@@ -34,6 +34,15 @@
             img {
                 width: 45%;
             }
+            .historia-humo-logo-container {
+                width: 45%;
+                background-color: #e5d283;
+                .historia-humo-logo {
+                    path {
+                        fill: #003566;
+                    }
+                }
+            }
         }
         img {
             transition: all 0.35s ease-in-out;
@@ -42,6 +51,24 @@
             height: auto;
             &.reversed {
                 border-radius: 1em 0 0 1em;
+            }
+        }
+        .historia-humo-logo-container {
+            width: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #003566;
+            border-radius: 1em 0 0 1em;
+            transition: all 0.35s ease-in-out;
+            .historia-humo-logo {
+                width: 50%;
+                border-radius: 0 1em 1em 0;
+                height: auto;
+                path {
+                    transition: all 2s ease-in-out;
+                    fill: #e5d283;
+                }
             }
         }
         .project-card-text {
