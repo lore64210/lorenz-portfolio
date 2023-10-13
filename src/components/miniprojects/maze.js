@@ -2,8 +2,8 @@
 import { useCallback, useMemo, useState } from "react";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
-import Maze from "./maze/Maze";
-import Cell from "./maze/MazeCell";
+import Maze from "./classes/maze/Maze";
+import Cell from "./classes/maze/MazeCell";
 import useIsMobile from "@/hooks/useIsMobile";
 
 export const CELL_AMOUNT = 20; // max 50, otherwise is to heavy to compute
@@ -15,7 +15,8 @@ const MazePage = () => {
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
     const cellSize =
-        (isMobile ? windowSize.width : windowSize.height / 2) / CELL_AMOUNT;
+        (isMobile ? windowSize.width / 1.5 : windowSize.height / 2) /
+        CELL_AMOUNT;
     const [finished, setFinished] = useState(false);
 
     const show = (p5, cell) => {
@@ -91,7 +92,7 @@ const MazePage = () => {
     };
 
     const setup = (p5, canvasRef) => {
-        const size = isMobile ? windowSize.width : windowSize.height / 2;
+        const size = cellSize * CELL_AMOUNT;
         p5.createCanvas(size, size).parent(canvasRef);
         for (let x = 0; x < CELL_AMOUNT; x++) {
             for (let y = 0; y < CELL_AMOUNT; y++) {

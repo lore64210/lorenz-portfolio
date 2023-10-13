@@ -1,4 +1,4 @@
-import { CELL_AMOUNT } from "../maze";
+import { CELL_AMOUNT } from "../../maze";
 import GraphNode from "../graphs/GraphNode";
 
 export default class Cell extends GraphNode {

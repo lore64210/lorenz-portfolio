@@ -1,4 +1,4 @@
-import { CELL_AMOUNT } from "../maze";
+import { CELL_AMOUNT } from "../../maze";
 import Graph from "../graphs/Graph";
 
 export default class Maze extends Graph {
