@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
 import Maze from "./classes/maze/Maze";
@@ -18,6 +18,11 @@ const MazePage = () => {
         (isMobile ? windowSize.width / 1.5 : windowSize.height / 2) /
         CELL_AMOUNT;
     const [finished, setFinished] = useState(false);
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
 
     const show = (p5, cell) => {
         if (cell.filled) {
@@ -124,7 +129,14 @@ const MazePage = () => {
         maze.getVertices().forEach((cell) => show(p5, cell));
     };
 
-    return <P5Container draw={draw} setup={setup} overrideSetup />;
+    return (
+        <P5Container
+            draw={draw}
+            setup={setup}
+            overrideSetup
+            restart={restart}
+        />
+    );
 };
 
 export default MazePage;

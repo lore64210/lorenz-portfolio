@@ -4,7 +4,7 @@ import Maze from "./classes/maze/Maze";
 import Cell from "./classes/maze/MazeCell";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export const CELL_AMOUNT = 25; // max 35, otherwise is to heavy to compute
 const OBSTACLE_PERCENTAGE = 0.5;
@@ -17,6 +17,11 @@ export default () => {
     const isMobile = useIsMobile();
     const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
     const cellSize = canvasSize / CELL_AMOUNT;
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
 
     const show = (p5, cell) => {
         p5.fill(cell.isObstacle ? "black" : "white");
@@ -89,5 +94,12 @@ export default () => {
         pathGenerator.current && pathGenerator.current.next();
     };
 
-    return <P5Container draw={draw} setup={setup} overrideSetup />;
+    return (
+        <P5Container
+            draw={draw}
+            setup={setup}
+            overrideSetup
+            restart={restart}
+        />
+    );
 };

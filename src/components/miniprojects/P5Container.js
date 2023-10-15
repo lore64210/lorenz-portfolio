@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import useIsMobile from "@/hooks/useIsMobile";
 const Sketch = dynamic(() => import("react-p5"), { ssr: false });
 
-const P5Container = ({ draw, setup, overrideSetup, ...props }) => {
+const P5Container = ({ draw, setup, overrideSetup, restart, ...props }) => {
     const windowSize = useWindowSize();
     const [initializedState, setInitializedState] = useState(false);
     const p5Ref = useRef();
@@ -20,7 +20,7 @@ const P5Container = ({ draw, setup, overrideSetup, ...props }) => {
                     .parent(canvasRef.current);
             setup?.(p5Ref.current, canvasRef.current);
         }
-    }, [initializedState]);
+    }, [initializedState, restart]);
     const defaultSetup = (p5, canvas) => {
         if (!initializedState) {
             setInitializedState(true);

@@ -2,7 +2,7 @@
 import useIsMobile from "@/hooks/useIsMobile";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONSUMABLES_AMOUNT = 20;
 const CONSUMABLE_GENERATION_RATE = 0.3; // 0 to 1
@@ -35,6 +35,12 @@ export default () => {
     const windowSize = useWindowSize();
     const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
     const [width, height] = [canvasSize, canvasSize];
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
+
     const createRandomPosition = (p5) =>
         p5.createVector(p5.random(width), p5.random(height));
 
@@ -115,7 +121,7 @@ export default () => {
             vehicle.live(p5, consumables, vehicles, width, height);
         });
     };
-    return <P5Container setup={setup} draw={draw} />;
+    return <P5Container setup={setup} draw={draw} restart={restart} />;
 };
 
 class Vehicle {

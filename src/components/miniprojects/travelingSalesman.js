@@ -2,7 +2,7 @@
 import P5Container from "./P5Container";
 import useIsMobile from "@/hooks/useIsMobile";
 import useWindowSize from "@/hooks/useWindowSize";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NODES_AMOUNT = 15;
 const NODE_SIZE = 10;
@@ -20,6 +20,12 @@ export default () => {
     const isMobile = useIsMobile();
     const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
     const [width, height] = [canvasSize, canvasSize];
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
+
     const getShortestDistance = (p5) => {
         let distance = 0;
         for (let i = 0; i < nodes.length - 1; i++) {
@@ -167,5 +173,5 @@ export default () => {
         getShortestDistance(p5);
         getShortestDistanceForOrderedNodes(p5);
     };
-    return <P5Container draw={draw} setup={setup} />;
+    return <P5Container draw={draw} setup={setup} restart={restart} />;
 };

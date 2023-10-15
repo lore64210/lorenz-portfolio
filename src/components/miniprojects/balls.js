@@ -2,6 +2,7 @@
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
 import Ball from "./classes/balls/Ball";
+import { useEffect, useState } from "react";
 
 const BALLS_AMOUNT = 20;
 const BALL_DIAMETER = 40;
@@ -16,6 +17,11 @@ export default () => {
     const balls = [];
 
     const { width, height } = useWindowSize();
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
 
     const randomColor = (p5) => {
         return p5.color(p5.random(255), p5.random(255), p5.random(255));
@@ -48,5 +54,5 @@ export default () => {
         });
     };
 
-    return <P5Container setup={setup} draw={draw} />;
+    return <P5Container setup={setup} draw={draw} restart={restart} />;
 };

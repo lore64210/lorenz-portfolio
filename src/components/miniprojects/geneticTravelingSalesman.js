@@ -2,7 +2,7 @@
 import useIsMobile from "@/hooks/useIsMobile";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NODES_AMOUNT = 15;
 const POPULATION_AMOUNT = 1000;
@@ -18,6 +18,11 @@ export default () => {
     const windowSize = useWindowSize();
     const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
     const [width, height] = [canvasSize, canvasSize];
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
 
     const getShortestDistance = (p5, order) => {
         let distance = 0;
@@ -93,7 +98,7 @@ export default () => {
             });
         }
     };
-    return <P5Container draw={draw} setup={setup} />;
+    return <P5Container draw={draw} setup={setup} restart={restart} />;
 };
 
 const shuffle = (originalArray) => {

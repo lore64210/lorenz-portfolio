@@ -2,7 +2,7 @@
 import P5Container from "@/components/miniprojects/P5Container";
 import useIsMobile from "@/hooks/useIsMobile";
 import useWindowSize from "@/hooks/useWindowSize";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const scale = 20;
 
@@ -14,6 +14,11 @@ export default () => {
     const rows = canvasSize / scale;
     const cols = rows;
     const isMobile = useIsMobile();
+    const [restart, setRestart] = useState(false);
+
+    useEffect(() => {
+        setRestart(true);
+    }, []);
 
     const setup = (p5, canvasRef) => {
         const canvasSize = isMobile
@@ -69,5 +74,12 @@ export default () => {
         }
     };
 
-    return <P5Container draw={draw} setup={setup} overrideSetup />;
+    return (
+        <P5Container
+            draw={draw}
+            setup={setup}
+            overrideSetup
+            restart={restart}
+        />
+    );
 };
