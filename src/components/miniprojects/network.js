@@ -5,7 +5,6 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Ball from "./classes/balls/Ball";
 import { useEffect, useState } from "react";
 
-const BALLS_AMOUNT = 100;
 const BALL_DIAMETER = 3;
 
 const ACELERATION = 0;
@@ -28,6 +27,8 @@ export default function Network() {
     useEffect(() => {
         setRestart(true);
     }, []);
+
+    const BALLS_AMOUNT = isMobile ? 25 : 100;
 
     const setup = (p5, canvasRef) => {
         p5.createCanvas(canvasSize, canvasSize).parent(canvasRef);
@@ -61,7 +62,7 @@ export default function Network() {
         balls.forEach((ball) => {
             ball.update(p5, width, height, balls);
             ball.draw(p5);
-            ball.drawLine(p5, balls);
+            ball.drawLine(p5, balls, canvasSize);
         });
     };
 

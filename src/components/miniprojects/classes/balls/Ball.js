@@ -28,7 +28,6 @@ export default class Ball {
     }
 
     update(p5, width, height, balls) {
-        console.log(this.color);
         this.checkForColision && this.checkColisionWithBalls(p5, balls);
         this.checkColisionWithWalls(width, height);
         this.attractedByMouse && this.goToMouse(p5);
@@ -92,7 +91,7 @@ export default class Ball {
         balls.forEach((ball) => (ball.collision = false));
     }
 
-    drawLine(p5, balls) {
+    drawLine(p5, balls, canvasSize) {
         balls.forEach((ball) => {
             const dist = p5.dist(
                 ball.position.x,
@@ -100,7 +99,7 @@ export default class Ball {
                 this.position.x,
                 this.position.y
             );
-            const maxDistance = this.diameter * 20;
+            const maxDistance = canvasSize / 8;
 
             if (ball !== this && dist < maxDistance) {
                 p5.stroke(

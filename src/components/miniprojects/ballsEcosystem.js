@@ -5,8 +5,8 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useRef, useState } from "react";
 
 const CONSUMABLES_AMOUNT = 20;
-const CONSUMABLE_GENERATION_RATE = 0.3; // 0 to 1
-const VEHICLES_AMOUNT = 10;
+const CONSUMABLE_GENERATION_RATE = 0.05; // 0 to 1
+const VEHICLES_AMOUNT = 5;
 
 const ACCELERATION_RATE = 2; // the bigger the better the behaviours
 const MIN_ACCELERATION = 0.001;
@@ -14,18 +14,15 @@ const MAX_VELOCITY = 5;
 
 const CONSUMABLE_VALUE = 150;
 const CONSUMABLE_SIZE = 10;
-const MAX_LIFE = 1000;
 const MIN_LIFE = 50;
-
-const MAX_HUNT_DISTANCE = 500;
 
 const MUTATION_RATE = 0.01;
 
 const POISON_DETECTION_RATE = 0.1;
 const MIN_POISON_DETECTION_RATE = 0.5;
 
-const CONSUMABLE_EATEN_SCORE = 200;
-const VEHICLE_EATEN_SCORE = 2000;
+const CONSUMABLE_EATEN_SCORE = 50;
+const VEHICLE_EATEN_SCORE = 500;
 
 export default () => {
     let consumables = useRef([]).current;
@@ -38,6 +35,9 @@ export default () => {
         : windowSize.height / 1.5;
     const [width, height] = [canvasSize, canvasSize];
     const [restart, setRestart] = useState(false);
+
+    const MAX_HUNT_DISTANCE = canvasSize / 2;
+    const MAX_LIFE = canvasSize * 2;
 
     useEffect(() => {
         setRestart(true);
@@ -83,7 +83,8 @@ export default () => {
                 escapeAccelerationRate,
                 huntRadius,
                 poisonDetectionRate,
-                initialLife
+                initialLife,
+                MAX_LIFE
             );
         });
         population.genotype = [...vehicles];
@@ -138,7 +139,8 @@ class Vehicle {
         escapeAccelerationRate,
         huntRadius,
         poisonDetectionRate,
-        life
+        life,
+        maxLife
     ) {
         this.position = initialPosition;
         this.velocity = initialVelocity;
@@ -155,6 +157,7 @@ class Vehicle {
         this.maxVelocity = maxVelocity;
         this.initialLife = life;
         this.life = life;
+        this.maxLife = maxLife;
     }
 
     live(p5, consumables, vehicles, width, height) {
@@ -224,8 +227,8 @@ class Vehicle {
                 this.life > vehicle.life
             ) {
                 this.life += vehicle.life;
-                if (this.life > MAX_LIFE) {
-                    this.life = MAX_LIFE;
+                if (this.life > this.maxLife) {
+                    this.life = this.maxLife;
                 }
                 inedecesToSplice.push(index);
             }
@@ -276,7 +279,7 @@ class Vehicle {
             if (distance <= this.getSize() / 2 + CONSUMABLE_SIZE / 2) {
                 if (consumable.poison) {
                     this.life -= CONSUMABLE_VALUE;
-                } else if (this.life < MAX_LIFE) {
+                } else if (this.life < this.maxLife) {
                     this.life += CONSUMABLE_VALUE;
                 }
                 inedecesToSplice.push(index);
@@ -393,7 +396,8 @@ class Population {
             this.mutate(parents[randomParent()].escapeAccelerationRate),
             this.mutate(parents[randomParent()].huntRadius),
             this.mutate(parents[randomParent()].poisonDetectionRate),
-            parents[randomParent()].initialLife
+            parents[randomParent()].initialLife,
+            parents[randomParent()].maxLife
         );
     }
 
