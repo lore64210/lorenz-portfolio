@@ -10,8 +10,8 @@ const BALL_DIAMETER = 40;
 const MAX_ACELERATION = 0.02;
 
 export const MAX_VELOCITY = 20;
-export const COLLISION = true;
-export const MOUSE_ATTRACTION = true;
+const COLLISION = true;
+const MOUSE_ATTRACTION = true;
 
 export default () => {
     const balls = [];
@@ -40,7 +40,16 @@ export default () => {
                 Math.random() * MAX_ACELERATION
             );
             balls.push(
-                new Ball(position, velocity, aceleration, BALL_DIAMETER, color)
+                new Ball(
+                    position,
+                    velocity,
+                    aceleration,
+                    BALL_DIAMETER,
+                    color,
+                    COLLISION,
+                    MOUSE_ATTRACTION,
+                    MAX_VELOCITY
+                )
             );
         }
     };
