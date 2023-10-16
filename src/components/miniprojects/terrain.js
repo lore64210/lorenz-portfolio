@@ -4,7 +4,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useRef, useState } from "react";
 
-const scale = 20;
+const scale = 50;
 
 export default () => {
     const windowSize = useWindowSize();
@@ -40,7 +40,7 @@ export default () => {
         p5.noFill();
         p5.rotateX(p5.PI / 2);
         p5.translate(-windowSize.width * 1.5, -windowSize.height * 4, -300);
-        flying.current -= 0.05;
+        flying.current -= 0.005;
         let yoff = flying.current;
         for (let y = 0; y < cols; y++) {
             let xoff = 0;
@@ -50,9 +50,9 @@ export default () => {
                     0,
                     1,
                     -250,
-                    100
+                    250
                 );
-                xoff += 0.2;
+                xoff += 0.1;
             }
             yoff += 0.1;
         }
