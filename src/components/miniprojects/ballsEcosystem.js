@@ -48,7 +48,8 @@ export default () => {
         ...createRandomPosition(p5),
         poison: Math.random() < 0.4,
     });
-    const setup = (p5) => {
+    const setup = (p5, canvasRef) => {
+        p5.createCanvas(canvasSize, canvasSize).parent(canvasRef);
         consumables = Array.from(Array(CONSUMABLES_AMOUNT).keys()).map(() =>
             createConsumable(p5)
         );

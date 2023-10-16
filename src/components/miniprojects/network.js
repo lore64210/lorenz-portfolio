@@ -5,7 +5,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Ball from "./classes/balls/Ball";
 import { useEffect, useState } from "react";
 
-const BALLS_AMOUNT = 200;
+const BALLS_AMOUNT = 100;
 const BALL_DIAMETER = 2;
 
 const ACELERATION = 0;
