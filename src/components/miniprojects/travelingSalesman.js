@@ -18,7 +18,9 @@ export default () => {
     let orderedShortestDistance = useRef().current;
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
-    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
+    const canvasSize = isMobile
+        ? windowSize.width - 20
+        : windowSize.height / 1.5;
     const [width, height] = [canvasSize, canvasSize];
     const [restart, setRestart] = useState(false);
 

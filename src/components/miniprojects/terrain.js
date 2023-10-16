@@ -23,7 +23,7 @@ export default () => {
     const setup = (p5, canvasRef) => {
         const canvasSize = isMobile
             ? windowSize.width - 20
-            : windowSize.height / 2;
+            : windowSize.height / 1.5;
         p5.createCanvas(canvasSize, canvasSize, p5.WEBGL).parent(canvasRef);
 
         const terrain = new Array(rows);

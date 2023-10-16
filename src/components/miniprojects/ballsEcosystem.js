@@ -33,7 +33,9 @@ export default () => {
     let population = useRef(new Population()).current;
     const isMobile = useIsMobile();
     const windowSize = useWindowSize();
-    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
+    const canvasSize = isMobile
+        ? windowSize.width - 20
+        : windowSize.height / 1.5;
     const [width, height] = [canvasSize, canvasSize];
     const [restart, setRestart] = useState(false);
 

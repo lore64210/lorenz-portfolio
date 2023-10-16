@@ -10,7 +10,9 @@ const P5Container = ({ draw, setup, overrideSetup, restart, ...props }) => {
     const p5Ref = useRef();
     const canvasRef = useRef();
     const isMobile = useIsMobile();
-    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
+    const canvasSize = isMobile
+        ? windowSize.width - 20
+        : windowSize.height / 1.5;
 
     useEffect(() => {
         if (initializedState) {

@@ -17,10 +17,10 @@ const MOUSE_ATTRACTION = true;
 export default () => {
     const balls = [];
 
-    const { width } = useWindowSize();
+    const { width, height } = useWindowSize();
     const [restart, setRestart] = useState(false);
     const isMobile = useIsMobile();
-    const canvasSize = isMobile ? width - 20 : width / 2;
+    const canvasSize = isMobile ? width - 20 : height / 1.5;
 
     useEffect(() => {
         setRestart(true);

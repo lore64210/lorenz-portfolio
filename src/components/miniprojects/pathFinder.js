@@ -15,7 +15,9 @@ export default () => {
     const pathGenerator = useRef();
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
-    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.width / 2;
+    const canvasSize = isMobile
+        ? windowSize.width - 20
+        : windowSize.height / 1.5;
     const cellSize = canvasSize / CELL_AMOUNT;
     const [restart, setRestart] = useState(false);
 

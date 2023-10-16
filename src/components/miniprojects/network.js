@@ -6,7 +6,7 @@ import Ball from "./classes/balls/Ball";
 import { useEffect, useState } from "react";
 
 const BALLS_AMOUNT = 100;
-const BALL_DIAMETER = 2;
+const BALL_DIAMETER = 3;
 
 const ACELERATION = 0;
 
@@ -20,7 +20,9 @@ export default function Network() {
     const [restart, setRestart] = useState(false);
     const balls = [];
 
-    const canvasSize = isMobile ? windowSize.width - 20 : windowSize.height / 2;
+    const canvasSize = isMobile
+        ? windowSize.width - 20
+        : windowSize.height / 1.5;
     const [width, height] = [canvasSize, canvasSize];
 
     useEffect(() => {

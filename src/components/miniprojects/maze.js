@@ -15,7 +15,7 @@ const MazePage = () => {
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
     const cellSize =
-        (isMobile ? windowSize.width / 1.5 : windowSize.height / 2) /
+        (isMobile ? windowSize.width / 1.5 : windowSize.height / 1.5) /
         CELL_AMOUNT;
     const [finished, setFinished] = useState(false);
     const [restart, setRestart] = useState(false);
