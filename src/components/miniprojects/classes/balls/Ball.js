@@ -99,7 +99,7 @@ export default class Ball {
                 this.position.x,
                 this.position.y
             );
-            const maxDistance = canvasSize / 8;
+            const maxDistance = canvasSize / 6;
 
             if (ball !== this && dist < maxDistance) {
                 p5.stroke(

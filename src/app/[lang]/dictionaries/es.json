@@ -43,24 +43,23 @@
             ]
         },
         "balls": {
-            "title": "Pelotas locas",
+            "title": "De a muchos es mas divertido",
             "content": [
-                "Estudiando choques elasticos en un sistema de particulas en condiciones ideales cuando iba a la facultad me imaginaba algo asi",
-                "Pensando a una pelotita como un agente individual con velocidad y aceleracion, su unica responsabilidad es moverse conservando estos valores hasta que se choque con algo",
-                "En caso de que se encuentre con una pared, dependiendo de cual, su velocidad pasa a ser negativa en X o en Y",
-                "Algo similar pasa con el contacto con otro agente, pero \"transfiriendo\" la velocidad de una pelotita a otra, cambiando la direccion de ambas",
-                "Para que no sea tan aburrido, la aceleracion de las pelotitas va a ir dirigida hacia el mouse si se lo ubica sobre el canvas"
+                "Es increible como un conjunto de agentes con responsabilidades y funciones minimas pueden armar una situacion tan placentera de mirar",
+                "Cada pelotita se mueve por el mapa sin proposito, teniendo en cuenta siempre la distancia con los demas agentes",
+                "Cuando la distancia entre dos agentes es de determinado valor, la opacidad de la linea que los une empieza a aumentar, generando estos patrones tan hipnotizantes",
+                "Esta mezcla de pelotas moviendose teniendo en cuenta las distancias con sus vecinos es clave para el pequeño ecosistema que muestro abajo, por eso queria mostrarlo de una forma linda y a modo de presentacion"
             ]
         },
         "balls-ecosystem": {
             "title": "Pelotas Inteligentes!",
             "content": [
-                "Estas pelotas son mas especiales, porque estan vivas, y tienen hambre.",
+                "Estas pelotas son mas especiales que las anteriores, porque da la sensacion de que estan vivas, y por lo tanto, de que tienen hambre.",
                 "A medida que pasa el tiempo, su tamaño va disminuyendo, hasta que si son muy chiquititas, se mueren, desaparecen",
                 "Una pelota puede aumentar su tamaño comiendo puntitos verdes, o a otras pelotas que sean mas chicas que esta. Comer puntitos rojos (veneno) va a disminuir su tamaño",
                 "Cada pelota tiene un valor aleatorio por cada \"interes\" y por cada \"rechazo\" que tenga, este interes/rechazo puede ser sobre puntos verdes, rojos u otras pelotas, mas chicas o grandes",
-                "Mientras mayor sea el interes, su aceleracion rotara el movimiento del agente hacia su objetivo, y su rechazo lo alejará",
-                "Pero la mejor de este mini proyectito es que cada vez que quede una sola pelota viva en el coliseo multicolor, termina una iteracion",
+                "Mientras mayor sea el interes, su aceleracion rotara al movimiento del agente hacia su objetivo, y su rechazo lo alejará",
+                "Pero la mejor de este mini proyecto es que cada vez que quede una sola pelota viva en el coliseo multicolor, termina una iteracion",
                 "Y por cada iteracion, se aplica un algoritmo genetico, que se usa para la creacion de la siguiente ronda de pelotitas",
                 "Mientras mas tiempo haya durado una pelota en una iteracion, mayor la probabilidad de que sus genes (sus intereses y rechazos) sean elegidos para la creacion de una nueva pelotita",
                 "Esta evolucion genetica se puede ver representada por los colores de las pelotas: Iteracion tras iteracion, los colores son cada ves mas homogeneos, debido a que por una seleccion de genes del mas fuerte, las nuevas pelotas heredan sus caracteristicas",

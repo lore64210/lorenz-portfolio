@@ -45,11 +45,10 @@
         "balls": {
             "title": "Crazy balls",
             "content": [
-                "This is what i imagined when i studied particle systems in physics",
-                "Each ball is an agent with acceleration and velocity, and its only responsability is to keep those values until it collides with something",
-                "When it hits a wall, its velocity changes the ball's direction",
-                "Something similar happeens when colliding with another agent, only that it's transferring its velocity to the other ball and changing directions of both of them",
-                "Also, agents acceleration are slightly changing if you put your mouse over the canvas, every ball it's going to be headed to your cursor"
+                "It is incredible how a group of agents with minimal responsibilities and functions can put together a situation so pleasant to watch",
+                "Each little ball moves around the map without purpose, always taking into account the distance from the other agents",
+                "When the distance between two agents is of a certain value, the opacity of the line that joins them begins to increase, generating these hypnotizing patterns",
+                "This mixture of balls moving taking into account the distances with their neighbors is key to the small ecosystem that I show below, that's why I wanted to show it in a nice way and as a presentation"
             ]
         },
         "balls-ecosystem": {
