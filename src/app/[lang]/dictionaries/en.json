@@ -81,17 +81,6 @@
                 "That is, although he does not know if the next step he is going to take will lead him to a dead end, in the best of cases it is the best possible path"
             ]
         },
-        "traveling-salesman": {
-            "title": "The shortest distance",
-            "content": [
-                "Here I leave a visual representation of the solution to a known logic problem",
-                "The objective is to find, given an X number of points, the shortest path that unites them all",
-                "The first approach, and the most practical, tries to find a solution randomly, using brute force, each time it tries it stores the distance and if it finds a distance less than the current distance, it changes the solution found and continues searching",
-                "The second approach is recursive, it goes in an orderly manner node by node trying all possible combinations, it is a very slow process but eventually it will find the solution. It is a different type of brute force",
-                "The third is the most efficient, where a genetic algorithm is used to search for solutions in parallel, of all the solutions found in an iteration, the best ones are taken to be taken into account in the next stage",
-                "The process is repeated countless times but in each iteration there is considerable progress, which makes it a faster solution than brute force"
-            ]
-        },
         "terrain": {
             "title": "Terrain generator!",
             "content": [

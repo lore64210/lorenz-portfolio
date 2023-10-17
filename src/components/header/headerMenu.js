@@ -63,11 +63,6 @@ export default function HeaderMenu({ dict, lang }) {
                                         {dict.playground["path-finder"]}
                                     </h4>
                                 </Link>
-                                <Link href={`/${lang}/traveling-salesman`}>
-                                    <h4 className="header-nav-item">
-                                        {dict.playground["traveling-salesman"]}
-                                    </h4>
-                                </Link>
                                 <Link href={`/${lang}/terrain`}>
                                     <h4 className="header-nav-item">
                                         {dict.playground["terrain"]}

@@ -80,17 +80,6 @@
                 "Es decir, que si bien no sabe si el siguiente paso que va a tomar lo va a llevar a un callejon sin salida, en el mejor de los casos es el mejor camino posible"
             ]
         },
-        "traveling-salesman": {
-            "title": "La distancia mas corta",
-            "content": [
-                "Aca dejo una representacion visual de la solucion a un problema conocido de logica",
-                "El objetivo es encontrar, dada una X cantidad de puntos, el camino mas corto que los una a todos",
-                "La primera aproximacion, y las mas herratica, trata de contrar una solucion de forma aleatoria, usando fuerza bruta, cada vez que prueba almacena la distancia y si encuentra una distancia menor a la distancia actual, cambia la solucion encontrada y sigue buscando",
-                "La segunda aproximacion es recursiva, va de forma ordenada nodo por nodo probando todas las combinaciones posibles, es un proceso muy lento pero eventualmente va a encontrar la solucion. Es un tipo distinto de fuerza bruta",
-                "La tercera es la mas eficiente, donde usa un algoritmo genetico para ir buscando soluciones en paralelo, de todas las soluciones encontradas en una iteracion, se agarran las mejores para ser tenidas en cuenta en la siguiente etapa",
-                "El proceso se repite incontables veces pero en cada iteracion hay un progreso considerable, por lo que la hace una solucion mas rapida a la de la fuerza bruta"
-            ]
-        },
         "terrain": {
             "title": "Generador de terrenos!",
             "content": [
