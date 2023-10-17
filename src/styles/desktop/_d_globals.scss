@@ -24,21 +24,51 @@ a {
     width: 20vw;
     &:hover {
         .header-title {
-            animation: shake 1s;
+            animation: shake 1s 2 reverse;
         }
         .header-image {
             .profile-img-border {
-                width: 27vh;
-                height: 27vh;
+                width: 38vh;
+                height: 38vh;
                 .profile-img {
-                    width: 25vh;
-                    height: 25vh;
+                    width: 35vh;
+                    height: 35vh;
                 }
             }
         }
     }
     .header-image {
         margin-left: 2em;
+        .profile-img-border {
+            background: linear-gradient(
+                45deg,
+                #d4145a90,
+                #fbb03b90,
+                #ff512f90,
+                #dd247690,
+                #ff61d290
+            );
+            transition: all 0.5s ease-in-out;
+            border-radius: 50em;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 28vh;
+            height: 28vh;
+            animation: border-rad-min 50s infinite;
+            .profile-img {
+                transition: all 1s ease-in-out;
+                width: 25vh;
+                height: 25vh;
+                border-radius: 2em;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+                animation: image 30s infinite, border-rad 20s infinite;
+                background-image: url("/static/images/profile/img-1.jpeg");
+            }
+        }
     }
     .header-title {
         cursor: pointer;
@@ -130,6 +160,156 @@ a {
         border-radius: 0;
     }
 }
+@keyframes image {
+    0% {
+        background-image: url("/static/images/profile/img-1.jpeg"),
+            url("/static/images/profile/img-2.jpeg");
+    }
+    15% {
+        background-image: url("/static/images/profile/img-2.jpeg"),
+            url("/static/images/profile/img-3.jpeg");
+    }
+    30% {
+        background-image: url("/static/images/profile/img-3.jpeg"),
+            url("/static/images/profile/img-4.jpeg");
+    }
+    45% {
+        background-image: url("/static/images/profile/img-4.jpeg"),
+            url("/static/images/profile/img-5.jpeg");
+    }
+    59% {
+        background-image: url("/static/images/profile/img-5.jpeg"),
+            url("/static/images/profile/img-6.jpeg");
+    }
+    74% {
+        background-image: url("/static/images/profile/img-6.jpeg"),
+            url("/static/images/profile/img-7.jpeg");
+    }
+    88% {
+        background-image: url("/static/images/profile/img-7.jpeg"),
+            url("/static/images/profile/img-1.jpeg");
+    }
+    100% {
+        background-image: url("/static/images/profile/img-1.jpeg");
+    }
+}
+
+@keyframes border-rad {
+    0% {
+        border-radius: 10em 5em 6em 8em;
+    }
+    15% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    30% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    45% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    59% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    74% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    88% {
+        border-radius: (random(10) + 7) + em (random(10) + 7) + em
+            (random(10) + 7) + em (random(10) + 7) + em;
+    }
+    100% {
+        border-radius: 10em 5em 6em 8em;
+    }
+}
+@keyframes border-rad-min {
+    0% {
+        border-radius: 5em 1em 3em 2em;
+    }
+    5% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    10% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    15% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    20% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    25% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    30% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    35% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    40% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    45% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    50% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    55% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    60% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    65% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    70% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    75% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    80% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    85% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    90% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    95% {
+        border-radius: (random(5) + 1) + em (random(5) + 1) + em (random(5) + 1) +
+            em (random(5) + 1) + em;
+    }
+    100% {
+        border-radius: 5em 1em 3em 2em;
+    }
+}
 
 .main {
     width: 80vw;
@@ -166,31 +346,6 @@ a {
     background-image: linear-gradient(-75deg, #f5444490 50%, #f1272790 50%);
     animation-direction: alternate-reverse;
     animation-duration: 20s;
-}
-
-.profile-img-border {
-    background: linear-gradient(
-        45deg,
-        #d4145a20,
-        #fbb03b20,
-        #ff512f20,
-        #dd247620,
-        #ff61d220
-    );
-    transition: all 0.5s ease-in-out;
-    border-radius: 50em;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 21vh;
-    height: 21vh;
-    .profile-img {
-        transition: all 1s ease-in-out;
-        width: 19vh;
-        height: 19vh;
-        border-radius: 50em;
-    }
 }
 
 @keyframes slide {

@@ -12,15 +12,7 @@ export default function ProfilePic({ className }) {
         !!size && (
             <WithAnimation className={className}>
                 <div className="profile-img-border">
-                    <Image
-                        src="/static/images/profile.webp"
-                        alt="Lorenzo Matias Lopez"
-                        className="profile-img"
-                        priority={true}
-                        draggable={false}
-                        width={size}
-                        height={size}
-                    />
+                    <div className="profile-img" />
                 </div>
             </WithAnimation>
         )
