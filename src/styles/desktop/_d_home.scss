@@ -1,5 +1,5 @@
 .home {
-    margin-top: 2em;
+    margin: 2em;
 }
 .project-card-container {
     width: 100%;
@@ -101,11 +101,11 @@
     row-gap: 2em;
     margin-top: 2em;
     margin-bottom: 2em;
-    width: 75vw;
+    width: 65vw;
     .playground-project-card {
         position: relative;
-        width: calc(25vw * 3 / 4.5);
-        height: calc(25vw * 3 / 5);
+        width: calc(21vw * 3 / 4.5);
+        height: calc(21vw * 3 / 5);
         .playground-project-card-floating {
             //background-color: rgba(255, 255, 255, 0.1);
             background-color: rgba(0, 0, 0, 0.3);

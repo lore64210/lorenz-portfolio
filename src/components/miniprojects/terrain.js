@@ -75,11 +75,14 @@ export default () => {
     };
 
     return (
-        <P5Container
-            draw={draw}
-            setup={setup}
-            overrideSetup
-            restart={restart}
-        />
+        <>
+            <P5Container
+                draw={draw}
+                setup={setup}
+                overrideSetup
+                restart={restart}
+            />
+            <div className="mini-project-controls"></div>
+        </>
     );
 };
