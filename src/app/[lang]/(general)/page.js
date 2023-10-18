@@ -1,10 +1,10 @@
 import PlaygroundProjectCard from "@/components/playgroundProjectCard";
 import ProjectCard from "@/components/projectCard";
-import { getDictionary } from "./dictionaries";
+import { getDictionary } from "../dictionaries";
 import WithAnimation from "@/components/withAnimation";
 import Blob from "@/components/blob";
 import ProjectImage from "@/components/projectImage";
-import "../../styles/home.scss";
+import "../../../styles/home.scss";
 
 export default async function Home({ params: { lang = "es" } }) {
     const dict = await getDictionary(lang);

@@ -9,7 +9,6 @@ import Slider from "../slider";
 import Checkbox from "../checkbox";
 
 export const CELL_AMOUNT = 25; // max 35, otherwise is to heavy to compute
-const diagonals = true;
 
 export default () => {
     const pathGenerator = useRef();
@@ -20,7 +19,7 @@ export default () => {
         : windowSize.height / 1.5;
     const cellSize = canvasSize / CELL_AMOUNT;
     const [reset, setReset] = useState(false);
-    const [obstaclesPercentage, setObstaclesPercentage] = useState(50);
+    const [obstaclesPercentage, setObstaclesPercentage] = useState(35);
     const [diagonalsAllowed, setDiagonalsAllowed] = useState(true);
     const [setupDone, setSetupDone] = useState(false);
     const maze = useMemo(() => new Maze(true), [reset]);

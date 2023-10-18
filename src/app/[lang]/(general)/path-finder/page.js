@@ -1,6 +1,6 @@
 import PathFinder from "@/components/miniprojects/pathFinder";
-import "../../../styles/project.scss";
-import { getDictionary } from "../dictionaries";
+import "../../../../styles/project.scss";
+import { getDictionary } from "../../dictionaries";
 
 export default async function TerrainPage({ params: { lang = "es" } }) {
     const dict = await getDictionary(lang);

@@ -1,6 +1,6 @@
 import Maze from "@/components/miniprojects/maze";
-import { getDictionary } from "../dictionaries";
-import "../../../styles/project.scss";
+import { getDictionary } from "../../dictionaries";
+import "../../../../styles/project.scss";
 
 export default async function MazeGeneratorPage({ params: { lang = "es" } }) {
     const dict = await getDictionary(lang);

@@ -5,7 +5,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useRef, useState } from "react";
 import Slider from "../slider";
 
-const scale = 20;
+const scale = 25;
 
 export default () => {
     const windowSize = useWindowSize();
@@ -18,10 +18,10 @@ export default () => {
     const [restart, setRestart] = useState(false);
     const [speedValue, setSpeedValue] = useState(50);
     const [mountainSizeValue, setMountainSizeValue] = useState(500);
-    const [rotateXValue, setRotateXValue] = useState(20);
+    const [rotateXValue, setRotateXValue] = useState(30);
     const [rotateZValue, setRotateZValue] = useState(1);
     const [distanceValue, setDistanceValue] = useState(500);
-    const [distanceHorizontalValue, setDistanceHorizontalValue] = useState(30);
+    const [distanceHorizontalValue, setDistanceHorizontalValue] = useState(35);
 
     useEffect(() => {
         setRestart(true);

@@ -1,6 +1,6 @@
 import BallsEcosystem from "@/components/miniprojects/ballsEcosystem";
-import { getDictionary } from "../dictionaries";
-import "../../../styles/project.scss";
+import { getDictionary } from "../../dictionaries";
+import "../../../../styles/project.scss";
 import Network from "@/components/miniprojects/network";
 
 export default async function BallsPage({ params: { lang = "es" } }) {
