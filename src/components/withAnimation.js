@@ -7,6 +7,7 @@ export default function WithAnimation({
     animationName = "opacity",
     animationDuration = 2,
     className,
+    callback,
 }) {
     const [isIntersecting, setIsIntersecting] = useState(false);
     const ref = useRef();
@@ -14,8 +15,10 @@ export default function WithAnimation({
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 setIsIntersecting(true);
+                callback?.(true);
             } else {
                 setIsIntersecting(false);
+                callback?.(false);
             }
         });
         observer.observe(ref.current);

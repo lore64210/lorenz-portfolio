@@ -18,7 +18,7 @@ a {
     flex-direction: column;
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 95vh;
     padding: 20px;
     margin-bottom: 20px;
     width: 20vw;
@@ -29,14 +29,17 @@ a {
         width: 25vw;
         .header-title {
             animation: shake 1s 2 reverse;
+            &.show-header-title {
+                top: 34vh;
+            }
         }
         .header-image {
             .profile-img-border {
-                width: 38vh;
-                height: 38vh;
+                width: 33vh;
+                height: 33vh !important;
                 .profile-img {
-                    width: 35vh;
-                    height: 35vh;
+                    width: 30vh;
+                    height: 30vh !important;
                     animation: image 15s infinite, border-rad 30s infinite;
                 }
             }
@@ -44,37 +47,25 @@ a {
     }
     .header-image {
         margin-left: 2em;
-        .profile-img-border {
-            background: linear-gradient(
-                45deg,
-                #d4145a90,
-                #fbb03b90,
-                #ff512f90,
-                #dd247690,
-                #ff61d290
-            );
-            transition: all 0.5s ease-in-out;
-            border-radius: 50em;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 28vh;
+        transition: all 1s ease-in-out;
+        height: fit-content;
+        &.show-header-image {
+            opacity: 1;
             height: 28vh;
-            animation: border-rad-min 50s infinite;
-            .profile-img {
-                transition: all 1s ease-in-out;
-                width: 25vh;
-                height: 25vh;
-                border-radius: 2em;
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-                background-position: center;
-                animation: border-rad 30s infinite;
-                background-image: url("/static/images/profile/img-1.jpeg");
+            .profile-img-border {
+                height: 28vh;
+                .profile-img {
+                    height: 25vh;
+                }
             }
         }
+        &.hide-header-image {
+            height: 0;
+            max-width: 28vh;
+            opacity: 0;
+        }
     }
+
     .header-title {
         cursor: pointer;
         position: absolute;
@@ -86,9 +77,54 @@ a {
         height: 2em;
         align-items: center;
         border-radius: 1em;
+        transition: top 1s ease-in-out;
+        &.show-header-title {
+            top: 28vh;
+        }
+        &.hide-header-title {
+            top: 0;
+        }
     }
     nav {
         margin-top: 6em;
+        transition: margin-top 2s ease-in-out;
+        &.hide-header-nav-margin {
+            margin-top: 4em;
+        }
+    }
+}
+
+.profile-img-border {
+    background: linear-gradient(
+        45deg,
+        #d4145a90,
+        #fbb03b90,
+        #ff512f90,
+        #dd247690,
+        #ff61d290
+    );
+    transition: all 0.5s ease-in-out;
+    border-radius: 50em;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28vh;
+    height: 28vh;
+    animation: border-rad-min 50s infinite;
+    .profile-img {
+        &.profile-img-animation {
+            animation: image 60s infinite, border-rad 30s infinite;
+        }
+        transition: all 1s ease-in-out;
+        width: 25vh;
+        height: 25vh;
+        border-radius: 2em;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        animation: border-rad 30s infinite;
+        background-image: url("/static/images/profile/img-1.jpeg");
     }
 }
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Accordeon from "../accordeon";
 
-export default function HeaderMenu({ dict, lang }) {
+export default function HeaderMenu({ dict, lang, className }) {
     return (
         <div>
             <Link href={`/${lang}`} className="header-nav-item">
