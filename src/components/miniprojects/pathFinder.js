@@ -5,13 +5,13 @@ import Cell from "./classes/maze/MazeCell";
 import P5Container from "./P5Container";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Slider from "../slider";
+import Checkbox from "../checkbox";
 
 export const CELL_AMOUNT = 25; // max 35, otherwise is to heavy to compute
-const OBSTACLE_PERCENTAGE = 0.5;
 const diagonals = true;
 
 export default () => {
-    const maze = useMemo(() => new Maze(true), []);
     const pathGenerator = useRef();
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
@@ -19,11 +19,17 @@ export default () => {
         ? windowSize.width - 20
         : windowSize.height / 1.5;
     const cellSize = canvasSize / CELL_AMOUNT;
-    const [restart, setRestart] = useState(false);
+    const [reset, setReset] = useState(false);
+    const [obstaclesPercentage, setObstaclesPercentage] = useState(50);
+    const [diagonalsAllowed, setDiagonalsAllowed] = useState(true);
+    const [setupDone, setSetupDone] = useState(false);
+    const maze = useMemo(() => new Maze(true), [reset]);
 
     useEffect(() => {
-        setRestart(true);
-    }, []);
+        if (setupDone) {
+            setupFunction();
+        }
+    }, [reset]);
 
     const show = (p5, cell) => {
         p5.fill(cell.isObstacle ? "black" : "white");
@@ -56,7 +62,7 @@ export default () => {
             if (y !== CELL_AMOUNT - 1) {
                 cell.addEdge(maze.getCell(x, y + 1));
             }
-            if (diagonals) {
+            if (diagonalsAllowed) {
                 if (x !== 0 && y !== 0) {
                     cell.addEdge(maze.getCell(x - 1, y - 1));
                 }
@@ -73,15 +79,16 @@ export default () => {
         });
     };
 
-    const setup = (p5, canvasRef) => {
-        p5.createCanvas(canvasSize, canvasSize).parent(canvasRef);
+    const setupFunction = () => {
         for (let x = 0; x < CELL_AMOUNT; x++) {
             for (let y = 0; y < CELL_AMOUNT; y++) {
                 const cell = new Cell(x, y, cellSize);
                 const isStart = x === 0 && y === 0;
                 const isEnd = x === CELL_AMOUNT - 1 && y === CELL_AMOUNT - 1;
                 cell.setIsObstacle(
-                    !isStart && !isEnd && Math.random() < OBSTACLE_PERCENTAGE
+                    !isStart &&
+                        !isEnd &&
+                        Math.random() < obstaclesPercentage / 100
                 );
                 maze.addVertex(cell);
                 if (isEnd) {
@@ -94,6 +101,12 @@ export default () => {
         maze.setCurrentCell(0, 0, true);
     };
 
+    const setup = (p5, canvasRef) => {
+        p5.createCanvas(canvasSize, canvasSize).parent(canvasRef);
+        setupFunction();
+        setSetupDone(true);
+    };
+
     const draw = (p5) => {
         p5.frameRate(15);
         maze.getVertices().forEach((cell) => show(p5, cell));
@@ -101,11 +114,28 @@ export default () => {
     };
 
     return (
-        <P5Container
-            draw={draw}
-            setup={setup}
-            overrideSetup
-            restart={restart}
-        />
+        <div className="mini-project-container">
+            <P5Container draw={draw} setup={setup} overrideSetup />
+            <div className="mini-projects-controls">
+                <Slider
+                    label="Obstacles"
+                    onChange={setObstaclesPercentage}
+                    value={obstaclesPercentage}
+                    min={20}
+                    max={60}
+                />
+                <Checkbox
+                    label="Diagonals"
+                    defaultValue={diagonalsAllowed}
+                    onChange={setDiagonalsAllowed}
+                />
+                <button
+                    className="restart-button"
+                    onClick={() => setReset((prev) => !prev)}
+                >
+                    Restart
+                </button>
+            </div>
+        </div>
     );
 };
