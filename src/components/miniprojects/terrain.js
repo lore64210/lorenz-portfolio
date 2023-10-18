@@ -7,7 +7,7 @@ import Slider from "../slider";
 
 const scale = 25;
 
-export default () => {
+export default ({ dict }) => {
     const windowSize = useWindowSize();
     const flying = useRef(0);
     const terrainRef = useRef();
@@ -95,40 +95,54 @@ export default () => {
             />
             <div className="mini-projects-controls">
                 <Slider
-                    label="Speed"
+                    label={dict["projects-content"]["terrain"].labels["speed"]}
                     onChange={setSpeedValue}
                     value={speedValue}
                 />
                 <Slider
-                    label="Mountain Size"
+                    label={
+                        dict["projects-content"]["terrain"].labels[
+                            "mountain-size"
+                        ]
+                    }
                     onChange={setMountainSizeValue}
                     value={mountainSizeValue}
                     min={50}
                     max={1000}
                 />
                 <Slider
-                    label="Rotate Y"
+                    label={
+                        dict["projects-content"]["terrain"].labels["rotate-y"]
+                    }
                     onChange={setRotateXValue}
                     value={rotateXValue}
                     min={20}
                     max={80}
                 />
                 <Slider
-                    label="Rotate X"
+                    label={
+                        dict["projects-content"]["terrain"].labels["rotate-x"]
+                    }
                     onChange={setRotateZValue}
                     value={rotateZValue}
                     min={1}
                     max={64}
                 />
                 <Slider
-                    label="Distance"
+                    label={
+                        dict["projects-content"]["terrain"].labels["distance"]
+                    }
                     onChange={setDistanceValue}
                     value={distanceValue}
                     min={10}
                     max={3000}
                 />
                 <Slider
-                    label="Distance Horizontal"
+                    label={
+                        dict["projects-content"]["terrain"].labels[
+                            "horizontal-distance"
+                        ]
+                    }
                     onChange={setDistanceHorizontalValue}
                     value={distanceHorizontalValue}
                     min={1}

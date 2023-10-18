@@ -11,7 +11,7 @@ export const CELL_AMOUNT = 20; // max 50, otherwise is to heavy to compute
 
 // REFACTOR, some calculations are way to expensive,
 
-const MazePage = () => {
+const MazePage = ({ dict }) => {
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
     const cellSize =
@@ -154,10 +154,18 @@ const MazePage = () => {
                     onChange={setSpeed}
                     min={10}
                     max={60}
-                    label="Speed"
+                    label={
+                        dict["projects-content"]["maze-generator"]["labels"][
+                            "speed"
+                        ]
+                    }
                 />
                 <button className="restart-button" onClick={handleRestart}>
-                    Restart
+                    {
+                        dict["projects-content"]["maze-generator"]["labels"][
+                            "restart"
+                        ]
+                    }
                 </button>
             </div>
         </div>

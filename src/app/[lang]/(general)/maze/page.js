@@ -15,7 +15,7 @@ export default async function MazeGeneratorPage({ params: { lang = "es" } }) {
                 )}
             </div>
             <div className="canvas-container">
-                <Maze />
+                <Maze dict={dict} />
             </div>
         </div>
     );

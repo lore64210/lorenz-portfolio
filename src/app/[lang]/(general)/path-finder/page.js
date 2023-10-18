@@ -13,7 +13,7 @@ export default async function TerrainPage({ params: { lang = "es" } }) {
                 ))}
             </div>
             <div className="canvas-container">
-                <PathFinder />
+                <PathFinder dict={dict} />
             </div>
         </div>
     );

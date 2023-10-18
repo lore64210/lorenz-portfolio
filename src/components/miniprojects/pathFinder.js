@@ -10,7 +10,7 @@ import Checkbox from "../checkbox";
 
 export const CELL_AMOUNT = 25; // max 35, otherwise is to heavy to compute
 
-export default () => {
+export default ({ dict }) => {
     const pathGenerator = useRef();
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
@@ -117,14 +117,22 @@ export default () => {
             <P5Container draw={draw} setup={setup} overrideSetup />
             <div className="mini-projects-controls">
                 <Slider
-                    label="Obstacles"
+                    label={
+                        dict["projects-content"]["path-finder"]["labels"][
+                            "obstacles"
+                        ]
+                    }
                     onChange={setObstaclesPercentage}
                     value={obstaclesPercentage}
                     min={20}
                     max={60}
                 />
                 <Checkbox
-                    label="Diagonals"
+                    label={
+                        dict["projects-content"]["path-finder"]["labels"][
+                            "diagonals"
+                        ]
+                    }
                     defaultValue={diagonalsAllowed}
                     onChange={setDiagonalsAllowed}
                 />
@@ -132,7 +140,11 @@ export default () => {
                     className="restart-button"
                     onClick={() => setReset((prev) => !prev)}
                 >
-                    Restart
+                    {
+                        dict["projects-content"]["path-finder"]["labels"][
+                            "restart"
+                        ]
+                    }
                 </button>
             </div>
         </div>

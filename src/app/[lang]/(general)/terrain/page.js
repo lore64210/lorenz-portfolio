@@ -13,7 +13,7 @@ export default async function TerrainPage({ params: { lang = "es" } }) {
                 ))}
             </div>
             <div className="canvas-container">
-                <Terrain />
+                <Terrain dict={dict} />
             </div>
         </div>
     );

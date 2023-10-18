@@ -62,7 +62,11 @@
                 "Con este algoritmo generamos un laberinto distinto en cada ocasion",
                 "Cada celda del laberinto es un nodo, y las \"paredes\" son booleanos para saber si hay una pared en alguna direccion",
                 "De esta forma, armamos un grafo con sus vertices, y lo representamos visualmente. Al ser un grafo, podemos aplicar un algoritmo sobre este de forma sencilla para ir recorriendo los nodos segun los vertices que tengamos al alcance"
-            ]
+            ],
+            "labels": {
+                "speed": "Velocidad",
+                "restart": "Reiniciar"
+            }
         },
         "balls": {
             "title": "De a muchos es mas divertido",
@@ -100,7 +104,12 @@
                 "Los puntos verdes son los recorridos, y los amarillos son los que el algoritmo puede elegir para moverse",
                 "Siempre va a elegir un punto amarillo que le convenga mas para llegar a la meta, y la decision de cual es el mas conveniente lo hace a travez de la heuristica, o sea, que sabiendo donde esta la meta respecto a su posicion actual, elije el punto amarillo que menor distancia represente el proximo movimiento (una decision tirada al azar si, pero informada y con fundamento)",
                 "Es decir, que si bien no sabe si el siguiente paso que va a tomar lo va a llevar a un callejon sin salida, en el mejor de los casos es el mejor camino posible"
-            ]
+            ],
+            "labels": {
+                "obstacles": "Obstaculos",
+                "diagonals": "Ir en diagonal",
+                "restart": "Reiniciar"
+            }
         },
         "terrain": {
             "title": "Generador de terrenos!",
@@ -111,7 +120,15 @@
                 "El canvas esta rotado y trasladado para que se pueda visualizar mejor como z sube y baja",
                 "La forma en que sube y baja z es a travez de \"El sonido de Perlin\", una forma especial de usar el algoritmo RANDOM, pero en lugar de ser una subida y bajada erratica donde se va de 0 a 100, la curva de cambio es muchisimo mas tenue",
                 "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z que va incrementandose un poquito despues de cada iteracion, lo que hace que parezca que estamos sobrevolando unas montañas en lugar de estar rebotando en una gelatina"
-            ]
+            ],
+            "labels": {
+                "speed": "Velocidad",
+                "mountain-size": "Altura de montañas",
+                "rotate-y": "Rotar eje Y",
+                "rotate-x": "Rotar eje X",
+                "distance": "Distancia",
+                "horizontal-distance": "Distancia Horizontal"
+            }
         }
     }
 }
