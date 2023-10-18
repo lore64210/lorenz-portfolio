@@ -27,6 +27,9 @@ export default () => {
 
     const show = (p5, cell) => {
         p5.fill(cell.isObstacle ? "black" : "white");
+        if (cell.isEnd) {
+            p5.fill("orange");
+        }
         if (cell.searched) {
             p5.fill("yellow");
         }
@@ -82,6 +85,7 @@ export default () => {
                 );
                 maze.addVertex(cell);
                 if (isEnd) {
+                    cell.setIsEnd(true);
                     pathGenerator.current = maze.aStarSearchGenerator(cell);
                 }
             }
