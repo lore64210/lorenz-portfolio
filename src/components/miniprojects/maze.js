@@ -5,13 +5,13 @@ import useWindowSize from "@/hooks/useWindowSize";
 import Maze from "./classes/maze/Maze";
 import Cell from "./classes/maze/MazeCell";
 import useIsMobile from "@/hooks/useIsMobile";
+import Slider from "../slider";
 
 export const CELL_AMOUNT = 20; // max 50, otherwise is to heavy to compute
 
 // REFACTOR, some calculations are way to expensive,
 
 const MazePage = () => {
-    const maze = useMemo(() => new Maze(true), []);
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
     const cellSize =
@@ -19,10 +19,15 @@ const MazePage = () => {
         CELL_AMOUNT;
     const [finished, setFinished] = useState(false);
     const [restart, setRestart] = useState(false);
+    const maze = useMemo(() => new Maze(true), [restart]);
+    const [setupDone, setSetupDone] = useState(false);
+    const [speed, setSpeed] = useState(10);
 
     useEffect(() => {
-        setRestart(true);
-    }, []);
+        if (setupDone) {
+            setupFunction();
+        }
+    }, [restart]);
 
     const show = (p5, cell) => {
         if (cell.filled) {
@@ -96,9 +101,7 @@ const MazePage = () => {
         });
     };
 
-    const setup = (p5, canvasRef) => {
-        const size = cellSize * CELL_AMOUNT;
-        p5.createCanvas(size, size).parent(canvasRef);
+    const setupFunction = () => {
         for (let x = 0; x < CELL_AMOUNT; x++) {
             for (let y = 0; y < CELL_AMOUNT; y++) {
                 const cell = new Cell(x, y, cellSize);
@@ -107,6 +110,13 @@ const MazePage = () => {
         }
         connectCells();
         maze.setCurrentCell(0, 0, true);
+    };
+
+    const setup = (p5, canvasRef) => {
+        const size = cellSize * CELL_AMOUNT;
+        p5.createCanvas(size, size).parent(canvasRef);
+        setupFunction();
+        setSetupDone(true);
     };
 
     const onFinish = useCallback(() => {
@@ -118,24 +128,39 @@ const MazePage = () => {
     const draw = (p5) => {
         p5.background(0);
         if (!finished) {
+            p5.frameRate(60);
             const mazeComplete = maze.create();
             if (mazeComplete) {
                 onFinish();
             }
         } else {
-            p5.frameRate(10);
+            p5.frameRate(speed);
             maze.move();
         }
         maze.getVertices().forEach((cell) => show(p5, cell));
     };
 
+    const handleRestart = () => {
+        setFinished(false);
+        setRestart((prev) => !prev);
+    };
+
     return (
-        <P5Container
-            draw={draw}
-            setup={setup}
-            overrideSetup
-            restart={restart}
-        />
+        <div className="mini-project-container">
+            <P5Container draw={draw} setup={setup} overrideSetup />
+            <div className="mini-projects-controls">
+                <Slider
+                    value={speed}
+                    onChange={setSpeed}
+                    min={10}
+                    max={60}
+                    label="Speed"
+                />
+                <button className="restart-button" onClick={handleRestart}>
+                    Restart
+                </button>
+            </div>
+        </div>
     );
 };
 
