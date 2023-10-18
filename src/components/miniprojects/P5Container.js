@@ -23,6 +23,7 @@ const P5Container = ({ draw, setup, overrideSetup, restart, ...props }) => {
             setup?.(p5Ref.current, canvasRef.current);
         }
     }, [initializedState, restart]);
+
     const defaultSetup = (p5, canvas) => {
         if (!initializedState) {
             setInitializedState(true);
@@ -31,8 +32,10 @@ const P5Container = ({ draw, setup, overrideSetup, restart, ...props }) => {
         }
     };
     const defaultDraw = (p5) => {
-        p5.background(255);
-        draw?.(p5);
+        if (initializedState) {
+            p5.background(255);
+            draw?.(p5);
+        }
     };
 
     const windowResized = (p5) =>

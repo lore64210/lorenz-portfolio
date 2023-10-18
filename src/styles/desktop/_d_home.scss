@@ -27,6 +27,8 @@
         &:hover {
             margin-left: 5%;
             width: 77%;
+            background-color: rgba(202, 71, 10, 0.774);
+
             .project-card-text {
                 margin: 1em;
             }
@@ -95,17 +97,16 @@
 }
 
 .playground-project-card-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
     align-items: center;
-    row-gap: 2em;
+    justify-content: space-around;
     margin-top: 2em;
     margin-bottom: 2em;
-    width: 65vw;
+    width: 70vw;
     .playground-project-card {
         position: relative;
-        width: calc(21vw * 3 / 4.5);
-        height: calc(21vw * 3 / 5);
+        width: calc(20vw * 3 / 4.5);
+        height: calc(20vw * 3 / 5);
         .playground-project-card-floating {
             //background-color: rgba(255, 255, 255, 0.1);
             background-color: rgba(0, 0, 0, 0.3);
@@ -126,6 +127,7 @@
             cursor: pointer;
             &:hover {
                 top: -0.5em;
+                background-color: rgba(202, 71, 10, 0.774);
             }
             img {
                 border-radius: 1em 1em 0 0;
