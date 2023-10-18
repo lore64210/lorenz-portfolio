@@ -48,22 +48,25 @@ export default function HeaderMenu({ dict, lang }) {
                         header: <h3>{dict.header.playground}</h3>,
                         content: (
                             <>
-                                <Link href={`/${lang}/maze`}>
+                                <Link target="_blank" href={`/${lang}/maze`}>
                                     <h4 className="header-nav-item">
                                         {dict.playground["maze-generator"]}
                                     </h4>
                                 </Link>
-                                <Link href={`/${lang}/balls`}>
+                                <Link target="_blank" href={`/${lang}/balls`}>
                                     <h4 className="header-nav-item">
                                         {dict.playground["balls-ecosystem"]}
                                     </h4>
                                 </Link>
-                                <Link href={`/${lang}/path-finder`}>
+                                <Link
+                                    target="_blank"
+                                    href={`/${lang}/path-finder`}
+                                >
                                     <h4 className="header-nav-item">
                                         {dict.playground["path-finder"]}
                                     </h4>
                                 </Link>
-                                <Link href={`/${lang}/terrain`}>
+                                <Link target="_blank" href={`/${lang}/terrain`}>
                                     <h4 className="header-nav-item">
                                         {dict.playground["terrain"]}
                                     </h4>

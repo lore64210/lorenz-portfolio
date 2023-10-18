@@ -4,7 +4,7 @@ import WithAnimation from "./withAnimation";
 
 export default function PlaygroundProjectCard({ image, title, href }) {
     return (
-        <Link href={href} className="playground-project-card">
+        <Link target="_blank" href={href} className="playground-project-card">
             <WithAnimation>
                 <div className="playground-project-card-floating">
                     <ProjectImage src={image} alt={title} />
