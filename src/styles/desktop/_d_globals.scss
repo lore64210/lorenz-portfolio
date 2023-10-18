@@ -49,7 +49,7 @@ a {
     .header-image {
         margin-left: 2em;
         transition: all 1s ease-in-out;
-        height: fit-content;
+        opacity: 0;
         &.show-header-image {
             opacity: 1;
             height: 28vh;
@@ -87,7 +87,7 @@ a {
         }
     }
     nav {
-        margin-top: 6em;
+        margin-top: 6.5em;
         transition: margin-top 2s ease-in-out;
         &.hide-header-nav-margin {
             margin-top: 4em;

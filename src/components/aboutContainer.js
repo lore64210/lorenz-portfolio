@@ -1,18 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "./header/header";
 import ProfilePic from "./profilePic";
 import WithAnimation from "./withAnimation";
 
 export default function AboutContainer({ lang, dict }) {
-    const [isShowingProfilePic, setIsShowingProfilePic] = useState(false);
+    const [isShowingProfilePic, setIsShowingProfilePic] = useState(true);
+    const [disableAnimation, setDisableAnimation] = useState(true);
+    const callback = useCallback(
+        (value) => {
+            setIsShowingProfilePic(value);
+            if (disableAnimation) {
+                setDisableAnimation(value);
+            } else {
+                setDisableAnimation(false);
+            }
+        },
+        [disableAnimation]
+    );
     return (
         <>
             <Header
                 dict={dict}
                 lang={lang}
                 showProfilePic={!isShowingProfilePic}
+                isAboutPage
+                disableAnimation={disableAnimation}
             />
             <main className="main">
                 <div className="main-bg"></div>
@@ -22,7 +36,7 @@ export default function AboutContainer({ lang, dict }) {
                 <div className="about">
                     <ProfilePic
                         className="about-profile-pic"
-                        callback={setIsShowingProfilePic}
+                        callback={callback}
                         isAboutPage
                     />
                     <WithAnimation>

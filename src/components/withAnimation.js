@@ -8,6 +8,7 @@ export default function WithAnimation({
     animationDuration = 2,
     className,
     callback,
+    disabled = false,
 }) {
     const [isIntersecting, setIsIntersecting] = useState(false);
     const ref = useRef();
@@ -29,7 +30,7 @@ export default function WithAnimation({
             ref={ref}
             className={className}
             style={
-                isIntersecting
+                !disabled && isIntersecting
                     ? {
                           animationName,
                           animationDuration: animationDuration + "s",
