@@ -8,9 +8,10 @@
         background-color: rgba(202, 71, 10, 0.247);
         backdrop-filter: blur(15px);
         border-radius: 1em;
-        padding: 1em;
+        padding: 3em;
         margin: 2em;
         width: 50vw;
+        animation: about-border-rad-min 50s infinite;
     }
 }
 
@@ -29,6 +30,7 @@
     padding: 1em;
     padding-bottom: 3em;
     margin: 2em;
+    animation: about-border-rad-min 50s infinite;
 
     .restart-button {
         background-color: orange;

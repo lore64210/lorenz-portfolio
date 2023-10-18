@@ -16,9 +16,14 @@
         height: 200px;
         transition: all 0.3s ease-in-out;
         cursor: pointer;
+        animation: border-rad 50s infinite;
+
         &.reversed {
             transition: all 0.2s ease-in-out;
             margin-left: 15%;
+            text-align: end;
+            border-start-end-radius: 1em !important;
+            border-end-end-radius: 1em !important;
             &:hover {
                 margin-left: 10%;
                 width: 77%;
@@ -107,6 +112,7 @@
         position: relative;
         width: calc(20vw * 3 / 4.5);
         height: calc(20vw * 3 / 5);
+        margin-bottom: 2em;
         .playground-project-card-floating {
             //background-color: rgba(255, 255, 255, 0.1);
             background-color: rgba(0, 0, 0, 0.3);
@@ -124,6 +130,8 @@
             width: 100%;
             height: 100%;
             transition: all 0.25s ease-in-out;
+            padding-bottom: 2em;
+            border-top: 1em !important;
             cursor: pointer;
             &:hover {
                 top: -0.5em;

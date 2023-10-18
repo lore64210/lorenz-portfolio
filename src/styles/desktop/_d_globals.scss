@@ -113,6 +113,9 @@ a {
     width: 28vh;
     height: 28vh;
     animation: border-rad-min 50s infinite;
+    &.about-profile-img-border {
+        animation: about-border-rad-min 50s infinite;
+    }
     .profile-img {
         &.profile-img-animation {
             animation: image 60s infinite, border-rad 30s infinite;
@@ -280,6 +283,7 @@ a {
         border-radius: 10em 5em 6em 8em;
     }
 }
+
 @keyframes border-rad-min {
     0% {
         border-radius: 5em 1em 3em 2em;
@@ -362,6 +366,91 @@ a {
     }
     100% {
         border-radius: 5em 1em 3em 2em;
+    }
+}
+
+@keyframes about-border-rad-min {
+    0% {
+        border-radius: 10em 2em 6em 4em;
+    }
+    5% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    10% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    15% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    20% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    25% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    30% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    35% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    40% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    45% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    50% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    55% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    60% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    65% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    70% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    75% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    80% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    85% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    90% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    95% {
+        border-radius: (random(8) + 2) + em (random(8) + 2) + em (random(8) + 2) +
+            em (random(8) + 2) + em;
+    }
+    100% {
+        border-radius: 10em 2em 6em 4em;
     }
 }
 

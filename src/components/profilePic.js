@@ -19,7 +19,11 @@ export default function ProfilePic({
                 className={className}
                 callback={callback}
             >
-                <div className="profile-img-border">
+                <div
+                    className={`profile-img-border ${
+                        isAboutPage ? "about-profile-img-border" : ""
+                    }`}
+                >
                     <div
                         className={`profile-img ${
                             isAboutPage ? "profile-img-animation" : ""
