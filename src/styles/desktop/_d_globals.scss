@@ -34,6 +34,7 @@ a {
             }
         }
         .header-image {
+            z-index: -1;
             .profile-img-border {
                 width: 33vh;
                 height: 33vh !important;
