@@ -27,7 +27,7 @@ body {
         width: 100%;
         .header-title {
             position: relative;
-            padding-left: 0;
+            padding-left: 0.5em;
             padding-right: 0;
             margin: 0;
             font-size: 1.5rem;
@@ -75,7 +75,7 @@ body {
     cursor: pointer;
     display: flex;
     padding: 0;
-    padding-right: 2em;
+    padding-right: 1em;
     width: 3em;
     height: 3em;
     overflow: hidden;
