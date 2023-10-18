@@ -17,12 +17,14 @@
         display: flex;
         justify-content: center;
         .project-card {
-            width: 90%;
+            width: 100%;
             height: auto;
             border-radius: 1em;
             margin: 0;
             margin-bottom: 2em;
             flex-direction: column;
+            animation: border-rad-min 50s infinite;
+            padding-bottom: 2em;
             &.reversed {
                 flex-direction: column-reverse;
                 margin: 0;

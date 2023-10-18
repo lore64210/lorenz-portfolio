@@ -26,7 +26,6 @@ a {
     backdrop-filter: blur(15px);
     transition: width 0.25s ease-in-out;
     &:hover {
-        width: 25vw;
         .header-title {
             animation: shake 1s 2 reverse;
             &.show-header-title {
