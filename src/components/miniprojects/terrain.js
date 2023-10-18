@@ -5,7 +5,7 @@ import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useRef, useState } from "react";
 import Slider from "../slider";
 
-const scale = 50;
+const scale = 20;
 
 export default () => {
     const windowSize = useWindowSize();
@@ -21,6 +21,7 @@ export default () => {
     const [rotateXValue, setRotateXValue] = useState(20);
     const [rotateZValue, setRotateZValue] = useState(1);
     const [distanceValue, setDistanceValue] = useState(500);
+    const [distanceHorizontalValue, setDistanceHorizontalValue] = useState(30);
 
     useEffect(() => {
         setRestart(true);
@@ -45,7 +46,11 @@ export default () => {
         p5.noFill();
         p5.rotateX(p5.PI / (rotateXValue / 10));
         p5.rotateZ(rotateZValue / 10);
-        p5.translate(-canvasSize * 2.1, -canvasSize * 3, -distanceValue);
+        p5.translate(
+            -canvasSize * 2.1,
+            (-canvasSize * distanceHorizontalValue) / 10,
+            -distanceValue
+        );
         flying.current -= speedValue / 5000;
         let yoff = flying.current;
         for (let y = 0; y < cols; y++) {
@@ -120,7 +125,14 @@ export default () => {
                     onChange={setDistanceValue}
                     value={distanceValue}
                     min={10}
-                    max={1000}
+                    max={3000}
+                />
+                <Slider
+                    label="Distance Horizontal"
+                    onChange={setDistanceHorizontalValue}
+                    value={distanceHorizontalValue}
+                    min={1}
+                    max={100}
                 />
             </div>
         </div>
