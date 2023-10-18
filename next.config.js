@@ -9,8 +9,8 @@ module.exports = {
                 permanent: true,
             },
             {
-                source: "/about-me",
-                destination: "/es/about-me",
+                source: "/about",
+                destination: "/es/about",
                 permanent: true,
             },
             {

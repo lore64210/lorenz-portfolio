@@ -7,7 +7,7 @@ export default function HeaderMenu({ dict, lang }) {
             <Link href={`/${lang}`} className="header-nav-item">
                 <h3>{dict.header.home}</h3>
             </Link>
-            <Link href={`/${lang}/about-me`} className="header-nav-item">
+            <Link href={`/${lang}/about`} className="header-nav-item">
                 <h3>{dict.header["about-me"]}</h3>
             </Link>
             <Accordeon

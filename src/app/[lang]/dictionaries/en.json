@@ -5,6 +5,31 @@
         "projects": "Projects",
         "playground": "Playground"
     },
+    "about": {
+        "content": [
+            "I have been a web page developer for a couple of years",
+            "When I tell people about what I do, I'm pretty sure they think 'Oh my god, how boring,' but the truth is that beyond the frustration and stress that this job can generate, I think I was able to transform the habit of creating software into something quite entertaining and fun",
+            "Without going any further, I think I have a better time programming than playing Assassin's Creed",
+            "I made this website to show a little what I can do, and the desire to have a good time doing it. I am not a very original or fast person, but with desire and time I end up putting together things that make me feel proud, hence the motivation to show my work with this little webpage",
+            "",
+            "I have been a web page developer for a couple of years now",
+            "When I tell people about what I do, I'm pretty sure they think 'Oh my god, how boring,' but the truth is that beyond the frustration and stress that this job can generate, I think I was able to transform the habit of creating software into something quite entertaining and fun",
+            "Without going any further, I think I have a better time programming than playing Assassin's Creed",
+            "I work mostly with React, but I like to try different things all the time to have a little idea of ​​what each tool can do",
+            "Although I am a FullStack developer, I try to put a little more focus on the FrontEnd side, because I realized that even though it is not very good, I enjoy it more ;D",
+            "",
+            "I already worked in several places, from each one I learned something new, whether it was how to move socially, how to learn new things, how to think about different situations, alone or in a team",
+            "In addition, of course, to having encountered many different ways of working, with different tools, languages, frameworks that, with the passage of time, the society of programmers marks as obsolete, but they all serve to fulfill the creation of some functionality",
+            "The stack I use is varied, among these I worked and played using SpringBoot with Java, Django with Python, NodeJS, and some more that I forgot in the Backend",
+            "In the Frontend, as I mentioned before, I mostly use React, along with Next, but I also know VueJS and some view-templates languages ​​that SpringBoot and Django handle, but with so many things to know and learn, I didn't pay much attention",
+            "",
+            "In recent years I have noticed how technology is advancing at exponential steps, but the use we give to the Internet is declining in terms of quality of content. I guess if you ask me why I dedicate myself to this, it is because one day I would like to be able to find a way for the relationship between people and the virtual world to be something healthier, to work better as a tool than it is now, more connected to reality and less invasive in terms of the amount of time we spend consuming content from a screen (Obviously I am projecting there because I am a software developer and my eyes are burned from looking at monitors so much and the life of an average person is not as I describe it, but lately it is my perception)",
+            "In other words and less depressing, that our relationship with the virtual is something more human and that the machines that tell us what to watch and give an opinion are replaced (or improved) by something that we really enjoy",
+            "But since I don't have the slightest idea how to achieve something like that, I continue studying",
+            "If you made it this far, thank you for reading me. And if you saw any of the things I did, also, thank you very much for taking the time. Honestly, I'm a little embarrassed to expose the work I do so I hope you liked it",
+            "Have a good day and have a good time"
+        ]
+    },
     "projects": {
         "title": "My Projects",
         "portfolio-maker": {
