@@ -81,7 +81,7 @@ export default () => {
     };
 
     return (
-        <>
+        <div className="mini-project-container">
             <P5Container
                 draw={draw}
                 setup={setup}
@@ -123,6 +123,6 @@ export default () => {
                     max={1000}
                 />
             </div>
-        </>
+        </div>
     );
 };

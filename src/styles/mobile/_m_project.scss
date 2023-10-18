@@ -10,7 +10,7 @@
         box-shadow: none;
         backdrop-filter: none;
         border-radius: 1em;
-        width: 90vw;
+        width: 85vw;
         margin: 0;
     }
 }
@@ -18,4 +18,16 @@
 .canvas-container {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.mini-project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-projects-controls {
+    width: 75vw;
 }
