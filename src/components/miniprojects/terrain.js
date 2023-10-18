@@ -3,6 +3,7 @@ import P5Container from "@/components/miniprojects/P5Container";
 import useIsMobile from "@/hooks/useIsMobile";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useEffect, useRef, useState } from "react";
+import Slider from "../slider";
 
 const scale = 50;
 
@@ -15,6 +16,11 @@ export default () => {
     const cols = rows;
     const isMobile = useIsMobile();
     const [restart, setRestart] = useState(false);
+    const [speedValue, setSpeedValue] = useState(50);
+    const [mountainSizeValue, setMountainSizeValue] = useState(500);
+    const [rotateXValue, setRotateXValue] = useState(20);
+    const [rotateZValue, setRotateZValue] = useState(1);
+    const [distanceValue, setDistanceValue] = useState(500);
 
     useEffect(() => {
         setRestart(true);
@@ -36,11 +42,11 @@ export default () => {
     const draw = (p5) => {
         p5.background(0);
         p5.stroke(255);
-
         p5.noFill();
-        p5.rotateX(p5.PI / 2);
-        p5.translate(-windowSize.width * 1.5, -windowSize.height * 4, -300);
-        flying.current -= 0.005;
+        p5.rotateX(p5.PI / (rotateXValue / 10));
+        p5.rotateZ(rotateZValue / 10);
+        p5.translate(-canvasSize * 2.1, -canvasSize * 3, -distanceValue);
+        flying.current -= speedValue / 5000;
         let yoff = flying.current;
         for (let y = 0; y < cols; y++) {
             let xoff = 0;
@@ -49,8 +55,8 @@ export default () => {
                     p5.noise(xoff, yoff),
                     0,
                     1,
-                    -250,
-                    250
+                    -mountainSizeValue,
+                    mountainSizeValue
                 );
                 xoff += 0.1;
             }
@@ -82,7 +88,41 @@ export default () => {
                 overrideSetup
                 restart={restart}
             />
-            <div className="mini-project-controls"></div>
+            <div className="mini-projects-controls">
+                <Slider
+                    label="Speed"
+                    onChange={setSpeedValue}
+                    value={speedValue}
+                />
+                <Slider
+                    label="Mountain Size"
+                    onChange={setMountainSizeValue}
+                    value={mountainSizeValue}
+                    min={50}
+                    max={1000}
+                />
+                <Slider
+                    label="Rotate Y"
+                    onChange={setRotateXValue}
+                    value={rotateXValue}
+                    min={20}
+                    max={80}
+                />
+                <Slider
+                    label="Rotate X"
+                    onChange={setRotateZValue}
+                    value={rotateZValue}
+                    min={1}
+                    max={64}
+                />
+                <Slider
+                    label="Distance"
+                    onChange={setDistanceValue}
+                    value={distanceValue}
+                    min={10}
+                    max={1000}
+                />
+            </div>
         </>
     );
 };
