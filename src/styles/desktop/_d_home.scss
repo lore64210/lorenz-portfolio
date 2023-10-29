@@ -43,6 +43,9 @@
                     width: 40%;
                     filter: invert(100%);
                 }
+                &.historia-humo-logo {
+                    width: 40%;
+                }
             }
             .historia-humo-logo-container {
                 width: 45%;
@@ -69,6 +72,10 @@
             height: auto;
             &.organizer-logo {
                 transition: all 1.5s ease-in-out;
+            }
+            &.historia-humo-logo {
+                transition: all 1.5s ease-in-out;
+                border-radius: 0.5em 0 0 0.5em;
             }
             &.reversed {
                 border-radius: 1em 0 0 1em;
