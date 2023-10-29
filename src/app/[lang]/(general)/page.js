@@ -47,7 +47,7 @@ export default async function Home({ params: { lang = "es" } }) {
                         />
                     }
                     tecnologies="Django"
-                    href="/historia-y-humo"
+                    href="https://lore64210.pythonanywhere.com/blog/"
                 />
                 <ProjectCard
                     title={dict.projects["planet-shop"].title}
