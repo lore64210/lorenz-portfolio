@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
 import Accordeon from "../accordeon";
+import Image from "next/image";
+import useIsMobile from "@/hooks/useIsMobile";
 
-export default function HeaderMenu({ dict, lang, className }) {
+export default function HeaderMenu({ dict, lang }) {
+    const isMobile = useIsMobile();
     return (
         <div>
             <Link href={`/${lang}`} className="header-nav-item">
@@ -76,6 +80,21 @@ export default function HeaderMenu({ dict, lang, className }) {
                     },
                 ]}
             />
+            <Link
+                href="https://github.com/lore64210?tab=repositories"
+                className="header-nav-item"
+                target="_blank"
+            >
+                <h3>{dict.header["my-repos"]}</h3>
+                {!isMobile && (
+                    <Image
+                        src="/static/images/github.png"
+                        width={20}
+                        height={20}
+                        className="github-icon"
+                    />
+                )}
+            </Link>
         </div>
     );
 }

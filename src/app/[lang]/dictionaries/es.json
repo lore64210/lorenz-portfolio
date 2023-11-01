@@ -3,7 +3,8 @@
         "home": "Home",
         "about-me": "Sobre mi",
         "projects": "Proyectos",
-        "playground": "Playground"
+        "playground": "Playground",
+        "my-repos": "Mis Repositorios"
     },
     "about": {
         "content": [

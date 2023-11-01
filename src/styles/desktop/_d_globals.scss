@@ -512,10 +512,18 @@ h4.header-nav-item {
         margin: 0;
         padding: 0;
     }
+    .github-icon {
+        margin-left: 1em;
+        filter: invert(100%);
+        transition: filter 0.25s ease-in-out;
+    }
     &:hover {
         padding: 0.5em;
         background-color: orange;
         color: #222831 !important;
+        .github-icon {
+            filter: invert(10%);
+        }
     }
     transition: all 0.25s;
 }
