@@ -42,9 +42,9 @@
             "title": "Organizer",
             "description": "Una app mobile que es el clasico del dev que esta aprendiendo a programar: Una TODO-app con varias funciones como sacar fotos, grabar audios entre otras"
         },
-        "planet-shop": {
-            "title": "Planet Shop",
-            "description": "Una tienda ecommerce para mostrar tus productos, manejar stock, precios, descuentos, etc..."
+        "spring-crud-initializr": {
+            "title": "Spring CRUD Initializr",
+            "description": "Una herramienta sencilla para agilizar la creacion de APIs CRUD hechas con Spring, generando las distintas entidades de dominio, los servicios, controladores, tests, schema.sql, entre otros"
         }
     },
     "playground": {

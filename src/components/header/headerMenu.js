@@ -42,7 +42,10 @@ export default function HeaderMenu({ dict, lang }) {
                                     {dict.projects["organizer"].title}
                                 </h4>
                                 <h4 className="header-nav-item">
-                                    {dict.projects["planet-shop"].title}
+                                    {
+                                        dict.projects["spring-crud-initializr"]
+                                            .title
+                                    }
                                 </h4>
                             </>
                         ),

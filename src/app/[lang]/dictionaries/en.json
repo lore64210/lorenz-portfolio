@@ -45,9 +45,9 @@
             "title": "Organizer",
             "description": "A TODO mobile app with many features like taking pictures, record audios, checklist and more. A classic developer project"
         },
-        "planet-shop": {
-            "title": "Planet Shop",
-            "description": "An ecommerce web page to sell your products, manage stock, discounts, etc..."
+        "spring-crud-initializr": {
+            "title": "Spring CRUD Initializr",
+            "description": "A simple tool to speed up the creation of CRUD APIs made with Spring, generating the different domain entities, services, controllers, tests, schema.sql, etc"
         }
     },
     "playground": {

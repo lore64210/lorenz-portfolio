@@ -42,6 +42,11 @@
                 &.organizer-logo {
                     width: 40%;
                     filter: invert(100%);
+                    &.spring-crud-initializr-logo {
+                        filter: none !important;
+                        width: 7.5em;
+                        height: 7.5em;
+                    }
                 }
                 &.historia-humo-logo {
                     width: 40%;
@@ -79,6 +84,12 @@
             }
             &.reversed {
                 border-radius: 1em 0 0 1em;
+            }
+            &.spring-crud-initializr-logo {
+                width: 5em;
+                height: 5em;
+                margin: auto;
+                transition: all 0.25s ease-in-out;
             }
         }
         .historia-humo-logo-container {

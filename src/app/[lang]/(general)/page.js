@@ -38,7 +38,6 @@ export default async function Home({ params: { lang = "es" } }) {
                 <ProjectCard
                     title={dict.projects["historia-humo"].title}
                     description={dict.projects["historia-humo"].description}
-                    image="/static/images/historia-humo.png"
                     imageComponent={
                         <ProjectImage
                             src="/static/images/historia-humo.png"
@@ -50,16 +49,20 @@ export default async function Home({ params: { lang = "es" } }) {
                     href="https://lore64210.pythonanywhere.com/blog/"
                 />
                 <ProjectCard
-                    title={dict.projects["planet-shop"].title}
-                    description={dict.projects["planet-shop"].description}
-                    image="/static/images/profile.webp"
+                    title={dict.projects["spring-crud-initializr"].title}
+                    description={
+                        dict.projects["spring-crud-initializr"].description
+                    }
                     tecnologies="React, Spring Boot"
                     reversed
                     imageComponent={
-                        <div className="coming-soon">
-                            <h1>Coming Soon!</h1>
-                        </div>
+                        <ProjectImage
+                            src="/static/images/spring-crud-initializr.png"
+                            alt={dict.projects["spring-crud-initializr"].title}
+                            className="organizer-logo spring-crud-initializr-logo"
+                        />
                     }
+                    href="https://spring-crud-initializr.onrender.com/"
                 />
             </div>
             <WithAnimation>
