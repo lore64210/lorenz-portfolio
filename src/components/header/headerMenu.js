@@ -31,22 +31,33 @@ export default function HeaderMenu({ dict, lang }) {
                                     </h4>
                                 </Link>
                                 <Link
-                                    href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
+                                    href="https://lore64210.pythonanywhere.com/"
                                     target="_blank"
                                 >
                                     <h4 className="header-nav-item">
                                         {dict.projects["historia-humo"].title}
                                     </h4>
                                 </Link>
-                                <h4 className="header-nav-item">
-                                    {dict.projects["organizer"].title}
-                                </h4>
-                                <h4 className="header-nav-item">
-                                    {
-                                        dict.projects["spring-crud-initializr"]
-                                            .title
-                                    }
-                                </h4>
+                                <Link
+                                    href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
+                                    target="_blank"
+                                >
+                                    <h4 className="header-nav-item">
+                                        {dict.projects["organizer"].title}
+                                    </h4>
+                                </Link>
+                                <Link
+                                    href="https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/"
+                                    target="_blank"
+                                >
+                                    <h4 className="header-nav-item">
+                                        {
+                                            dict.projects[
+                                                "spring-crud-initializr"
+                                            ].title
+                                        }
+                                    </h4>
+                                </Link>
                             </>
                         ),
                     },
