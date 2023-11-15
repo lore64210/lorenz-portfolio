@@ -62,7 +62,7 @@ export default async function Home({ params: { lang = "es" } }) {
                             className="organizer-logo spring-crud-initializr-logo"
                         />
                     }
-                    href="https://spring-crud-initializr.onrender.com/"
+                    href="https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/"
                 />
             </div>
             <WithAnimation>
