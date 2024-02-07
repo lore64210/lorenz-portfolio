@@ -28,6 +28,9 @@
             "Que tengas un buen dia y no te olvides de pasarla bien"
         ]
     },
+    "technologies": {
+        "title": "Tecnologias que uso"
+    },
     "projects": {
         "title": "Mis Proyectos",
         "portfolio-maker": {

@@ -5,11 +5,137 @@ import WithAnimation from "@/components/withAnimation";
 import Blob from "@/components/blob";
 import ProjectImage from "@/components/projectImage";
 import "../../../styles/home.scss";
+import {
+    FaDocker,
+    FaNodeJs,
+    FaVuejs,
+    FaPython,
+    FaJava,
+    FaReact,
+    FaAws,
+    FaJenkins,
+} from "react-icons/fa";
+import { SiKubernetes, SiTypescript, SiDjango } from "react-icons/si";
+import { TbBrandNextjs } from "react-icons/tb";
+import { IoLogoVercel, IoLogoJavascript } from "react-icons/io5";
+import { BiLogoSpringBoot, BiLogoGoogleCloud } from "react-icons/bi";
+import { DiRedis, DiPostgresql, DiMysql, DiMongodb } from "react-icons/di";
 
 export default async function Home({ params: { lang = "es" } }) {
     const dict = await getDictionary(lang);
     return (
         <div className="home">
+            <WithAnimation>
+                <h1>{dict.technologies.title}</h1>
+            </WithAnimation>
+            <WithAnimation>
+                <div className="tech-icon-card-container">
+                    <h2>Lenguajes</h2>
+                    <div className="tech-icon-card-content-container">
+                        <div className="tech-icon-container">
+                            <IoLogoJavascript className="tech-icon" />
+                            <span>Javascript</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaJava className="tech-icon" />
+                            <span>Java</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaPython className="tech-icon" />
+                            <span>Python</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <SiTypescript className="tech-icon" />
+                            <span>Typescript</span>
+                        </div>
+                    </div>
+                </div>
+            </WithAnimation>
+            <WithAnimation>
+                <div className="tech-icon-card-container">
+                    <h2>Frameworks</h2>
+                    <div className="tech-icon-card-content-container">
+                        <div className="tech-icon-container">
+                            <FaReact className="tech-icon" />
+                            <span>ReactJS</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <TbBrandNextjs className="tech-icon" />
+                            <span>NextJS</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <SiDjango className="tech-icon" />
+                            <span>DJango</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaVuejs className="tech-icon" />
+                            <span>VueJS</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <BiLogoSpringBoot className="tech-icon" />
+                            <span>SpringBoot</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaNodeJs className="tech-icon" />
+                            <span>NodeJS</span>
+                        </div>
+                    </div>
+                </div>
+            </WithAnimation>
+            <WithAnimation>
+                <div className="tech-icon-card-container">
+                    <h2>Bases de datos</h2>
+                    <div className="tech-icon-card-content-container">
+                        <div className="tech-icon-container">
+                            <DiMongodb className="tech-icon" />
+                            <span>MongoDB</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <DiMysql className="tech-icon" />
+                            <span>MySQL</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <DiPostgresql className="tech-icon" />
+                            <span>PostreSQL</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <DiRedis className="tech-icon" />
+                            <span>Redis</span>
+                        </div>
+                    </div>
+                </div>
+            </WithAnimation>
+            <WithAnimation>
+                <div className="tech-icon-card-container">
+                    <h2>Despliegues</h2>
+                    <div className="tech-icon-card-content-container">
+                        <div className="tech-icon-container">
+                            <FaDocker className="tech-icon" />
+                            <span>Docker</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <IoLogoVercel className="tech-icon" />
+                            <span>Vercel</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaAws className="tech-icon" />
+                            <span>AWS</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <BiLogoGoogleCloud className="tech-icon" />
+                            <span>GCP</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <FaJenkins className="tech-icon" />
+                            <span>Jenkins</span>
+                        </div>
+                        <div className="tech-icon-container">
+                            <SiKubernetes className="tech-icon" />
+                            <span>Kubernetes</span>
+                        </div>
+                    </div>
+                </div>
+            </WithAnimation>
             <WithAnimation>
                 <h1>{dict.projects.title}</h1>
             </WithAnimation>

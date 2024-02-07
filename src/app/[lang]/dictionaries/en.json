@@ -31,6 +31,9 @@
             "Have a good day and have a good time"
         ]
     },
+    "technologies": {
+        "title": "Tecnhnologies i use"
+    },
     "projects": {
         "title": "My Projects",
         "portfolio-maker": {
