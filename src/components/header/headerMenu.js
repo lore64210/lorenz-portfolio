@@ -109,6 +109,13 @@ export default function HeaderMenu({ dict, lang }) {
                     />
                 )}
             </Link>
+            <Link
+                href={`/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`}
+                target="_blank"
+                className="header-nav-item"
+            >
+                <h3>{dict["cv"]["download"]}</h3>
+            </Link>
         </div>
     );
 }

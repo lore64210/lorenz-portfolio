@@ -6,6 +6,9 @@
         "playground": "Playground",
         "my-repos": "My Repositories"
     },
+    "cv": {
+        "download": "My Curriculum"
+    },
     "about": {
         "content": [
             "I have been a web page developer for a couple of years",
