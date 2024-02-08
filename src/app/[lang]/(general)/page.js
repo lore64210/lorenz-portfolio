@@ -161,6 +161,8 @@ export default async function Home({ params: { lang = "es" } }) {
                     href="https://play.google.com/store/apps/details?id=com.lore64210.Organizer"
                     reversed
                 />
+                {/*
+                 
                 <ProjectCard
                     title={dict.projects["historia-humo"].title}
                     description={dict.projects["historia-humo"].description}
@@ -174,13 +176,14 @@ export default async function Home({ params: { lang = "es" } }) {
                     tecnologies="Django"
                     href="https://lore64210.pythonanywhere.com/blog/"
                 />
+                */}
                 <ProjectCard
                     title={dict.projects["spring-crud-initializr"].title}
                     description={
                         dict.projects["spring-crud-initializr"].description
                     }
                     tecnologies="React, Spring Boot"
-                    reversed
+                    //reversed
                     imageComponent={
                         <ProjectImage
                             src="/static/images/spring-crud-initializr.png"
