@@ -121,13 +121,26 @@
 
 .tech-icon-card-container {
     background-color: rgba(0, 0, 0, 0.3);
+    flex-direction: column;
     backdrop-filter: blur(5px);
     border-radius: 1em;
     background-clip: blur(10px);
     width: fit-content;
     padding: 3em;
     margin: 1em;
+    height: auto !important;
+    width: fit-content !important;
+    cursor: auto !important;
     animation: border-rad 30s infinite;
+    &.reversed-tech {
+        transition: all 0.5s ease-in-out;
+        margin-left: 35%;
+        text-align: end;
+        &:hover {
+            margin-left: 30%;
+            width: 77%;
+        }
+    }
     .tech-icon-card-content-container {
         display: flex;
         .tech-icon-container {
