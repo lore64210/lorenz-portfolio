@@ -69,10 +69,6 @@ export default async function Home({ params: { lang = "es" } }) {
                                 <span>DJango</span>
                             </div>
                             <div className="tech-icon-container">
-                                <FaVuejs className="tech-icon" />
-                                <span>VueJS</span>
-                            </div>
-                            <div className="tech-icon-container">
                                 <BiLogoSpringBoot className="tech-icon" />
                                 <span>SpringBoot</span>
                             </div>
@@ -129,10 +125,6 @@ export default async function Home({ params: { lang = "es" } }) {
                             <div className="tech-icon-container">
                                 <FaJenkins className="tech-icon" />
                                 <span>Jenkins</span>
-                            </div>
-                            <div className="tech-icon-container">
-                                <SiKubernetes className="tech-icon" />
-                                <span>Kubernetes</span>
                             </div>
                         </div>
                     </div>
