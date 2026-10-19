@@ -11,9 +11,10 @@ export default function SiteHeader({ lang, copy }) {
     const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
     const links = [
         { href: "#about", label: copy.nav.about },
-        { href: `/${lang}#projects`, label: copy.nav.projects },
-        { href: `/${lang}#playground`, label: copy.nav.playground },
-        { href: previewLinks.email, label: copy.nav.contact },
+        { href: "#skills", label: copy.nav.skills },
+        { href: "#projects", label: copy.nav.projects },
+        { href: "#playground", label: copy.nav.playground },
+        { href: "#contact", label: copy.nav.contact },
     ];
 
     const close = () => setOpen(false);

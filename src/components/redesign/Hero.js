@@ -20,7 +20,7 @@ export default function Hero({ lang, copy }) {
                     <p className="hero-description">{copy.hero.description}</p>
 
                     <div className="hero-actions">
-                        <a href={`/${lang}#projects`} className="btn btn-primary">
+                        <a href="#projects" className="btn btn-primary">
                             {copy.hero.projectsCta}
                             <FaArrowRight />
                         </a>
