@@ -3,7 +3,8 @@ import { getDictionary } from "../../dictionaries";
 import "../../../../styles/project.scss";
 import Network from "@/components/miniprojects/network";
 
-export default async function BallsPage({ params: { lang = "es" } }) {
+export default async function BallsPage({ params }) {
+    const { lang = "es" } = await params;
     const dict = await getDictionary(lang);
     return (
         <div className="project-page">

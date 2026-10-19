@@ -21,7 +21,8 @@ import { IoLogoVercel, IoLogoJavascript } from "react-icons/io5";
 import { BiLogoSpringBoot, BiLogoGoogleCloud } from "react-icons/bi";
 import { DiRedis, DiPostgresql, DiMysql, DiMongodb } from "react-icons/di";
 
-export default async function Home({ params: { lang = "es" } }) {
+export default async function Home({ params }) {
+    const { lang = "es" } = await params;
     const dict = await getDictionary(lang);
     return (
         <div className="home">

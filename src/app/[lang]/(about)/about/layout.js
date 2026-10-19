@@ -8,10 +8,9 @@ export const metadata = {
     description: "Everything you need to know about me",
 };
 
-export default async function RootLayout({
-    children,
-    params: { lang = "es" },
-}) {
+export default async function RootLayout({ children, params }) {
+    const { lang = "es" } = await params;
+
     return (
         <html lang={lang}>
             <body className={montserrat.className}>{children}</body>

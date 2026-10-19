@@ -1,13 +1,18 @@
-// Get the preferred locale, similar to the above or using a library
+import { NextResponse } from "next/server";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 
-let headers = { "accept-language": "es;q=0.5" };
-let languages = new Negotiator({ headers }).languages();
-let locales = ["en", "es"];
-let defaultLocale = "en";
+const locales = ["en", "es"];
+const defaultLocale = "en";
 
-match(languages, locales, defaultLocale); // -> 'en-US'
+function getLocale(request) {
+    const headers = {
+        "accept-language": request.headers.get("accept-language") ?? "en",
+    };
+    const languages = new Negotiator({ headers }).languages();
+    return match(languages, locales, defaultLocale);
+}
+
 export function middleware(request) {
     // Check if there is any supported locale in the pathname
     const { pathname } = request.nextUrl;
@@ -23,14 +28,12 @@ export function middleware(request) {
     request.nextUrl.pathname = `/${locale}${pathname}`;
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
-    return Response.redirect(request.nextUrl);
+    return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
     matcher: [
-        // Skip all internal paths (_next)
-        "/((?!_next).*)",
-        // Optional: only run on root (/) URL
-        // '/'
+        // Skip API routes, Next.js internals and static files
+        "/((?!api|_next|.*\\..*).*)",
     ],
 };

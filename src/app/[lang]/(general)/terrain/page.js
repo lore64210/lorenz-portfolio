@@ -2,7 +2,8 @@ import Terrain from "@/components/miniprojects/terrain";
 import "../../../../styles/project.scss";
 import { getDictionary } from "../../dictionaries";
 
-export default async function TerrainPage({ params: { lang = "es" } }) {
+export default async function TerrainPage({ params }) {
+    const { lang = "es" } = await params;
     const dict = await getDictionary(lang);
     return (
         <div className="project-page">
