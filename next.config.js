@@ -1,14 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
-    webpack(webpackConfig) {
-        return {
-            ...webpackConfig,
-            optimization: {
-                minimize: false,
-            },
-        };
-    },
     async redirects() {
         return [
             {
