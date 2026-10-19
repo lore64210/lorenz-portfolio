@@ -2,6 +2,7 @@ import { JetBrains_Mono, Quicksand } from "next/font/google";
 import "../../styles/preview.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
+import ScrollProgress from "@/components/motion/ScrollProgress";
 import { getPreviewCopy } from "@/content/preview";
 
 const quicksand = Quicksand({
@@ -35,6 +36,7 @@ export default async function RootLayout({ children, params }) {
             className={`${quicksand.variable} ${jetbrains.variable}`}
         >
             <body className="preview-body">
+                <ScrollProgress />
                 <SiteHeader lang={lang} copy={copy} />
                 {children}
                 <SiteFooter lang={lang} copy={copy} />

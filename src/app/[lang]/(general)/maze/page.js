@@ -2,6 +2,9 @@ import { getDictionary } from "../../dictionaries";
 import { getPreviewCopy } from "@/content/preview";
 import PlaygroundPage from "@/components/redesign/PlaygroundPage";
 import PlaygroundNotes from "@/components/redesign/PlaygroundNotes";
+import Reveal from "@/components/motion/Reveal";
+import RevealMedia from "@/components/motion/RevealMedia";
+import RevealText from "@/components/motion/RevealText";
 import Maze from "@/components/miniprojects/maze";
 
 export const metadata = {
@@ -19,13 +22,20 @@ export default async function MazeGeneratorPage({ params }) {
         <PlaygroundPage lang={lang} copy={copy}>
             <header className="playground-header">
                 <p className="eyebrow">{copy.playgroundPage.eyebrow}</p>
-                <h1>{content.title}</h1>
-                <p className="playground-lead">{lead}</p>
+                <RevealText as="h1" text={content.title} play />
+                <Reveal
+                    as="p"
+                    className="playground-lead"
+                    play
+                    delay={0.15}
+                >
+                    {lead}
+                </Reveal>
             </header>
 
-            <div className="playground-stage">
+            <RevealMedia className="playground-stage">
                 <Maze dict={dict} />
-            </div>
+            </RevealMedia>
 
             <PlaygroundNotes
                 title={copy.playgroundPage.notes}

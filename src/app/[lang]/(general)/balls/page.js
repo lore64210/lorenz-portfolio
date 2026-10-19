@@ -2,6 +2,9 @@ import { getDictionary } from "../../dictionaries";
 import { getPreviewCopy } from "@/content/preview";
 import PlaygroundPage from "@/components/redesign/PlaygroundPage";
 import PlaygroundNotes from "@/components/redesign/PlaygroundNotes";
+import Reveal from "@/components/motion/Reveal";
+import RevealMedia from "@/components/motion/RevealMedia";
+import RevealText from "@/components/motion/RevealText";
 import Network from "@/components/miniprojects/network";
 import BallsEcosystem from "@/components/miniprojects/ballsEcosystem";
 
@@ -22,19 +25,30 @@ export default async function BallsPage({ params }) {
         <PlaygroundPage lang={lang} copy={copy}>
             <header className="playground-header">
                 <p className="eyebrow">{copy.playgroundPage.eyebrow}</p>
-                <h1>{copy.playgroundPage.ballTitle}</h1>
-                <p className="playground-lead">
+                <RevealText
+                    as="h1"
+                    text={copy.playgroundPage.ballTitle}
+                    play
+                />
+                <Reveal
+                    as="p"
+                    className="playground-lead"
+                    play
+                    delay={0.15}
+                >
                     {copy.playgroundPage.ballLead}
-                </p>
+                </Reveal>
             </header>
 
             <section className="playground-subsection">
-                <h2>{network.title}</h2>
-                <p className="playground-lead">{networkLead}</p>
+                <RevealText as="h2" text={network.title} />
+                <Reveal as="p" className="playground-lead" delay={0.1}>
+                    {networkLead}
+                </Reveal>
 
-                <div className="playground-stage">
+                <RevealMedia className="playground-stage">
                     <Network />
-                </div>
+                </RevealMedia>
 
                 <PlaygroundNotes
                     title={copy.playgroundPage.notes}
@@ -46,12 +60,14 @@ export default async function BallsPage({ params }) {
                 <p className="eyebrow">
                     {copy.playgroundPage.secondExperiment}
                 </p>
-                <h2>{ecosystem.title}</h2>
-                <p className="playground-lead">{ecosystemLead}</p>
+                <RevealText as="h2" text={ecosystem.title} />
+                <Reveal as="p" className="playground-lead" delay={0.1}>
+                    {ecosystemLead}
+                </Reveal>
 
-                <div className="playground-stage">
+                <RevealMedia className="playground-stage">
                     <BallsEcosystem />
-                </div>
+                </RevealMedia>
 
                 <PlaygroundNotes
                     title={copy.playgroundPage.notes}

@@ -1,12 +1,21 @@
+import Reveal from "@/components/motion/Reveal";
+import RevealText from "@/components/motion/RevealText";
+
 export default function SectionHeading({ eyebrow, title, description }) {
     return (
         <div className="section-heading">
             <div>
                 <p className="eyebrow">{eyebrow}</p>
-                <h2>{title}</h2>
+                <RevealText as="h2" text={title} />
             </div>
             {description && (
-                <p className="section-description">{description}</p>
+                <Reveal
+                    as="p"
+                    className="section-description"
+                    delay={0.15}
+                >
+                    {description}
+                </Reveal>
             )}
         </div>
     );

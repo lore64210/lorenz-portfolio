@@ -1,5 +1,8 @@
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
+import Reveal from "@/components/motion/Reveal";
+import RevealMedia from "@/components/motion/RevealMedia";
+import RevealText from "@/components/motion/RevealText";
 import SectionHeading from "./SectionHeading";
 import { projectItems } from "@/content/preview";
 
@@ -28,22 +31,30 @@ export default function ProjectsSection({ copy }) {
                                 <div
                                     className={`project-media project-media-${project.tone}`}
                                 >
-                                    <Image
-                                        src={project.image}
-                                        alt={item.title}
-                                        width={1200}
-                                        height={900}
-                                        className="project-image"
-                                        style={{ objectFit: project.fit }}
-                                    />
+                                    <RevealMedia className="project-media-reveal">
+                                        <Image
+                                            src={project.image}
+                                            alt={item.title}
+                                            width={1200}
+                                            height={900}
+                                            className="project-image"
+                                            style={{
+                                                objectFit: project.fit,
+                                            }}
+                                        />
+                                    </RevealMedia>
                                 </div>
 
-                                <div className="project-content">
+                                <Reveal
+                                    as="div"
+                                    className="project-content"
+                                    delay={0.1}
+                                >
                                     <span className="project-index">
                                         0{index + 1}
                                     </span>
                                     <p className="project-label">{item.label}</p>
-                                    <h3>{item.title}</h3>
+                                    <RevealText as="h3" text={item.title} />
                                     <p className="project-description">
                                         {item.description}
                                     </p>
@@ -68,7 +79,7 @@ export default function ProjectsSection({ copy }) {
                                         {item.link}
                                         <FaArrowRight />
                                     </a>
-                                </div>
+                                </Reveal>
                             </article>
                         );
                     })}

@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import Reveal from "@/components/motion/Reveal";
+import RevealMedia from "@/components/motion/RevealMedia";
+import RevealText from "@/components/motion/RevealText";
+import ParallaxY from "@/components/motion/ParallaxY";
 
 export default function AboutSection({ lang, copy }) {
     const blocks = [
@@ -26,24 +30,39 @@ export default function AboutSection({ lang, copy }) {
             <div className="container about-inner">
                 <div className="about-visual">
                     <div className="about-line" aria-hidden="true" />
-                    <Image
-                        src="/static/images/profile/lorenzo-lean-clean.png"
-                        width={679}
-                        height={1069}
-                        alt={copy.about.imageAlt}
-                        className="about-image"
-                        sizes="(max-width: 960px) 70vw, 380px"
-                    />
+                    <ParallaxY className="about-image-parallax" speed={0.12}>
+                        <RevealMedia className="about-image-wrap">
+                            <Image
+                                src="/static/images/profile/lorenzo-lean-clean.png"
+                                width={679}
+                                height={1069}
+                                alt={copy.about.imageAlt}
+                                className="about-image"
+                                sizes="(max-width: 960px) 70vw, 380px"
+                            />
+                        </RevealMedia>
+                    </ParallaxY>
                 </div>
 
                 <div className="about-content">
                     <p className="eyebrow">{copy.about.eyebrow}</p>
-                    <h2>{copy.about.title}</h2>
-                    <p className="about-intro">{copy.about.intro}</p>
+                    <RevealText as="h2" text={copy.about.title} />
+                    <Reveal
+                        as="p"
+                        className="about-intro"
+                        delay={0.1}
+                    >
+                        {copy.about.intro}
+                    </Reveal>
 
                     <div className="about-blocks">
-                        {blocks.map((block) => (
-                            <div className="about-block" key={block.number}>
+                        {blocks.map((block, index) => (
+                            <Reveal
+                                as="div"
+                                className="about-block"
+                                key={block.number}
+                                delay={0.1 + index * 0.06}
+                            >
                                 <span className="about-number">
                                     {block.number}
                                 </span>
@@ -51,14 +70,19 @@ export default function AboutSection({ lang, copy }) {
                                     <h3>{block.title}</h3>
                                     <p>{block.text}</p>
                                 </div>
-                            </div>
+                            </Reveal>
                         ))}
                     </div>
 
-                    <Link href={`/${lang}/about`} className="text-link">
-                        {copy.about.more}
-                        <FaArrowRight />
-                    </Link>
+                    <Reveal className="text-link-wrap" delay={0.2}>
+                        <Link
+                            href={`/${lang}/about`}
+                            className="text-link"
+                        >
+                            {copy.about.more}
+                            <FaArrowRight />
+                        </Link>
+                    </Reveal>
                 </div>
             </div>
         </section>

@@ -5,6 +5,10 @@ import {
     FaFileAlt,
     FaLinkedin,
 } from "react-icons/fa";
+import Reveal from "@/components/motion/Reveal";
+import RevealMedia from "@/components/motion/RevealMedia";
+import RevealText from "@/components/motion/RevealText";
+import ParallaxY from "@/components/motion/ParallaxY";
 import { previewLinks } from "@/content/preview";
 
 export default function ContactSection({ lang, copy }) {
@@ -37,31 +41,43 @@ export default function ContactSection({ lang, copy }) {
                 <div className="contact-header">
                     <div className="contact-copy">
                         <p className="eyebrow">{copy.contact.eyebrow}</p>
-                        <h2>{copy.contact.title}</h2>
-                        <p className="section-description">
+                        <RevealText as="h2" text={copy.contact.title} />
+                        <Reveal
+                            as="p"
+                            className="section-description"
+                            delay={0.15}
+                        >
                             {copy.contact.description}
-                        </p>
+                        </Reveal>
                     </div>
 
                     <div className="contact-figure" aria-hidden="true">
                         <div className="contact-glow" />
-                        <Image
-                            src="/static/images/profile/lorenzo-stand-clean.png"
-                            width={642}
-                            height={1157}
-                            alt=""
-                            className="contact-image"
-                            sizes="(max-width: 960px) 0px, 340px"
-                        />
+                        <ParallaxY
+                            className="contact-image-parallax"
+                            speed={0.12}
+                        >
+                            <RevealMedia className="contact-image-wrap">
+                                <Image
+                                    src="/static/images/profile/lorenzo-stand-clean.png"
+                                    width={642}
+                                    height={1157}
+                                    alt=""
+                                    className="contact-image"
+                                    sizes="(max-width: 960px) 0px, 340px"
+                                />
+                            </RevealMedia>
+                        </ParallaxY>
                     </div>
                 </div>
 
                 <div className="contact-cards">
-                    {cards.map(({ key, href, icon, external }) => {
+                    {cards.map(({ key, href, icon, external }, index) => {
                         const card = copy.contact.cards[key];
 
                         return (
-                            <a
+                            <Reveal
+                                as="a"
                                 key={key}
                                 href={href}
                                 {...(external
@@ -71,6 +87,7 @@ export default function ContactSection({ lang, copy }) {
                                       }
                                     : {})}
                                 className="contact-card"
+                                delay={index * 0.06}
                             >
                                 <span className="contact-card-icon">
                                     {icon}
@@ -81,12 +98,16 @@ export default function ContactSection({ lang, copy }) {
                                     {card.cta}
                                     <FaArrowRight />
                                 </span>
-                            </a>
+                            </Reveal>
                         );
                     })}
                 </div>
 
-                <div className="contact-email-row">
+                <Reveal
+                    as="div"
+                    className="contact-email-row"
+                    delay={0.1}
+                >
                     <span>{copy.contact.emailLabel}</span>
                     <a
                         href={previewLinks.email}
@@ -94,7 +115,7 @@ export default function ContactSection({ lang, copy }) {
                     >
                         lore64210@gmail.com
                     </a>
-                </div>
+                </Reveal>
             </div>
         </section>
     );

@@ -292,7 +292,6 @@ body.preview-body {
 
 .hero-copy {
     max-width: 640px;
-    animation: fade-up 0.8s 0.1s both;
 }
 
 .hero h1 {
@@ -359,7 +358,6 @@ body.preview-body {
     align-items: flex-end;
     justify-content: center;
     min-height: 520px;
-    animation: fade-up 1s 0.2s both;
 }
 
 .hero-grid {
@@ -473,7 +471,6 @@ body.preview-body {
 
 .about-content {
     max-width: 640px;
-    animation: fade-up 0.8s 0.15s both;
 }
 
 .about-content h2 {
@@ -1738,5 +1735,196 @@ body.preview-body {
 
     .playground-stage canvas {
         border-radius: 8px;
+    }
+}
+
+/* Motion system */
+.scroll-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 80;
+    height: 2px;
+    background: transparent;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+}
+
+.motion-word-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+}
+
+.motion-word {
+    display: inline-block;
+}
+
+.motion-words-play .motion-word {
+    animation: word-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(
+        var(--word-index) * 80ms + var(--word-delay, 0ms) + 100ms
+    );
+}
+
+.motion-words.is-armed:not(.is-visible) .motion-word {
+    opacity: 0;
+    transform: translateY(110%);
+}
+
+.motion-words.is-visible .motion-word {
+    animation: word-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--word-index) * 80ms + var(--word-delay, 0ms));
+}
+
+.motion-reveal.is-armed:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 24px));
+}
+
+.motion-reveal.is-visible {
+    animation: reveal-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-reveal-play {
+    animation: reveal-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-reveal.is-done,
+.motion-reveal-play.is-done {
+    animation: none;
+    opacity: 1;
+    will-change: auto;
+}
+
+.motion-media.is-armed:not(.is-visible) {
+    opacity: 0;
+    transform: scale(1.03);
+}
+
+.motion-media.is-visible {
+    animation: media-reveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--media-delay, 0ms);
+}
+
+.motion-media-play {
+    animation: media-reveal 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--media-delay, 0ms) + 150ms);
+}
+
+.motion-media.is-done,
+.motion-media-play.is-done {
+    animation: none;
+    clip-path: none;
+    opacity: 1;
+    will-change: auto;
+}
+
+.hero-image-box {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.about-image-wrap {
+    width: min(100%, 380px);
+    display: flex;
+    justify-content: center;
+}
+
+.project-media-reveal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-image-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.about-image-parallax,
+.contact-image-parallax {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-image-parallax {
+    justify-content: flex-end;
+}
+
+.playground-card-reveal {
+    min-width: 0;
+}
+
+.playground-body {
+    transition: transform 0.3s ease;
+}
+
+.playground-card:hover .playground-body {
+    transform: translateY(-4px);
+}
+
+@keyframes word-up {
+    from {
+        opacity: 0;
+        transform: translateY(110%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(var(--reveal-y, 24px));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes media-reveal {
+    from {
+        opacity: 0;
+        clip-path: inset(100% 0% 0% 0%);
+        transform: scale(1.03);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0% 0% 0% 0%);
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motion-word,
+    .motion-reveal,
+    .motion-media {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+    }
+
+    .playground-body {
+        transition: none;
     }
 }
