@@ -1,0 +1,43 @@
+import { JetBrains_Mono, Quicksand } from "next/font/google";
+import "../../../styles/preview.scss";
+import SiteHeader from "@/components/redesign/SiteHeader";
+import SiteFooter from "@/components/redesign/SiteFooter";
+import { getPreviewCopy } from "@/content/preview";
+
+const quicksand = Quicksand({
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "600", "700"],
+    variable: "--font-quicksand",
+    display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+    subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-jetbrains",
+    display: "swap",
+});
+
+export const metadata = {
+    title: "Lorenzo López — Preview",
+    description:
+        "Prototipo de la nueva home de Lorenzo López, desarrollador full stack.",
+};
+
+export default async function PreviewLayout({ children, params }) {
+    const { lang = "es" } = await params;
+    const copy = getPreviewCopy(lang);
+
+    return (
+        <html
+            lang={lang}
+            className={`${quicksand.variable} ${jetbrains.variable}`}
+        >
+            <body className="preview-body">
+                <SiteHeader lang={lang} copy={copy} />
+                {children}
+                <SiteFooter lang={lang} copy={copy} />
+            </body>
+        </html>
+    );
+}
