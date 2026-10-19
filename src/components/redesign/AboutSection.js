@@ -27,7 +27,7 @@ export default function AboutSection({ lang, copy }) {
                 <div className="about-visual">
                     <div className="about-line" aria-hidden="true" />
                     <Image
-                        src="/static/images/profile/lorenzo-lean.png"
+                        src="/static/images/profile/lorenzo-lean-clean.png"
                         width={679}
                         height={1069}
                         alt={copy.about.imageAlt}

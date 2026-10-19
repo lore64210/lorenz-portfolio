@@ -46,7 +46,7 @@ export default function ContactSection({ lang, copy }) {
                     <div className="contact-figure" aria-hidden="true">
                         <div className="contact-glow" />
                         <Image
-                            src="/static/images/profile/lorenzo-stand.png"
+                            src="/static/images/profile/lorenzo-stand-clean.png"
                             width={642}
                             height={1157}
                             alt=""
