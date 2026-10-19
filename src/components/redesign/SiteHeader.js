@@ -2,19 +2,23 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { previewLinks } from "@/content/preview";
 
 export default function SiteHeader({ lang, copy }) {
     const [open, setOpen] = useState(false);
+    const pathname = usePathname();
     const otherLang = lang === "es" ? "en" : "es";
+    const pathWithoutLang = pathname?.replace(/^\/(es|en)/, "") ?? "";
+    const otherLangHref = `/${otherLang}${pathWithoutLang}`;
     const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
     const links = [
-        { href: "#about", label: copy.nav.about },
-        { href: "#skills", label: copy.nav.skills },
-        { href: "#projects", label: copy.nav.projects },
-        { href: "#playground", label: copy.nav.playground },
-        { href: "#contact", label: copy.nav.contact },
+        { href: `/${lang}/about`, label: copy.nav.about },
+        { href: `/${lang}#skills`, label: copy.nav.skills },
+        { href: `/${lang}#projects`, label: copy.nav.projects },
+        { href: `/${lang}#playground`, label: copy.nav.playground },
+        { href: `/${lang}#contact`, label: copy.nav.contact },
     ];
 
     const close = () => setOpen(false);
@@ -22,7 +26,7 @@ export default function SiteHeader({ lang, copy }) {
     return (
         <header className="site-header">
             <div className="container site-header-inner">
-                <Link href={`/${lang}/preview`} className="site-logo">
+                <Link href={`/${lang}`} className="site-logo">
                     Lorenzo{" "}
                     <span>López</span>
                 </Link>
@@ -37,10 +41,7 @@ export default function SiteHeader({ lang, copy }) {
                             {link.label}
                         </a>
                     ))}
-                    <Link
-                        href={`/${otherLang}/preview`}
-                        className="lang-switch"
-                    >
+                    <Link href={otherLangHref} className="lang-switch">
                         {copy.nav.language}
                     </Link>
                     <div className="site-nav-social">
@@ -97,7 +98,7 @@ export default function SiteHeader({ lang, copy }) {
                         </a>
                     ))}
                     <Link
-                        href={`/${otherLang}/preview`}
+                        href={otherLangHref}
                         onClick={close}
                         className="nav-mobile-link"
                     >

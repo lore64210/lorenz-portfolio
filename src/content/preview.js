@@ -118,6 +118,50 @@ const copy = {
             imageAlt:
                 "Ilustración low-poly de Lorenzo apoyado con las manos en los bolsillos",
         },
+        aboutPage: {
+            eyebrow: "01 — Sobre mí",
+            title: "Un poco más sobre mí",
+            lead: "Soy Lorenzo, desarrollador full stack. Me gusta construir productos web que se sientan simples, rápidos y cuidados, y entender todo lo que pasa entre una idea y algo que funciona.",
+            back: "Volver al inicio",
+            meta: [
+                "Full Stack Developer",
+                "React · Next · Spring",
+                "Playground con p5.js",
+            ],
+            sections: [
+                {
+                    title: "Cómo empecé",
+                    paragraphs: [
+                        "Empecé a programar por curiosidad, casi como un juego. La posibilidad de crear algo desde cero me enganchó y con el tiempo se transformó en mi forma de trabajar.",
+                        "Fui probando herramientas y lenguajes a medida que los proyectos lo pedían. Esa costumbre de aprender haciendo sigue siendo la forma en la que me muevo hoy.",
+                    ],
+                },
+                {
+                    title: "Cómo trabajo",
+                    paragraphs: [
+                        "Me muevo entre el frontend y el backend: React y Next para construir interfaces, y Spring Boot, Django o Node para resolver la lógica. Me interesa entender el producto completo, no solo la parte que me toca.",
+                        "Trato de escribir código claro, cuidar los detalles de la experiencia y dejar las cosas un poco mejor de como las encontré.",
+                    ],
+                },
+                {
+                    title: "Lo que me importa",
+                    paragraphs: [
+                        "Me importa que las cosas funcionen, pero también cómo se sienten. Disfruto trabajar con gente que se toma en serio lo que hace, comparte lo que sabe y se anima a probar.",
+                        "No me considero la persona más rápida ni la más original; lo que sí tengo es constancia, curiosidad y ganas de que cada proyecto quede bien.",
+                    ],
+                },
+                {
+                    title: "El playground",
+                    paragraphs: [
+                        "Cuando quiero probar una idea o simplemente entretenerme, armo experimentos con p5.js. Ahí viven los laberintos, las pelotas que evolucionan y los terrenos infinitos.",
+                        "Es mi forma de recordar que programar también puede ser un juego.",
+                    ],
+                },
+            ],
+            ctaTitle: "¿Seguimos la charla?",
+            ctaText: "Si tenés una idea, una propuesta o simplemente ganas de escribirme, estoy del otro lado.",
+            cta: "Hablemos",
+        },
         skills: {
             eyebrow: "02 — Skills",
             title: "Herramientas con las que trabajo",
@@ -175,6 +219,14 @@ const copy = {
                     description: "Terrenos generados con ruido y geometría.",
                 },
             },
+        },
+        playgroundPage: {
+            eyebrow: "04 — Playground",
+            back: "Volver al playground",
+            notes: "Cómo funciona",
+            secondExperiment: "Segundo experimento",
+            ballTitle: "Ball Ecosystem",
+            ballLead: "Dos experimentos con agentes que se mueven, se conectan y evolucionan.",
         },
         contact: {
             eyebrow: "05 — Contacto",
@@ -247,6 +299,50 @@ const copy = {
             imageAlt:
                 "Low-poly illustration of Lorenzo leaning with his hands in his pockets",
         },
+        aboutPage: {
+            eyebrow: "01 — About",
+            title: "A little more about me",
+            lead: "I'm Lorenzo, a full stack developer. I like building web products that feel simple, fast and carefully made, and understanding everything that happens between an idea and something that works.",
+            back: "Back to home",
+            meta: [
+                "Full Stack Developer",
+                "React · Next · Spring",
+                "p5.js playground",
+            ],
+            sections: [
+                {
+                    title: "How I started",
+                    paragraphs: [
+                        "I started programming out of curiosity, almost like a game. The possibility of creating something from scratch hooked me, and over time it became the way I work.",
+                        "I kept trying tools and languages as projects demanded them. That habit of learning by building is still how I move today.",
+                    ],
+                },
+                {
+                    title: "How I work",
+                    paragraphs: [
+                        "I move between frontend and backend: React and Next to build interfaces, and Spring Boot, Django or Node to solve the logic. I care about understanding the whole product, not just the part I'm working on.",
+                        "I try to write clear code, take care of the details of the experience, and leave things a little better than I found them.",
+                    ],
+                },
+                {
+                    title: "What matters to me",
+                    paragraphs: [
+                        "I care about whether things work, but also how they feel. I enjoy working with people who take what they do seriously, share what they know, and are willing to try.",
+                        "I'm not the fastest or the most original person; what I do have is persistence, curiosity and the desire to make every project feel right.",
+                    ],
+                },
+                {
+                    title: "The playground",
+                    paragraphs: [
+                        "When I want to test an idea or just have fun, I build experiments with p5.js. That's where the mazes, evolving balls and endless terrains live.",
+                        "It's my way of remembering that programming can also be a game.",
+                    ],
+                },
+            ],
+            ctaTitle: "Shall we keep talking?",
+            ctaText: "If you have an idea, a proposal, or just want to write to me, I'm around.",
+            cta: "Let's talk",
+        },
         skills: {
             eyebrow: "02 — Skills",
             title: "Tools I work with",
@@ -304,6 +400,14 @@ const copy = {
                     description: "Terrain generated with noise and geometry.",
                 },
             },
+        },
+        playgroundPage: {
+            eyebrow: "04 — Playground",
+            back: "Back to playground",
+            notes: "How it works",
+            secondExperiment: "Second experiment",
+            ballTitle: "Ball Ecosystem",
+            ballLead: "Two experiments with agents that move, connect and evolve.",
         },
         contact: {
             eyebrow: "05 — Contact",

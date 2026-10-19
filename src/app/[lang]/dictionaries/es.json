@@ -57,12 +57,12 @@
     },
     "projects-content": {
         "maze-generator": {
-            "title": "Laberintos aleatorios!",
+            "title": "Laberintos aleatorios",
             "content": [
-                "Que mejor manera de aplicar algoritmos de busqueda que con un laberinto?",
-                "Con este algoritmo generamos un laberinto distinto en cada ocasion",
-                "Cada celda del laberinto es un nodo, y las \"paredes\" son booleanos para saber si hay una pared en alguna direccion",
-                "De esta forma, armamos un grafo con sus vertices, y lo representamos visualmente. Al ser un grafo, podemos aplicar un algoritmo sobre este de forma sencilla para ir recorriendo los nodos segun los vertices que tengamos al alcance"
+                "¿Qué mejor manera de aplicar algoritmos de búsqueda que con un laberinto?",
+                "Con este algoritmo generamos un laberinto distinto en cada ocasión.",
+                "Cada celda del laberinto es un nodo, y las \"paredes\" son booleanos que indican si hay una pared en cada dirección.",
+                "De esta forma armamos un grafo con sus vértices y lo representamos visualmente. Al ser un grafo, podemos aplicar un algoritmo sobre él de forma sencilla para ir recorriendo los nodos según los vértices que tengamos al alcance."
             ],
             "labels": {
                 "speed": "Velocidad",
@@ -70,57 +70,57 @@
             }
         },
         "balls": {
-            "title": "De a muchos es mas divertido",
+            "title": "De a muchos es más divertido",
             "content": [
-                "Es increible como un conjunto de agentes con responsabilidades y funciones minimas pueden armar una situacion tan placentera de mirar",
-                "Cada pelotita se mueve por el mapa sin proposito, teniendo en cuenta siempre la distancia con los demas agentes",
-                "Cuando la distancia entre dos agentes es de determinado valor, la opacidad de la linea que los une empieza a aumentar, generando estos patrones tan hipnotizantes",
-                "Esta mezcla de pelotas moviendose teniendo en cuenta las distancias con sus vecinos es clave para el pequeño ecosistema que muestro abajo, por eso queria mostrarlo de una forma linda y a modo de presentacion"
+                "Es increíble cómo un conjunto de agentes con responsabilidades y funciones mínimas puede armar una escena tan placentera de mirar.",
+                "Cada pelotita se mueve por el mapa sin propósito, teniendo en cuenta siempre la distancia con los demás agentes.",
+                "Cuando la distancia entre dos agentes alcanza determinado valor, la opacidad de la línea que los une empieza a aumentar, generando estos patrones tan hipnotizantes.",
+                "Esta mezcla de pelotas moviéndose y teniendo en cuenta las distancias con sus vecinos es clave para el pequeño ecosistema que muestro abajo; por eso quería mostrarlo de una forma linda y a modo de presentación."
             ]
         },
         "balls-ecosystem": {
-            "title": "Pelotas Inteligentes!",
+            "title": "Pelotas inteligentes",
             "content": [
-                "Estas pelotas son mas especiales que las anteriores, porque da la sensacion de que estan vivas, y por lo tanto, de que tienen hambre.",
-                "A medida que pasa el tiempo, su tamaño va disminuyendo, hasta que si son muy chiquititas, se mueren, desaparecen",
-                "Una pelota puede aumentar su tamaño comiendo puntitos verdes, o a otras pelotas que sean mas chicas que esta. Comer puntitos rojos (veneno) va a disminuir su tamaño",
-                "Cada pelota tiene un valor aleatorio por cada \"interes\" y por cada \"rechazo\" que tenga, este interes/rechazo puede ser sobre puntos verdes, rojos u otras pelotas, mas chicas o grandes",
-                "Mientras mayor sea el interes, su aceleracion rotara al movimiento del agente hacia su objetivo, y su rechazo lo alejará",
-                "Pero la mejor de este mini proyecto es que cada vez que quede una sola pelota viva en el coliseo multicolor, termina una iteracion",
-                "Y por cada iteracion, se aplica un algoritmo genetico, que se usa para la creacion de la siguiente ronda de pelotitas",
-                "Mientras mas tiempo haya durado una pelota en una iteracion, mayor la probabilidad de que sus genes (sus intereses y rechazos) sean elegidos para la creacion de una nueva pelotita",
-                "Esta evolucion genetica se puede ver representada por los colores de las pelotas: Iteracion tras iteracion, los colores son cada ves mas homogeneos, debido a que por una seleccion de genes del mas fuerte, las nuevas pelotas heredan sus caracteristicas",
-                "Por supuesto, hay pequeños cambios aleatorios (mutaciones) entre generacion y generacion, para que no se vuelva predecible lo que va a pasar",
-                "Si nos quedamos observando a los supervivientes en su pequeño, violento e injusto mundo, probablemente puedan ver a lo que me estoy refiriendo"
+                "Estas pelotas son más especiales que las anteriores, porque dan la sensación de estar vivas y, por lo tanto, de tener hambre.",
+                "A medida que pasa el tiempo, su tamaño va disminuyendo; si son muy chiquititas, se mueren y desaparecen.",
+                "Una pelota puede aumentar su tamaño comiendo puntitos verdes o a otras pelotas más chicas que ella. Comer puntitos rojos (veneno) hace que disminuya.",
+                "Cada pelota tiene un valor aleatorio por cada \"interés\" y cada \"rechazo\"; ese interés o rechazo puede ser sobre puntos verdes, rojos u otras pelotas, más chicas o grandes.",
+                "Cuanto mayor sea el interés, su aceleración rotará el movimiento del agente hacia su objetivo; el rechazo lo alejará.",
+                "Pero lo mejor de este mini proyecto es que, cada vez que queda una sola pelota viva en el coliseo multicolor, termina una iteración.",
+                "Y por cada iteración se aplica un algoritmo genético para crear la siguiente ronda de pelotitas.",
+                "Cuanto más tiempo haya durado una pelota en una iteración, mayor es la probabilidad de que sus genes (sus intereses y rechazos) sean elegidos para crear una nueva pelotita.",
+                "Esta evolución genética se puede ver en los colores de las pelotas: iteración tras iteración, los colores son cada vez más homogéneos, porque las nuevas pelotas heredan las características de los genes del más fuerte.",
+                "Por supuesto, hay pequeños cambios aleatorios (mutaciones) entre generación y generación para que lo que pasa no se vuelva predecible.",
+                "Si se quedan observando a los supervivientes en su pequeño, violento e injusto mundo, probablemente entiendan a qué me refiero."
             ]
         },
         "path-finder": {
             "title": "Buscando el caminito",
             "content": [
-                "Al igual que con otros ejemplos, la estructura que use para generar este tablero es un grafo",
-                "La idea es que el agente vaya desde la punta superior izquierda hasta la punta inferior derecha",
-                "Puede moverse en vertical, horizontal y en diagonales, por lo que en un gran porcentaje, puede hayar un camino",
-                "En caso de que sea imposible acceder a la meta, va seguir expandiendose por el terreno como si fuera un hongo hasta que no tenga mas espacio para moverse",
-                "El algoritmo que use para encontrar el camino mas corto es A*, uno conocido por su elegancia y eficiencia",
-                "Los puntos verdes son los recorridos, y los amarillos son los que el algoritmo puede elegir para moverse",
-                "Siempre va a elegir un punto amarillo que le convenga mas para llegar a la meta, y la decision de cual es el mas conveniente lo hace a travez de la heuristica, o sea, que sabiendo donde esta la meta respecto a su posicion actual, elije el punto amarillo que menor distancia represente el proximo movimiento (una decision tirada al azar si, pero informada y con fundamento)",
-                "Es decir, que si bien no sabe si el siguiente paso que va a tomar lo va a llevar a un callejon sin salida, en el mejor de los casos es el mejor camino posible"
+                "Al igual que con otros ejemplos, la estructura que usé para generar este tablero es un grafo.",
+                "La idea es que el agente vaya desde la punta superior izquierda hasta la punta inferior derecha.",
+                "Puede moverse en vertical, horizontal y en diagonal, así que en un gran porcentaje de casos puede hallar un camino.",
+                "En caso de que sea imposible llegar a la meta, va a seguir expandiéndose por el terreno como un hongo hasta quedarse sin espacio para moverse.",
+                "El algoritmo que usé para encontrar el camino más corto es A*, conocido por su elegancia y eficiencia.",
+                "Los puntos verdes son los recorridos, y los amarillos son los que el algoritmo puede elegir para moverse.",
+                "Siempre va a elegir un punto amarillo que le convenga más para llegar a la meta. La decisión de cuál es el más conveniente la toma a través de la heurística: sabiendo dónde está la meta respecto de su posición actual, elige el punto amarillo que represente la menor distancia para el próximo movimiento (una decisión tirada al azar, sí, pero informada y con fundamento).",
+                "Es decir, aunque no sabe si el siguiente paso lo va a llevar a un callejón sin salida, en el mejor de los casos es el mejor camino posible."
             ],
             "labels": {
-                "obstacles": "Obstaculos",
+                "obstacles": "Obstáculos",
                 "diagonals": "Ir en diagonal",
                 "restart": "Reiniciar"
             }
         },
         "terrain": {
-            "title": "Generador de terrenos!",
+            "title": "Generador de terrenos",
             "content": [
-                "Este es especial, podria quedarme mirandolo para siempre",
-                "La idea es sencilla, es una matriz de vertices que tienen una posicion (x,y,z)",
-                "se usan los ejes x y z para dibujar los triangulos, y el eje z para elevar dichos triangulos",
-                "El canvas esta rotado y trasladado para que se pueda visualizar mejor como z sube y baja",
-                "La forma en que sube y baja z es a travez de \"El sonido de Perlin\", una forma especial de usar el algoritmo RANDOM, pero en lugar de ser una subida y bajada erratica donde se va de 0 a 100, la curva de cambio es muchisimo mas tenue",
-                "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z que va incrementandose un poquito despues de cada iteracion, lo que hace que parezca que estamos sobrevolando unas montañas en lugar de estar rebotando en una gelatina"
+                "Este es especial; podría quedarme mirándolo para siempre.",
+                "La idea es sencilla: es una matriz de vértices que tienen una posición (x, y, z).",
+                "Se usan los ejes x e y para dibujar los triángulos, y el eje z para elevar dichos triángulos.",
+                "El canvas está rotado y trasladado para que se pueda visualizar mejor cómo sube y baja z.",
+                "La forma en que sube y baja z es a través del \"ruido de Perlin\", una forma especial de usar el algoritmo RANDOM: en lugar de una subida y bajada errática de 0 a 100, la curva de cambio es muchísimo más tenue.",
+                "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z, que va incrementándose un poquito después de cada iteración; eso hace que parezca que estamos sobrevolando unas montañas en lugar de rebotando en una gelatina."
             ],
             "labels": {
                 "speed": "Velocidad",
@@ -128,7 +128,7 @@
                 "rotate-y": "Rotar eje Y",
                 "rotate-x": "Rotar eje X",
                 "distance": "Distancia",
-                "horizontal-distance": "Distancia Horizontal"
+                "horizontal-distance": "Distancia horizontal"
             }
         }
     }

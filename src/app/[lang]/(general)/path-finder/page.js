@@ -1,21 +1,36 @@
-import PathFinder from "@/components/miniprojects/pathFinder";
-import "../../../../styles/project.scss";
 import { getDictionary } from "../../dictionaries";
+import { getPreviewCopy } from "@/content/preview";
+import PlaygroundPage from "@/components/redesign/PlaygroundPage";
+import PlaygroundNotes from "@/components/redesign/PlaygroundNotes";
+import PathFinder from "@/components/miniprojects/pathFinder";
 
-export default async function TerrainPage({ params }) {
+export const metadata = {
+    title: "Path Finder — Lorenzo López",
+};
+
+export default async function PathFinderPage({ params }) {
     const { lang = "es" } = await params;
     const dict = await getDictionary(lang);
+    const copy = getPreviewCopy(lang);
+    const content = dict["projects-content"]["path-finder"];
+    const [lead, ...notes] = content.content;
+
     return (
-        <div className="project-page">
-            <div className="project-description-container">
-                <h1>{dict["projects-content"]["path-finder"].title}</h1>
-                {dict["projects-content"]["path-finder"].content.map((c, i) => (
-                    <p key={i}>{c}</p>
-                ))}
-            </div>
-            <div className="canvas-container">
+        <PlaygroundPage lang={lang} copy={copy}>
+            <header className="playground-header">
+                <p className="eyebrow">{copy.playgroundPage.eyebrow}</p>
+                <h1>{content.title}</h1>
+                <p className="playground-lead">{lead}</p>
+            </header>
+
+            <div className="playground-stage">
                 <PathFinder dict={dict} />
             </div>
-        </div>
+
+            <PlaygroundNotes
+                title={copy.playgroundPage.notes}
+                notes={notes}
+            />
+        </PlaygroundPage>
     );
 }

@@ -1,5 +1,5 @@
 import { JetBrains_Mono, Quicksand } from "next/font/google";
-import "../../../styles/preview.scss";
+import "../../styles/preview.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
 import { getPreviewCopy } from "@/content/preview";
@@ -19,18 +19,19 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata = {
-    title: "Lorenzo López — Preview",
+    title: "Lorenzo López — Desarrollador Full Stack",
     description:
-        "Prototipo de la nueva home de Lorenzo López, desarrollador full stack.",
+        "Portfolio de Lorenzo López, desarrollador full stack. Proyectos, experimentos con p5.js y formas de contacto.",
 };
 
-export default async function PreviewLayout({ children, params }) {
+export default async function RootLayout({ children, params }) {
     const { lang = "es" } = await params;
     const copy = getPreviewCopy(lang);
 
     return (
         <html
             lang={lang}
+            data-scroll-behavior="smooth"
             className={`${quicksand.variable} ${jetbrains.variable}`}
         >
             <body className="preview-body">
