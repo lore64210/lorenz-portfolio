@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import useScrollExit from "./useScrollExit";
 
 export default function Reveal({
     as: Tag = "div",
@@ -13,25 +12,46 @@ export default function Reveal({
     ...rest
 }) {
     const ref = useRef(null);
-    useScrollExit(ref);
+    const firstCallback = useRef(true);
 
     useEffect(() => {
         const el = ref.current;
-        if (!el || play) return;
+        if (!el) return;
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             return;
         }
 
-        el.classList.add("is-armed");
+        if (!play) {
+            el.classList.add("is-armed");
+        }
+
+        const restart = () => {
+            el.classList.remove("is-done");
+            el.classList.remove("motion-reveal-play");
+            void el.offsetWidth;
+            el.classList.add("motion-reveal-play");
+        };
 
         const observer = new IntersectionObserver(
             ([entry]) => {
+                if (play) {
+                    if (firstCallback.current) {
+                        firstCallback.current = false;
+                        return;
+                    }
+                    if (entry.isIntersecting) restart();
+                    return;
+                }
+
                 if (entry.isIntersecting) {
+                    el.classList.remove("is-done");
                     el.classList.add("is-visible");
-                    observer.disconnect();
+                } else {
+                    el.classList.remove("is-visible");
+                    el.classList.remove("is-done");
                 }
             },
-            { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+            { threshold: 0 }
         );
 
         observer.observe(el);

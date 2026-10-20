@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import {
     FaArrowRight,
     FaEnvelope,
@@ -14,58 +11,10 @@ import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 
 export default function Hero({ lang, copy }) {
-    const sectionRef = useRef(null);
     const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
 
-    useEffect(() => {
-        if (
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
-            return;
-        }
-
-        const section = sectionRef.current;
-        if (!section) return;
-
-        const copyEl = section.querySelector(".hero-copy");
-        const visualEl = section.querySelector(".hero-visual");
-        let raf = 0;
-
-        const update = () => {
-            const rect = section.getBoundingClientRect();
-            const progress = Math.max(
-                0,
-                Math.min(1, -rect.top / Math.max(1, rect.height))
-            );
-            const y = progress * -40;
-            const opacity = 1 - progress * 0.9;
-
-            if (copyEl) {
-                copyEl.style.transform = `translate3d(0, ${y}px, 0)`;
-                copyEl.style.opacity = String(opacity);
-            }
-            if (visualEl) {
-                visualEl.style.transform = `translate3d(0, ${y * 0.6}px, 0)`;
-                visualEl.style.opacity = String(opacity);
-            }
-        };
-
-        const onScroll = () => {
-            cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(update);
-        };
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        update();
-
-        return () => {
-            window.removeEventListener("scroll", onScroll);
-            cancelAnimationFrame(raf);
-        };
-    }, []);
-
     return (
-        <section className="hero" ref={sectionRef}>
+        <section className="hero">
             <div className="container hero-inner">
                 <div className="hero-copy">
                     <Reveal
