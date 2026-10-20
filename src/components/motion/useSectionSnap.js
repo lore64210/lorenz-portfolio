@@ -4,13 +4,12 @@ import { useEffect } from "react";
 
 const DESKTOP = "(min-width: 1000px) and (min-height: 640px)";
 const HEADER_SELECTOR = ".site-header";
-const WHEEL_THRESHOLD = 100;
+const WHEEL_THRESHOLD = 60;
 const WHEEL_IDLE = 250;
-const DURATION = 800;
-const SETTLE = 120;
+const DURATION = 650;
+const SETTLE = 80;
 
-const easeInOutCubic = (t) =>
-    t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
 export default function useSectionSnap(containerRef) {
     useEffect(() => {
@@ -40,6 +39,7 @@ export default function useSectionSnap(containerRef) {
         let unlockTimer = 0;
         let accumulated = 0;
         let lastWheelAt = 0;
+        let queuedDirection = 0;
 
         const animateTo = (target) => {
             if (animating || target == null) return;
@@ -59,6 +59,12 @@ export default function useSectionSnap(containerRef) {
                 window.clearTimeout(unlockTimer);
                 unlockTimer = window.setTimeout(() => {
                     animating = false;
+
+                    if (queuedDirection) {
+                        const direction = queuedDirection;
+                        queuedDirection = 0;
+                        goDirection(direction);
+                    }
                 }, SETTLE);
             };
 
@@ -70,7 +76,7 @@ export default function useSectionSnap(containerRef) {
 
             const step = (now) => {
                 const t = Math.min(1, (now - startedAt) / DURATION);
-                window.scrollTo(0, start + distance * easeInOutCubic(t));
+                window.scrollTo(0, start + distance * easeOutCubic(t));
                 if (t < 1) {
                     raf = requestAnimationFrame(step);
                 } else {
@@ -82,6 +88,11 @@ export default function useSectionSnap(containerRef) {
         };
 
         const goDirection = (direction) => {
+            if (animating) {
+                queuedDirection = direction;
+                return;
+            }
+
             const scroll = window.scrollY;
             const targets = getTargets();
 
@@ -137,7 +148,6 @@ export default function useSectionSnap(containerRef) {
             }
 
             event.preventDefault();
-            if (animating) return;
 
             const now = performance.now();
             if (now - lastWheelAt >= WHEEL_IDLE) accumulated = 0;
@@ -148,6 +158,12 @@ export default function useSectionSnap(containerRef) {
 
             const direction = accumulated > 0 ? 1 : -1;
             accumulated = 0;
+
+            if (animating) {
+                queuedDirection = direction;
+                return;
+            }
+
             goDirection(direction);
         };
 
