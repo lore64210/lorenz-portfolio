@@ -6,9 +6,9 @@ const DESKTOP = "(min-width: 1000px) and (min-height: 640px)";
 const HEADER_SELECTOR = ".site-header";
 const WHEEL_THRESHOLD = 60;
 const WHEEL_IDLE = 250;
-const WHEEL_PAUSE = 200;
 const DURATION = 650;
 const SETTLE = 80;
+const WHEEL_LOCK = DURATION + 200;
 
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
@@ -40,15 +40,13 @@ export default function useSectionSnap(containerRef) {
         let unlockTimer = 0;
         let accumulated = 0;
         let lastWheelAt = 0;
-        let queuedDirection = 0;
-        let suppressMomentum = false;
+        let lockedUntil = 0;
 
         const animateTo = (target) => {
             if (animating || target == null) return;
             animating = true;
             accumulated = 0;
-            suppressMomentum = true;
-            lastWheelAt = performance.now();
+            lockedUntil = performance.now() + WHEEL_LOCK;
 
             const start = window.scrollY;
             const distance = target - start;
@@ -63,12 +61,6 @@ export default function useSectionSnap(containerRef) {
                 window.clearTimeout(unlockTimer);
                 unlockTimer = window.setTimeout(() => {
                     animating = false;
-
-                    if (queuedDirection) {
-                        const direction = queuedDirection;
-                        queuedDirection = 0;
-                        goDirection(direction);
-                    }
                 }, SETTLE);
             };
 
@@ -92,10 +84,7 @@ export default function useSectionSnap(containerRef) {
         };
 
         const goDirection = (direction) => {
-            if (animating) {
-                queuedDirection = direction;
-                return;
-            }
+            if (animating) return;
 
             const scroll = window.scrollY;
             const targets = getTargets();
@@ -154,16 +143,7 @@ export default function useSectionSnap(containerRef) {
             event.preventDefault();
 
             const now = performance.now();
-
-            if (suppressMomentum) {
-                if (now - lastWheelAt < WHEEL_PAUSE) {
-                    lastWheelAt = now;
-                    accumulated = 0;
-                    return;
-                }
-
-                suppressMomentum = false;
-            }
+            if (now < lockedUntil) return;
 
             if (now - lastWheelAt >= WHEEL_IDLE) accumulated = 0;
             lastWheelAt = now;
@@ -173,12 +153,6 @@ export default function useSectionSnap(containerRef) {
 
             const direction = accumulated > 0 ? 1 : -1;
             accumulated = 0;
-
-            if (animating) {
-                queuedDirection = direction;
-                return;
-            }
-
             goDirection(direction);
         };
 
