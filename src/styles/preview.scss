@@ -2132,8 +2132,12 @@ body.preview-body {
         margin-top: 24px;
     }
 
+    .hero.snap-section .hero-visual {
+        align-items: center;
+    }
+
     .hero.snap-section .hero-image {
-        height: clamp(260px, 42vh, 340px);
+        height: clamp(340px, 60vh, 460px);
     }
 
     .about-section.snap-section {
