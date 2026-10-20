@@ -28,22 +28,20 @@ export default function ProjectsSection({ copy }) {
                                     index % 2 ? "is-reversed" : ""
                                 }`}
                             >
-                                <div
+                                <RevealMedia
                                     className={`project-media project-media-${project.tone}`}
                                 >
-                                    <RevealMedia className="project-media-reveal">
-                                        <Image
-                                            src={project.image}
-                                            alt={item.title}
-                                            width={1200}
-                                            height={900}
-                                            className="project-image"
-                                            style={{
-                                                objectFit: project.fit,
-                                            }}
-                                        />
-                                    </RevealMedia>
-                                </div>
+                                    <Image
+                                        src={project.image}
+                                        alt={item.title}
+                                        width={1200}
+                                        height={900}
+                                        className="project-image"
+                                        style={{
+                                            objectFit: project.fit,
+                                        }}
+                                    />
+                                </RevealMedia>
 
                                 <Reveal
                                     as="div"

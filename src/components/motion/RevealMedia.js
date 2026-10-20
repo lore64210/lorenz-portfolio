@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import useScrollExit from "./useScrollExit";
 
 export default function RevealMedia({
     as: Tag = "div",
@@ -11,6 +12,7 @@ export default function RevealMedia({
     ...rest
 }) {
     const ref = useRef(null);
+    useScrollExit(ref);
 
     useEffect(() => {
         const el = ref.current;

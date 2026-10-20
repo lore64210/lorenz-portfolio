@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, Fragment } from "react";
+import useScrollExit from "./useScrollExit";
 
 export default function RevealText({
     text,
@@ -10,6 +11,7 @@ export default function RevealText({
     delay = 0,
 }) {
     const ref = useRef(null);
+    useScrollExit(ref);
 
     useEffect(() => {
         const el = ref.current;
