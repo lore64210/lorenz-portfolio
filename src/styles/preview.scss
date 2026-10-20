@@ -1053,13 +1053,13 @@ body.preview-body {
     position: relative;
     display: flex;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: center;
     min-height: 360px;
 }
 
 .contact-glow {
     position: absolute;
-    right: 10%;
+    left: 50%;
     bottom: 0;
     width: 340px;
     height: 340px;
@@ -1071,6 +1071,7 @@ body.preview-body {
         transparent 70%
     );
     filter: blur(16px);
+    transform: translateX(-50%);
 }
 
 .contact-image {
@@ -1867,7 +1868,7 @@ body.preview-body {
 }
 
 .contact-image-parallax {
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .playground-card-reveal {
@@ -2080,5 +2081,247 @@ body.preview-body {
 
     .contact-section.snap-section .contact-email-row {
         padding-top: 20px;
+    }
+}
+
+/* Compact snap for smaller desktop viewports */
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .snap-section {
+        height: calc(100svh - 77px);
+        min-height: 0;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        scroll-margin-top: 77px;
+    }
+
+    .hero.snap-section {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .hero.snap-section .hero-inner {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .hero.snap-section h1 {
+        font-size: clamp(48px, 8vw, 84px);
+    }
+
+    .hero.snap-section .hero-role {
+        margin-top: 16px;
+        font-size: 19px;
+    }
+
+    .hero.snap-section .hero-description {
+        margin-top: 16px;
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .hero.snap-section .hero-actions {
+        margin-top: 24px;
+    }
+
+    .hero.snap-section .hero-social {
+        margin-top: 24px;
+    }
+
+    .hero.snap-section .hero-image {
+        height: clamp(260px, 42vh, 340px);
+    }
+
+    .about-section.snap-section {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .about-section.snap-section .about-image-wrap {
+        width: min(100%, 260px);
+    }
+
+    .about-section.snap-section .about-content h2 {
+        font-size: 40px;
+    }
+
+    .about-section.snap-section .about-intro {
+        margin-bottom: 14px;
+        font-size: 15px;
+    }
+
+    .about-section.snap-section .about-blocks {
+        gap: 10px;
+    }
+
+    .about-section.snap-section .about-block {
+        padding-top: 10px;
+    }
+
+    .about-section.snap-section .about-block h3 {
+        font-size: 18px;
+    }
+
+    .about-section.snap-section .about-block p {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .about-section.snap-section .text-link-wrap {
+        margin-top: 10px;
+    }
+
+    .about-section.snap-section .text-link-wrap .text-link {
+        margin-top: 0;
+    }
+
+    .skills-section.snap-section,
+    .projects-section.snap-section,
+    .playground-section.snap-section,
+    .contact-section.snap-section {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .section-heading {
+        margin-bottom: 18px;
+    }
+
+    .section-heading h2,
+    .contact-copy h2 {
+        font-size: 40px;
+    }
+
+    .section-description {
+        font-size: 15px;
+    }
+
+    .skill-row {
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 16px;
+        padding: 14px 0;
+    }
+
+    .skill-row-title {
+        padding-top: 4px;
+        font-size: 18px;
+    }
+
+    .skill-tags {
+        gap: 8px;
+    }
+
+    .skill-tag {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .projects-section.snap-section .section-heading {
+        margin-bottom: 16px;
+    }
+
+    .projects-section.snap-section .projects-list {
+        gap: 0;
+    }
+
+    .playground-section.snap-section .section-heading {
+        margin-bottom: 16px;
+    }
+
+    .playground-section.snap-section .playground-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .playground-section.snap-section .playground-body {
+        padding: 12px 14px 14px;
+    }
+
+    .playground-section.snap-section .playground-body h3 {
+        font-size: 18px;
+    }
+
+    .playground-section.snap-section .playground-body p {
+        font-size: 13px;
+    }
+
+    .contact-section.snap-section .contact-header {
+        margin-bottom: 16px;
+    }
+
+    .contact-section.snap-section .contact-figure {
+        min-height: 0;
+    }
+
+    .contact-section.snap-section .contact-image {
+        height: clamp(180px, 26vh, 240px);
+    }
+
+    .contact-section.snap-section .contact-cards {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .contact-section.snap-section .contact-card {
+        min-height: 120px;
+        padding: 14px;
+    }
+
+    .contact-section.snap-section .contact-card h3 {
+        font-size: 18px;
+    }
+
+    .contact-section.snap-section .contact-card p {
+        margin-bottom: 10px;
+        font-size: 13px;
+    }
+
+    .contact-section.snap-section .contact-email-row {
+        padding-top: 14px;
+    }
+
+    .contact-section.snap-section .contact-email {
+        font-size: 30px;
+    }
+}
+
+/* Extra compact About for short desktop windows */
+@media (min-width: 1000px) and (max-height: 660px) {
+    .about-section.snap-section .about-image-wrap {
+        width: min(100%, 220px);
+    }
+
+    .about-section.snap-section .about-content h2 {
+        font-size: 36px;
+    }
+
+    .about-section.snap-section .about-intro {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .about-section.snap-section .about-blocks {
+        gap: 6px;
+    }
+
+    .about-section.snap-section .about-block {
+        padding-top: 8px;
+    }
+
+    .about-section.snap-section .about-block h3 {
+        font-size: 17px;
+    }
+
+    .about-section.snap-section .about-block p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .about-section.snap-section .text-link-wrap {
+        margin-top: 8px;
     }
 }

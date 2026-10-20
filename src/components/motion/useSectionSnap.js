@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const DESKTOP = "(min-width: 1100px) and (min-height: 768px)";
+const DESKTOP = "(min-width: 1000px) and (min-height: 640px)";
 const HEADER_SELECTOR = ".site-header";
 const WHEEL_THRESHOLD = 100;
 const WHEEL_IDLE = 250;
