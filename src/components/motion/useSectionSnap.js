@@ -6,6 +6,7 @@ const DESKTOP = "(min-width: 1000px) and (min-height: 640px)";
 const HEADER_SELECTOR = ".site-header";
 const WHEEL_THRESHOLD = 60;
 const WHEEL_IDLE = 250;
+const WHEEL_PAUSE = 200;
 const DURATION = 650;
 const SETTLE = 80;
 
@@ -40,11 +41,14 @@ export default function useSectionSnap(containerRef) {
         let accumulated = 0;
         let lastWheelAt = 0;
         let queuedDirection = 0;
+        let suppressMomentum = false;
 
         const animateTo = (target) => {
             if (animating || target == null) return;
             animating = true;
             accumulated = 0;
+            suppressMomentum = true;
+            lastWheelAt = performance.now();
 
             const start = window.scrollY;
             const distance = target - start;
@@ -150,6 +154,17 @@ export default function useSectionSnap(containerRef) {
             event.preventDefault();
 
             const now = performance.now();
+
+            if (suppressMomentum) {
+                if (now - lastWheelAt < WHEEL_PAUSE) {
+                    lastWheelAt = now;
+                    accumulated = 0;
+                    return;
+                }
+
+                suppressMomentum = false;
+            }
+
             if (now - lastWheelAt >= WHEEL_IDLE) accumulated = 0;
             lastWheelAt = now;
             accumulated += delta;
