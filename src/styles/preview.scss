@@ -952,7 +952,9 @@ body.preview-body {
 }
 
 .playground-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     overflow: hidden;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -1015,6 +1017,7 @@ body.preview-body {
 }
 
 .playground-body {
+    flex: 1;
     padding: 22px 24px 26px;
 }
 
@@ -1869,6 +1872,7 @@ body.preview-body {
 
 .playground-card-reveal {
     min-width: 0;
+    height: 100%;
 }
 
 .playground-body {
@@ -1926,5 +1930,155 @@ body.preview-body {
 
     .playground-body {
         transition: none;
+    }
+}
+
+/* Desktop section snap */
+@media (min-width: 1100px) and (min-height: 768px) {
+    .snap-section {
+        height: calc(100svh - 77px);
+        min-height: 0;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        scroll-margin-top: 77px;
+    }
+
+    .hero.snap-section {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .hero.snap-section .hero-inner {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .hero.snap-section .hero-image {
+        height: clamp(360px, 58vh, 520px);
+    }
+
+    .about-section.snap-section {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .about-section.snap-section .about-image-wrap {
+        width: min(100%, 340px);
+    }
+
+    .about-section.snap-section .about-content h2 {
+        font-size: clamp(34px, 4vw, 52px);
+    }
+
+    .about-section.snap-section .about-intro {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .about-section.snap-section .about-blocks {
+        gap: 16px;
+    }
+
+    .about-section.snap-section .about-block {
+        padding-top: 14px;
+    }
+
+    .about-section.snap-section .about-block h3 {
+        font-size: 20px;
+    }
+
+    .about-section.snap-section .about-block p {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .about-section.snap-section .text-link-wrap {
+        margin-top: 18px;
+    }
+
+    .about-section.snap-section .text-link-wrap .text-link {
+        margin-top: 0;
+    }
+
+    .projects-section.snap-section {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .projects-section.snap-section .section-heading {
+        margin-bottom: 24px;
+    }
+
+    .projects-section.snap-section .projects-list {
+        gap: 0;
+    }
+
+    .playground-section.snap-section {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .playground-section.snap-section .section-heading {
+        margin-bottom: 24px;
+    }
+
+    .playground-section.snap-section .playground-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .playground-section.snap-section .playground-body {
+        padding: 16px 18px 18px;
+    }
+
+    .playground-section.snap-section .playground-body h3 {
+        font-size: 20px;
+    }
+
+    .playground-section.snap-section .playground-body p {
+        font-size: 14px;
+    }
+
+    .contact-section.snap-section {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .contact-section.snap-section .contact-header {
+        margin-bottom: 24px;
+    }
+
+    .contact-section.snap-section .contact-figure {
+        min-height: 0;
+    }
+
+    .contact-section.snap-section .contact-image {
+        height: clamp(280px, 36vh, 340px);
+    }
+
+    .contact-section.snap-section .contact-cards {
+        margin-bottom: 20px;
+    }
+
+    .contact-section.snap-section .contact-card {
+        min-height: 150px;
+        padding: 18px;
+    }
+
+    .contact-section.snap-section .contact-card h3 {
+        font-size: 20px;
+    }
+
+    .contact-section.snap-section .contact-card p {
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+
+    .contact-section.snap-section .contact-email-row {
+        padding-top: 20px;
     }
 }

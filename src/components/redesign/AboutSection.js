@@ -26,7 +26,7 @@ export default function AboutSection({ lang, copy }) {
     ];
 
     return (
-        <section className="about-section" id="about">
+        <section className="about-section snap-section" id="about">
             <div className="container about-inner">
                 <div className="about-visual">
                     <div className="about-line" aria-hidden="true" />

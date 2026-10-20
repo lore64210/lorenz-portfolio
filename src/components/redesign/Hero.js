@@ -14,7 +14,7 @@ export default function Hero({ lang, copy }) {
     const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
 
     return (
-        <section className="hero">
+        <section className="hero snap-section">
             <div className="container hero-inner">
                 <div className="hero-copy">
                     <Reveal

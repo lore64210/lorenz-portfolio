@@ -1,3 +1,4 @@
+import SnapContainer from "@/components/motion/SnapContainer";
 import Hero from "@/components/redesign/Hero";
 import AboutSection from "@/components/redesign/AboutSection";
 import SkillsSection from "@/components/redesign/SkillsSection";
@@ -11,13 +12,13 @@ export default async function Home({ params }) {
     const copy = getPreviewCopy(lang);
 
     return (
-        <main className="preview-main">
+        <SnapContainer>
             <Hero lang={lang} copy={copy} />
             <AboutSection lang={lang} copy={copy} />
             <SkillsSection copy={copy} />
             <ProjectsSection copy={copy} />
             <PlaygroundSection lang={lang} copy={copy} />
             <ContactSection lang={lang} copy={copy} />
-        </main>
+        </SnapContainer>
     );
 }

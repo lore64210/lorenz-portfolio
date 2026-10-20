@@ -36,7 +36,7 @@ export default function ContactSection({ lang, copy }) {
     ];
 
     return (
-        <section id="contact" className="section contact-section">
+        <section id="contact" className="section contact-section snap-section">
             <div className="container">
                 <div className="contact-header">
                     <div className="contact-copy">

@@ -4,7 +4,7 @@ import { skillGroups } from "@/content/preview";
 
 export default function SkillsSection({ copy }) {
     return (
-        <section id="skills" className="section skills-section">
+        <section id="skills" className="section skills-section snap-section">
             <div className="container">
                 <SectionHeading
                     eyebrow={copy.skills.eyebrow}

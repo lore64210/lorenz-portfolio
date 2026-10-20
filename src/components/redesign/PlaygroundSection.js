@@ -7,7 +7,7 @@ import { playgroundItems } from "@/content/preview";
 
 export default function PlaygroundSection({ lang, copy }) {
     return (
-        <section id="playground" className="section playground-section">
+        <section id="playground" className="section playground-section snap-section">
             <div className="container">
                 <SectionHeading
                     eyebrow={copy.playground.eyebrow}
