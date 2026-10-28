@@ -135,12 +135,12 @@ function smoothMap(map) {
     if ("filter" in context) context.filter = "blur(0.4px)";
     context.drawImage(image, 0, 0, size, size);
 
-    // 5x5 median: removes isolated bright/dark texels (fabric reflections)
-    // without smearing the whole texture as much as a strong blur would.
+    // 7x7 median on dark pixels: the suit has tiny baked light specks that a
+    // 5x5 pass left behind. Bright pixels (skin, eyes, shoes) are untouched.
     const imageData = context.getImageData(0, 0, size, size);
     const source = imageData.data;
     const output = new Uint8ClampedArray(source.length);
-    const radius = 2;
+    const radius = 3;
     const windowSize = (radius * 2 + 1) ** 2;
     const window = new Uint8Array(windowSize);
     const medianIndex = windowSize >> 1;
@@ -148,6 +148,18 @@ function smoothMap(map) {
     for (let y = 0; y < size; y++) {
         for (let x = 0; x < size; x++) {
             const pixel = (y * size + x) * 4;
+            const red = source[pixel];
+            const green = source[pixel + 1];
+            const blue = source[pixel + 2];
+            const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+
+            if (luminance > 115) {
+                output[pixel] = red;
+                output[pixel + 1] = green;
+                output[pixel + 2] = blue;
+                output[pixel + 3] = source[pixel + 3];
+                continue;
+            }
 
             for (let channel = 0; channel < 3; channel++) {
                 let count = 0;
@@ -176,6 +188,12 @@ function smoothMap(map) {
             }
 
             output[pixel + 3] = source[pixel + 3];
+
+            // Compress the dark fabric range around a near-black base so baked
+            // specks and JPEG noise disappear; geometry/lighting keep the folds.
+            output[pixel] = Math.round(22 + output[pixel] * 0.12);
+            output[pixel + 1] = Math.round(20 + output[pixel + 1] * 0.12);
+            output[pixel + 2] = Math.round(22 + output[pixel + 2] * 0.12);
         }
     }
 
@@ -451,18 +469,20 @@ export async function createDancer({
     scene.add(dancer);
 
     scene.add(new THREE.HemisphereLight(0xfff4e8, 0x0b1020, 1.1));
-    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
-    const keyLight = new THREE.DirectionalLight(0xffe2c4, 2.4);
+    const keyLight = new THREE.DirectionalLight(0xffe2c4, 3);
     keyLight.position.set(3.2, 5.5, 4.2);
     scene.add(keyLight);
 
-    const redLight = new THREE.DirectionalLight(0xff2e55, 2.8);
-    redLight.position.set(-4.2, 2.3, 2.4);
+    // Coloured lights sit behind the character so they act as a rim instead
+    // of grazing the fabric and turning every tiny bump into a bright speck.
+    const redLight = new THREE.DirectionalLight(0xff2e55, 2.4);
+    redLight.position.set(-3.5, 2.6, -3.5);
     scene.add(redLight);
 
-    const blueLight = new THREE.DirectionalLight(0x3b82ff, 3);
-    blueLight.position.set(4.2, 2.3, 2.4);
+    const blueLight = new THREE.DirectionalLight(0x3b82ff, 2.6);
+    blueLight.position.set(3.5, 2.6, -3.5);
     scene.add(blueLight);
 
     const backRim = new THREE.DirectionalLight(0x9bd8ff, 1.6);

@@ -1,5 +1,6 @@
 import {
     FaArrowRight,
+    FaChevronDown,
     FaEnvelope,
     FaGithub,
     FaLinkedin,
@@ -11,7 +12,22 @@ import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 
 export default function Hero({ lang, copy }) {
-    const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
+    const cvOptions = [
+        {
+            key: "es",
+            href: "/static/pdf/CV_LORENZO_LOPEZ_ES.pdf",
+            label: copy.cvOptions.es,
+            download: "CV_Lorenzo_Matias_Lopez_ES.pdf",
+        },
+        {
+            key: "en",
+            href: "/static/pdf/CV_LORENZO_LOPEZ_EN.pdf",
+            label: copy.cvOptions.en,
+            download: "CV_Lorenzo_Matias_Lopez_EN.pdf",
+        },
+    ];
+    const orderedCvOptions =
+        lang === "en" ? [cvOptions[1], cvOptions[0]] : cvOptions;
 
     return (
         <section className="hero snap-section">
@@ -60,14 +76,27 @@ export default function Hero({ lang, copy }) {
                             {copy.hero.projectsCta}
                             <FaArrowRight />
                         </a>
-                        <a
-                            href={cvHref}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="btn btn-ghost"
-                        >
-                            {copy.hero.cvCta}
-                        </a>
+                        <details className="cv-menu">
+                            <summary className="btn btn-ghost cv-menu-trigger">
+                                {copy.hero.cvCta}
+                                <FaChevronDown />
+                            </summary>
+                            <div className="cv-menu-panel">
+                                {orderedCvOptions.map((option) => (
+                                    <a
+                                        key={option.key}
+                                        href={option.href}
+                                        download={option.download}
+                                        className="cv-menu-option"
+                                    >
+                                        <span>{option.label}</span>
+                                        <span className="cv-menu-format">
+                                            PDF
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+                        </details>
                     </Reveal>
 
                     <Reveal

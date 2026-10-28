@@ -11,7 +11,22 @@ import ParallaxY from "@/components/motion/ParallaxY";
 import { previewLinks } from "@/content/preview";
 
 export default function ContactSection({ lang, copy }) {
-    const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
+    const cvOptions = [
+        {
+            key: "es",
+            href: "/static/pdf/CV_LORENZO_LOPEZ_ES.pdf",
+            label: copy.cvOptions.es,
+            download: "CV_Lorenzo_Matias_Lopez_ES.pdf",
+        },
+        {
+            key: "en",
+            href: "/static/pdf/CV_LORENZO_LOPEZ_EN.pdf",
+            label: copy.cvOptions.en,
+            download: "CV_Lorenzo_Matias_Lopez_EN.pdf",
+        },
+    ];
+    const orderedCvOptions =
+        lang === "en" ? [cvOptions[1], cvOptions[0]] : cvOptions;
 
     const cards = [
         {
@@ -28,9 +43,8 @@ export default function ContactSection({ lang, copy }) {
         },
         {
             key: "cv",
-            href: cvHref,
             icon: <FaFileAlt />,
-            external: true,
+            downloads: orderedCvOptions,
         },
     ];
 
@@ -65,35 +79,70 @@ export default function ContactSection({ lang, copy }) {
                 </div>
 
                 <div className="contact-cards">
-                    {cards.map(({ key, href, icon, external }, index) => {
-                        const card = copy.contact.cards[key];
+                    {cards.map(
+                        (
+                            { key, href, icon, external, downloads },
+                            index
+                        ) => {
+                            const card = copy.contact.cards[key];
 
-                        return (
-                            <Reveal
-                                as="a"
-                                key={key}
-                                href={href}
-                                {...(external
-                                    ? {
-                                          target: "_blank",
-                                          rel: "noreferrer",
-                                      }
-                                    : {})}
-                                className="contact-card"
-                                delay={index * 0.06}
-                            >
-                                <span className="contact-card-icon">
-                                    {icon}
-                                </span>
-                                <h3>{card.title}</h3>
-                                <p>{card.text}</p>
-                                <span className="contact-card-link">
-                                    {card.cta}
-                                    <FaArrowRight />
-                                </span>
-                            </Reveal>
-                        );
-                    })}
+                            if (downloads) {
+                                return (
+                                    <Reveal
+                                        as="div"
+                                        key={key}
+                                        className="contact-card"
+                                        delay={index * 0.06}
+                                    >
+                                        <span className="contact-card-icon">
+                                            {icon}
+                                        </span>
+                                        <h3>{card.title}</h3>
+                                        <p>{card.text}</p>
+                                        <div className="contact-card-options">
+                                            {downloads.map((option) => (
+                                                <a
+                                                    key={option.key}
+                                                    href={option.href}
+                                                    download={option.download}
+                                                    className="contact-card-link"
+                                                >
+                                                    {option.label}
+                                                    <FaArrowRight />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </Reveal>
+                                );
+                            }
+
+                            return (
+                                <Reveal
+                                    as="a"
+                                    key={key}
+                                    href={href}
+                                    {...(external
+                                        ? {
+                                              target: "_blank",
+                                              rel: "noreferrer",
+                                          }
+                                        : {})}
+                                    className="contact-card"
+                                    delay={index * 0.06}
+                                >
+                                    <span className="contact-card-icon">
+                                        {icon}
+                                    </span>
+                                    <h3>{card.title}</h3>
+                                    <p>{card.text}</p>
+                                    <span className="contact-card-link">
+                                        {card.cta}
+                                        <FaArrowRight />
+                                    </span>
+                                </Reveal>
+                            );
+                        }
+                    )}
                 </div>
 
                 <Reveal

@@ -88,6 +88,10 @@ const copy = {
             menu: "Abrir menú",
             language: "EN",
         },
+        cvOptions: {
+            es: "Español (ES)",
+            en: "English (EN)",
+        },
         hero: {
             eyebrow: "Hola, soy",
             name: "Lorenzo López",
@@ -262,6 +266,10 @@ const copy = {
             cv: "Resume",
             menu: "Open menu",
             language: "ES",
+        },
+        cvOptions: {
+            es: "Español (ES)",
+            en: "English (EN)",
         },
         hero: {
             eyebrow: "Hi, I'm",
