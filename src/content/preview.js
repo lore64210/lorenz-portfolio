@@ -98,7 +98,7 @@ const copy = {
             cvCta: "Descargar CV",
             socialLabel: "Encontrame en",
             imageAlt:
-                "Ilustración low-poly de Lorenzo saltando con los brazos levantados",
+                "Personaje 3D de Lorenzo, de Winston's Paradigm, de pie con distintas animaciones idle y un efecto de pixelado que oculta el rostro",
         },
         about: {
             eyebrow: "01 — Sobre mí",
@@ -115,8 +115,10 @@ const copy = {
             future:
                 "Quiero seguir construyendo productos que la gente disfrute usar, aprender herramientas nuevas y formar parte de equipos que cuiden lo que hacen.",
             more: "Leer más sobre mí",
+            homeImageAlt:
+                "Personaje 3D de Lorenzo, de Winston's Paradigm, bailando con un efecto de pixelado que oculta el rostro",
             imageAlt:
-                "Ilustración low-poly de Lorenzo apoyado con las manos en los bolsillos",
+                "Personaje 3D de Lorenzo, de Winston's Paradigm, saludando y mandando un beso con un efecto de pixelado que oculta el rostro",
         },
         aboutPage: {
             eyebrow: "01 — Sobre mí",
@@ -126,7 +128,6 @@ const copy = {
             meta: [
                 "Full Stack Developer",
                 "React · Next · Spring",
-                "Playground con p5.js",
             ],
             sections: [
                 {
@@ -148,13 +149,6 @@ const copy = {
                     paragraphs: [
                         "Me importa que las cosas funcionen, pero también cómo se sienten. Disfruto trabajar con gente que se toma en serio lo que hace, comparte lo que sabe y se anima a probar.",
                         "No me considero la persona más rápida ni la más original; lo que sí tengo es constancia, curiosidad y ganas de que cada proyecto quede bien.",
-                    ],
-                },
-                {
-                    title: "El playground",
-                    paragraphs: [
-                        "Cuando quiero probar una idea o simplemente entretenerme, armo experimentos con p5.js. Ahí viven los laberintos, las pelotas que evolucionan y los terrenos infinitos.",
-                        "Es mi forma de recordar que programar también puede ser un juego.",
                     ],
                 },
             ],
@@ -279,7 +273,7 @@ const copy = {
             cvCta: "Download resume",
             socialLabel: "Find me on",
             imageAlt:
-                "Low-poly illustration of Lorenzo jumping with his arms raised",
+                "3D character of Lorenzo from Winston's Paradigm standing with different idle animations and a pixelated effect that hides his face",
         },
         about: {
             eyebrow: "01 — About",
@@ -296,8 +290,10 @@ const copy = {
             future:
                 "I want to keep building products people enjoy using, learn new tools, and be part of teams that care about what they make.",
             more: "Read more about me",
+            homeImageAlt:
+                "3D character of Lorenzo from Winston's Paradigm dancing with a pixelated effect that hides his face",
             imageAlt:
-                "Low-poly illustration of Lorenzo leaning with his hands in his pockets",
+                "3D character of Lorenzo from Winston's Paradigm waving and blowing a kiss with a pixelated effect that hides his face",
         },
         aboutPage: {
             eyebrow: "01 — About",
@@ -307,7 +303,6 @@ const copy = {
             meta: [
                 "Full Stack Developer",
                 "React · Next · Spring",
-                "p5.js playground",
             ],
             sections: [
                 {
@@ -329,13 +324,6 @@ const copy = {
                     paragraphs: [
                         "I care about whether things work, but also how they feel. I enjoy working with people who take what they do seriously, share what they know, and are willing to try.",
                         "I'm not the fastest or the most original person; what I do have is persistence, curiosity and the desire to make every project feel right.",
-                    ],
-                },
-                {
-                    title: "The playground",
-                    paragraphs: [
-                        "When I want to test an idea or just have fun, I build experiments with p5.js. That's where the mazes, evolving balls and endless terrains live.",
-                        "It's my way of remembering that programming can also be a game.",
                     ],
                 },
             ],

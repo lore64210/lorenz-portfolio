@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
     FaArrowRight,
     FaEnvelope,
@@ -6,6 +5,7 @@ import {
     FaLinkedin,
 } from "react-icons/fa";
 import { previewLinks } from "@/content/preview";
+import DancerCanvas from "@/components/dancer/DancerCanvas";
 import Reveal from "@/components/motion/Reveal";
 import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
@@ -109,14 +109,9 @@ export default function Hero({ lang, copy }) {
                         play
                         delay={0.2}
                     >
-                        <Image
-                            src="/static/images/profile/lorenzo-hero.png"
-                            width={827}
-                            height={1232}
-                            alt={copy.hero.imageAlt}
-                            className="hero-image"
-                            sizes="(max-width: 960px) 80vw, 480px"
-                            priority
+                        <DancerCanvas
+                            variant="hero"
+                            label={copy.hero.imageAlt}
                         />
                     </RevealMedia>
                 </div>

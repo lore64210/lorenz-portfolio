@@ -1,12 +1,11 @@
-import Image from "next/image";
 import {
     FaArrowRight,
     FaEnvelope,
     FaFileAlt,
     FaLinkedin,
 } from "react-icons/fa";
+import DancerCanvas from "@/components/dancer/DancerCanvas";
 import Reveal from "@/components/motion/Reveal";
-import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 import ParallaxY from "@/components/motion/ParallaxY";
 import { previewLinks } from "@/content/preview";
@@ -53,20 +52,14 @@ export default function ContactSection({ lang, copy }) {
 
                     <div className="contact-figure" aria-hidden="true">
                         <div className="contact-glow" />
+                        <div className="contact-ring" />
                         <ParallaxY
                             className="contact-image-parallax"
                             speed={0.12}
                         >
-                            <RevealMedia className="contact-image-wrap">
-                                <Image
-                                    src="/static/images/profile/lorenzo-stand-clean.png"
-                                    width={642}
-                                    height={1157}
-                                    alt=""
-                                    className="contact-image"
-                                    sizes="(max-width: 960px) 0px, 340px"
-                                />
-                            </RevealMedia>
+                            <div className="contact-image-wrap">
+                                <DancerCanvas variant="contact" />
+                            </div>
                         </ParallaxY>
                     </div>
                 </div>

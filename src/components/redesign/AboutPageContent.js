@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import DancerCanvas from "@/components/dancer/DancerCanvas";
 import Reveal from "@/components/motion/Reveal";
-import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 import ParallaxY from "@/components/motion/ParallaxY";
 
@@ -56,17 +55,12 @@ export default function AboutPageContent({ lang, copy }) {
                     >
                         <div className="about-page-glow" aria-hidden="true" />
                         <div className="about-page-ring" aria-hidden="true" />
-                        <RevealMedia>
-                            <Image
-                                src="/static/images/profile/lorenzo-side.png"
-                                width={624}
-                                height={1036}
-                                alt=""
-                                className="about-page-image"
-                                sizes="(max-width: 960px) 70vw, 380px"
-                                priority
+                        <div>
+                            <DancerCanvas
+                                variant="aboutPage"
+                                label={copy.about.imageAlt}
                             />
-                        </RevealMedia>
+                        </div>
                     </ParallaxY>
                 </header>
 

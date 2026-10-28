@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import DancerCanvas from "@/components/dancer/DancerCanvas";
 import Reveal from "@/components/motion/Reveal";
-import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 import ParallaxY from "@/components/motion/ParallaxY";
 
@@ -30,17 +29,14 @@ export default function AboutSection({ lang, copy }) {
             <div className="container about-inner">
                 <div className="about-visual">
                     <div className="about-line" aria-hidden="true" />
+                    <div className="about-ring" aria-hidden="true" />
                     <ParallaxY className="about-image-parallax" speed={0.12}>
-                        <RevealMedia className="about-image-wrap">
-                            <Image
-                                src="/static/images/profile/lorenzo-lean-clean.png"
-                                width={679}
-                                height={1069}
-                                alt={copy.about.imageAlt}
-                                className="about-image"
-                                sizes="(max-width: 960px) 70vw, 380px"
+                        <div className="about-image-wrap">
+                            <DancerCanvas
+                                variant="about"
+                                label={copy.about.homeImageAlt}
                             />
-                        </RevealMedia>
+                        </div>
                     </ParallaxY>
                 </div>
 

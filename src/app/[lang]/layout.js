@@ -1,5 +1,6 @@
 import { JetBrains_Mono, Quicksand } from "next/font/google";
 import "../../styles/preview.scss";
+import "../../styles/dancer.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
 import ScrollProgress from "@/components/motion/ScrollProgress";
