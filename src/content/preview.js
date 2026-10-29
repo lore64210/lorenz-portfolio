@@ -120,9 +120,9 @@ const copy = {
                 "Quiero seguir construyendo productos que la gente disfrute usar, aprender herramientas nuevas y formar parte de equipos que cuiden lo que hacen.",
             more: "Leer más sobre mí",
             homeImageAlt:
-                "Personaje 3D de Lorenzo, de Winston's Paradigm, bailando con un efecto de pixelado que oculta el rostro",
-            imageAlt:
                 "Personaje 3D de Lorenzo, de Winston's Paradigm, saludando y mandando un beso con un efecto de pixelado que oculta el rostro",
+            imageAlt:
+                "Personaje 3D de Lorenzo, de Winston's Paradigm, bailando con un efecto de pixelado que oculta el rostro",
         },
         aboutPage: {
             eyebrow: "01 — Sobre mí",
@@ -299,9 +299,9 @@ const copy = {
                 "I want to keep building products people enjoy using, learn new tools, and be part of teams that care about what they make.",
             more: "Read more about me",
             homeImageAlt:
-                "3D character of Lorenzo from Winston's Paradigm dancing with a pixelated effect that hides his face",
-            imageAlt:
                 "3D character of Lorenzo from Winston's Paradigm waving and blowing a kiss with a pixelated effect that hides his face",
+            imageAlt:
+                "3D character of Lorenzo from Winston's Paradigm dancing with a pixelated effect that hides his face",
         },
         aboutPage: {
             eyebrow: "01 — About",

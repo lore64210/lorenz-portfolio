@@ -39,7 +39,7 @@ const BONE_MAP = {
 const START_SEQUENCE = {
     hero: 0,
     about: 0,
-    aboutPage: 1,
+    aboutPage: 0,
     contact: 4,
 };
 
@@ -188,12 +188,6 @@ function smoothMap(map) {
             }
 
             output[pixel + 3] = source[pixel + 3];
-
-            // Compress the dark fabric range around a near-black base so baked
-            // specks and JPEG noise disappear; geometry/lighting keep the folds.
-            output[pixel] = Math.round(22 + output[pixel] * 0.12);
-            output[pixel + 1] = Math.round(20 + output[pixel + 1] * 0.12);
-            output[pixel + 2] = Math.round(22 + output[pixel + 2] * 0.12);
         }
     }
 
@@ -440,9 +434,9 @@ export async function createDancer({
             : variant === "contact"
               ? dances.resting && [dances.resting]
               : variant === "about"
-                ? aboutDances
+                ? dances.greetings
                 : variant === "aboutPage"
-                  ? dances.greetings
+                  ? aboutDances
                   : null;
 
     const sequences = placementSequences ?? dances.sequences;
