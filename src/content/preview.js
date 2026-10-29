@@ -54,8 +54,9 @@ export const projectItems = [
         image: "/static/images/musikit.png",
         href: "https://musikitstudio.vercel.app/#/music",
         stack: "React · Tone.js",
-        fit: "cover",
+        fit: "contain",
         tone: "ink",
+        wide: true,
     },
 ];
 

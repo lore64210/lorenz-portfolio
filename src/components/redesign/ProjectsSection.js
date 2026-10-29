@@ -15,7 +15,9 @@ function ProjectRow({ project, index, copy }) {
             className={`project-row ${index % 2 ? "is-reversed" : ""}`}
         >
             <RevealMedia
-                className={`project-media project-media-${project.tone}`}
+                className={`project-media project-media-${project.tone} ${
+                    project.wide ? "project-media-wide" : ""
+                }`}
             >
                 <Image
                     src={project.image}

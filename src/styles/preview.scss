@@ -966,6 +966,10 @@ body.preview-body {
     background: #150b10;
 }
 
+.project-media.project-media-wide {
+    aspect-ratio: 16 / 9;
+}
+
 .project-media-mint {
     padding: 48px;
     background: linear-gradient(135deg, #eaf7f1, #d8f0e6);
