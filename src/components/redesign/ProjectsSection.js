@@ -24,6 +24,7 @@ function ProjectRow({ project, index, copy }) {
                     height={900}
                     className="project-image"
                     style={{ objectFit: project.fit }}
+                    sizes="(max-width: 960px) 92vw, 1000px"
                 />
             </RevealMedia>
 
@@ -87,6 +88,21 @@ export default function ProjectsSection({ copy }) {
                         <ProjectRow
                             project={projectItems[1]}
                             index={1}
+                            copy={copy}
+                        />
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="projects-3"
+                className="section projects-section snap-section"
+            >
+                <div className="container">
+                    <div className="projects-list">
+                        <ProjectRow
+                            project={projectItems[2]}
+                            index={2}
                             copy={copy}
                         />
                     </div>

@@ -49,6 +49,14 @@ export const projectItems = [
         fit: "contain",
         tone: "mint",
     },
+    {
+        key: "musikit",
+        image: "/static/images/musikit.png",
+        href: "https://musikitstudio.vercel.app/#/music",
+        stack: "React · Tone.js",
+        fit: "cover",
+        tone: "ink",
+    },
 ];
 
 export const playgroundItems = [
@@ -190,6 +198,13 @@ const copy = {
                     label: "Herramienta para devs",
                     description:
                         "Una herramienta para generar APIs CRUD con Spring a partir de tus entidades: servicios, controladores, tests y schema.sql, listos para arrancar.",
+                    link: "Ver proyecto",
+                },
+                musikit: {
+                    title: "Musikit",
+                    label: "Estudio de música",
+                    description:
+                        "Un estudio para crear música y exportar archivos de audio a partir de lo que compones. Todo el front está hecho con React y Tone.js.",
                     link: "Ver proyecto",
                 },
             },
@@ -369,6 +384,13 @@ const copy = {
                     label: "Developer tool",
                     description:
                         "A tool to generate CRUD APIs with Spring from your entities: services, controllers, tests and schema.sql, ready to start.",
+                    link: "View project",
+                },
+                musikit: {
+                    title: "Musikit",
+                    label: "Music studio",
+                    description:
+                        "A studio to create music and export audio files from what you compose. The whole front end is built with React and Tone.js.",
                     link: "View project",
                 },
             },
