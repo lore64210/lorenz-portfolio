@@ -11,8 +11,6 @@ const MODEL_URL = "/static/models/meshy-lore.glb";
 const DANCES_URL = "/static/data/winston-dances.json";
 const DEG = Math.PI / 180;
 const TRANSITION_SECONDS = 0.45;
-// Temporary switch: set to true to restore the pixelation post-process.
-const ENABLE_PIXELATION = false;
 
 /** Contract rig used by Winston's Paradigm -> actual Meshy/Mixamo bones. */
 const BONE_MAP = {
@@ -404,28 +402,27 @@ export async function createDancer({
     renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.toneMappingExposure = 1.12;
 
-    const usePostProcessing = ENABLE_PIXELATION;
-    let composer = null;
-    let renderPass = null;
-    let pixelatePass = null;
-    let outputPass = null;
+    // The pixelation + two-tone rim is part of the character's art direction,
+    // so every placement goes through the composer.
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, camera);
+    const outputPass = new OutputPass();
+    const pixelatePass = new ShaderPass(PixelateShader);
 
-    if (usePostProcessing) {
-        composer = new EffectComposer(renderer);
-        renderPass = new RenderPass(scene, camera);
-        pixelatePass = new ShaderPass(PixelateShader);
-        pixelatePass.uniforms.uPixelSize.value = 3;
-        pixelatePass.uniforms.uVignette.value = 0.12;
-        outputPass = new OutputPass();
+    pixelatePass.uniforms.uPixelSize.value = 3;
+    pixelatePass.uniforms.uVignette.value = 0.12;
+    pixelatePass.uniforms.uRimLeft.value = new THREE.Color(0xff8a63);
+    pixelatePass.uniforms.uRimRight.value = new THREE.Color(0x7fd1c0);
+    pixelatePass.uniforms.uRimStrength.value = 0.6;
 
-        composer.addPass(renderPass);
-        composer.addPass(pixelatePass);
-        composer.addPass(outputPass);
-    }
+    // The stylisation pass needs display-space input, so `OutputPass` goes
+    // before it instead of at the end of the chain.
+    composer.addPass(renderPass);
+    composer.addPass(outputPass);
+    composer.addPass(pixelatePass);
 
     const renderFrame = () => {
-        if (composer) composer.render();
-        else renderer.render(scene, camera);
+        composer.render();
     };
 
     const startSequence =
@@ -492,10 +489,8 @@ export async function createDancer({
 
         renderer.setPixelRatio(ratio);
         renderer.setSize(width, height, false);
-        if (composer) {
-            composer.setPixelRatio(ratio);
-            composer.setSize(width, height);
-        }
+        composer.setPixelRatio(ratio);
+        composer.setSize(width, height);
 
         camera.aspect = width / height;
 
@@ -529,20 +524,17 @@ export async function createDancer({
         camera.updateProjectionMatrix();
         camera.updateMatrixWorld(true);
 
-        if (pixelatePass) {
-            pixelatePass.uniforms.uResolution.value = new THREE.Vector2(
-                width * ratio,
-                height * ratio
-            );
-            pixelatePass.uniforms.uPixelRatio.value = ratio;
-            // Keep the blocks visually similar on every placement: taller
-            // canvas means a slightly larger cell, so the face stays hidden
-            // while the body keeps a readable silhouette.
-            pixelatePass.uniforms.uPixelSize.value = Math.max(
-                2.5,
-                height * 0.006
-            );
-        }
+        const uniforms = pixelatePass.uniforms;
+
+        uniforms.uResolution.value = new THREE.Vector2(
+            width * ratio,
+            height * ratio
+        );
+        uniforms.uPixelRatio.value = ratio;
+        // Keep the blocks visually similar on every placement: taller canvas
+        // means a slightly larger cell, so the face stays hidden while the
+        // body keeps a readable silhouette.
+        uniforms.uPixelSize.value = Math.max(2.5, height * 0.006);
     }
 
     function advance(dt) {

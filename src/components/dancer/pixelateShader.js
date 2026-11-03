@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 /**
  * Pixelation pass, adapted from Winston's Paradigm
  * (`UnityProject/Assets/Shaders/PreviewLookFx.shader`, the `pixelate` branch).
@@ -6,6 +8,10 @@
  * keep the same visual weight on retina and non-retina screens. Alpha is
  * expanded a little around the silhouette so the character keeps a chunky
  * outline instead of losing its edges to transparent blocks.
+ *
+ * `uRimStrength` adds a two-tone halo: `uRimLeft` tints the side the light
+ * comes from on the left, `uRimRight` the opposite side. Set it to 0 to get
+ * the plain pixelation back.
  */
 export const PixelateShader = {
     name: "WinstonPixelateShader",
@@ -16,6 +22,9 @@ export const PixelateShader = {
         uPixelRatio: { value: 1 },
         uPixelSize: { value: 3 },
         uVignette: { value: 0.12 },
+        uRimLeft: { value: new THREE.Color(0xff8a63) },
+        uRimRight: { value: new THREE.Color(0x7fd1c0) },
+        uRimStrength: { value: 0 },
     },
 
     vertexShader: /* glsl */ `
@@ -33,6 +42,9 @@ export const PixelateShader = {
         uniform float uPixelRatio;
         uniform float uPixelSize;
         uniform float uVignette;
+        uniform vec3 uRimLeft;
+        uniform vec3 uRimRight;
+        uniform float uRimStrength;
 
         varying vec2 vUv;
 
@@ -103,6 +115,33 @@ export const PixelateShader = {
             if (uVignette > 0.001 && alpha > 0.02 && src.a > 0.05) {
                 float vig = 1.0 - smoothstep(0.85, 1.4, length((vUv - 0.5) * 2.0));
                 color *= mix(1.0, vig, clamp(uVignette, 0.0, 1.0) * 0.35);
+            }
+
+            if (uRimStrength > 0.001) {
+                vec2 texel = 1.0 / uResolution;
+                float sum = 0.0;
+                vec3 tint = vec3(0.0);
+
+                for (int i = 0; i < 12; i++) {
+                    float angle = float(i) * 0.5235988;
+                    vec2 dir = vec2(cos(angle), sin(angle));
+                    vec3 side = mix(uRimLeft, uRimRight, step(dir.x, 0.0));
+
+                    for (int r = 1; r <= 3; r++) {
+                        float radius = float(r) * cell * 0.85;
+                        float a = sampleAt(vUv + dir * texel * radius).a;
+                        sum += a;
+                        tint += side * a;
+                    }
+                }
+
+                float norm = sum / 36.0;
+                vec3 glowColor = sum > 0.0001 ? tint / sum : vec3(0.0);
+                float glow = smoothstep(0.010, 0.24, norm);
+                float halo = glow * uRimStrength * (1.0 - alpha);
+
+                color = mix(color, glowColor, clamp(halo, 0.0, 1.0));
+                alpha = max(alpha, glow * uRimStrength * 0.55);
             }
 
             gl_FragColor = vec4(color, alpha);
