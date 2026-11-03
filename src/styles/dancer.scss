@@ -46,7 +46,7 @@
 .dancer-canvas {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     display: block;
     width: 100%;
     height: 100%;
@@ -54,6 +54,35 @@
     outline: none;
     filter: drop-shadow(0 26px 34px rgba(0, 0, 0, 0.32));
     transition: opacity 0.7s ease;
+}
+
+.dancer-poster {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    object-fit: contain;
+    pointer-events: none;
+    transition: opacity 0.55s ease;
+}
+
+.dancer-stage.is-ready .dancer-poster {
+    opacity: 0;
+}
+
+.dancer-stage.is-static {
+    cursor: default;
+}
+
+.dancer-stage.is-static .dancer-loading {
+    display: none;
+}
+
+.dancer-stage.is-static .dancer-shadow {
+    opacity: 0.55;
+}
+
+.dancer-stage.has-poster.is-failed .dancer-fallback {
+    display: none;
 }
 
 .dancer-stage.is-ready .dancer-canvas {
@@ -118,7 +147,7 @@
 .dancer-loading {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 3;
     display: grid;
     place-items: center;
     pointer-events: none;

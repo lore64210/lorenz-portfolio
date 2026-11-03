@@ -72,7 +72,10 @@ export default function ContactSection({ lang, copy }) {
                             speed={0.12}
                         >
                             <div className="contact-image-wrap">
-                                <DancerCanvas variant="contact" />
+                                <DancerCanvas
+                                    variant="contact"
+                                    poster="/static/images/profile/contact-poster.webp"
+                                />
                             </div>
                         </ParallaxY>
                     </div>

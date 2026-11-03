@@ -8,7 +8,6 @@ import {
 import { previewLinks } from "@/content/preview";
 import DancerCanvas from "@/components/dancer/DancerCanvas";
 import Reveal from "@/components/motion/Reveal";
-import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 
 export default function Hero({ lang, copy }) {
@@ -128,16 +127,13 @@ export default function Hero({ lang, copy }) {
                     <div className="hero-glow" aria-hidden="true" />
                     <div className="hero-ring hero-ring-1" aria-hidden="true" />
                     <div className="hero-ring hero-ring-2" aria-hidden="true" />
-                    <RevealMedia
-                        className="hero-image-box"
-                        play
-                        delay={0.2}
-                    >
+                    <div className="hero-image-box">
                         <DancerCanvas
                             variant="hero"
                             label={copy.hero.imageAlt}
+                            poster="/static/images/profile/hero-poster.webp"
                         />
-                    </RevealMedia>
+                    </div>
                 </div>
             </div>
         </section>

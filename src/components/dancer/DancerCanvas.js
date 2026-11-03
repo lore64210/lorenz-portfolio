@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -12,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 export default function DancerCanvas({
     variant = "hero",
     label,
+    poster,
     className = "",
 }) {
     const hostRef = useRef(null);
@@ -22,6 +24,22 @@ export default function DancerCanvas({
         const host = hostRef.current;
         const canvas = canvasRef.current;
         if (!host || !canvas) return;
+
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+        const smallScreen = window.matchMedia("(max-width: 960px)").matches;
+        const lowMemory =
+            typeof navigator.deviceMemory === "number" &&
+            navigator.deviceMemory <= 4;
+
+        // Phones, tablets, reduced-motion users and low-memory devices get the
+        // poster instead of a WebGL scene. The 3D stays on desktop, where it
+        // is the hero's signature detail.
+        if (reducedMotion || smallScreen || lowMemory) {
+            setStatus("static");
+            return;
+        }
 
         const controller = new AbortController();
         let cancelled = false;
@@ -124,9 +142,23 @@ export default function DancerCanvas({
             ref={hostRef}
             className={`dancer-stage dancer-stage--${variant} ${
                 status === "ready" ? "is-ready" : ""
-            } ${status === "failed" ? "is-failed" : ""} ${className}`.trim()}
+            } ${status === "failed" ? "is-failed" : ""} ${
+                status === "static" ? "is-static" : ""
+            } ${poster ? "has-poster" : ""} ${className}`.trim()}
         >
             <div className="dancer-shadow" aria-hidden="true" />
+            {poster && (
+                <Image
+                    src={poster}
+                    alt=""
+                    fill
+                    unoptimized
+                    preload={variant === "hero"}
+                    fetchPriority={variant === "hero" ? "high" : undefined}
+                    sizes="(max-width: 600px) 340px, (max-width: 960px) 400px, 460px"
+                    className="dancer-poster"
+                />
+            )}
             <canvas
                 ref={canvasRef}
                 className="dancer-canvas"

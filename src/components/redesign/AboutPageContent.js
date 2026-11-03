@@ -59,6 +59,7 @@ export default function AboutPageContent({ lang, copy }) {
                             <DancerCanvas
                                 variant="aboutPage"
                                 label={copy.about.imageAlt}
+                                poster="/static/images/profile/about-poster.webp"
                             />
                         </div>
                     </ParallaxY>
