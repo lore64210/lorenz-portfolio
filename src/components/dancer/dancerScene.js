@@ -395,7 +395,7 @@ export async function createDancer({
     const renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
-        antialias: false,
+        antialias: true,
         powerPreference: "high-performance",
         preserveDrawingBuffer: captureMode,
     });
@@ -404,23 +404,29 @@ export async function createDancer({
     renderer.toneMapping = THREE.NeutralToneMapping;
     renderer.toneMappingExposure = 1.12;
 
-    const composer = new EffectComposer(renderer);
-    const renderPass = new RenderPass(scene, camera);
+    const usePostProcessing = ENABLE_PIXELATION;
+    let composer = null;
+    let renderPass = null;
+    let pixelatePass = null;
+    let outputPass = null;
 
-    const pixelatePass = ENABLE_PIXELATION
-        ? new ShaderPass(PixelateShader)
-        : null;
-
-    if (pixelatePass) {
+    if (usePostProcessing) {
+        composer = new EffectComposer(renderer);
+        renderPass = new RenderPass(scene, camera);
+        pixelatePass = new ShaderPass(PixelateShader);
         pixelatePass.uniforms.uPixelSize.value = 3;
         pixelatePass.uniforms.uVignette.value = 0.12;
+        outputPass = new OutputPass();
+
+        composer.addPass(renderPass);
+        composer.addPass(pixelatePass);
+        composer.addPass(outputPass);
     }
 
-    const outputPass = new OutputPass();
-
-    composer.addPass(renderPass);
-    if (pixelatePass) composer.addPass(pixelatePass);
-    composer.addPass(outputPass);
+    const renderFrame = () => {
+        if (composer) composer.render();
+        else renderer.render(scene, camera);
+    };
 
     const startSequence =
         START_SEQUENCE[variant] ?? 0;
@@ -482,15 +488,14 @@ export async function createDancer({
         const rect = host.getBoundingClientRect();
         const width = Math.max(1, rect.width);
         const height = Math.max(1, rect.height);
-        const maxRatio = captureMode ? 3 : 2;
-        const ratio = captureMode
-            ? maxRatio
-            : Math.min(window.devicePixelRatio || 1, maxRatio);
+        const ratio = 3;
 
         renderer.setPixelRatio(ratio);
         renderer.setSize(width, height, false);
-        composer.setPixelRatio(ratio);
-        composer.setSize(width, height);
+        if (composer) {
+            composer.setPixelRatio(ratio);
+            composer.setSize(width, height);
+        }
 
         camera.aspect = width / height;
 
@@ -680,7 +685,7 @@ export async function createDancer({
         lastTime = time;
 
         update(dt);
-        composer.render();
+        renderFrame();
         markReady();
 
         raf = requestAnimationFrame(loop);
@@ -756,7 +761,7 @@ export async function createDancer({
             // Reduced-motion scenes do not run a loop; repaint on drag.
             if (!running) {
                 update(0);
-                composer.render();
+                renderFrame();
             }
             return;
         }
@@ -778,7 +783,7 @@ export async function createDancer({
         if (reduced) {
             stop();
             update(0);
-            composer.render();
+            renderFrame();
         } else if (visible) {
             start();
         }
@@ -802,7 +807,7 @@ export async function createDancer({
         resize();
         if (ready && !running) {
             update(0);
-            composer.render();
+            renderFrame();
         }
     });
     resizeObserver.observe(host);
@@ -835,10 +840,10 @@ export async function createDancer({
 
     resize();
     update(0);
-    composer.render();
+    renderFrame();
     markReady();
 
-    if (!reduced) start();
+    if (!reduced && !captureMode) start();
 
     let destroyed = false;
 
@@ -869,10 +874,10 @@ export async function createDancer({
         scene.remove(dancer);
         dancer.remove(model);
 
-        renderPass.dispose?.();
+        renderPass?.dispose?.();
         pixelatePass?.dispose?.();
-        outputPass.dispose?.();
-        composer.dispose();
+        outputPass?.dispose?.();
+        composer?.dispose();
 
         renderer.dispose();
         try {
