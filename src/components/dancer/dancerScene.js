@@ -11,6 +11,8 @@ const MODEL_URL = "/static/models/meshy-lore.glb";
 const DANCES_URL = "/static/data/winston-dances.json";
 const DEG = Math.PI / 180;
 const TRANSITION_SECONDS = 0.45;
+// Temporary switch: set to true to restore the pixelation post-process.
+const ENABLE_PIXELATION = false;
 
 /** Contract rig used by Winston's Paradigm -> actual Meshy/Mixamo bones. */
 const BONE_MAP = {
@@ -394,14 +396,19 @@ export async function createDancer({
     const composer = new EffectComposer(renderer);
     const renderPass = new RenderPass(scene, camera);
 
-    const pixelatePass = new ShaderPass(PixelateShader);
-    pixelatePass.uniforms.uPixelSize.value = 3;
-    pixelatePass.uniforms.uVignette.value = 0.12;
+    const pixelatePass = ENABLE_PIXELATION
+        ? new ShaderPass(PixelateShader)
+        : null;
+
+    if (pixelatePass) {
+        pixelatePass.uniforms.uPixelSize.value = 3;
+        pixelatePass.uniforms.uVignette.value = 0.12;
+    }
 
     const outputPass = new OutputPass();
 
     composer.addPass(renderPass);
-    composer.addPass(pixelatePass);
+    if (pixelatePass) composer.addPass(pixelatePass);
     composer.addPass(outputPass);
 
     const startSequence =
@@ -504,18 +511,20 @@ export async function createDancer({
         camera.updateProjectionMatrix();
         camera.updateMatrixWorld(true);
 
-        pixelatePass.uniforms.uResolution.value = new THREE.Vector2(
-            width * ratio,
-            height * ratio
-        );
-        pixelatePass.uniforms.uPixelRatio.value = ratio;
-        // Keep the blocks visually similar on every placement: taller canvas
-        // means a slightly larger cell, so the face stays hidden while the
-        // body keeps a readable silhouette.
-        pixelatePass.uniforms.uPixelSize.value = Math.max(
-            2.5,
-            height * 0.006
-        );
+        if (pixelatePass) {
+            pixelatePass.uniforms.uResolution.value = new THREE.Vector2(
+                width * ratio,
+                height * ratio
+            );
+            pixelatePass.uniforms.uPixelRatio.value = ratio;
+            // Keep the blocks visually similar on every placement: taller
+            // canvas means a slightly larger cell, so the face stays hidden
+            // while the body keeps a readable silhouette.
+            pixelatePass.uniforms.uPixelSize.value = Math.max(
+                2.5,
+                height * 0.006
+            );
+        }
     }
 
     function advance(dt) {
@@ -848,7 +857,7 @@ export async function createDancer({
         dancer.remove(model);
 
         renderPass.dispose?.();
-        pixelatePass.dispose?.();
+        pixelatePass?.dispose?.();
         outputPass.dispose?.();
         composer.dispose();
 
