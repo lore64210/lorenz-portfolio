@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Reveal from "@/components/motion/Reveal";
-import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 import SectionHeading from "./SectionHeading";
+import ProjectCarousel from "./ProjectCarousel";
 import { projectItems } from "@/content/preview";
 
 function ProjectRow({ project, index, copy }) {
@@ -14,21 +13,14 @@ function ProjectRow({ project, index, copy }) {
         <article
             className={`project-row ${index % 2 ? "is-reversed" : ""}`}
         >
-            <RevealMedia
+            <ProjectCarousel
+                project={project}
+                title={item.title}
+                copy={copy}
                 className={`project-media project-media-${project.tone} ${
                     project.wide ? "project-media-wide" : ""
                 }`}
-            >
-                <Image
-                    src={project.image}
-                    alt={item.title}
-                    width={1200}
-                    height={900}
-                    className="project-image"
-                    style={{ objectFit: project.fit }}
-                    sizes="(max-width: 960px) 92vw, 1000px"
-                />
-            </RevealMedia>
+            />
 
             <Reveal as="div" className="project-content" delay={0.1}>
                 <span className="project-index">0{index + 1}</span>

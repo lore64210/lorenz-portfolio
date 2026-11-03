@@ -35,26 +35,55 @@ export const skillGroups = [
 export const projectItems = [
     {
         key: "organizer",
-        image: "/static/images/organizer.jpeg",
-        href: "https://play.google.com/store/apps/details?id=com.lore64210.Organizer",
-        stack: "React Native",
-        fit: "cover",
+        images: [
+            {
+                src: "/static/images/organizer/home-dark.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/organizer/home-light.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/organizer/reminder-light.png",
+                fit: "contain",
+            },
+        ],
+        href: "https://lore64210.github.io/organizer/",
+        stack: "React Native · Expo",
         tone: "navy",
     },
     {
         key: "spring-crud-initializr",
-        image: "/static/images/spring-crud-initializr.png",
+        images: [
+            {
+                src: "/static/images/spring-crud-initializr-app.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/spring-crud-initializr.png",
+                fit: "contain",
+                blend: "multiply",
+            },
+        ],
         href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/",
         stack: "React · Spring Boot",
-        fit: "contain",
         tone: "mint",
     },
     {
         key: "musikit",
-        image: "/static/images/musikit.png",
+        images: [
+            {
+                src: "/static/images/musikit.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/musikit-home.png",
+                fit: "contain",
+            },
+        ],
         href: "https://musikitstudio.vercel.app/#/music",
         stack: "React · Tone.js",
-        fit: "contain",
         tone: "ink",
         wide: true,
     },
@@ -186,13 +215,15 @@ const copy = {
             title: "Cosas que construí",
             description:
                 "Proyectos donde puse en práctica el stack y el detalle. Algunos están online; otros siguen creciendo.",
+            previousImage: "Imagen anterior",
+            nextImage: "Imagen siguiente",
             items: {
                 organizer: {
                     title: "Organizer",
                     label: "App mobile",
                     description:
-                        "Una app mobile para organizar el día: tareas, fotos y audios en un solo lugar. Nació como un proyecto para aprender React Native y terminó siendo una app publicada.",
-                    link: "Ver en Play Store",
+                        "Una app mobile para organizar el día que funciona 100% offline: listas, notas, fotos, audios y alarmas, todo guardado en el teléfono. Sin cuentas, sin servidores y sin analytics.",
+                    link: "Ver proyecto",
                 },
                 "spring-crud-initializr": {
                     title: "Spring CRUD Initializr",
@@ -372,13 +403,15 @@ const copy = {
             title: "Things I've built",
             description:
                 "Projects where I put the stack and the details into practice. Some are online; others keep growing.",
+            previousImage: "Previous image",
+            nextImage: "Next image",
             items: {
                 organizer: {
                     title: "Organizer",
                     label: "Mobile app",
                     description:
-                        "A mobile app to organize your day: tasks, photos and audio in one place. It started as a React Native learning project and ended up as a published app.",
-                    link: "View on Play Store",
+                        "A mobile app to organize your day that works 100% offline: lists, notes, photos, audio and alarms, all stored on your phone. No accounts, no servers and no analytics.",
+                    link: "View project",
                 },
                 "spring-crud-initializr": {
                     title: "Spring CRUD Initializr",
