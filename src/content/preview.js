@@ -113,11 +113,15 @@ export const projectItems = [
                 type: "musikit-logo",
             },
             {
-                src: "/static/images/musikit.png",
+                src: "/static/images/musikit-landing.png",
                 fit: "cover",
             },
             {
-                src: "/static/images/musikit-home.png",
+                src: "/static/images/musikit-studio-night.png",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/musikit-studio-dream.png",
                 fit: "cover",
             },
         ],
