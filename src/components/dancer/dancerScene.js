@@ -75,21 +75,10 @@ function prepareModel(scene) {
                 material.emissive.setRGB(0, 0, 0);
             }
 
-            // The photogrammetry texture carries tiny light specks that read
-            // as dust on the dark suit. A half-resolution, slightly blurred
-            // copy keeps the silhouette and removes the noise at this size.
-            if (material.map?.image) {
-                const original = material.map;
-                const smoothed = smoothMap(original);
+            // The base color texture is pre-smoothed at build time to remove
+            // the baked light specks from the suit; doing it at runtime was
+            // blocking the main thread for seconds.
 
-                if (smoothed !== original) {
-                    material.map = smoothed;
-                    if (material.emissiveMap === original) {
-                        material.emissiveMap = null;
-                    }
-                    original.dispose();
-                }
-            }
 
             // The GLB declares a specular colour factor of 2. Clamp it so the
             // rough fabric does not sparkle.
@@ -118,86 +107,6 @@ function prepareModel(scene) {
     });
 }
 
-function smoothMap(map) {
-    const image = map.image;
-    if (!image?.width || !image?.height) return map;
-
-    const size = 512;
-    const canvas = document.createElement("canvas");
-    canvas.width = size;
-    canvas.height = size;
-
-    const context = canvas.getContext("2d");
-    if (!context) return map;
-
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = "high";
-    if ("filter" in context) context.filter = "blur(0.4px)";
-    context.drawImage(image, 0, 0, size, size);
-
-    // 5x5 box blur on dark pixels: the suit has tiny baked light specks.
-    // Bright pixels (skin, eyes, shoes) are untouched. A box blur avoids the
-    // cost of a full median filter, which used to block the main thread for
-    // seconds while the hero scene was loading.
-    const imageData = context.getImageData(0, 0, size, size);
-    const source = imageData.data;
-    const output = new Uint8ClampedArray(source.length);
-    const radius = 2;
-    const windowSize = (radius * 2 + 1) ** 2;
-
-    for (let y = 0; y < size; y++) {
-        for (let x = 0; x < size; x++) {
-            const pixel = (y * size + x) * 4;
-            const red = source[pixel];
-            const green = source[pixel + 1];
-            const blue = source[pixel + 2];
-            const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-
-            if (luminance > 115) {
-                output[pixel] = red;
-                output[pixel + 1] = green;
-                output[pixel + 2] = blue;
-                output[pixel + 3] = source[pixel + 3];
-                continue;
-            }
-
-            for (let channel = 0; channel < 3; channel++) {
-                let sum = 0;
-
-                for (let dy = -radius; dy <= radius; dy++) {
-                    const sy = Math.min(size - 1, Math.max(0, y + dy));
-                    for (let dx = -radius; dx <= radius; dx++) {
-                        const sx = Math.min(size - 1, Math.max(0, x + dx));
-                        sum += source[(sy * size + sx) * 4 + channel];
-                    }
-                }
-
-                output[pixel + channel] = sum / windowSize;
-            }
-
-            output[pixel + 3] = source[pixel + 3];
-        }
-    }
-
-    imageData.data.set(output);
-    context.putImageData(imageData, 0, 0);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = map.colorSpace;
-    texture.flipY = map.flipY;
-    texture.wrapS = map.wrapS;
-    texture.wrapT = map.wrapT;
-    texture.magFilter = map.magFilter;
-    texture.minFilter = map.minFilter;
-    texture.anisotropy = map.anisotropy;
-    texture.offset.copy(map.offset);
-    texture.repeat.copy(map.repeat);
-    texture.center.copy(map.center);
-    texture.rotation = map.rotation;
-    texture.needsUpdate = true;
-
-    return texture;
-}
 let gltfPromise = null;
 let dancesPromise = null;
 
@@ -555,9 +464,7 @@ export async function createDancer({
         const rect = host.getBoundingClientRect();
         const width = Math.max(1, rect.width);
         const height = Math.max(1, rect.height);
-        const maxRatio = window.matchMedia("(max-width: 960px)").matches
-            ? 1.5
-            : 1.75;
+        const maxRatio = 2;
         const ratio = Math.min(window.devicePixelRatio || 1, maxRatio);
 
         renderer.setPixelRatio(ratio);

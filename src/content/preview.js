@@ -75,15 +75,15 @@ export const projectItems = [
             },
             {
                 src: "/static/images/organizer/home-dark.png",
-                fit: "cover",
+                fit: "contain",
             },
             {
                 src: "/static/images/organizer/home-light.png",
-                fit: "cover",
+                fit: "contain",
             },
             {
                 src: "/static/images/organizer/reminder-light.png",
-                fit: "cover",
+                fit: "contain",
             },
         ],
         href: "https://lore64210.github.io/organizer/",
