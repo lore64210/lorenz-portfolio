@@ -362,21 +362,21 @@ export async function createDancer({
     scene.add(new THREE.HemisphereLight(0xfff4e8, 0x0b1020, 1.1));
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
-    const keyLight = new THREE.DirectionalLight(0xffe2c4, 3);
+    const keyLight = new THREE.DirectionalLight(0xffe2c4, 2.6);
     keyLight.position.set(3.2, 5.5, 4.2);
     scene.add(keyLight);
 
-    // Coloured lights sit behind the character so they act as a rim instead
-    // of grazing the fabric and turning every tiny bump into a bright speck.
-    const redLight = new THREE.DirectionalLight(0xff2e55, 2.4);
+    // Soft warm/cool rims. Saturated red/blue lights read as chromatic
+    // fringing on the dark suit, so keep them subtle.
+    const redLight = new THREE.DirectionalLight(0xffb38a, 0.9);
     redLight.position.set(-3.5, 2.6, -3.5);
     scene.add(redLight);
 
-    const blueLight = new THREE.DirectionalLight(0x3b82ff, 2.6);
+    const blueLight = new THREE.DirectionalLight(0x9bc8ff, 1);
     blueLight.position.set(3.5, 2.6, -3.5);
     scene.add(blueLight);
 
-    const backRim = new THREE.DirectionalLight(0x9bd8ff, 1.6);
+    const backRim = new THREE.DirectionalLight(0xd9ecff, 1);
     backRim.position.set(0, 2.8, -4);
     scene.add(backRim);
 
