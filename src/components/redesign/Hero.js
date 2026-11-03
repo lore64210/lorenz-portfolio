@@ -57,14 +57,9 @@ export default function Hero({ lang, copy }) {
                         {copy.hero.role}
                     </Reveal>
 
-                    <Reveal
-                        as="p"
-                        className="hero-description"
-                        play
-                        delay={0.3}
-                    >
+                    <p className="hero-description">
                         {copy.hero.description}
-                    </Reveal>
+                    </p>
 
                     <Reveal
                         as="div"

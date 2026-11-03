@@ -28,6 +28,9 @@ export default function DancerCanvas({
         let started = false;
         let destroy = null;
         let sizeObserver = null;
+        let idleId = 0;
+        let startTimer = 0;
+        let startScheduled = false;
 
         const init = () => {
             if (started || cancelled) return true;
@@ -66,19 +69,52 @@ export default function DancerCanvas({
             return true;
         };
 
-        // Hidden placements (e.g. the contact figure on mobile) should not
-        // allocate a WebGL context. Start as soon as the stage gets a size.
-        if (!init()) {
+        const startWhenSized = () => {
+            if (init()) return;
             sizeObserver = new ResizeObserver(() => {
                 init();
             });
             sizeObserver.observe(host);
-        }
+        };
+
+        const scheduleStart = () => {
+            if (startScheduled || started || cancelled) return;
+            startScheduled = true;
+
+            if ("requestIdleCallback" in window) {
+                idleId = window.requestIdleCallback(startWhenSized, {
+                    timeout: 1500,
+                });
+            } else {
+                startTimer = window.setTimeout(startWhenSized, 400);
+            }
+        };
+
+        // Start the hero scene right away, but wait until the about/contact
+        // stages are near the viewport. Checking the rect (instead of using
+        // IntersectionObserver) also works while the parent reveal animation
+        // is still clipping the stage.
+        const maybeStart = () => {
+            if (started || cancelled || startScheduled) return;
+
+            const rect = host.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                scheduleStart();
+            }
+        };
+
+        window.addEventListener("scroll", maybeStart, { passive: true });
+        window.addEventListener("resize", maybeStart);
+        maybeStart();
 
         return () => {
             cancelled = true;
             controller.abort();
+            window.removeEventListener("scroll", maybeStart);
+            window.removeEventListener("resize", maybeStart);
             sizeObserver?.disconnect();
+            if (idleId) window.cancelIdleCallback(idleId);
+            window.clearTimeout(startTimer);
             destroy?.();
         };
     }, [variant]);

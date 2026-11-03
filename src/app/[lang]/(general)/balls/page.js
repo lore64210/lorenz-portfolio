@@ -1,5 +1,6 @@
 import { getDictionary } from "../../dictionaries";
 import { getPreviewCopy } from "@/content/preview";
+import { buildMetadata } from "@/content/site";
 import PlaygroundPage from "@/components/redesign/PlaygroundPage";
 import PlaygroundNotes from "@/components/redesign/PlaygroundNotes";
 import Reveal from "@/components/motion/Reveal";
@@ -8,9 +9,17 @@ import RevealText from "@/components/motion/RevealText";
 import Network from "@/components/miniprojects/network";
 import BallsEcosystem from "@/components/miniprojects/ballsEcosystem";
 
-export const metadata = {
-    title: "Ball Ecosystem — Lorenzo López",
-};
+export async function generateMetadata({ params }) {
+    const { lang = "es" } = await params;
+    const copy = getPreviewCopy(lang);
+
+    return buildMetadata({
+        lang,
+        title: `${copy.playgroundPage.ballTitle} — ${copy.hero.name}`,
+        description: copy.playgroundPage.ballLead,
+        path: `/${lang}/balls`,
+    });
+}
 
 export default async function BallsPage({ params }) {
     const { lang = "es" } = await params;

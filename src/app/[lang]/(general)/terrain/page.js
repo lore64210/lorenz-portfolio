@@ -1,5 +1,6 @@
 import { getDictionary } from "../../dictionaries";
 import { getPreviewCopy } from "@/content/preview";
+import { buildMetadata } from "@/content/site";
 import PlaygroundPage from "@/components/redesign/PlaygroundPage";
 import PlaygroundNotes from "@/components/redesign/PlaygroundNotes";
 import Reveal from "@/components/motion/Reveal";
@@ -7,9 +8,18 @@ import RevealMedia from "@/components/motion/RevealMedia";
 import RevealText from "@/components/motion/RevealText";
 import Terrain from "@/components/miniprojects/terrain";
 
-export const metadata = {
-    title: "Terrain — Lorenzo López",
-};
+export async function generateMetadata({ params }) {
+    const { lang = "es" } = await params;
+    const dict = await getDictionary(lang);
+    const content = dict["projects-content"]["terrain"];
+
+    return buildMetadata({
+        lang,
+        title: `${content.title} — Lorenzo López`,
+        description: content.content[0],
+        path: `/${lang}/terrain`,
+    });
+}
 
 export default async function TerrainPage({ params }) {
     const { lang = "es" } = await params;

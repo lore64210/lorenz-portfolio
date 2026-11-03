@@ -4,7 +4,8 @@ import "../../styles/dancer.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
 import ScrollProgress from "@/components/motion/ScrollProgress";
-import { getPreviewCopy } from "@/content/preview";
+import { getPreviewCopy, previewLinks } from "@/content/preview";
+import { buildMetadata, siteName, siteUrl } from "@/content/site";
 
 const quicksand = Quicksand({
     subsets: ["latin"],
@@ -20,15 +21,50 @@ const jetbrains = JetBrains_Mono({
     display: "swap",
 });
 
-export const metadata = {
-    title: "Lorenzo López — Desarrollador Full Stack",
-    description:
-        "Portfolio de Lorenzo López, desarrollador full stack. Proyectos, experimentos con p5.js y formas de contacto.",
-};
+export async function generateMetadata({ params }) {
+    const { lang = "es" } = await params;
+    const copy = getPreviewCopy(lang);
+
+    return buildMetadata({
+        lang,
+        title: `${copy.hero.name} — ${copy.hero.role}`,
+        description: copy.hero.description,
+        path: `/${lang}`,
+    });
+}
 
 export default async function RootLayout({ children, params }) {
     const { lang = "es" } = await params;
     const copy = getPreviewCopy(lang);
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": `${siteUrl}/#person`,
+                name: copy.hero.name,
+                jobTitle: copy.hero.role,
+                url: `${siteUrl}/${lang}`,
+                sameAs: [previewLinks.github, previewLinks.linkedin],
+                knowsAbout: [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "Spring Boot",
+                    "Node.js",
+                    "Django",
+                ],
+            },
+            {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`,
+                name: siteName,
+                url: `${siteUrl}/${lang}`,
+                inLanguage: lang,
+                author: { "@id": `${siteUrl}/#person` },
+            },
+        ],
+    };
 
     return (
         <html
@@ -41,6 +77,12 @@ export default async function RootLayout({ children, params }) {
                 <SiteHeader lang={lang} copy={copy} />
                 {children}
                 <SiteFooter lang={lang} copy={copy} />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+                    }}
+                />
             </body>
         </html>
     );

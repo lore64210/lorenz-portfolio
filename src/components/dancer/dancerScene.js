@@ -135,15 +135,15 @@ function smoothMap(map) {
     if ("filter" in context) context.filter = "blur(0.4px)";
     context.drawImage(image, 0, 0, size, size);
 
-    // 7x7 median on dark pixels: the suit has tiny baked light specks that a
-    // 5x5 pass left behind. Bright pixels (skin, eyes, shoes) are untouched.
+    // 5x5 box blur on dark pixels: the suit has tiny baked light specks.
+    // Bright pixels (skin, eyes, shoes) are untouched. A box blur avoids the
+    // cost of a full median filter, which used to block the main thread for
+    // seconds while the hero scene was loading.
     const imageData = context.getImageData(0, 0, size, size);
     const source = imageData.data;
     const output = new Uint8ClampedArray(source.length);
-    const radius = 3;
+    const radius = 2;
     const windowSize = (radius * 2 + 1) ** 2;
-    const window = new Uint8Array(windowSize);
-    const medianIndex = windowSize >> 1;
 
     for (let y = 0; y < size; y++) {
         for (let x = 0; x < size; x++) {
@@ -162,29 +162,17 @@ function smoothMap(map) {
             }
 
             for (let channel = 0; channel < 3; channel++) {
-                let count = 0;
+                let sum = 0;
 
                 for (let dy = -radius; dy <= radius; dy++) {
                     const sy = Math.min(size - 1, Math.max(0, y + dy));
                     for (let dx = -radius; dx <= radius; dx++) {
                         const sx = Math.min(size - 1, Math.max(0, x + dx));
-                        window[count++] =
-                            source[(sy * size + sx) * 4 + channel];
+                        sum += source[(sy * size + sx) * 4 + channel];
                     }
                 }
 
-                // Partial selection sort: only the lower half is needed.
-                for (let k = 0; k <= medianIndex; k++) {
-                    let min = k;
-                    for (let j = k + 1; j < windowSize; j++) {
-                        if (window[j] < window[min]) min = j;
-                    }
-                    const value = window[k];
-                    window[k] = window[min];
-                    window[min] = value;
-                }
-
-                output[pixel + channel] = window[medianIndex];
+                output[pixel + channel] = sum / windowSize;
             }
 
             output[pixel + 3] = source[pixel + 3];
@@ -567,7 +555,10 @@ export async function createDancer({
         const rect = host.getBoundingClientRect();
         const width = Math.max(1, rect.width);
         const height = Math.max(1, rect.height);
-        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        const maxRatio = window.matchMedia("(max-width: 960px)").matches
+            ? 1.5
+            : 1.75;
+        const ratio = Math.min(window.devicePixelRatio || 1, maxRatio);
 
         renderer.setPixelRatio(ratio);
         renderer.setSize(width, height, false);
