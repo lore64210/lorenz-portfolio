@@ -32,11 +32,14 @@ export default function DancerCanvas({
         const lowMemory =
             typeof navigator.deviceMemory === "number" &&
             navigator.deviceMemory <= 4;
+        const captureMode = new URLSearchParams(
+            window.location.search
+        ).has("capture");
 
         // Phones, tablets, reduced-motion users and low-memory devices get the
         // poster instead of a WebGL scene. The 3D stays on desktop, where it
         // is the hero's signature detail.
-        if (reducedMotion || smallScreen || lowMemory) {
+        if (!captureMode && (reducedMotion || smallScreen || lowMemory)) {
             setStatus("static");
             return;
         }

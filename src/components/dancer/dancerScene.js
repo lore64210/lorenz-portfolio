@@ -82,6 +82,18 @@ function prepareModel(scene) {
             // blocking the main thread for seconds.
 
 
+            // The suit uses a metallic-roughness texture that produces small
+            // specular reflections from the rim lights. Force a fully matte
+            // material so the dark fabric reads as cloth instead of wet vinyl.
+            if ("metalness" in material) {
+                material.metalness = 0;
+                material.metalnessMap = null;
+            }
+            if ("roughness" in material) {
+                material.roughness = 0.95;
+                material.roughnessMap = null;
+            }
+
             // The GLB declares a specular colour factor of 2. Clamp it so the
             // rough fabric does not sparkle.
             if ("specularIntensity" in material) {
@@ -91,17 +103,10 @@ function prepareModel(scene) {
                 material.specularColor.setRGB(1, 1, 1);
             }
 
-            // Rigged exports omit metalness maps; the glTF default of 1 makes
-            // the character black without an environment probe.
-            if ("metalness" in material && !material.metalnessMap) {
-                material.metalness = 0;
-            }
-            if (
-                "roughness" in material &&
-                !material.roughnessMap &&
-                material.roughness < 0.6
-            ) {
-                material.roughness = 0.8;
+            // Soften the normal map a little; it still gives the cloth some
+            // shape without turning every bump into a highlight.
+            if (material.normalScale) {
+                material.normalScale.set(0.6, 0.6);
             }
 
             material.needsUpdate = true;
@@ -382,11 +387,17 @@ export async function createDancer({
     backRim.position.set(0, 2.8, -4);
     scene.add(backRim);
 
+    // `?capture=1` is a maintenance hook for exporting transparent poster
+    // frames from the canvas. It has no effect on normal page loads.
+    const captureMode = new URLSearchParams(window.location.search).has(
+        "capture"
+    );
     const renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
         antialias: false,
         powerPreference: "high-performance",
+        preserveDrawingBuffer: captureMode,
     });
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -471,8 +482,10 @@ export async function createDancer({
         const rect = host.getBoundingClientRect();
         const width = Math.max(1, rect.width);
         const height = Math.max(1, rect.height);
-        const maxRatio = 2;
-        const ratio = Math.min(window.devicePixelRatio || 1, maxRatio);
+        const maxRatio = captureMode ? 3 : 2;
+        const ratio = captureMode
+            ? maxRatio
+            : Math.min(window.devicePixelRatio || 1, maxRatio);
 
         renderer.setPixelRatio(ratio);
         renderer.setSize(width, height, false);
