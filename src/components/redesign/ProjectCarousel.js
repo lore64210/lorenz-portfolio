@@ -5,6 +5,14 @@ import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import RevealMedia from "@/components/motion/RevealMedia";
 
+const MUSIKIT_BARS = [
+    { scale: 0.56, delay: "0.00s", duration: "0.80s" },
+    { scale: 0.93, delay: "0.49s", duration: "0.98s" },
+    { scale: 0.75, delay: "0.07s", duration: "1.16s" },
+    { scale: 0.67, delay: "0.56s", duration: "1.34s" },
+    { scale: 0.49, delay: "0.14s", duration: "1.52s" },
+];
+
 export default function ProjectCarousel({ project, title, copy, className }) {
     const images = project.images?.length
         ? project.images
@@ -59,27 +67,62 @@ export default function ProjectCarousel({ project, title, copy, className }) {
                     >
                         {images.map((image, index) => (
                             <div
-                                key={image.src}
+                                key={image.src ?? `${image.type}-${index}`}
                                 className={`project-carousel-slide ${
                                     index === active ? "is-active" : ""
+                                } ${
+                                    image.type
+                                        ? "project-carousel-slide-logo"
+                                        : ""
                                 }`}
                                 aria-hidden={index !== active}
                             >
-                                <Image
-                                    src={image.src}
-                                    alt={`${title} — ${index + 1}`}
-                                    width={1200}
-                                    height={900}
-                                    className="project-image"
-                                    style={{
-                                        objectFit:
-                                            image.fit ??
-                                            project.fit ??
-                                            "cover",
-                                        mixBlendMode: image.blend,
-                                    }}
-                                    sizes="(max-width: 960px) 92vw, 1000px"
-                                />
+                                {image.type === "musikit-logo" ? (
+                                    <div className="project-logo-musikit">
+                                        <span
+                                            className="project-logo-mark"
+                                            aria-hidden="true"
+                                        >
+                                            <span className="sound-bars">
+                                                {MUSIKIT_BARS.map(
+                                                    (bar, barIndex) => (
+                                                        <span
+                                                            key={barIndex}
+                                                            className="sound-bars-bar"
+                                                            style={{
+                                                                "--bar-scale":
+                                                                    bar.scale,
+                                                                "--bar-delay":
+                                                                    bar.delay,
+                                                                "--bar-duration":
+                                                                    bar.duration,
+                                                            }}
+                                                        />
+                                                    )
+                                                )}
+                                            </span>
+                                        </span>
+                                        <span className="project-logo-title">
+                                            musikit!
+                                        </span>
+                                    </div>
+                                ) : (
+                                    <Image
+                                        src={image.src}
+                                        alt={`${title} — ${index + 1}`}
+                                        width={1200}
+                                        height={900}
+                                        className="project-image"
+                                        style={{
+                                            objectFit:
+                                                image.fit ??
+                                                project.fit ??
+                                                "cover",
+                                            mixBlendMode: image.blend,
+                                        }}
+                                        sizes="(max-width: 960px) 92vw, 1000px"
+                                    />
+                                )}
                             </div>
                         ))}
                     </div>

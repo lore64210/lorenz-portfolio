@@ -2,6 +2,7 @@ import SnapContainer from "@/components/motion/SnapContainer";
 import Hero from "@/components/redesign/Hero";
 import AboutSection from "@/components/redesign/AboutSection";
 import SkillsSection from "@/components/redesign/SkillsSection";
+import ExperienceSection from "@/components/redesign/ExperienceSection";
 import ProjectsSection from "@/components/redesign/ProjectsSection";
 import PlaygroundSection from "@/components/redesign/PlaygroundSection";
 import ContactSection from "@/components/redesign/ContactSection";
@@ -16,6 +17,7 @@ export default async function Home({ params }) {
             <Hero lang={lang} copy={copy} />
             <AboutSection lang={lang} copy={copy} />
             <SkillsSection copy={copy} />
+            <ExperienceSection copy={copy} />
             <ProjectsSection copy={copy} />
             <PlaygroundSection lang={lang} copy={copy} />
             <ContactSection lang={lang} copy={copy} />

@@ -16,6 +16,7 @@ export default function SiteHeader({ lang, copy }) {
     const links = [
         { href: `/${lang}/about`, label: copy.nav.about },
         { href: `/${lang}#skills`, label: copy.nav.skills },
+        { href: `/${lang}#experience`, label: copy.nav.experience },
         { href: `/${lang}#projects`, label: copy.nav.projects },
         { href: `/${lang}#playground`, label: copy.nav.playground },
         { href: `/${lang}#contact`, label: copy.nav.contact },

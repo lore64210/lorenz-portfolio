@@ -32,21 +32,58 @@ export const skillGroups = [
     },
 ];
 
+export const experienceItems = [
+    {
+        key: "houm-product-engineer",
+        company: "HOUM",
+        stack: ["React", "TypeScript", "Spring Boot", "OpenAI API"],
+    },
+    {
+        key: "houm-senior-frontend",
+        company: "HOUM",
+        stack: ["React", "TypeScript", "MUI", "Design System"],
+    },
+    {
+        key: "minutentag-frontend",
+        company: "MinutenTag",
+        stack: ["React", "Redux", "Django", "Firebase", "Three.js"],
+    },
+    {
+        key: "connectis-fullstack",
+        company: "Connectis",
+        stack: ["React", "TypeScript", "Spring Boot", "Vue.js"],
+    },
+    {
+        key: "botmaker-fullstack",
+        company: "Botmaker",
+        stack: ["React", "WebSockets"],
+    },
+    {
+        key: "onready-fullstack",
+        company: "OnReady",
+        stack: ["React Native", "React", "Spring Boot", "RabbitMQ"],
+    },
+];
+
 export const projectItems = [
     {
         key: "organizer",
         images: [
             {
+                src: "/static/images/organizer.jpeg",
+                fit: "cover",
+            },
+            {
                 src: "/static/images/organizer/home-dark.png",
-                fit: "contain",
+                fit: "cover",
             },
             {
                 src: "/static/images/organizer/home-light.png",
-                fit: "contain",
+                fit: "cover",
             },
             {
                 src: "/static/images/organizer/reminder-light.png",
-                fit: "contain",
+                fit: "cover",
             },
         ],
         href: "https://lore64210.github.io/organizer/",
@@ -57,13 +94,12 @@ export const projectItems = [
         key: "spring-crud-initializr",
         images: [
             {
-                src: "/static/images/spring-crud-initializr-app.png",
-                fit: "contain",
+                src: "/static/images/spring-crud-initializr-logo.png",
+                fit: "cover",
             },
             {
-                src: "/static/images/spring-crud-initializr.png",
-                fit: "contain",
-                blend: "multiply",
+                src: "/static/images/spring-crud-initializr-app.png",
+                fit: "cover",
             },
         ],
         href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/",
@@ -74,12 +110,15 @@ export const projectItems = [
         key: "musikit",
         images: [
             {
+                type: "musikit-logo",
+            },
+            {
                 src: "/static/images/musikit.png",
-                fit: "contain",
+                fit: "cover",
             },
             {
                 src: "/static/images/musikit-home.png",
-                fit: "contain",
+                fit: "cover",
             },
         ],
         href: "https://musikitstudio.vercel.app/#/music",
@@ -119,6 +158,7 @@ const copy = {
             home: "Inicio",
             about: "Sobre mí",
             skills: "Skills",
+            experience: "Experiencia",
             projects: "Proyectos",
             playground: "Playground",
             contact: "Contacto",
@@ -210,8 +250,75 @@ const copy = {
                 cloud: "Cloud & DevOps",
             },
         },
+        experience: {
+            eyebrow: "03 — Experiencia",
+            title: "Dónde trabajé",
+            description:
+                "Seis años de recorrido: desde apps mobile y APIs hasta producto, liderazgo y automatización con IA.",
+            items: {
+                "houm-product-engineer": {
+                    role: "Product Engineer",
+                    period: "Sept. 2025 — Oct. 2026",
+                    bullets: [
+                        "Relevé necesidades directamente con usuarios finales y las transformé en requerimientos de producto.",
+                        "Planifiqué las soluciones con producto, diseño y desarrollo, y lideré su implementación end-to-end.",
+                        "Construí un agente con la API de OpenAI que detecta inconsistencias entre contratos y datos, abre un ticket y adjunta una propuesta de fix en un Pull Request.",
+                    ],
+                },
+                "houm-senior-frontend": {
+                    role: "Frontend Developer SR",
+                    period: "Abr. 2024 — Sept. 2025",
+                    bullets: [
+                        "Desarrollé vistas centralizadas para gestionar el proceso de alquileres, cubriendo gaps operativos que las herramientas existentes no resolvían.",
+                        "Construí la mayor parte del frontend del sistema de comentarios y notificaciones internas que reemplazó a Slack y Google Chat.",
+                        "Lideré el frontend de un sistema de asignación de tareas con panel de disponibilidad, vacaciones y licencias.",
+                        "Contribuí a la migración al design system interno, reemplazando MUI en una codebase de gran escala.",
+                        "Resolví deuda técnica transversal: filtros, tablas, validaciones y parseos.",
+                        "Apliqué mejoras de seguridad para auditorías internas y amplié mi participación a proyectos Django.",
+                    ],
+                },
+                "minutentag-frontend": {
+                    role: "Frontend Developer SSR",
+                    period: "Nov. 2022 — Abr. 2023",
+                    bullets: [
+                        "Desarrollé features en React para clientes de Estados Unidos, integrando la lógica de negocio con backends en Django y Firebase.",
+                        "Mantuve aplicaciones y resolví bugs con Redux, React Drag & Drop y Three.js.",
+                    ],
+                },
+                "connectis-fullstack": {
+                    role: "Full Stack Developer SSR / Team Leader",
+                    period: "Ago. 2021 — Sept. 2022",
+                    bullets: [
+                        "Lideré el relevamiento de necesidades del cliente y la definición del backlog, como nexo entre negocio y equipo técnico.",
+                        "Desarrollé soluciones administrativas internas para equipos de Movistar con Spring Boot y React, incluido el formulario público de portabilidad numérica.",
+                        "Construí APIs REST con Spring Boot para proyectos internos.",
+                        "Impulsé la adopción de React y TypeScript en una empresa orientada a Vue.js, iniciando proyectos como referente técnico.",
+                        "Di charlas internas sobre TypeScript y React para el equipo.",
+                        "Crecí de Junior a Team Lead liderando equipos de 2 a 4 personas.",
+                    ],
+                },
+                "botmaker-fullstack": {
+                    role: "Full Stack Developer JR",
+                    period: "Mar. 2021 — Ago. 2021",
+                    bullets: [
+                        "Migré componentes de clase a hooks en la plataforma interna.",
+                        "Mejoré la UI de herramientas administrativas e implementé actualizaciones en tiempo real con WebSockets.",
+                    ],
+                },
+                "onready-fullstack": {
+                    role: "Full Stack Developer JR",
+                    period: "Ago. 2019 — Mar. 2021",
+                    bullets: [
+                        "Participé en proyectos variados dando soporte al backlog y asistiendo a reuniones de relevamiento con clientes.",
+                        "Colaboré en la app mobile de PaQuery con React Native: vistas de choferes, mapa con ruteo, cámara y lector de QR/barcode.",
+                        "Participé del rediseño de Alternativa Teatral y de su nuevo sistema de pagos con Mercado Pago y Spring Boot.",
+                        "Implementé control de sesiones simultáneas para streams en vivo con RabbitMQ.",
+                    ],
+                },
+            },
+        },
         projects: {
-            eyebrow: "03 — Proyectos",
+            eyebrow: "04 — Proyectos",
             title: "Cosas que construí",
             description:
                 "Proyectos donde puse en práctica el stack y el detalle. Algunos están online; otros siguen creciendo.",
@@ -242,7 +349,7 @@ const copy = {
             },
         },
         playground: {
-            eyebrow: "04 — Playground",
+            eyebrow: "05 — Playground",
             title: "Experimentos visuales",
             description:
                 "Mini proyectos con p5.js para probar ideas, algoritmos y movimiento.",
@@ -266,7 +373,7 @@ const copy = {
             },
         },
         playgroundPage: {
-            eyebrow: "04 — Playground",
+            eyebrow: "05 — Playground",
             back: "Volver al playground",
             notes: "Cómo funciona",
             secondExperiment: "Segundo experimento",
@@ -274,7 +381,7 @@ const copy = {
             ballLead: "Dos experimentos con agentes que se mueven, se conectan y evolucionan.",
         },
         contact: {
-            eyebrow: "05 — Contacto",
+            eyebrow: "06 — Contacto",
             title: "¿Construimos algo?",
             description:
                 "Si tenés una idea, una propuesta o simplemente ganas de charlar, escribime. Me gusta escuchar qué está haciendo la gente.",
@@ -307,6 +414,7 @@ const copy = {
             home: "Home",
             about: "About",
             skills: "Skills",
+            experience: "Experience",
             projects: "Projects",
             playground: "Playground",
             contact: "Contact",
@@ -398,8 +506,75 @@ const copy = {
                 cloud: "Cloud & DevOps",
             },
         },
+        experience: {
+            eyebrow: "03 — Experience",
+            title: "Where I've worked",
+            description:
+                "Six years across mobile apps, APIs, product work, leadership and AI automation.",
+            items: {
+                "houm-product-engineer": {
+                    role: "Product Engineer",
+                    period: "Sep. 2025 — Oct. 2026",
+                    bullets: [
+                        "Gathered needs directly from end users and turned them into product requirements.",
+                        "Planned solutions with product, design and engineering, and led their end-to-end implementation.",
+                        "Built an OpenAI API agent that detects inconsistencies between contracts and system data, opens a support ticket and attaches a proposed fix in a Pull Request.",
+                    ],
+                },
+                "houm-senior-frontend": {
+                    role: "Senior Frontend Developer",
+                    period: "Apr. 2024 — Sep. 2025",
+                    bullets: [
+                        "Built centralized views to manage the rental process, closing operational gaps existing tools did not cover.",
+                        "Built most of the frontend of an internal comments and notifications system, replacing Slack and Google Chat.",
+                        "Led the frontend of a task assignment system with an admin panel for availability, vacations and leaves.",
+                        "Contributed to the migration to the in-house design system, progressively replacing MUI in a large-scale codebase.",
+                        "Reduced technical debt across the platform: filters, tables, validations and parsing.",
+                        "Applied security improvements for internal audits and extended my work to Django backend projects.",
+                    ],
+                },
+                "minutentag-frontend": {
+                    role: "Semi-Senior Frontend Developer",
+                    period: "Nov. 2022 — Apr. 2023",
+                    bullets: [
+                        "Built React features for US clients, integrating business logic with Django and Firebase backends.",
+                        "Maintained applications and fixed bugs using Redux, React Drag & Drop and Three.js.",
+                    ],
+                },
+                "connectis-fullstack": {
+                    role: "Semi-Senior Full Stack Developer / Team Leader",
+                    period: "Aug. 2021 — Sep. 2022",
+                    bullets: [
+                        "Led client requirements gathering and backlog definition, acting as the link between business and engineering.",
+                        "Built internal admin solutions for several Movistar teams with Spring Boot and React, including the public number portability form.",
+                        "Developed REST APIs with Spring Boot for internal projects.",
+                        "Drove React and TypeScript adoption in a Vue.js-oriented company, starting projects as technical referent.",
+                        "Gave internal talks on TypeScript and React.",
+                        "Grew from Junior developer to Team Lead, leading teams of 2 to 4 people.",
+                    ],
+                },
+                "botmaker-fullstack": {
+                    role: "Junior Full Stack Developer",
+                    period: "Mar. 2021 — Aug. 2021",
+                    bullets: [
+                        "Migrated class components to hooks on the internal platform.",
+                        "Improved admin UI and implemented real-time updates with WebSockets.",
+                    ],
+                },
+                "onready-fullstack": {
+                    role: "Junior Full Stack Developer",
+                    period: "Aug. 2019 — Mar. 2021",
+                    bullets: [
+                        "Supported the backlog across projects and joined client requirements meetings.",
+                        "Contributed to the PaQuery mobile app with React Native: driver views, routing map, camera and QR/barcode reader.",
+                        "Helped redesign Alternativa Teatral and build its new payment system with Mercado Pago and Spring Boot.",
+                        "Implemented concurrent session control for live streams with RabbitMQ.",
+                    ],
+                },
+            },
+        },
         projects: {
-            eyebrow: "03 — Projects",
+            eyebrow: "04 — Projects",
             title: "Things I've built",
             description:
                 "Projects where I put the stack and the details into practice. Some are online; others keep growing.",
@@ -430,7 +605,7 @@ const copy = {
             },
         },
         playground: {
-            eyebrow: "04 — Playground",
+            eyebrow: "05 — Playground",
             title: "Visual experiments",
             description:
                 "Small p5.js projects to test ideas, algorithms and motion.",
@@ -454,7 +629,7 @@ const copy = {
             },
         },
         playgroundPage: {
-            eyebrow: "04 — Playground",
+            eyebrow: "05 — Playground",
             back: "Back to playground",
             notes: "How it works",
             secondExperiment: "Second experiment",
@@ -462,7 +637,7 @@ const copy = {
             ballLead: "Two experiments with agents that move, connect and evolve.",
         },
         contact: {
-            eyebrow: "05 — Contact",
+            eyebrow: "06 — Contact",
             title: "Let's build something",
             description:
                 "If you have an idea, a proposal, or just want to chat, write to me. I like hearing what people are building.",
