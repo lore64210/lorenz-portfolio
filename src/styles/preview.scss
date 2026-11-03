@@ -18,6 +18,35 @@
 html {
     background: var(--bg);
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 122, 89, 0.55) var(--bg);
+}
+
+@supports selector(::-webkit-scrollbar) {
+    html {
+        scrollbar-width: auto;
+        scrollbar-color: auto;
+    }
+
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 3px solid var(--bg);
+        border-radius: 999px;
+        background: rgba(255, 122, 89, 0.55);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+    }
 }
 
 * {
@@ -187,6 +216,11 @@ body.preview-body {
 
 .btn-primary {
     background: var(--accent);
+    color: var(--bg);
+}
+
+.preview-body a.btn-primary,
+.preview-body button.btn-primary {
     color: var(--bg);
 }
 
