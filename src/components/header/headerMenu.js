@@ -47,7 +47,7 @@ export default function HeaderMenu({ dict, lang }) {
                                     </h4>
                                 </Link>
                                 <Link
-                                    href="https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/"
+                                    href={`https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=${lang}`}
                                     target="_blank"
                                 >
                                     <h4 className="header-nav-item">

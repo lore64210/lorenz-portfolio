@@ -102,7 +102,10 @@ export const projectItems = [
                 fit: "cover",
             },
         ],
-        href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/",
+        href: {
+            es: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=es",
+            en: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=en",
+        },
         stack: "React · Spring Boot",
         tone: "mint",
     },
@@ -672,3 +675,8 @@ const copy = {
 };
 
 export const getPreviewCopy = (lang) => copy[lang] ?? copy.es;
+
+export const getProjectHref = (project, lang) => {
+    if (typeof project?.href === "string") return project.href;
+    return project?.href?.[lang] ?? project?.href?.es;
+};

@@ -3,7 +3,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealText from "@/components/motion/RevealText";
 import SectionHeading from "./SectionHeading";
 import ProjectCarousel from "./ProjectCarousel";
-import { projectItems } from "@/content/preview";
+import { getProjectHref, projectItems } from "@/content/preview";
 
 function ProjectRow({ project, index, copy }) {
     const item = copy.projects.items[project.key];
@@ -50,7 +50,12 @@ function ProjectRow({ project, index, copy }) {
     );
 }
 
-export default function ProjectsSection({ copy }) {
+export default function ProjectsSection({ copy, lang = "es" }) {
+    const projects = projectItems.map((project) => ({
+        ...project,
+        href: getProjectHref(project, lang),
+    }));
+
     return (
         <>
             <section
@@ -65,7 +70,7 @@ export default function ProjectsSection({ copy }) {
                     />
                     <div className="projects-list">
                         <ProjectRow
-                            project={projectItems[0]}
+                            project={projects[0]}
                             index={0}
                             copy={copy}
                         />
@@ -80,7 +85,7 @@ export default function ProjectsSection({ copy }) {
                 <div className="container">
                     <div className="projects-list">
                         <ProjectRow
-                            project={projectItems[1]}
+                            project={projects[1]}
                             index={1}
                             copy={copy}
                         />
@@ -95,7 +100,7 @@ export default function ProjectsSection({ copy }) {
                 <div className="container">
                     <div className="projects-list">
                         <ProjectRow
-                            project={projectItems[2]}
+                            project={projects[2]}
                             index={2}
                             copy={copy}
                         />

@@ -18,7 +18,7 @@ export default async function Home({ params }) {
             <AboutSection lang={lang} copy={copy} />
             <SkillsSection copy={copy} />
             <ExperienceSection copy={copy} />
-            <ProjectsSection copy={copy} />
+            <ProjectsSection copy={copy} lang={lang} />
             <PlaygroundSection lang={lang} copy={copy} />
             <ContactSection lang={lang} copy={copy} />
         </SnapContainer>
