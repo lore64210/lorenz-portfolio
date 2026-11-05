@@ -67,6 +67,7 @@ export default function SiteHeader({ lang, copy }) {
                         href={cvHref}
                         target="_blank"
                         rel="noreferrer"
+                        download={`CV_Lorenzo_Lopez_${lang.toUpperCase()}.pdf`}
                         className="btn btn-small btn-outline"
                     >
                         {copy.nav.cv}
@@ -109,6 +110,7 @@ export default function SiteHeader({ lang, copy }) {
                         href={cvHref}
                         target="_blank"
                         rel="noreferrer"
+                        download={`CV_Lorenzo_Lopez_${lang.toUpperCase()}.pdf`}
                         className="btn btn-outline"
                         onClick={close}
                     >

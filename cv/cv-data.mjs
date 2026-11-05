@@ -31,7 +31,6 @@ export const CV = {
             summary: "Resumen profesional",
             skills: "Habilidades técnicas",
             experience: "Experiencia laboral",
-            projects: "Proyectos destacados",
             education: "Educación",
             languages: "Idiomas",
         },
@@ -174,22 +173,6 @@ export const CV = {
             ["Español", "Nativo"],
             ["Inglés", "B2, conversacional"],
         ],
-        projects: [
-            {
-                name: "Catarsis",
-                description: "Fanzine digital",
-                stack: "React, TypeScript, Firebase",
-                href: "https://catarsisfanzine.vercel.app/",
-                label: "catarsisfanzine.vercel.app",
-            },
-            {
-                name: "Spring CRUD Initializr",
-                description: "Generador de APIs CRUD",
-                stack: "React, Spring Boot",
-                href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=es",
-                label: "spring-crud-initializr",
-            },
-        ],
     },
     en: {
         name: "Lorenzo Matías López",
@@ -201,7 +184,6 @@ export const CV = {
             summary: "Professional Summary",
             skills: "Technical Skills",
             experience: "Work Experience",
-            projects: "Selected Projects",
             education: "Education",
             languages: "Languages",
         },
@@ -343,22 +325,6 @@ export const CV = {
         languages: [
             ["Spanish", "Native"],
             ["English", "B2, conversational"],
-        ],
-        projects: [
-            {
-                name: "Catarsis",
-                description: "Digital fanzine",
-                stack: "React, TypeScript, Firebase",
-                href: "https://catarsisfanzine.vercel.app/",
-                label: "catarsisfanzine.vercel.app",
-            },
-            {
-                name: "Spring CRUD Initializr",
-                description: "CRUD API generator",
-                stack: "React, Spring Boot",
-                href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=en",
-                label: "spring-crud-initializr",
-            },
         ],
     },
 };

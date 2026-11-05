@@ -16,13 +16,13 @@ export default function ContactSection({ lang, copy }) {
             key: "es",
             href: "/static/pdf/CV_LORENZO_LOPEZ_ES.pdf",
             label: copy.cvOptions.es,
-            download: "CV_Lorenzo_Matias_Lopez_ES.pdf",
+            download: "CV_Lorenzo_Lopez_ES.pdf",
         },
         {
             key: "en",
             href: "/static/pdf/CV_LORENZO_LOPEZ_EN.pdf",
             label: copy.cvOptions.en,
-            download: "CV_Lorenzo_Matias_Lopez_EN.pdf",
+            download: "CV_Lorenzo_Lopez_EN.pdf",
         },
     ];
     const orderedCvOptions =

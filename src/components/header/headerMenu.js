@@ -112,6 +112,7 @@ export default function HeaderMenu({ dict, lang }) {
             <Link
                 href={`/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`}
                 target="_blank"
+                download={`CV_Lorenzo_Lopez_${lang.toUpperCase()}.pdf`}
                 className="header-nav-item"
             >
                 <h3>{dict["cv"]["download"]}</h3>

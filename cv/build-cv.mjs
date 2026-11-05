@@ -42,8 +42,8 @@ body {
     margin: 0;
     color: #1f2933;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    line-height: 1.35;
+    font-size: 10.2pt;
+    line-height: 1.38;
 }
 
 a {
@@ -89,11 +89,11 @@ h1 {
 }
 
 section {
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
 h2 {
-    margin: 0 0 6px;
+    margin: 0 0 7px;
     padding-bottom: 3px;
     border-bottom: 1px solid #d1d5db;
     color: #111827;
@@ -131,7 +131,7 @@ ul {
 }
 
 li {
-    margin: 0 0 3px;
+    margin: 0 0 3.2px;
     break-inside: avoid;
 }
 
@@ -140,7 +140,7 @@ li {
 }
 
 .job {
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 .job:first-of-type {
@@ -148,7 +148,7 @@ li {
 }
 
 .job-role {
-    margin-top: 6px;
+    margin-top: 7px;
 }
 
 .job-role:first-of-type {
@@ -176,18 +176,6 @@ li {
 
 .education {
     margin-top: 0;
-}
-
-.project-line {
-    margin: 0 0 2px;
-}
-
-.project-line strong {
-    color: #111827;
-}
-
-.project-stack {
-    color: #4b5563;
 }
 
 .education p {
@@ -264,20 +252,6 @@ function renderExperience(cv) {
         .join("\n");
 }
 
-function renderProjects(cv) {
-    return cv.projects
-        .map(
-            (project) => `
-                <p class="project-line">
-                    <strong>${escapeHtml(project.name)}</strong> — ${escapeHtml(project.description)}
-                    <span class="project-stack">(${escapeHtml(project.stack)})</span> ·
-                    ${link(project.href, project.label)}
-                </p>
-            `,
-        )
-        .join("\n");
-}
-
 function renderEducation(cv) {
     return cv.education
         .map(
@@ -322,11 +296,6 @@ function render(cv, lang) {
     <section>
         <h2>${escapeHtml(cv.sections.experience)}</h2>
         ${renderExperience(cv)}
-    </section>
-
-    <section>
-        <h2>${escapeHtml(cv.sections.projects)}</h2>
-        ${renderProjects(cv)}
     </section>
 
     <section>

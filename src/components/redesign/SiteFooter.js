@@ -2,6 +2,7 @@ import { previewLinks } from "@/content/preview";
 
 export default function SiteFooter({ lang, copy }) {
     const cvHref = `/static/pdf/CV_LORENZO_LOPEZ_${lang.toUpperCase()}.pdf`;
+    const cvDownload = `CV_Lorenzo_Lopez_${lang.toUpperCase()}.pdf`;
     const year = new Date().getFullYear();
 
     return (
@@ -28,7 +29,12 @@ export default function SiteFooter({ lang, copy }) {
                     >
                         LinkedIn
                     </a>
-                    <a href={cvHref} target="_blank" rel="noreferrer">
+                    <a
+                        href={cvHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        download={cvDownload}
+                    >
                         {copy.nav.cv}
                     </a>
                 </nav>
