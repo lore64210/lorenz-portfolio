@@ -8,6 +8,8 @@ const HOLD_MS = 1500;
 const FADE_MS = 480;
 const SCROLL_FADE_MS = 320;
 const NEIGHBOR_WEIGHT = 0.55;
+const MAX_CELLS = 1800;
+const FRAME_MS = 1000 / 30;
 
 /**
  * Fondo de grilla invisible que se enciende con el mouse.
@@ -53,6 +55,7 @@ export default function MouseGrid() {
         let scrolling = false;
         let scrollTimer = 0;
         let scrollFadeAt = 0;
+        let lastDraw = 0;
 
         const cells = new Map();
 
@@ -77,7 +80,10 @@ export default function MouseGrid() {
                     alpha = Math.max(0, 1 - (time - cell.fadeAt) / FADE_MS);
                 }
 
-                ctx.globalAlpha = alpha * cell.weight * scrollFade;
+                const finalAlpha = alpha * cell.weight * scrollFade;
+                if (finalAlpha < 0.01) continue;
+
+                ctx.globalAlpha = finalAlpha;
                 ctx.fillRect(x, y, CELL, CELL);
             }
 
@@ -88,9 +94,16 @@ export default function MouseGrid() {
             if (!raf) raf = requestAnimationFrame(tick);
         };
 
-        const tick = () => {
+        const tick = (frameTime) => {
             raf = 0;
-            const time = now();
+            const time = frameTime || now();
+
+            if (time - lastDraw < FRAME_MS) {
+                schedule();
+                return;
+            }
+
+            lastDraw = time;
             draw(time);
 
             if (scrollFadeAt && time >= scrollFadeAt + SCROLL_FADE_MS) {
@@ -109,6 +122,7 @@ export default function MouseGrid() {
         const activate = (col, row, weight = 1) => {
             if (scrollFadeAt) return;
             if (col < 0 || row < 0 || col >= cols || row >= rows) return;
+            if (!cells.has(`${col}:${row}`) && cells.size >= MAX_CELLS) return;
 
             const key = `${col}:${row}`;
             const time = now();
@@ -160,7 +174,12 @@ export default function MouseGrid() {
             let err = dx + dy;
 
             while (true) {
-                activateArea(x0, y0);
+                if (x0 === x1 && y0 === y1) {
+                    activateArea(x0, y0);
+                } else {
+                    activate(x0, y0);
+                }
+
                 if (x0 === x1 && y0 === y1) break;
 
                 const e2 = 2 * err;
@@ -217,7 +236,7 @@ export default function MouseGrid() {
         };
 
         const resize = () => {
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            dpr = Math.min(window.devicePixelRatio || 1, 1);
             width = window.innerWidth;
             height = window.innerHeight;
             cols = Math.ceil(width / CELL);

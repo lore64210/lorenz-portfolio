@@ -12,6 +12,18 @@ const DANCES_URL = "/static/data/winston-dances.json";
 const DEG = Math.PI / 180;
 const TRANSITION_SECONDS = 0.45;
 
+/** Límites del seguimiento de cabeza, pensados para no quebrar el cuello. */
+const MAX_HEAD_YAW = 90 * DEG;
+const MAX_HEAD_PITCH = 45 * DEG;
+const NECK_SHARE = 0.35;
+const HEAD_SHARE = 0.65;
+
+/**
+ * Los ojos del mesh están un poco por encima del eje del hueso Head
+ * (`headfront`: y=2.25, z=16.4). Sin este offset la mirada queda alta.
+ */
+const GAZE_PITCH_OFFSET = 7.8 * DEG;
+
 /** Contract rig used by Winston's Paradigm -> actual Meshy/Mixamo bones. */
 const BONE_MAP = {
     Hips: "mixamorig:Hips",
@@ -204,6 +216,8 @@ const rootQuaternion = new THREE.Quaternion();
 const offset = new THREE.Vector3();
 const worldPosition = new THREE.Vector3();
 const transitionQuaternion = new THREE.Quaternion();
+const lookEuler = new THREE.Euler();
+const lookQuaternion = new THREE.Quaternion();
 
 function applyPose(model, rig, pose, blend = null) {
     for (const entry of rig.entries) {
@@ -349,6 +363,8 @@ export async function createDancer({
 
     const isSingleSequence = sequences.length === 1;
     const isResting = variant === "contact" && !!dances.resting;
+    const idleSequence = dances.idle ?? null;
+    const canIdleOnHover = variant !== "contact" && !!idleSequence;
 
     const model = cloneSkeleton(gltf.scene);
     model.traverse((object) => {
@@ -356,6 +372,10 @@ export async function createDancer({
     });
 
     const rig = buildRig(model);
+    const neckEntry =
+        rig.binding.find(([contract]) => contract === "Neck")?.[1] ?? null;
+    const headEntry =
+        rig.binding.find(([contract]) => contract === "Head")?.[1] ?? null;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 30);
@@ -433,6 +453,8 @@ export async function createDancer({
     let cycleIndex = 0;
     let frameIndex = 0;
     let elapsed = 0;
+    let nearIdle = false;
+    let savedSequenceState = null;
 
     model.updateMatrixWorld(true);
     const footEntries = rig.binding.filter(
@@ -452,6 +474,8 @@ export async function createDancer({
     let pointerY = 0;
     let smoothX = 0;
     let smoothY = 0;
+    let lookX = 0;
+    let lookY = 0;
     let dragging = false;
     let dragPointerId = null;
     let dragLastX = 0;
@@ -485,7 +509,7 @@ export async function createDancer({
         const rect = host.getBoundingClientRect();
         const width = Math.max(1, rect.width);
         const height = Math.max(1, rect.height);
-        const ratio = 3;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
         renderer.setPixelRatio(ratio);
         renderer.setSize(width, height, false);
@@ -542,7 +566,7 @@ export async function createDancer({
         let guard = 0;
 
         while (guard++ < 512) {
-            const sequence = sequences[sequenceIndex];
+            const sequence = nearIdle ? idleSequence : sequences[sequenceIndex];
             const frame = sequence.frames[frameIndex];
             if (elapsed < frame.duration) break;
 
@@ -551,18 +575,24 @@ export async function createDancer({
 
             if (frameIndex >= sequence.frames.length) {
                 frameIndex = 0;
-                cycleIndex += 1;
 
-                if (cycleIndex >= (sequence.cycles ?? 1)) {
+                if (nearIdle) {
+                    // El idle se repite mientras el puntero esté cerca.
                     cycleIndex = 0;
+                } else {
+                    cycleIndex += 1;
 
-                    // Single-sequence placements loop seamlessly; multi-
-                    // sequence placements advance to the next clip. Poses are
-                    // crossfaded with quaternion slerp in update().
-                    if (!isSingleSequence) {
-                        sequenceIndex =
-                            (sequenceIndex + 1) % sequences.length;
-                        transitionRequested = true;
+                    if (cycleIndex >= (sequence.cycles ?? 1)) {
+                        cycleIndex = 0;
+
+                        // Single-sequence placements loop seamlessly; multi-
+                        // sequence placements advance to the next clip. Poses
+                        // are crossfaded with quaternion slerp in update().
+                        if (!isSingleSequence) {
+                            sequenceIndex =
+                                (sequenceIndex + 1) % sequences.length;
+                            transitionRequested = true;
+                        }
                     }
                 }
             }
@@ -571,12 +601,46 @@ export async function createDancer({
         }
     }
 
+    function enterIdle() {
+        if (nearIdle || !canIdleOnHover || reduced) return;
+
+        savedSequenceState = {
+            sequenceIndex,
+            cycleIndex,
+            frameIndex,
+            elapsed,
+        };
+        nearIdle = true;
+        frameIndex = 0;
+        cycleIndex = 0;
+        elapsed = 0;
+        transitionRequested = true;
+    }
+
+    function exitIdle() {
+        if (!nearIdle) return;
+
+        nearIdle = false;
+
+        if (savedSequenceState) {
+            ({ sequenceIndex, cycleIndex, frameIndex, elapsed } =
+                savedSequenceState);
+            savedSequenceState = null;
+        }
+
+        transitionRequested = true;
+    }
+
     function update(dt) {
         clock += dt;
 
         const ease = 1 - Math.exp(-dt * 4);
         smoothX += (pointerX - smoothX) * ease;
         smoothY += (pointerY - smoothY) * ease;
+
+        const lookEase = 1 - Math.exp(-dt * 7);
+        lookX += (pointerX - lookX) * lookEase;
+        lookY += (pointerY - lookY) * lookEase;
 
         if (!reduced) {
             dancer.rotation.y =
@@ -606,7 +670,7 @@ export async function createDancer({
             transitionTime = 0;
         }
 
-        const sequence = sequences[sequenceIndex];
+        const sequence = nearIdle ? idleSequence : sequences[sequenceIndex];
         const pose = reduced
             ? dances.idle?.frames?.[0]?.joints ?? sequence.frames[0].joints
             : sequence.frames[frameIndex].joints;
@@ -630,6 +694,59 @@ export async function createDancer({
                   }
                 : null
         );
+
+        // Seguimiento de cabeza: se suma a la pose de baile, repartido entre
+        // cuello y cabeza para que el gesto no salga solo del cráneo.
+        if (!reduced && (neckEntry || headEntry)) {
+            const distance = Math.hypot(lookX, lookY);
+            const proximity =
+                1 - THREE.MathUtils.smoothstep(distance, 1.25, 2.1);
+            const desiredYaw = lookX * MAX_HEAD_YAW * proximity;
+            const pitch = lookY * MAX_HEAD_PITCH * proximity;
+
+            // El cuerpo también gira con el drag: compensamos ese giro para
+            // que la cabeza siga apuntando al cursor en pantalla y no a la
+            // orientación original del modelo.
+            let yaw = desiredYaw - dancer.rotation.y;
+            yaw =
+                THREE.MathUtils.euclideanModulo(yaw + Math.PI, Math.PI * 2) -
+                Math.PI;
+            yaw = THREE.MathUtils.clamp(
+                yaw,
+                -MAX_HEAD_YAW,
+                MAX_HEAD_YAW
+            );
+
+            if (neckEntry) {
+                neckEntry.bone.quaternion.multiply(
+                    lookQuaternion.setFromEuler(
+                        lookEuler.set(
+                            pitch * NECK_SHARE,
+                            yaw * NECK_SHARE,
+                            0,
+                            "YXZ"
+                        )
+                    )
+                );
+            }
+
+            if (headEntry) {
+                headEntry.bone.quaternion.multiply(
+                    lookQuaternion.setFromEuler(
+                        lookEuler.set(
+                            pitch * HEAD_SHARE +
+                                GAZE_PITCH_OFFSET * proximity,
+                            yaw * HEAD_SHARE,
+                            0,
+                            "YXZ"
+                        )
+                    )
+                );
+            }
+
+            // No hace falta otro updateMatrixWorld: el renderer actualiza las
+            // matrices al dibujar y los pies no dependen del cuello/cabeza.
+        }
 
         if (transitioning) {
             transitionTime += dt / TRANSITION_SECONDS;
@@ -745,6 +862,8 @@ export async function createDancer({
     }
 
     function onPointerMove(event) {
+        if (!reduced) enterIdle();
+
         if (dragging && event.pointerId === dragPointerId) {
             const dx = event.clientX - dragLastX;
             dragLastX = event.clientX;
@@ -764,7 +883,12 @@ export async function createDancer({
         pointerY = ((event.clientY - rect.top) / rect.height) * 2 - 1;
     }
 
+    function onPointerEnter() {
+        if (!reduced) enterIdle();
+    }
+
     function onPointerLeave() {
+        exitIdle();
         if (dragging) return;
         pointerX = 0;
         pointerY = 0;
@@ -773,6 +897,7 @@ export async function createDancer({
     function onMotionChange() {
         reduced = motionQuery.matches;
         if (reduced) {
+            exitIdle();
             stop();
             update(0);
             renderFrame();
@@ -815,6 +940,7 @@ export async function createDancer({
     intersectionObserver.observe(host);
 
     host.addEventListener("pointerdown", onPointerDown);
+    host.addEventListener("pointerenter", onPointerEnter);
     host.addEventListener("pointermove", onPointerMove, { passive: true });
     host.addEventListener("pointerup", onPointerUp);
     host.addEventListener("pointercancel", onPointerUp);
@@ -848,6 +974,7 @@ export async function createDancer({
         intersectionObserver.disconnect();
 
         host.removeEventListener("pointerdown", onPointerDown);
+        host.removeEventListener("pointerenter", onPointerEnter);
         host.removeEventListener("pointermove", onPointerMove);
         host.removeEventListener("pointerup", onPointerUp);
         host.removeEventListener("pointercancel", onPointerUp);
