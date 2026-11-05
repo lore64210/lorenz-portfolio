@@ -4,6 +4,7 @@ import "../../styles/dancer.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
 import ScrollProgress from "@/components/motion/ScrollProgress";
+import MouseGrid from "@/components/motion/MouseGrid";
 import { getPreviewCopy, previewLinks } from "@/content/preview";
 import { buildMetadata, siteName, siteUrl } from "@/content/site";
 
@@ -73,16 +74,19 @@ export default async function RootLayout({ children, params }) {
             className={`${quicksand.variable} ${jetbrains.variable}`}
         >
             <body className="preview-body">
-                <ScrollProgress />
-                <SiteHeader lang={lang} copy={copy} />
-                {children}
-                <SiteFooter lang={lang} copy={copy} />
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-                    }}
-                />
+                <MouseGrid />
+                <div className="site-content">
+                    <ScrollProgress />
+                    <SiteHeader lang={lang} copy={copy} />
+                    {children}
+                    <SiteFooter lang={lang} copy={copy} />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+                        }}
+                    />
+                </div>
             </body>
         </html>
     );
