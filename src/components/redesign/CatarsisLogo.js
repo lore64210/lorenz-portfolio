@@ -12,8 +12,8 @@ const ESPACIADO = 0.02;
 /** Ritmo de la entrada: primero se escribe, después se barajan las variantes. */
 const ESPERA_INICIAL = 260;
 const PASO_LETRA = 120;
-const PAUSA_ANTES_DE_BARAJAR = 160;
-const PASO_VARIANTE = 230;
+const PAUSA_ANTES_DE_BARAJAR = 300;
+const PASO_VARIANTE = 500;
 const CAMBIOS_DE_VARIANTE = 3;
 
 /** Variante inicial estable, para que el HTML del servidor y el cliente coincidan. */
