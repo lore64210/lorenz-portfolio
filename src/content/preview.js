@@ -67,30 +67,6 @@ export const experienceItems = [
 
 export const projectItems = [
     {
-        key: "organizer",
-        images: [
-            {
-                src: "/static/images/organizer.jpeg",
-                fit: "cover",
-            },
-            {
-                src: "/static/images/organizer/home-dark.png",
-                fit: "contain",
-            },
-            {
-                src: "/static/images/organizer/home-light.png",
-                fit: "contain",
-            },
-            {
-                src: "/static/images/organizer/reminder-light.png",
-                fit: "contain",
-            },
-        ],
-        href: "https://lore64210.github.io/organizer/",
-        stack: "React Native · Expo",
-        tone: "navy",
-    },
-    {
         key: "spring-crud-initializr",
         images: [
             {
@@ -155,6 +131,30 @@ export const projectItems = [
         href: "https://catarsisfanzine.vercel.app/",
         stack: "React · TypeScript · Firebase · Leaflet",
         tone: "sky",
+    },
+    {
+        key: "organizer",
+        images: [
+            {
+                src: "/static/images/organizer.jpeg",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/organizer/home-dark.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/organizer/home-light.png",
+                fit: "contain",
+            },
+            {
+                src: "/static/images/organizer/reminder-light.png",
+                fit: "contain",
+            },
+        ],
+        href: "https://lore64210.github.io/organizer/",
+        stack: "React Native · Expo",
+        tone: "navy",
     },
 ];
 
