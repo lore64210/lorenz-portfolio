@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import RevealMedia from "@/components/motion/RevealMedia";
+import CatarsisLogo from "./CatarsisLogo";
 
 const MUSIKIT_BARS = [
     { scale: 0.56, delay: "0.00s", duration: "0.80s" },
@@ -74,10 +75,16 @@ export default function ProjectCarousel({ project, title, copy, className }) {
                                     image.type
                                         ? "project-carousel-slide-logo"
                                         : ""
+                                } ${
+                                    image.type === "catarsis-logo"
+                                        ? "project-carousel-slide-catarsis"
+                                        : ""
                                 }`}
                                 aria-hidden={index !== active}
                             >
-                                {image.type === "musikit-logo" ? (
+                                {image.type === "catarsis-logo" ? (
+                                    <CatarsisLogo active={index === active} />
+                                ) : image.type === "musikit-logo" ? (
                                     <div className="project-logo-musikit">
                                         <span
                                             className="project-logo-mark"
@@ -149,7 +156,7 @@ export default function ProjectCarousel({ project, title, copy, className }) {
                         <div className="project-carousel-dots">
                             {images.map((image, index) => (
                                 <button
-                                    key={image.src}
+                                    key={image.src ?? `${image.type}-${index}`}
                                     type="button"
                                     className={`project-carousel-dot ${
                                         index === active ? "is-active" : ""

@@ -133,6 +133,29 @@ export const projectItems = [
         tone: "ink",
         wide: true,
     },
+    {
+        key: "catarsis",
+        images: [
+            {
+                type: "catarsis-logo",
+            },
+            {
+                src: "/static/images/catarsis/origen.webp",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/catarsis/comunidad.webp",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/catarsis/donde-estamos.webp",
+                fit: "cover",
+            },
+        ],
+        href: "https://catarsisfanzine.vercel.app/",
+        stack: "React · TypeScript · Firebase · Leaflet",
+        tone: "sky",
+    },
 ];
 
 export const playgroundItems = [
@@ -351,6 +374,13 @@ const copy = {
                     label: "Estudio de música",
                     description:
                         "Un estudio para crear música y exportar archivos de audio a partir de lo que compones. Todo el front está hecho con React y Tone.js.",
+                    link: "Ver proyecto",
+                },
+                catarsis: {
+                    title: "Catarsis",
+                    label: "Fanzine independiente",
+                    description:
+                        "Un fanzine sobre comunidad, oficios y la crítica a la productividad. Notas, collage y un espacio para dejar tu mensaje.",
                     link: "Ver proyecto",
                 },
             },
@@ -607,6 +637,13 @@ const copy = {
                     label: "Music studio",
                     description:
                         "A studio to create music and export audio files from what you compose. The whole front end is built with React and Tone.js.",
+                    link: "View project",
+                },
+                catarsis: {
+                    title: "Catarsis",
+                    label: "Independent fanzine",
+                    description:
+                        "A fanzine about community, crafts and the critique of productivity. Notes, collage and a space to leave your message.",
                     link: "View project",
                 },
             },

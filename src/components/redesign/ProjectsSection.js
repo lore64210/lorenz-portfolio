@@ -107,6 +107,21 @@ export default function ProjectsSection({ copy, lang = "es" }) {
                     </div>
                 </div>
             </section>
+
+            <section
+                id="projects-4"
+                className="section projects-section snap-section"
+            >
+                <div className="container">
+                    <div className="projects-list">
+                        <ProjectRow
+                            project={projects[3]}
+                            index={3}
+                            copy={copy}
+                        />
+                    </div>
+                </div>
+            </section>
         </>
     );
 }
