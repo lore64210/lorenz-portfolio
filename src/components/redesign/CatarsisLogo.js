@@ -9,11 +9,12 @@ const TEXT = "Catarsis";
 const MARGEN_BALDOSA = 0.04;
 const ESPACIADO = 0.02;
 
-/** Ritmo de la entrada: una letra aparece y, mientras tanto, las variantes se barajan. */
-const ESPERA_INICIAL = 240;
-const PASO_LETRA = 95;
-const PASO_VARIANTE = 85;
-const ESPERA_ASENTAR = 650;
+/** Ritmo de la entrada: primero se escribe, después se barajan las variantes. */
+const ESPERA_INICIAL = 260;
+const PASO_LETRA = 120;
+const PAUSA_ANTES_DE_BARAJAR = 160;
+const PASO_VARIANTE = 230;
+const CAMBIOS_DE_VARIANTE = 3;
 
 /** Variante inicial estable, para que el HTML del servidor y el cliente coincidan. */
 const varianteInicial = (char) => manifest.variants[char]?.[0] ?? 0;
@@ -39,6 +40,7 @@ export default function CatarsisLogo({ active = true }) {
     const [ancho, setAncho] = useState(0);
     const [enVista, setEnVista] = useState(false);
     const [visibles, setVisibles] = useState(0);
+    const [asentado, setAsentado] = useState(false);
     const [baldosas, setBaldosas] = useState(() =>
         Array.from(TEXT, varianteInicial),
     );
@@ -101,8 +103,10 @@ export default function CatarsisLogo({ active = true }) {
             if (reduced && enVista) {
                 setBaldosas(letras.map(varianteAleatoria));
                 setVisibles(letras.length);
+                setAsentado(true);
             } else if (!reduced) {
                 setVisibles(0);
+                setAsentado(false);
             }
             return;
         }
@@ -112,8 +116,11 @@ export default function CatarsisLogo({ active = true }) {
         const definitivas = letras.map(varianteAleatoria);
 
         setVisibles(0);
+        setAsentado(false);
         setBaldosas(letras.map(varianteAleatoria));
 
+        // Primera fase: typewriter. Las letras aparecen de a una y no cambian
+        // de recorte durante el tipeo, así la entrada se lee ordenada.
         letras.forEach((_, indice) => {
             timers.push(
                 setTimeout(() => {
@@ -122,23 +129,34 @@ export default function CatarsisLogo({ active = true }) {
             );
         });
 
-        const barajado = setInterval(() => {
-            if (!cancelado) setBaldosas(letras.map(varianteAleatoria));
-        }, PASO_VARIANTE);
+        // Segunda fase: una vez escrita la palabra, todas las letras cambian
+        // de variante al mismo tiempo y con un ritmo más lento.
+        const finTipeo = ESPERA_INICIAL + (letras.length - 1) * PASO_LETRA;
+        const inicioBarajado = finTipeo + PAUSA_ANTES_DE_BARAJAR;
 
-        const asentar = setTimeout(
-            () => {
+        for (let paso = 0; paso < CAMBIOS_DE_VARIANTE; paso++) {
+            timers.push(
+                setTimeout(
+                    () => {
+                        if (!cancelado) {
+                            setBaldosas(letras.map(varianteAleatoria));
+                        }
+                    },
+                    inicioBarajado + paso * PASO_VARIANTE,
+                ),
+            );
+        }
+
+        timers.push(
+            setTimeout(() => {
                 if (cancelado) return;
-                clearInterval(barajado);
                 setBaldosas(definitivas);
-            },
-            ESPERA_INICIAL + (letras.length - 1) * PASO_LETRA + ESPERA_ASENTAR,
+                setAsentado(true);
+            }, inicioBarajado + CAMBIOS_DE_VARIANTE * PASO_VARIANTE),
         );
 
         return () => {
             cancelado = true;
-            clearInterval(barajado);
-            clearTimeout(asentar);
             timers.forEach(clearTimeout);
         };
     }, [active, enVista, letras]);
@@ -184,7 +202,7 @@ export default function CatarsisLogo({ active = true }) {
             <span
                 className="project-logo-catarsis-rule"
                 aria-hidden="true"
-                style={{ transform: `rotate(-1.5deg) scaleX(${visibles === letras.length ? 1 : 0})` }}
+                style={{ transform: `rotate(-1.5deg) scaleX(${asentado ? 1 : 0})` }}
             />
         </div>
     );
