@@ -26,7 +26,7 @@ const link = (href, label) =>
 const styles = `
 @page {
     size: A4;
-    margin: 14mm 16mm;
+    margin: 13mm 15mm;
 }
 
 * {
@@ -42,8 +42,8 @@ body {
     margin: 0;
     color: #1f2933;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10.2pt;
-    line-height: 1.38;
+    font-size: 10pt;
+    line-height: 1.35;
 }
 
 a {
@@ -89,11 +89,11 @@ h1 {
 }
 
 section {
-    margin-top: 18px;
+    margin-top: 16px;
 }
 
 h2 {
-    margin: 0 0 7px;
+    margin: 0 0 6px;
     padding-bottom: 3px;
     border-bottom: 1px solid #d1d5db;
     color: #111827;
@@ -131,7 +131,7 @@ ul {
 }
 
 li {
-    margin: 0 0 3.2px;
+    margin: 0 0 3px;
     break-inside: avoid;
 }
 
@@ -140,7 +140,7 @@ li {
 }
 
 .job {
-    margin-top: 14px;
+    margin-top: 12px;
 }
 
 .job:first-of-type {
@@ -148,7 +148,7 @@ li {
 }
 
 .job-role {
-    margin-top: 7px;
+    margin-top: 6px;
 }
 
 .job-role:first-of-type {
@@ -178,29 +178,29 @@ li {
     margin-top: 0;
 }
 
+.project-line {
+    margin: 0 0 2px;
+}
+
+.project-line strong {
+    color: #111827;
+}
+
+.project-stack {
+    color: #4b5563;
+}
+
 .education p {
     margin-top: 2px;
-}
-
-body.lang-en section {
-    margin-top: 20px;
-}
-
-body.lang-en .job {
-    margin-top: 15px;
-}
-
-body.lang-en .job-role {
-    margin-top: 8px;
-}
-
-body.lang-en li {
-    margin-bottom: 3.6px;
 }
 `;
 
 function renderContact(cv) {
     const c = cv.contact;
+    const languages = cv.languages
+        .map(([label, value]) => `${label}: ${value}`)
+        .join(" · ");
+
     return `
         <div class="contact">
             <p>${escapeHtml(c.location)}</p>
@@ -208,6 +208,7 @@ function renderContact(cv) {
             <p><span class="label">LinkedIn:</span> ${link(c.linkedin, c.linkedinLabel)}</p>
             <p><span class="label">Portfolio:</span> ${link(c.portfolio, c.portfolioLabel)}</p>
             <p><span class="label">GitHub:</span> ${link(c.github, c.githubLabel)}</p>
+            <p><span class="label">${escapeHtml(cv.sections.languages)}:</span> ${escapeHtml(languages)}</p>
         </div>
     `;
 }
@@ -263,11 +264,16 @@ function renderExperience(cv) {
         .join("\n");
 }
 
-function renderLanguages(cv) {
-    return cv.languages
+function renderProjects(cv) {
+    return cv.projects
         .map(
-            ([label, value]) =>
-                `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`,
+            (project) => `
+                <p class="project-line">
+                    <strong>${escapeHtml(project.name)}</strong> — ${escapeHtml(project.description)}
+                    <span class="project-stack">(${escapeHtml(project.stack)})</span> ·
+                    ${link(project.href, project.label)}
+                </p>
+            `,
         )
         .join("\n");
 }
@@ -319,13 +325,13 @@ function render(cv, lang) {
     </section>
 
     <section>
-        <h2>${escapeHtml(cv.sections.education)}</h2>
-        ${renderEducation(cv)}
+        <h2>${escapeHtml(cv.sections.projects)}</h2>
+        ${renderProjects(cv)}
     </section>
 
     <section>
-        <h2>${escapeHtml(cv.sections.languages)}</h2>
-        ${renderLanguages(cv)}
+        <h2>${escapeHtml(cv.sections.education)}</h2>
+        ${renderEducation(cv)}
     </section>
 </body>
 </html>`;

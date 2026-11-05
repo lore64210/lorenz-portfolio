@@ -8,8 +8,8 @@
 const contact = (lang) => ({
     location:
         lang === "es"
-            ? "Buenos Aires, Argentina · Abierto a trabajo remoto"
-            : "Buenos Aires, Argentina · Open to remote work",
+            ? "Buenos Aires, Argentina (GMT-3) · Abierto a trabajo remoto"
+            : "Buenos Aires, Argentina (GMT-3) · Open to remote work",
     phone: "+54 11 5690-4930",
     email: "lore64210@gmail.com",
     linkedin: "https://www.linkedin.com/in/lorenzo-matias-lopez/",
@@ -31,6 +31,7 @@ export const CV = {
             summary: "Resumen profesional",
             skills: "Habilidades técnicas",
             experience: "Experiencia laboral",
+            projects: "Proyectos destacados",
             education: "Educación",
             languages: "Idiomas",
         },
@@ -41,13 +42,16 @@ export const CV = {
             ],
             [
                 "Backend",
-                "Java (Spring Boot), APIs REST, arquitectura de microservicios, Node.js (Express), Python (Django)",
+                "Java (Spring Boot, JPA/Hibernate, Maven/Gradle), APIs REST, arquitectura de microservicios, Node.js (Express), Python (Django)",
             ],
             [
                 "IA aplicada",
                 "integración de la API de OpenAI para agentes de automatización, Cursor y Claude como asistentes de desarrollo full stack",
             ],
-            ["Testing", "Vitest, React Testing Library, Cypress, Jest"],
+            [
+                "Testing",
+                "Vitest, React Testing Library, Cypress, Jest, JUnit, Mockito",
+            ],
             ["Bases de datos", "PostgreSQL, MongoDB, MySQL, Oracle, Redis"],
             [
                 "Cloud & DevOps",
@@ -71,7 +75,7 @@ export const CV = {
                         bullets: [
                             "Relevé necesidades y requerimientos de producto directamente con usuarios finales.",
                             "Planifiqué las soluciones junto al equipo (producto, diseño y desarrollo) y lideré su implementación end-to-end, incorporando Cursor y Claude para ampliar mi alcance técnico y acelerar la entrega.",
-                            "Desarrollé un sistema de automatización para la corrección de incidentes usando la API de OpenAI: un agente que detecta incongruencias entre los datos del sistema y los documentos de contratos generados, levanta un ticket de soporte y adjunta una propuesta de fix en un Pull Request.",
+                            "Desarrollé un sistema de automatización para la corrección de incidentes usando la API de OpenAI: un agente que detecta incongruencias entre los datos del sistema y los documentos de contratos generados, levanta un ticket de soporte y adjunta una propuesta de fix en un Pull Request, reduciendo el tiempo de diagnóstico y resolución de incidentes.",
                             "Implementé múltiples mejoras en flujos de trabajo existentes, automatizando tareas manuales y reduciendo la intervención operativa de los empleados dentro de la plataforma.",
                         ],
                     },
@@ -120,7 +124,7 @@ export const CV = {
                             "Coordiné el relevamiento de necesidades del cliente y la conformación del backlog, actuando como nexo entre el negocio y el equipo técnico.",
                             "Desarrollé y mantuve soluciones administrativas internas para distintos equipos de Movistar, incluyendo el formulario público de portabilidad numérica, con Spring Boot y React; también desarrollé APIs REST para proyectos internos.",
                             "Impulsé la adopción de React y TypeScript en una empresa mayormente orientada a Vue.js, iniciando proyectos con React + Spring Boot como referente técnico.",
-                            "Di charlas técnicas internas sobre TypeScript y React para el equipo de desarrollo.",
+                            "Di charlas técnicas internas y mentoré a desarrolladores Junior en TypeScript, React y buenas prácticas de desarrollo.",
                             "Crecí de desarrollador Junior a Team Lead dentro de la misma empresa, liderando equipos de 2 a 4 personas.",
                         ],
                     },
@@ -170,6 +174,22 @@ export const CV = {
             ["Español", "Nativo"],
             ["Inglés", "B2, conversacional"],
         ],
+        projects: [
+            {
+                name: "Catarsis",
+                description: "Fanzine digital",
+                stack: "React, TypeScript, Firebase",
+                href: "https://catarsisfanzine.vercel.app/",
+                label: "catarsisfanzine.vercel.app",
+            },
+            {
+                name: "Spring CRUD Initializr",
+                description: "Generador de APIs CRUD",
+                stack: "React, Spring Boot",
+                href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=es",
+                label: "spring-crud-initializr",
+            },
+        ],
     },
     en: {
         name: "Lorenzo Matías López",
@@ -181,6 +201,7 @@ export const CV = {
             summary: "Professional Summary",
             skills: "Technical Skills",
             experience: "Work Experience",
+            projects: "Selected Projects",
             education: "Education",
             languages: "Languages",
         },
@@ -191,13 +212,16 @@ export const CV = {
             ],
             [
                 "Backend",
-                "Java (Spring Boot), REST APIs, microservices architecture, Node.js (Express), Python (Django)",
+                "Java (Spring Boot, JPA/Hibernate, Maven/Gradle), REST APIs, microservices architecture, Node.js (Express), Python (Django)",
             ],
             [
                 "Applied AI",
                 "OpenAI API integration for automation agents, Cursor and Claude as full stack development assistants",
             ],
-            ["Testing", "Vitest, React Testing Library, Cypress, Jest"],
+            [
+                "Testing",
+                "Vitest, React Testing Library, Cypress, Jest, JUnit, Mockito",
+            ],
             ["Databases", "PostgreSQL, MongoDB, MySQL, Oracle, Redis"],
             [
                 "Cloud & DevOps",
@@ -221,7 +245,7 @@ export const CV = {
                         bullets: [
                             "Gathered product needs and requirements directly from end users.",
                             "Planned solutions with the team (product, design and development) and led end-to-end implementation, incorporating Cursor and Claude to broaden my technical reach and speed up delivery.",
-                            "Built an incident-fixing automation system using the OpenAI API: an agent that detects inconsistencies between system data and generated contract documents, opens a support ticket and attaches a proposed fix in a Pull Request.",
+                            "Built an incident-fixing automation system using the OpenAI API: an agent that detects inconsistencies between system data and generated contract documents, opens a support ticket and attaches a proposed fix in a Pull Request, reducing diagnosis and resolution time for incidents.",
                             "Implemented multiple improvements to existing workflows, automating manual tasks and reducing operational overhead for employees on the platform.",
                         ],
                     },
@@ -250,7 +274,7 @@ export const CV = {
                 context: "Digital agency",
                 roles: [
                     {
-                        title: "Semi-Senior Frontend Developer",
+                        title: "Mid-Senior Frontend Developer",
                         dates: "Nov 2022 – Apr 2023",
                         bullets: [
                             "Developed React features for US clients, integrating business logic with Django and Firebase backends.",
@@ -264,13 +288,13 @@ export const CV = {
                 context: "Technology consultancy",
                 roles: [
                     {
-                        title: "Semi-Senior Full Stack Developer / Team Leader",
+                        title: "Mid-Senior Full Stack Developer / Team Leader",
                         dates: "Aug 2021 – Sep 2022",
                         bullets: [
                             "Coordinated client needs gathering and backlog definition, acting as the link between the business and the technical team.",
                             "Built and maintained internal administrative solutions for several Movistar teams, including the public number portability form, with Spring Boot and React; also developed REST APIs for internal projects.",
                             "Drove the adoption of React and TypeScript in a company mostly oriented to Vue.js, starting projects with React + Spring Boot as technical referent.",
-                            "Gave internal tech talks on TypeScript and React for the development team.",
+                            "Gave internal tech talks and mentored junior developers on TypeScript, React and engineering best practices.",
                             "Grew from Junior developer to Team Lead within the same company, leading teams of 2 to 4 people.",
                         ],
                     },
@@ -319,6 +343,22 @@ export const CV = {
         languages: [
             ["Spanish", "Native"],
             ["English", "B2, conversational"],
+        ],
+        projects: [
+            {
+                name: "Catarsis",
+                description: "Digital fanzine",
+                stack: "React, TypeScript, Firebase",
+                href: "https://catarsisfanzine.vercel.app/",
+                label: "catarsisfanzine.vercel.app",
+            },
+            {
+                name: "Spring CRUD Initializr",
+                description: "CRUD API generator",
+                stack: "React, Spring Boot",
+                href: "https://spring-crud-initializr-pkecm27xsq-uc.a.run.app/?lang=en",
+                label: "spring-crud-initializr",
+            },
         ],
     },
 };
