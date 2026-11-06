@@ -476,6 +476,8 @@ export async function createDancer({
     let smoothY = 0;
     let lookX = 0;
     let lookY = 0;
+    let headYaw = 0;
+    let headPitch = 0;
     let dragging = false;
     let dragPointerId = null;
     let dragLastX = 0;
@@ -702,27 +704,45 @@ export async function createDancer({
             const proximity =
                 1 - THREE.MathUtils.smoothstep(distance, 1.25, 2.1);
             const desiredYaw = lookX * MAX_HEAD_YAW * proximity;
-            const pitch = lookY * MAX_HEAD_PITCH * proximity;
+            const targetPitch = lookY * MAX_HEAD_PITCH * proximity;
 
             // El cuerpo también gira con el drag: compensamos ese giro para
             // que la cabeza siga apuntando al cursor en pantalla y no a la
             // orientación original del modelo.
-            let yaw = desiredYaw - dancer.rotation.y;
-            yaw =
-                THREE.MathUtils.euclideanModulo(yaw + Math.PI, Math.PI * 2) -
-                Math.PI;
-            yaw = THREE.MathUtils.clamp(
-                yaw,
+            let targetYaw = desiredYaw - dancer.rotation.y;
+            targetYaw =
+                THREE.MathUtils.euclideanModulo(
+                    targetYaw + Math.PI,
+                    Math.PI * 2
+                ) - Math.PI;
+            targetYaw = THREE.MathUtils.clamp(
+                targetYaw,
                 -MAX_HEAD_YAW,
                 MAX_HEAD_YAW
             );
+
+            // El giro del cuerpo no tiene que arrastrar la cabeza de golpe:
+            // suavizamos también el ángulo final, no solo el puntero.
+            const headEase = 1 - Math.exp(-dt * 5);
+            const yawDelta =
+                THREE.MathUtils.euclideanModulo(
+                    targetYaw - headYaw + Math.PI,
+                    Math.PI * 2
+                ) - Math.PI;
+            headYaw += yawDelta * headEase;
+            headPitch += (targetPitch - headPitch) * headEase;
+            headYaw =
+                THREE.MathUtils.euclideanModulo(
+                    headYaw + Math.PI,
+                    Math.PI * 2
+                ) - Math.PI;
 
             if (neckEntry) {
                 neckEntry.bone.quaternion.multiply(
                     lookQuaternion.setFromEuler(
                         lookEuler.set(
-                            pitch * NECK_SHARE,
-                            yaw * NECK_SHARE,
+                            headPitch * NECK_SHARE,
+                            headYaw * NECK_SHARE,
                             0,
                             "YXZ"
                         )
@@ -734,9 +754,9 @@ export async function createDancer({
                 headEntry.bone.quaternion.multiply(
                     lookQuaternion.setFromEuler(
                         lookEuler.set(
-                            pitch * HEAD_SHARE +
+                            headPitch * HEAD_SHARE +
                                 GAZE_PITCH_OFFSET * proximity,
-                            yaw * HEAD_SHARE,
+                            headYaw * HEAD_SHARE,
                             0,
                             "YXZ"
                         )
