@@ -4,7 +4,7 @@ import "../../styles/dancer.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
 import SiteFooter from "@/components/redesign/SiteFooter";
 import ScrollProgress from "@/components/motion/ScrollProgress";
-import MouseGridGate from "@/components/motion/MouseGridGate";
+import NetworkBackground from "@/components/motion/NetworkBackground";
 import { getPreviewCopy, previewLinks } from "@/content/preview";
 import { buildMetadata, siteName, siteUrl } from "@/content/site";
 
@@ -74,7 +74,7 @@ export default async function RootLayout({ children, params }) {
             className={`${quicksand.variable} ${jetbrains.variable}`}
         >
             <body className="preview-body">
-                <MouseGridGate />
+                <NetworkBackground />
                 <div className="site-content">
                     <ScrollProgress />
                     <SiteHeader lang={lang} copy={copy} />
