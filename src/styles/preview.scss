@@ -1367,7 +1367,7 @@ body.preview-body {
 .project-media:focus-within
     .project-carousel-slide-catarsis.is-active
     .project-logo-catarsis-word {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 @keyframes sound-bars-pulse {
@@ -1389,7 +1389,7 @@ body.preview-body {
 .project-media:focus-within
     .project-carousel-slide-logo.is-active
     .project-logo-musikit {
-    transform: scale(1.04);
+    transform: scale(1.05);
 }
 
 .project-carousel-arrow {
@@ -1468,7 +1468,8 @@ body.preview-body {
 @media (prefers-reduced-motion: reduce) {
     .project-carousel-track,
     .project-image,
-    .project-logo-musikit {
+    .project-logo-musikit,
+    .project-logo-catarsis-word {
         transition: none;
     }
 
@@ -1479,7 +1480,13 @@ body.preview-body {
         .project-logo-musikit,
     .project-media:focus-within
         .project-carousel-slide-logo.is-active
-        .project-logo-musikit {
+        .project-logo-musikit,
+    .project-media:hover
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word,
+    .project-media:focus-within
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word {
         transform: none;
     }
 
@@ -1526,7 +1533,7 @@ body.preview-body {
 
 .project-media:hover .project-carousel-slide.is-active .project-image,
 .project-media:focus-within .project-carousel-slide.is-active .project-image {
-    transform: scale(1.06);
+    transform: scale(1.08);
 }
 
 .project-content {

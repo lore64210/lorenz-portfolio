@@ -74,7 +74,7 @@ export const projectItems = [
                 fit: "cover",
             },
             {
-                src: "/static/images/spring-crud-initializr-app.png",
+                src: "/static/images/spring-crud-initializr-app.webp",
                 fit: "cover",
             },
         ],
@@ -100,7 +100,7 @@ export const projectItems = [
                 fit: "cover",
             },
             {
-                src: "/static/images/musikit-studio-dream.png",
+                src: "/static/images/musikit-studio-sequencer.webp",
                 fit: "cover",
             },
         ],
