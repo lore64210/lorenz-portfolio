@@ -15,6 +15,8 @@ const TRANSITION_SECONDS = 0.45;
 /** Límites del seguimiento de cabeza, pensados para no quebrar el cuello. */
 const MAX_HEAD_YAW = 90 * DEG;
 const MAX_HEAD_PITCH = 45 * DEG;
+const MAX_REST_LOOK_YAW = 60 * DEG;
+const MAX_REST_LOOK_PITCH = 40 * DEG;
 const NECK_SHARE = 0.35;
 const HEAD_SHARE = 0.65;
 
@@ -218,6 +220,14 @@ const worldPosition = new THREE.Vector3();
 const transitionQuaternion = new THREE.Quaternion();
 const lookEuler = new THREE.Euler();
 const lookQuaternion = new THREE.Quaternion();
+const restCameraQuaternion = new THREE.Quaternion();
+const restCameraInverse = new THREE.Quaternion();
+const restDelta = new THREE.Quaternion();
+const restIdentity = new THREE.Quaternion();
+const restNeckDelta = new THREE.Quaternion();
+const restHeadDelta = new THREE.Quaternion();
+const restParentWorld = new THREE.Quaternion();
+const restLocalDelta = new THREE.Quaternion();
 
 function applyPose(model, rig, pose, blend = null) {
     for (const entry of rig.entries) {
@@ -478,6 +488,8 @@ export async function createDancer({
     let lookY = 0;
     let headYaw = 0;
     let headPitch = 0;
+    let pointerInside = false;
+    const restLook = new THREE.Quaternion();
     let dragging = false;
     let dragPointerId = null;
     let dragLastX = 0;
@@ -700,72 +712,140 @@ export async function createDancer({
         // Seguimiento de cabeza: se suma a la pose de baile, repartido entre
         // cuello y cabeza para que el gesto no salga solo del cráneo.
         if (!reduced && (neckEntry || headEntry)) {
-            const distance = Math.hypot(lookX, lookY);
-            const proximity =
-                1 - THREE.MathUtils.smoothstep(distance, 1.25, 2.1);
-            const desiredYaw = lookX * MAX_HEAD_YAW * proximity;
-            const targetPitch = lookY * MAX_HEAD_PITCH * proximity;
+            if (isResting && headEntry) {
+                // La pose acostada deja los ejes locales del hueso girados, así
+                // que un yaw/pitch local inclina la cara hacia donde no debe.
+                // Acá generamos el delta en espacio de cámara y lo aplicamos en
+                // mundo, con la misma respuesta proporcional que el hero.
+                let targetYaw = pointerX * MAX_REST_LOOK_YAW;
+                const targetPitch = pointerY * MAX_REST_LOOK_PITCH;
 
-            // El cuerpo también gira con el drag: compensamos ese giro para
-            // que la cabeza siga apuntando al cursor en pantalla y no a la
-            // orientación original del modelo.
-            let targetYaw = desiredYaw - dancer.rotation.y;
-            targetYaw =
-                THREE.MathUtils.euclideanModulo(
-                    targetYaw + Math.PI,
-                    Math.PI * 2
-                ) - Math.PI;
-            targetYaw = THREE.MathUtils.clamp(
-                targetYaw,
-                -MAX_HEAD_YAW,
-                MAX_HEAD_YAW
-            );
-
-            // El giro del cuerpo no tiene que arrastrar la cabeza de golpe:
-            // suavizamos también el ángulo final, no solo el puntero.
-            const headEase = 1 - Math.exp(-dt * 5);
-            const yawDelta =
-                THREE.MathUtils.euclideanModulo(
-                    targetYaw - headYaw + Math.PI,
-                    Math.PI * 2
-                ) - Math.PI;
-            headYaw += yawDelta * headEase;
-            headPitch += (targetPitch - headPitch) * headEase;
-            headYaw =
-                THREE.MathUtils.euclideanModulo(
-                    headYaw + Math.PI,
-                    Math.PI * 2
-                ) - Math.PI;
-
-            if (neckEntry) {
-                neckEntry.bone.quaternion.multiply(
-                    lookQuaternion.setFromEuler(
-                        lookEuler.set(
-                            headPitch * NECK_SHARE,
-                            headYaw * NECK_SHARE,
-                            0,
-                            "YXZ"
-                        )
-                    )
+                // El giro del cuerpo (drag) no debe arrastrar la cara: el
+                // cuello compensa ese ángulo igual que en las poses de pie.
+                targetYaw = THREE.MathUtils.clamp(
+                    targetYaw - dancer.rotation.y,
+                    -MAX_REST_LOOK_YAW,
+                    MAX_REST_LOOK_YAW
                 );
-            }
 
-            if (headEntry) {
-                headEntry.bone.quaternion.multiply(
-                    lookQuaternion.setFromEuler(
-                        lookEuler.set(
-                            headPitch * HEAD_SHARE +
-                                GAZE_PITCH_OFFSET * proximity,
-                            headYaw * HEAD_SHARE,
-                            0,
-                            "YXZ"
+                if (pointerInside) {
+                    camera.getWorldQuaternion(restCameraQuaternion);
+                    restCameraInverse
+                        .copy(restCameraQuaternion)
+                        .invert();
+                    restDelta
+                        .setFromEuler(
+                            lookEuler.set(
+                                targetPitch,
+                                targetYaw,
+                                0,
+                                "YXZ"
+                            )
                         )
-                    )
-                );
-            }
+                        .premultiply(restCameraQuaternion)
+                        .multiply(restCameraInverse);
+                }
 
-            // No hace falta otro updateMatrixWorld: el renderer actualiza las
-            // matrices al dibujar y los pies no dependen del cuello/cabeza.
+                restLook.slerp(
+                    pointerInside ? restDelta : restIdentity,
+                    1 - Math.exp(-dt * 6)
+                );
+
+                restNeckDelta.copy(restIdentity).slerp(restLook, NECK_SHARE);
+                restHeadDelta.copy(restIdentity).slerp(restLook, HEAD_SHARE);
+
+                // Convertimos el delta de mundo al espacio local de cada hueso
+                // (L' = parentWorld⁻¹ · D · parentWorld · L).
+                if (neckEntry) {
+                    neckEntry.bone.parent.getWorldQuaternion(
+                        restParentWorld
+                    );
+                    restLocalDelta
+                        .copy(restParentWorld)
+                        .invert()
+                        .multiply(restNeckDelta)
+                        .multiply(restParentWorld);
+                    neckEntry.bone.quaternion.premultiply(restLocalDelta);
+                    neckEntry.bone.updateMatrixWorld(true);
+                }
+
+                headEntry.bone.parent.getWorldQuaternion(restParentWorld);
+                restLocalDelta
+                    .copy(restParentWorld)
+                    .invert()
+                    .multiply(restHeadDelta)
+                    .multiply(restParentWorld);
+                headEntry.bone.quaternion.premultiply(restLocalDelta);
+            } else {
+                const distance = Math.hypot(lookX, lookY);
+                const proximity =
+                    1 - THREE.MathUtils.smoothstep(distance, 1.25, 2.1);
+                const desiredYaw = lookX * MAX_HEAD_YAW * proximity;
+                const targetPitch = lookY * MAX_HEAD_PITCH * proximity;
+
+                // El cuerpo también gira con el drag: compensamos ese giro
+                // para que la cabeza siga apuntando al cursor en pantalla y no
+                // a la orientación original del modelo.
+                let targetYaw = desiredYaw - dancer.rotation.y;
+                targetYaw =
+                    THREE.MathUtils.euclideanModulo(
+                        targetYaw + Math.PI,
+                        Math.PI * 2
+                    ) - Math.PI;
+                targetYaw = THREE.MathUtils.clamp(
+                    targetYaw,
+                    -MAX_HEAD_YAW,
+                    MAX_HEAD_YAW
+                );
+
+                // El giro del cuerpo no tiene que arrastrar la cabeza de
+                // golpe: suavizamos también el ángulo final, no solo el
+                // puntero.
+                const headEase = 1 - Math.exp(-dt * 5);
+                const yawDelta =
+                    THREE.MathUtils.euclideanModulo(
+                        targetYaw - headYaw + Math.PI,
+                        Math.PI * 2
+                    ) - Math.PI;
+                headYaw += yawDelta * headEase;
+                headPitch += (targetPitch - headPitch) * headEase;
+                headYaw =
+                    THREE.MathUtils.euclideanModulo(
+                        headYaw + Math.PI,
+                        Math.PI * 2
+                    ) - Math.PI;
+
+                if (neckEntry) {
+                    neckEntry.bone.quaternion.multiply(
+                        lookQuaternion.setFromEuler(
+                            lookEuler.set(
+                                headPitch * NECK_SHARE,
+                                headYaw * NECK_SHARE,
+                                0,
+                                "YXZ"
+                            )
+                        )
+                    );
+                }
+
+                if (headEntry) {
+                    headEntry.bone.quaternion.multiply(
+                        lookQuaternion.setFromEuler(
+                            lookEuler.set(
+                                headPitch * HEAD_SHARE +
+                                    GAZE_PITCH_OFFSET * proximity,
+                                headYaw * HEAD_SHARE,
+                                0,
+                                "YXZ"
+                            )
+                        )
+                    );
+                }
+
+                // No hace falta otro updateMatrixWorld: el renderer actualiza
+                // las matrices al dibujar y los pies no dependen del
+                // cuello/cabeza.
+            }
         }
 
         if (transitioning) {
@@ -882,6 +962,8 @@ export async function createDancer({
     }
 
     function onPointerMove(event) {
+        pointerInside = true;
+
         if (!reduced) enterIdle();
 
         if (dragging && event.pointerId === dragPointerId) {
@@ -904,10 +986,12 @@ export async function createDancer({
     }
 
     function onPointerEnter() {
+        pointerInside = true;
         if (!reduced) enterIdle();
     }
 
     function onPointerLeave() {
+        pointerInside = false;
         exitIdle();
         if (dragging) return;
         pointerX = 0;
