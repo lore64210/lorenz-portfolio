@@ -412,9 +412,25 @@ const copy = {
             eyebrow: "05 — Playground",
             back: "Volver al playground",
             notes: "Cómo funciona",
-            secondExperiment: "Segundo experimento",
+            secondExperiment: "Experimento",
             ballTitle: "Ball Ecosystem",
-            ballLead: "Dos experimentos con agentes que se mueven, se conectan y evolucionan.",
+            ballLead:
+                "Un ecosistema de agentes que se mueven, comen y evolucionan generación tras generación.",
+            iteration: {
+                title: "Fin de la iteración",
+                generation: "Generación",
+                champion: "Sobreviviente",
+                fitness: "Resistencia",
+                next: "Nueva generación",
+                explanation:
+                    "Los colores y atributos se heredan de los padres elegidos por su resistencia: cada rasgo toma uno de los dos, y las mutaciones agregan pequeñas variaciones.",
+                continue: "Continuar",
+                introEyebrow: "Ecosistema",
+                introTitle: "Un pequeño ecosistema",
+                introCopy:
+                    "Cada pelota hereda intereses, rechazos y velocidad. Las más aptas sobreviven y dejan sus genes a la próxima generación.",
+                start: "Comenzar",
+            },
         },
         contact: {
             eyebrow: "06 — Contacto",
@@ -674,9 +690,25 @@ const copy = {
             eyebrow: "05 — Playground",
             back: "Back to playground",
             notes: "How it works",
-            secondExperiment: "Second experiment",
+            secondExperiment: "Experiment",
             ballTitle: "Ball Ecosystem",
-            ballLead: "Two experiments with agents that move, connect and evolve.",
+            ballLead:
+                "An ecosystem of agents that move, eat and evolve generation after generation.",
+            iteration: {
+                title: "Iteration complete",
+                generation: "Generation",
+                champion: "Survivor",
+                fitness: "Fitness",
+                next: "Next generation",
+                explanation:
+                    "Colors and traits are inherited from the parents selected by fitness: each trait comes from one of the two, and mutations add small variations.",
+                continue: "Continue",
+                introEyebrow: "Ecosystem",
+                introTitle: "A tiny ecosystem",
+                introCopy:
+                    "Each ball inherits interests, rejections and speed. The fittest survive and pass their genes to the next generation.",
+                start: "Start",
+            },
         },
         contact: {
             eyebrow: "06 — Contact",

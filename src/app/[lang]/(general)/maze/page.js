@@ -43,7 +43,7 @@ export default async function MazeGeneratorPage({ params }) {
                 </Reveal>
             </header>
 
-            <RevealMedia className="playground-stage">
+            <RevealMedia className="playground-stage playground-stage-maze">
                 <Maze dict={dict} />
             </RevealMedia>
 

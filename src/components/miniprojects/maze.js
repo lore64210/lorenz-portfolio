@@ -35,14 +35,17 @@ const MazePage = ({ dict }) => {
         } else {
             p5.fill("white");
         }
-        if (cell.isCurrentCell || cell.isEnd || cell.moved) {
+        if (cell.isCurrentCell || cell.moved) {
             p5.fill("orange");
+        }
+        if (cell.searched) {
+            p5.fill("red");
         }
         if (cell.isStart) {
             p5.fill("green");
         }
-        if (cell.searched) {
-            p5.fill("red");
+        if (cell.isEnd) {
+            p5.fill("#7fd1c0");
         }
         p5.noStroke();
         p5.rect(cell.positionX, cell.positionY, cell.cellSize, cell.cellSize);

@@ -68,19 +68,9 @@
                 "restart": "Restart"
             }
         },
-        "balls": {
-            "title": "Crazy balls",
-            "content": [
-                "It is incredible how a group of agents with minimal responsibilities and functions can put together a situation so pleasant to watch",
-                "Each little ball moves around the map without purpose, always taking into account the distance from the other agents",
-                "When the distance between two agents is of a certain value, the opacity of the line that joins them begins to increase, generating these hypnotizing patterns",
-                "This mixture of balls moving taking into account the distances with their neighbors is key to the small ecosystem that I show below, that's why I wanted to show it in a nice way and as a presentation"
-            ]
-        },
         "balls-ecosystem": {
             "title": "Smart balls",
             "content": [
-                "These balls are special, because they are alive, and also hungry",
                 "As time goes by, their size decreases, until if they are very small, they die, disappear",
                 "A ball can increase its size by eating green dots, or other balls that are smaller than this one. Eating red dots (poison) will reduce their size",
                 "Each ball has a random value for each \"interest\" and for each \"rejection\" it has, this interest/rejection can be on green, red dots or other balls, smaller or larger.",
@@ -109,7 +99,8 @@
             "labels": {
                 "obstacles": "Obstacles",
                 "diagonals": "Diagonals",
-                "restart": "Restart"
+                "restart": "Restart",
+                "hint": "Click a cell to add or remove an obstacle"
             }
         },
         "terrain": {
@@ -126,7 +117,8 @@
                 "rotate-y": "Rotate Y",
                 "rotate-x": "Rotate X",
                 "distance": "Distance",
-                "horizontal-distance": "Horizontal Distance"
+                "horizontal-distance": "Horizontal Distance",
+                "hint": "Drag to rotate · Pinch or scroll to zoom"
             }
         }
     }

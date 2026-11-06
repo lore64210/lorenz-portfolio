@@ -22,6 +22,18 @@ export default ({ dict }) => {
     const [rotateZValue, setRotateZValue] = useState(1);
     const [distanceValue, setDistanceValue] = useState(500);
     const [distanceHorizontalValue, setDistanceHorizontalValue] = useState(35);
+    const distanceRef = useRef(distanceValue);
+    const listenersRef = useRef(null);
+
+    useEffect(() => {
+        distanceRef.current = distanceValue;
+    }, [distanceValue]);
+
+    useEffect(() => {
+        return () => {
+            listenersRef.current?.abort();
+        };
+    }, []);
 
     useEffect(() => {
         setRestart(true);
@@ -38,6 +50,120 @@ export default ({ dict }) => {
             terrain[i] = new Array(rows);
         }
         terrainRef.current = terrain;
+
+        const canvas = p5.canvas;
+        canvas.style.touchAction = "none";
+        canvas.style.cursor = "grab";
+
+        const clamp = (value, min, max) =>
+            Math.min(max, Math.max(min, value));
+        const pointers = new Map();
+        let dragging = false;
+        let lastX = 0;
+        let lastY = 0;
+        let pinchStartDistance = 0;
+        let pinchStartValue = 0;
+        let pinching = false;
+
+        const onPointerDown = (event) => {
+            pointers.set(event.pointerId, {
+                x: event.clientX,
+                y: event.clientY,
+            });
+
+            try {
+                canvas.setPointerCapture?.(event.pointerId);
+            } catch {
+                // Pointer capture is best-effort.
+            }
+
+            if (pointers.size === 1) {
+                dragging = true;
+                lastX = event.clientX;
+                lastY = event.clientY;
+                canvas.style.cursor = "grabbing";
+            } else if (pointers.size === 2) {
+                dragging = false;
+                const [a, b] = [...pointers.values()];
+                pinchStartDistance = Math.hypot(a.x - b.x, a.y - b.y);
+                pinchStartValue = distanceRef.current;
+                pinching = true;
+            }
+        };
+
+        const onPointerMove = (event) => {
+            if (!pointers.has(event.pointerId)) return;
+
+            pointers.set(event.pointerId, {
+                x: event.clientX,
+                y: event.clientY,
+            });
+
+            if (pointers.size >= 2) {
+                const [a, b] = [...pointers.values()];
+                const distance = Math.hypot(a.x - b.x, a.y - b.y);
+
+                if (pinching && pinchStartDistance > 0) {
+                    setDistanceValue(
+                        clamp(
+                            pinchStartValue -
+                                (distance - pinchStartDistance) * 2.5,
+                            10,
+                            3000
+                        )
+                    );
+                }
+                return;
+            }
+
+            if (!dragging) return;
+
+            const dx = event.clientX - lastX;
+            const dy = event.clientY - lastY;
+            lastX = event.clientX;
+            lastY = event.clientY;
+
+            setRotateZValue((value) => clamp(value + dx * 0.14, 1, 64));
+            setRotateXValue((value) => clamp(value + dy * 0.14, 20, 80));
+        };
+
+        const onPointerUp = (event) => {
+            pointers.delete(event.pointerId);
+
+            if (pointers.size === 1) {
+                const [remaining] = [...pointers.values()];
+                dragging = true;
+                lastX = remaining.x;
+                lastY = remaining.y;
+                pinching = false;
+            } else if (pointers.size === 0) {
+                dragging = false;
+                pinching = false;
+                canvas.style.cursor = "grab";
+            }
+        };
+
+        const onWheel = (event) => {
+            event.preventDefault();
+            const delta = Math.max(-120, Math.min(120, event.deltaY));
+            setDistanceValue((value) =>
+                clamp(value + delta * 1.2, 10, 3000)
+            );
+        };
+
+        const controller = new AbortController();
+        listenersRef.current?.abort();
+        listenersRef.current = controller;
+        const options = { signal: controller.signal };
+
+        canvas.addEventListener("pointerdown", onPointerDown, options);
+        canvas.addEventListener("pointermove", onPointerMove, options);
+        canvas.addEventListener("pointerup", onPointerUp, options);
+        canvas.addEventListener("pointercancel", onPointerUp, options);
+        canvas.addEventListener("wheel", onWheel, {
+            passive: false,
+            signal: controller.signal,
+        });
     };
 
     const draw = (p5) => {
@@ -112,33 +238,6 @@ export default ({ dict }) => {
                 />
                 <Slider
                     label={
-                        dict["projects-content"]["terrain"].labels["rotate-y"]
-                    }
-                    onChange={setRotateXValue}
-                    value={rotateXValue}
-                    min={20}
-                    max={80}
-                />
-                <Slider
-                    label={
-                        dict["projects-content"]["terrain"].labels["rotate-x"]
-                    }
-                    onChange={setRotateZValue}
-                    value={rotateZValue}
-                    min={1}
-                    max={64}
-                />
-                <Slider
-                    label={
-                        dict["projects-content"]["terrain"].labels["distance"]
-                    }
-                    onChange={setDistanceValue}
-                    value={distanceValue}
-                    min={10}
-                    max={3000}
-                />
-                <Slider
-                    label={
                         dict["projects-content"]["terrain"].labels[
                             "horizontal-distance"
                         ]
@@ -148,6 +247,9 @@ export default ({ dict }) => {
                     min={1}
                     max={100}
                 />
+                <p className="mini-projects-hint">
+                    {dict["projects-content"]["terrain"].labels["hint"]}
+                </p>
             </div>
         </div>
     );

@@ -2100,7 +2100,132 @@ body.preview-body {
 
 /* Playground pages */
 .playground-page {
+    position: relative;
     padding-bottom: clamp(80px, 10vw, 130px);
+}
+
+.playground-network-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.playground-page .container {
+    position: relative;
+    z-index: 1;
+}
+
+.balls-ecosystem {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.balls-iteration-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: clamp(12px, 3vw, 28px);
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+}
+
+.balls-iteration-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.balls-iteration-card {
+    width: min(100%, 430px);
+    max-height: 100%;
+    overflow-y: auto;
+    padding: clamp(16px, 3vw, 26px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease 0.12s, transform 0.35s ease 0.12s;
+}
+
+.balls-iteration-overlay.is-visible .balls-iteration-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.balls-intro-title {
+    margin: 0 0 12px;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 500;
+    color: var(--text);
+}
+
+.balls-iteration-card .btn:disabled {
+    opacity: 0.45;
+    cursor: wait;
+}
+
+.balls-iteration-card .eyebrow {
+    margin-bottom: 8px;
+}
+
+.balls-iteration-generation {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.balls-iteration-champion,
+.balls-iteration-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 14px 0;
+}
+
+.balls-iteration-champion {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.balls-swatch {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+}
+
+.balls-iteration-label {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.balls-iteration-copy {
+    margin: 14px 0 18px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--muted);
 }
 
 .playground-header {
@@ -2191,6 +2316,13 @@ body.preview-body {
     width: 100%;
 }
 
+.mini-project-canvas {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+}
+
 .mini-projects-controls {
     flex: 0 0 230px;
     width: 230px;
@@ -2198,6 +2330,16 @@ body.preview-body {
     background: var(--surface-2);
     border: 1px solid var(--border);
     border-radius: 16px;
+}
+
+.mini-projects-hint {
+    margin: 20px 0 0;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
 }
 
 .mini-projects-controls .restart-button {
@@ -2280,6 +2422,14 @@ body.preview-body {
     max-width: 100%;
     height: auto !important;
     border-radius: 12px;
+}
+
+.playground-stage-maze {
+    border-radius: 0;
+}
+
+.playground-stage-maze canvas {
+    border-radius: 0;
 }
 
 /* About and playground responsive */

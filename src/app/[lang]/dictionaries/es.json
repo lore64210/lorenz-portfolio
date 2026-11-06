@@ -69,19 +69,9 @@
                 "restart": "Reiniciar"
             }
         },
-        "balls": {
-            "title": "De a muchos es más divertido",
-            "content": [
-                "Es increíble cómo un conjunto de agentes con responsabilidades y funciones mínimas puede armar una escena tan placentera de mirar.",
-                "Cada pelotita se mueve por el mapa sin propósito, teniendo en cuenta siempre la distancia con los demás agentes.",
-                "Cuando la distancia entre dos agentes alcanza determinado valor, la opacidad de la línea que los une empieza a aumentar, generando estos patrones tan hipnotizantes.",
-                "Esta mezcla de pelotas moviéndose y teniendo en cuenta las distancias con sus vecinos es clave para el pequeño ecosistema que muestro abajo; por eso quería mostrarlo de una forma linda y a modo de presentación."
-            ]
-        },
         "balls-ecosystem": {
             "title": "Pelotas inteligentes",
             "content": [
-                "Estas pelotas son más especiales que las anteriores, porque dan la sensación de estar vivas y, por lo tanto, de tener hambre.",
                 "A medida que pasa el tiempo, su tamaño va disminuyendo; si son muy chiquititas, se mueren y desaparecen.",
                 "Una pelota puede aumentar su tamaño comiendo puntitos verdes o a otras pelotas más chicas que ella. Comer puntitos rojos (veneno) hace que disminuya.",
                 "Cada pelota tiene un valor aleatorio por cada \"interés\" y cada \"rechazo\"; ese interés o rechazo puede ser sobre puntos verdes, rojos u otras pelotas, más chicas o grandes.",
@@ -109,7 +99,8 @@
             "labels": {
                 "obstacles": "Obstáculos",
                 "diagonals": "Ir en diagonal",
-                "restart": "Reiniciar"
+                "restart": "Reiniciar",
+                "hint": "Clic en una celda para poner o quitar un obstáculo"
             }
         },
         "terrain": {
@@ -128,7 +119,8 @@
                 "rotate-y": "Rotar eje Y",
                 "rotate-x": "Rotar eje X",
                 "distance": "Distancia",
-                "horizontal-distance": "Distancia horizontal"
+                "horizontal-distance": "Distancia horizontal",
+                "hint": "Arrastrá para rotar · Pinch o scroll para acercar/alejar"
             }
         }
     }

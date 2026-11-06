@@ -12,6 +12,7 @@ export const CELL_AMOUNT = 25; // max 35, otherwise is to heavy to compute
 
 export default ({ dict }) => {
     const pathGenerator = useRef();
+    const endCellRef = useRef(null);
     const windowSize = useWindowSize();
     const isMobile = useIsMobile();
     const canvasSize = isMobile
@@ -79,6 +80,33 @@ export default ({ dict }) => {
     };
 
     const setupFunction = () => {
+        const guaranteedPath = new Set(["0:0"]);
+        let pathX = 0;
+        let pathY = 0;
+
+        while (
+            pathX < CELL_AMOUNT - 1 ||
+            pathY < CELL_AMOUNT - 1
+        ) {
+            const moves = [];
+
+            if (pathX < CELL_AMOUNT - 1) moves.push([1, 0]);
+            if (pathY < CELL_AMOUNT - 1) moves.push([0, 1]);
+            if (
+                diagonalsAllowed &&
+                pathX < CELL_AMOUNT - 1 &&
+                pathY < CELL_AMOUNT - 1
+            ) {
+                moves.push([1, 1]);
+            }
+
+            const [dx, dy] =
+                moves[Math.floor(Math.random() * moves.length)];
+            pathX += dx;
+            pathY += dy;
+            guaranteedPath.add(`${pathX}:${pathY}`);
+        }
+
         for (let x = 0; x < CELL_AMOUNT; x++) {
             for (let y = 0; y < CELL_AMOUNT; y++) {
                 const cell = new Cell(x, y, cellSize);
@@ -87,11 +115,13 @@ export default ({ dict }) => {
                 cell.setIsObstacle(
                     !isStart &&
                         !isEnd &&
+                        !guaranteedPath.has(`${x}:${y}`) &&
                         Math.random() < obstaclesPercentage / 100
                 );
                 maze.addVertex(cell);
                 if (isEnd) {
                     cell.setIsEnd(true);
+                    endCellRef.current = cell;
                     pathGenerator.current = maze.aStarSearchGenerator(cell);
                 }
             }
@@ -112,9 +142,53 @@ export default ({ dict }) => {
         pathGenerator.current && pathGenerator.current.next();
     };
 
+    const resetSearch = () => {
+        const end = endCellRef.current;
+        if (!end) return;
+
+        maze.getVertices().forEach((cell) => {
+            cell.searched = false;
+            cell.currentCell = false;
+            cell.distance = null;
+            cell.heuristic = null;
+            cell.previousNode = null;
+        });
+
+        pathGenerator.current = maze.aStarSearchGenerator(end);
+    };
+
+    const handleCanvasClick = (event) => {
+        const canvas = event.currentTarget.querySelector("canvas");
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const relativeX = (event.clientX - rect.left) / rect.width;
+        const relativeY = (event.clientY - rect.top) / rect.height;
+
+        if (
+            relativeX < 0 ||
+            relativeX >= 1 ||
+            relativeY < 0 ||
+            relativeY >= 1
+        ) {
+            return;
+        }
+
+        const x = Math.floor(relativeX * CELL_AMOUNT);
+        const y = Math.floor(relativeY * CELL_AMOUNT);
+        const cell = maze.getCell(x, y);
+
+        if (!cell || cell.isStart || cell.isEnd) return;
+
+        cell.setIsObstacle(!cell.isObstacle);
+        resetSearch();
+    };
+
     return (
         <div className="mini-project-container">
-            <P5Container draw={draw} setup={setup} overrideSetup />
+            <div className="mini-project-canvas" onPointerDown={handleCanvasClick}>
+                <P5Container draw={draw} setup={setup} overrideSetup />
+            </div>
             <div className="mini-projects-controls">
                 <Slider
                     label={
@@ -146,6 +220,13 @@ export default ({ dict }) => {
                         ]
                     }
                 </button>
+                <p className="mini-projects-hint">
+                    {
+                        dict["projects-content"]["path-finder"]["labels"][
+                            "hint"
+                        ]
+                    }
+                </p>
             </div>
         </div>
     );

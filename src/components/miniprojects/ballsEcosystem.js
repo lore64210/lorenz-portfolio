@@ -24,39 +24,62 @@ const MIN_POISON_DETECTION_RATE = 0.5;
 const CONSUMABLE_EATEN_SCORE = 50;
 const VEHICLE_EATEN_SCORE = 500;
 
-export default () => {
-    let consumables = useRef([]).current;
-    let vehicles = useRef([]).current;
-    let population = useRef(new Population()).current;
+const colorCss = (color) =>
+    `rgb(${Math.round(color.r)}, ${Math.round(color.g)}, ${Math.round(
+        color.b
+    )})`;
+
+export default function BallsEcosystem({ labels }) {
+    const consumablesRef = useRef([]);
+    const vehiclesRef = useRef([]);
+    const population = useRef(new Population()).current;
+    const p5Ref = useRef(null);
+    const phaseRef = useRef("intro");
+    const nextPopulationRef = useRef(null);
+    const generationRef = useRef(1);
     const isMobile = useIsMobile();
     const windowSize = useWindowSize();
     const canvasSize = isMobile
         ? windowSize.width - 20
         : windowSize.height / 1.5;
-    const [width, height] = [canvasSize, canvasSize];
+    const boxSize = Number.isFinite(canvasSize) ? canvasSize : undefined;
     const [restart, setRestart] = useState(false);
-
-    const MAX_HUNT_DISTANCE = canvasSize / 2;
-    const MAX_LIFE = canvasSize * 2;
+    const [phase, setPhase] = useState("intro");
+    const [iteration, setIteration] = useState(null);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         setRestart(true);
     }, []);
 
     const createRandomPosition = (p5) =>
-        p5.createVector(p5.random(width), p5.random(height));
+        p5.createVector(p5.random(p5.width), p5.random(p5.height));
 
     const createConsumable = (p5) => ({
         ...createRandomPosition(p5),
         poison: Math.random() < 0.4,
     });
+
     const setup = (p5, canvasRef) => {
         p5.createCanvas(canvasSize, canvasSize).parent(canvasRef);
-        consumables = Array.from(Array(CONSUMABLES_AMOUNT).keys()).map(() =>
-            createConsumable(p5)
-        );
+        p5Ref.current = p5;
+        phaseRef.current = "intro";
+        generationRef.current = 1;
+        nextPopulationRef.current = null;
+        setPhase("intro");
+        setIteration(null);
+        setReady(true);
 
-        vehicles = Array.from(Array(VEHICLES_AMOUNT).keys()).map(() => {
+        const maxHuntDistance = p5.width / 2;
+        const maxLife = p5.width * 2;
+
+        consumablesRef.current = Array.from(
+            Array(CONSUMABLES_AMOUNT).keys()
+        ).map(() => createConsumable(p5));
+
+        vehiclesRef.current = Array.from(
+            Array(VEHICLES_AMOUNT).keys()
+        ).map(() => {
             const initialPosition = createRandomPosition(p5);
             const initialVelocity = p5.createVector(0, 0);
             const initialAcceleration = p5.createVector(0, 0);
@@ -70,9 +93,10 @@ export default () => {
                 Math.random() * ACCELERATION_RATE + MIN_ACCELERATION;
             const escapeAccelerationRate =
                 Math.random() * ACCELERATION_RATE + MIN_ACCELERATION;
-            const huntRadius = Math.random() * MAX_HUNT_DISTANCE;
-            const poisonDetectionRate = Math.random() + POISON_DETECTION_RATE;
-            const initialLife = Math.random() * MAX_LIFE + MIN_LIFE;
+            const huntRadius = Math.random() * maxHuntDistance;
+            const poisonDetectionRate =
+                Math.random() + POISON_DETECTION_RATE;
+            const initialLife = Math.random() * maxLife + MIN_LIFE;
             return new Vehicle(
                 initialPosition,
                 initialVelocity,
@@ -84,49 +108,209 @@ export default () => {
                 huntRadius,
                 poisonDetectionRate,
                 initialLife,
-                MAX_LIFE
+                maxLife
             );
         });
-        population.genotype = [...vehicles];
-        population.matingPool = [...vehicles];
+
+        population.genotype = [...vehiclesRef.current];
+        population.matingPool = [...vehiclesRef.current];
+        p5.noLoop();
+    };
+
+    const drawConsumable = (p5, consumable) => {
+        p5.fill(consumable.poison ? "red" : "green");
+        p5.ellipse(consumable.x, consumable.y, CONSUMABLE_SIZE);
+    };
+
+    const drawVehicle = (p5, vehicle) => {
+        p5.stroke(vehicle.color.r, vehicle.color.g, vehicle.color.b);
+        p5.fill(vehicle.color.r, vehicle.color.g, vehicle.color.b);
+        p5.ellipse(
+            vehicle.position.x,
+            vehicle.position.y,
+            vehicle.getSize()
+        );
+    };
+
+    const beginIteration = (p5) => {
+        if (phaseRef.current !== "running") return;
+
+        phaseRef.current = "paused";
+
+        const champion = vehiclesRef.current[0] ?? null;
+        const next = population.regeneratePopulation(() =>
+            createRandomPosition(p5)
+        );
+
+        nextPopulationRef.current = next;
+        setIteration({
+            generation: generationRef.current,
+            nextGeneration: generationRef.current + 1,
+            champion: champion
+                ? {
+                      color: champion.color,
+                      fitness: Math.round(champion.fitness),
+                  }
+                : null,
+            colors: next.map((vehicle) => vehicle.color),
+        });
+        setPhase("paused");
+        p5.noLoop();
+    };
+
+    const startSimulation = () => {
+        if (phaseRef.current !== "intro" || !p5Ref.current) return;
+        phaseRef.current = "running";
+        setPhase("running");
+        p5Ref.current.loop();
+    };
+
+    const continueGeneration = () => {
+        if (phaseRef.current !== "paused") return;
+
+        const next = nextPopulationRef.current;
+        const p5 = p5Ref.current;
+        if (!next || !p5) return;
+
+        vehiclesRef.current = next;
+        nextPopulationRef.current = null;
+        consumablesRef.current = Array.from(
+            Array(CONSUMABLES_AMOUNT).keys()
+        ).map(() => createConsumable(p5));
+        generationRef.current += 1;
+        phaseRef.current = "running";
+        setPhase("running");
+        setIteration(null);
+        p5.loop();
     };
 
     const draw = (p5) => {
-        if (vehicles.length <= 1) {
-            vehicles = population.regeneratePopulation(() =>
-                createRandomPosition(p5)
-            );
-        }
         p5.background(0);
         p5.noStroke();
-        consumables.forEach((consumable) => {
-            p5.fill(consumable.poison ? "red" : "green");
-            p5.ellipse(consumable.x, consumable.y, CONSUMABLE_SIZE);
-        });
 
-        if (
-            consumables.length < CONSUMABLES_AMOUNT &&
-            Math.random() < CONSUMABLE_GENERATION_RATE
-        ) {
-            consumables.push(createConsumable(p5));
+        consumablesRef.current.forEach((consumable) =>
+            drawConsumable(p5, consumable)
+        );
+
+        if (phaseRef.current !== "running") {
+            vehiclesRef.current.forEach((vehicle) =>
+                drawVehicle(p5, vehicle)
+            );
+            return;
         }
 
-        vehicles = vehicles.filter(({ life }) => life >= MIN_LIFE);
-
-        vehicles.forEach((vehicle) => {
-            p5.stroke(vehicle.color.r, vehicle.color.g, vehicle.color.b);
-            p5.fill(vehicle.color.r, vehicle.color.g, vehicle.color.b);
-            p5.ellipse(
-                vehicle.position.x,
-                vehicle.position.y,
-                vehicle.getSize()
+        if (vehiclesRef.current.length <= 1) {
+            beginIteration(p5);
+            vehiclesRef.current.forEach((vehicle) =>
+                drawVehicle(p5, vehicle)
             );
+            return;
+        }
 
-            vehicle.live(p5, consumables, vehicles, width, height);
+        if (
+            consumablesRef.current.length < CONSUMABLES_AMOUNT &&
+            Math.random() < CONSUMABLE_GENERATION_RATE
+        ) {
+            consumablesRef.current.push(createConsumable(p5));
+        }
+
+        vehiclesRef.current = vehiclesRef.current.filter(
+            ({ life }) => life >= MIN_LIFE
+        );
+
+        vehiclesRef.current.forEach((vehicle) => {
+            drawVehicle(p5, vehicle);
+            vehicle.live(
+                p5,
+                consumablesRef.current,
+                vehiclesRef.current,
+                p5.width,
+                p5.height
+            );
         });
     };
-    return <P5Container setup={setup} draw={draw} restart={restart} />;
-};
+
+    return (
+        <div
+            className="balls-ecosystem"
+            style={{ width: boxSize, height: boxSize }}
+        >
+            <P5Container setup={setup} draw={draw} restart={restart} />
+            <div
+                className={`balls-iteration-overlay ${
+                    phase !== "running" ? "is-visible" : ""
+                }`}
+            >
+                {phase === "intro" && (
+                    <div className="balls-iteration-card balls-intro-card">
+                        <p className="eyebrow">{labels.introEyebrow}</p>
+                        <h3 className="balls-intro-title">
+                            {labels.introTitle}
+                        </h3>
+                        <p className="balls-iteration-copy">
+                            {labels.introCopy}
+                        </p>
+                        <button
+                            type="button"
+                            className="btn btn-small"
+                            onClick={startSimulation}
+                            disabled={!ready}
+                        >
+                            {labels.start}
+                        </button>
+                    </div>
+                )}
+                {phase === "paused" && iteration && (
+                    <div className="balls-iteration-card">
+                        <p className="eyebrow">{labels.title}</p>
+                        <p className="balls-iteration-generation">
+                            {labels.generation} {iteration.generation} →{" "}
+                            {iteration.nextGeneration}
+                        </p>
+                        {iteration.champion && (
+                            <div className="balls-iteration-champion">
+                                <span
+                                    className="balls-swatch"
+                                    style={{
+                                        background: colorCss(
+                                            iteration.champion.color
+                                        ),
+                                    }}
+                                />
+                                <span>
+                                    {labels.champion} · {labels.fitness}:{" "}
+                                    {iteration.champion.fitness}
+                                </span>
+                            </div>
+                        )}
+                        <p className="balls-iteration-label">
+                            {labels.next}
+                        </p>
+                        <div className="balls-iteration-swatches">
+                            {iteration.colors.map((color, index) => (
+                                <span
+                                    key={`${index}-${color.r}-${color.g}-${color.b}`}
+                                    className="balls-swatch"
+                                    style={{ background: colorCss(color) }}
+                                />
+                            ))}
+                        </div>
+                        <p className="balls-iteration-copy">
+                            {labels.explanation}
+                        </p>
+                        <button
+                            type="button"
+                            className="btn btn-small"
+                            onClick={continueGeneration}
+                        >
+                            {labels.continue}
+                        </button>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
 
 class Vehicle {
     constructor(
@@ -386,11 +570,12 @@ class Population {
     generateNewDna(father, mother, randomPosition) {
         const parents = [father, mother];
         const randomParent = () => Math.round(Math.random());
+        const colorParent = parents[randomParent()];
         return new Vehicle(
             randomPosition,
             { ...parents[randomParent()].initialVelocity },
             { ...parents[randomParent()].initialAcceleration },
-            parents[randomParent()].color,
+            { ...colorParent.color },
             this.mutate(parents[randomParent()].maxVelocity),
             this.mutate(parents[randomParent()].eatAccelerationRate),
             this.mutate(parents[randomParent()].escapeAccelerationRate),
@@ -411,6 +596,9 @@ class Population {
     }
 
     regeneratePopulation(createRandomPosition) {
+        // La selección tiene que salir de la generación actual, no de un pool
+        // que acumula todas las generaciones anteriores.
+        this.matingPool = [...this.genotype];
         this.calculateBestFitness();
         const newPopulation = [];
         this.genotype.forEach(() => {
@@ -420,8 +608,8 @@ class Population {
             const newDna = this.generateNewDna(father, mother, randomPosition);
             newPopulation.push(newDna);
         });
-        this.matingPool = [...this.matingPool, ...newPopulation];
         this.genotype = newPopulation;
+        this.matingPool = [...newPopulation];
         return newPopulation;
     }
 }
