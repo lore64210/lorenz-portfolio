@@ -152,7 +152,10 @@ export const projectItems = [
                 fit: "contain",
             },
         ],
-        href: "https://lore64210.github.io/organizer/",
+        href: {
+            es: "https://lore64210.github.io/organizer/?lang=es",
+            en: "https://lore64210.github.io/organizer/?lang=en",
+        },
         stack: "React Native · Expo",
         tone: "navy",
     },
