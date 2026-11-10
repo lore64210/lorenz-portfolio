@@ -69,16 +69,17 @@
     opacity: 0;
 }
 
+/* No static poster: when the scene will not run, the stage collapses along
+   with the decorative frames that only exist to hold it. */
 .dancer-stage.is-static {
-    cursor: default;
-}
-
-.dancer-stage.is-static .dancer-loading {
     display: none;
 }
 
-.dancer-stage.is-static .dancer-shadow {
-    opacity: 0.55;
+.hero-visual:has(.dancer-stage.is-static),
+.about-visual:has(.dancer-stage.is-static),
+.contact-figure:has(.dancer-stage.is-static),
+.about-page-figure:has(.dancer-stage.is-static) {
+    display: none;
 }
 
 .dancer-stage.has-poster.is-failed .dancer-fallback {

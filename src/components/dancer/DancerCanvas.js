@@ -19,6 +19,10 @@ export default function DancerCanvas({
     const hostRef = useRef(null);
     const canvasRef = useRef(null);
     const [status, setStatus] = useState("loading");
+    // The poster is a placeholder for the real scene, never a static
+    // replacement. It only mounts once this effect confirms the scene will
+    // actually start, so the image is not even downloaded on phones.
+    const [posterVisible, setPosterVisible] = useState(false);
 
     useEffect(() => {
         const host = hostRef.current;
@@ -36,13 +40,15 @@ export default function DancerCanvas({
             window.location.search
         ).has("capture");
 
-        // Phones, tablets, reduced-motion users and low-memory devices get the
-        // poster instead of a WebGL scene. The 3D stays on desktop, where it
-        // is the hero's signature detail.
+        // Phones, tablets, reduced-motion users and low-memory devices get no
+        // artwork at all: the stage collapses instead of swapping in a static
+        // poster. The 3D stays a desktop-only signature detail.
         if (!captureMode && (reducedMotion || smallScreen || lowMemory)) {
             setStatus("static");
             return;
         }
+
+        setPosterVisible(true);
 
         const controller = new AbortController();
         let cancelled = false;
@@ -150,7 +156,7 @@ export default function DancerCanvas({
             } ${poster ? "has-poster" : ""} ${className}`.trim()}
         >
             <div className="dancer-shadow" aria-hidden="true" />
-            {poster && (
+            {poster && posterVisible && (
                 <Image
                     src={poster}
                     alt=""
