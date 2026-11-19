@@ -1,4 +1,6 @@
 import { JetBrains_Mono, Quicksand } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../../styles/preview.scss";
 import "../../styles/dancer.scss";
 import SiteHeader from "@/components/redesign/SiteHeader";
@@ -87,6 +89,8 @@ export default async function RootLayout({ children, params }) {
                         }}
                     />
                 </div>
+                <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
