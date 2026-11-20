@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Reveal from "@/components/motion/Reveal/Reveal";
-import SectionHeading from "@/components/redesign/SectionHeading/SectionHeading";
+import SectionHeading from "@/components/site/SectionHeading/SectionHeading";
 import { playgroundItems } from "@/content/preview";
 import { CARD_DELAY_STEP } from "./constants";
 

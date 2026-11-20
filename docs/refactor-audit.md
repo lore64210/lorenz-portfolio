@@ -26,7 +26,7 @@ src/
 │  │  └─ (about)/about/page.js
 │  ├─ robots.js  sitemap.js
 ├─ components/
-│  ├─ redesign/<Componente>/<Componente>.{js,scss} + constants.js
+│  ├─ site/<Componente>/<Componente>.{js,scss} + constants.js
 │  ├─ motion/<Componente>/<Componente>.{js,scss} + constants.js
 │  ├─ dancer/
 │  │  ├─ DancerCanvas/{DancerCanvas.js,dancer.scss,constants.js}

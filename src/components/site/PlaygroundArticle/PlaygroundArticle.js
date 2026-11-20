@@ -1,5 +1,5 @@
-import PlaygroundPage from "@/components/redesign/PlaygroundPage/PlaygroundPage";
-import PlaygroundNotes from "@/components/redesign/PlaygroundNotes/PlaygroundNotes";
+import PlaygroundPage from "@/components/site/PlaygroundPage/PlaygroundPage";
+import PlaygroundNotes from "@/components/site/PlaygroundNotes/PlaygroundNotes";
 import Reveal from "@/components/motion/Reveal/Reveal";
 import RevealMedia from "@/components/motion/RevealMedia/RevealMedia";
 import RevealText from "@/components/motion/RevealText/RevealText";

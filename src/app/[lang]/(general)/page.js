@@ -1,11 +1,11 @@
 import SnapContainer from "@/components/motion/SnapContainer/SnapContainer";
-import Hero from "@/components/redesign/Hero/Hero";
-import AboutSection from "@/components/redesign/AboutSection/AboutSection";
-import SkillsSection from "@/components/redesign/SkillsSection/SkillsSection";
-import ExperienceSection from "@/components/redesign/ExperienceSection/ExperienceSection";
-import ProjectsSection from "@/components/redesign/ProjectsSection/ProjectsSection";
-import PlaygroundSection from "@/components/redesign/PlaygroundSection/PlaygroundSection";
-import ContactSection from "@/components/redesign/ContactSection/ContactSection";
+import Hero from "@/components/site/Hero/Hero";
+import AboutSection from "@/components/site/AboutSection/AboutSection";
+import SkillsSection from "@/components/site/SkillsSection/SkillsSection";
+import ExperienceSection from "@/components/site/ExperienceSection/ExperienceSection";
+import ProjectsSection from "@/components/site/ProjectsSection/ProjectsSection";
+import PlaygroundSection from "@/components/site/PlaygroundSection/PlaygroundSection";
+import ContactSection from "@/components/site/ContactSection/ContactSection";
 import { getPreviewCopy } from "@/content/preview";
 import { resolveLocale } from "@/lib/locale";
 

@@ -3,7 +3,7 @@ import "./ExperienceSection.scss";
 
 import { useState } from "react";
 import Reveal from "@/components/motion/Reveal/Reveal";
-import SectionHeading from "@/components/redesign/SectionHeading/SectionHeading";
+import SectionHeading from "@/components/site/SectionHeading/SectionHeading";
 import { experienceItems } from "@/content/preview";
 import { DETAIL_DELAY, LIST_DELAY } from "./constants";
 

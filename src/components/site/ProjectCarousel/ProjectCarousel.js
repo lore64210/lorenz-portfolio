@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import RevealMedia from "@/components/motion/RevealMedia/RevealMedia";
-import CatarsisLogo from "@/components/redesign/CatarsisLogo/CatarsisLogo";
+import CatarsisLogo from "@/components/site/CatarsisLogo/CatarsisLogo";
 import {
     CAROUSEL_IMAGE_SIZES,
     SOUND_BARS_COUNT,

@@ -1,7 +1,7 @@
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { getPreviewCopy } from "@/content/preview";
 import { buildMetadata } from "@/content/site";
-import PlaygroundArticle from "@/components/redesign/PlaygroundArticle/PlaygroundArticle";
+import PlaygroundArticle from "@/components/site/PlaygroundArticle/PlaygroundArticle";
 import Terrain from "@/components/miniprojects/terrain/terrain";
 import { resolveLocale } from "@/lib/locale";
 import { SITE_NAME } from "@/constants/site";

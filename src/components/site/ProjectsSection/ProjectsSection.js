@@ -2,8 +2,8 @@ import "./ProjectsSection.scss";
 import { FaArrowRight } from "react-icons/fa";
 import Reveal from "@/components/motion/Reveal/Reveal";
 import RevealText from "@/components/motion/RevealText/RevealText";
-import SectionHeading from "@/components/redesign/SectionHeading/SectionHeading";
-import ProjectCarousel from "@/components/redesign/ProjectCarousel/ProjectCarousel";
+import SectionHeading from "@/components/site/SectionHeading/SectionHeading";
+import ProjectCarousel from "@/components/site/ProjectCarousel/ProjectCarousel";
 import { getProjectHref, projectItems } from "@/content/preview";
 import { CONTENT_DELAY } from "./constants";
 

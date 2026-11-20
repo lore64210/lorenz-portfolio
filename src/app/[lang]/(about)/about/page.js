@@ -1,4 +1,4 @@
-import AboutPageContent from "@/components/redesign/AboutPageContent/AboutPageContent";
+import AboutPageContent from "@/components/site/AboutPageContent/AboutPageContent";
 import { getPreviewCopy } from "@/content/preview";
 import { buildMetadata } from "@/content/site";
 import { resolveLocale } from "@/lib/locale";

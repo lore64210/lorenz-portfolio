@@ -1,6 +1,6 @@
 import "./SkillsSection.scss";
 import Reveal from "@/components/motion/Reveal/Reveal";
-import SectionHeading from "@/components/redesign/SectionHeading/SectionHeading";
+import SectionHeading from "@/components/site/SectionHeading/SectionHeading";
 import { skillGroups } from "@/content/preview";
 import { ROW_DELAY_STEP } from "./constants";
 
