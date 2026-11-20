@@ -1,40 +1,35 @@
-export const siteUrl = "https://lorenzomatiaslopez.vercel.app";
-export const siteName = "Lorenzo López";
-export const defaultOgImage = "/static/images/og-image.png";
-
-const locales = ["es", "en"];
-
-const localizePath = (path, locale) =>
-    `/${locale}${path.replace(/^\/(es|en)/, "")}`;
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/constants/site";
+import { LOCALES, getLocale, localizePath } from "@/constants/i18n";
 
 export function buildMetadata({
     lang,
     title,
     description,
     path,
-    image = defaultOgImage,
+    image = DEFAULT_OG_IMAGE,
 }) {
-    const canonical = new URL(path, siteUrl).toString();
-    const imageUrl = new URL(image, siteUrl).toString();
+    const locale = getLocale(lang);
+    const canonical = new URL(path, SITE_URL).toString();
+    const imageUrl = new URL(image, SITE_URL).toString();
 
     return {
-        metadataBase: new URL(siteUrl),
+        metadataBase: new URL(SITE_URL),
         title,
         description,
         alternates: {
             canonical,
             languages: Object.fromEntries(
-                locales.map((locale) => [
-                    locale,
-                    new URL(localizePath(path, locale), siteUrl).toString(),
+                LOCALES.map((item) => [
+                    item,
+                    new URL(localizePath(path, item), SITE_URL).toString(),
                 ])
             ),
         },
         openGraph: {
             type: "website",
-            siteName,
-            locale: lang === "es" ? "es_AR" : "en_US",
-            alternateLocale: lang === "es" ? ["en_US"] : ["es_AR"],
+            siteName: SITE_NAME,
+            locale: locale === "es" ? "es_AR" : "en_US",
+            alternateLocale: locale === "es" ? ["en_US"] : ["es_AR"],
             url: canonical,
             title,
             description,
@@ -43,7 +38,7 @@ export function buildMetadata({
                     url: imageUrl,
                     width: 1200,
                     height: 630,
-                    alt: siteName,
+                    alt: SITE_NAME,
                 },
             ],
         },

@@ -1,0 +1,1 @@
+export const FALLBACK_CANVAS_SIZE = 400;

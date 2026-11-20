@@ -1,0 +1,289 @@
+.project-media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: transform 0.35s ease, border-color 0.35s ease;
+}
+.project-media:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+.project-media-link {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.project-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.project-carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transform: translateX(var(--carousel-offset, 0));
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-carousel-slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+}
+.project-carousel-slide-logo {
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(139, 124, 247, 0.24),
+            transparent 45%
+        ),
+        #0f0b17;
+}
+.project-logo-musikit {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.6vw, 26px);
+    transition: transform 0.6s ease;
+}
+.project-logo-mark {
+    display: grid;
+    place-items: center;
+    width: clamp(64px, 8vw, 88px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(139, 124, 247, 0.45);
+    border-radius: clamp(12px, 1.6vw, 18px);
+    background: #241f33;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+.sound-bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(3px, 0.45vw, 5px);
+    height: clamp(30px, 4.4vw, 46px);
+}
+.sound-bars-bar {
+    display: block;
+    width: clamp(3px, 0.4vw, 4px);
+    height: 100%;
+    border-radius: 999px;
+    background: #8b7cf7;
+    opacity: 0.75;
+    transform-origin: center;
+    transform: scaleY(var(--bar-scale, 0.6));
+}
+.sound-bars-bar:nth-child(1) {
+    --bar-scale: 0.56;
+    --bar-delay: 0s;
+    --bar-duration: 0.8s;
+}
+.sound-bars-bar:nth-child(2) {
+    --bar-scale: 0.93;
+    --bar-delay: 0.49s;
+    --bar-duration: 0.98s;
+}
+.sound-bars-bar:nth-child(3) {
+    --bar-scale: 0.75;
+    --bar-delay: 0.07s;
+    --bar-duration: 1.16s;
+}
+.sound-bars-bar:nth-child(4) {
+    --bar-scale: 0.67;
+    --bar-delay: 0.56s;
+    --bar-duration: 1.34s;
+}
+.sound-bars-bar:nth-child(5) {
+    --bar-scale: 0.49;
+    --bar-delay: 0.14s;
+    --bar-duration: 1.52s;
+}
+.project-carousel-slide-logo.is-active .sound-bars-bar {
+    animation: sound-bars-pulse var(--bar-duration, 0.9s) ease-in-out
+        var(--bar-delay, 0s) infinite;
+}
+.project-logo-title {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4.2vw, 46px);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #ece9f7;
+}
+.project-carousel-slide-catarsis {
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(
+            circle at 16% 18%,
+            rgba(255, 255, 255, 0.48),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 84% 78%,
+            rgba(255, 255, 255, 0.28),
+            transparent 32%
+        ),
+        linear-gradient(160deg, #7aa7d9 0%, #4f7db6 46%, #2b4776 100%);
+}
+@keyframes sound-bars-pulse {
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scaleY(calc(var(--bar-scale, 0.6) * 0.4));
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(var(--bar-scale, 0.6));
+    }
+}
+.project-media:hover
+    .project-carousel-slide-logo.is-active
+    .project-logo-musikit,
+.project-media:focus-within
+    .project-carousel-slide-logo.is-active
+    .project-logo-musikit {
+    transform: scale(1.05);
+}
+.project-carousel-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    background: rgba(10, 16, 24, 0.55);
+    color: #fff;
+    font-size: 13px;
+    opacity: 0;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: opacity 0.25s ease, background 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+.project-carousel-arrow.is-prev {
+    left: 16px;
+}
+.project-carousel-arrow.is-next {
+    right: 16px;
+}
+.project-carousel-arrow:hover {
+    background: rgba(10, 16, 24, 0.8);
+}
+.project-media:hover .project-carousel-arrow,
+.project-media:focus-within .project-carousel-arrow {
+    opacity: 1;
+}
+.project-carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(10, 16, 24, 0.5);
+    transform: translateX(-50%);
+    backdrop-filter: blur(8px);
+}
+.project-carousel-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition: width 0.25s ease, background 0.25s ease;
+}
+.project-carousel-dot.is-active {
+    width: 18px;
+    background: var(--accent);
+}
+@media (hover: none) {
+    .project-carousel-arrow {
+        opacity: 1;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-carousel-track,
+    .project-image,
+    .project-logo-musikit,
+    .project-logo-catarsis-word {
+        transition: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-media:hover .project-carousel-slide.is-active .project-image,
+    .project-media:focus-within .project-carousel-slide.is-active .project-image,
+    .project-media:hover
+        .project-carousel-slide-logo.is-active
+        .project-logo-musikit,
+    .project-media:focus-within
+        .project-carousel-slide-logo.is-active
+        .project-logo-musikit,
+    .project-media:hover
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word,
+    .project-media:focus-within
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word {
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-carousel-slide-logo.is-active .sound-bars-bar {
+        animation: none;
+    }
+}
+.project-media-navy {
+    padding: 0;
+    background: #0b1c2c;
+}
+.project-media-ink {
+    padding: 0;
+    background: #150b10;
+}
+.project-media.project-media-wide {
+    aspect-ratio: 16 / 9;
+}
+.project-media-mint {
+    background: linear-gradient(135deg, #eaf7f1, #d8f0e6);
+    border-color: rgba(127, 209, 192, 0.3);
+}
+.project-media-sky {
+    padding: 0;
+    background: #2b4776;
+    border-color: rgba(122, 167, 217, 0.35);
+}
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.project-image-fit-contain {
+    object-fit: contain;
+}
+.project-media:hover .project-carousel-slide.is-active .project-image,
+.project-media:focus-within .project-carousel-slide.is-active .project-image {
+    transform: scale(1.08);
+}
+@media (max-width: 960px) {
+    .project-media {
+        aspect-ratio: 16 / 11;
+    }
+}

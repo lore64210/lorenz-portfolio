@@ -25,10 +25,6 @@ export default class GraphNode {
         this.distance = distance;
     }
 
-    getDistance() {
-        return this.distance;
-    }
-    
     getValue() {
         return this.value;
     }

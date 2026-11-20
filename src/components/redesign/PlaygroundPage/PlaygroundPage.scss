@@ -1,0 +1,73 @@
+.playground-page {
+    position: relative;
+    padding-bottom: clamp(80px, 10vw, 130px);
+}
+.playground-page .container {
+    position: relative;
+    z-index: 1;
+}
+.playground-header {
+    max-width: 960px;
+    padding: clamp(40px, 6vw, 72px) 0 clamp(24px, 4vw, 40px);
+}
+.playground-header h1 {
+    margin: 0;
+    font-size: clamp(44px, 6.5vw, 84px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+.playground-lead {
+    max-width: 760px;
+    margin: 24px 0 0;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.7;
+    color: var(--muted);
+}
+.playground-stage {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    padding: 24px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+.playground-stage canvas {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    border-radius: 12px;
+}
+.playground-stage-maze {
+    border-radius: 0;
+}
+.playground-stage-maze canvas {
+    border-radius: 0;
+}
+@media (max-width: 960px) {
+    .playground-header {
+        padding-top: 40px;
+    }
+}
+@media (max-width: 960px) {
+    .playground-stage {
+        padding: 16px;
+    }
+}
+@media (max-width: 600px) {
+    .playground-header h1 {
+        font-size: clamp(40px, 12vw, 60px);
+    }
+}
+@media (max-width: 600px) {
+    .playground-lead {
+        font-size: 16px;
+    }
+}
+@media (max-width: 600px) {
+    .playground-stage canvas {
+        border-radius: 8px;
+    }
+}

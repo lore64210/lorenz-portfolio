@@ -1,9 +1,10 @@
-import AboutPageContent from "@/components/redesign/AboutPageContent";
+import AboutPageContent from "@/components/redesign/AboutPageContent/AboutPageContent";
 import { getPreviewCopy } from "@/content/preview";
 import { buildMetadata } from "@/content/site";
+import { resolveLocale } from "@/lib/locale";
 
 export async function generateMetadata({ params }) {
-    const { lang = "es" } = await params;
+    const lang = await resolveLocale(params);
     const copy = getPreviewCopy(lang);
 
     return buildMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function AboutPage({ params }) {
-    const { lang = "es" } = await params;
+    const lang = await resolveLocale(params);
     const copy = getPreviewCopy(lang);
 
     return <AboutPageContent lang={lang} copy={copy} />;

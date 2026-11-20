@@ -1,10 +1,9 @@
-import { CELL_AMOUNT } from "../../maze";
-import GraphNode from "../graphs/GraphNode";
+import GraphNode from "@/components/miniprojects/classes/graphs/GraphNode";
 
 export default class Cell extends GraphNode {
     row = 0;
     col = 0;
-    cellSize = CELL_AMOUNT;
+    cellSize = 0;
     topWall = true;
     bottomWall = true;
     rightWall = true;

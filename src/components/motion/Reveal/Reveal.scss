@@ -1,0 +1,36 @@
+.motion-reveal.is-armed:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 24px));
+}
+.motion-reveal.is-visible {
+    animation: reveal-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+.motion-reveal-play {
+    animation: reveal-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+.motion-reveal.is-done,
+.motion-reveal-play.is-done {
+    animation: none;
+    opacity: 1;
+    will-change: auto;
+}
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(var(--reveal-y, 24px));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .motion-reveal {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+    }
+}

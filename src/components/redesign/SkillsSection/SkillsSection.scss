@@ -1,0 +1,94 @@
+.skills-list {
+    border-top: 1px solid var(--border);
+}
+.skill-row {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+}
+.skill-row-title {
+    margin: 0;
+    padding-top: 7px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.skill-tag::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--mint);
+}
+.skill-tag:hover {
+    border-color: rgba(127, 209, 192, 0.45);
+    background: var(--mint-soft);
+    color: var(--text);
+}
+@media (max-width: 960px) {
+    .skill-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 22px 0;
+    }
+}
+@media (max-width: 960px) {
+    .skill-row-title {
+        padding-top: 0;
+    }
+}
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .skills-section.snap-section {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+}
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .skill-row {
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 16px;
+        padding: 14px 0;
+    }
+}
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .skill-row-title {
+        padding-top: 4px;
+        font-size: 18px;
+    }
+}
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .skill-tags {
+        gap: 8px;
+    }
+}
+@media (min-width: 1000px) and (min-height: 640px) and (max-width: 1199px),
+    (min-width: 1000px) and (min-height: 640px) and (max-height: 767px) {
+    .skill-tag {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}

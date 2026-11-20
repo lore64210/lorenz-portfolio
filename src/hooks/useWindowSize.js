@@ -1,4 +1,6 @@
-const { useState, useEffect } = require("react");
+"use client";
+
+import { useEffect, useState } from "react";
 
 export default function useWindowSize() {
     const [windowSize, setWindowSize] = useState({
@@ -9,8 +11,8 @@ export default function useWindowSize() {
     useEffect(() => {
         function handleResize() {
             setWindowSize({
-                width: screen.width,
-                height: screen.height,
+                width: window.innerWidth,
+                height: window.innerHeight,
             });
         }
         window.addEventListener("resize", handleResize);
@@ -19,5 +21,6 @@ export default function useWindowSize() {
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
     return windowSize;
 }

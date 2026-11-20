@@ -2,13 +2,14 @@ import { JetBrains_Mono, Quicksand } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../../styles/preview.scss";
-import "../../styles/dancer.scss";
-import SiteHeader from "@/components/redesign/SiteHeader";
-import SiteFooter from "@/components/redesign/SiteFooter";
-import ScrollProgress from "@/components/motion/ScrollProgress";
-import NetworkBackground from "@/components/motion/NetworkBackground";
-import { getPreviewCopy, previewLinks } from "@/content/preview";
-import { buildMetadata, siteName, siteUrl } from "@/content/site";
+import SiteHeader from "@/components/redesign/SiteHeader/SiteHeader";
+import SiteFooter from "@/components/redesign/SiteFooter/SiteFooter";
+import ScrollProgress from "@/components/motion/ScrollProgress/ScrollProgress";
+import NetworkBackground from "@/components/motion/NetworkBackground/NetworkBackground";
+import { getPreviewCopy } from "@/content/preview";
+import { buildMetadata } from "@/content/site";
+import { resolveLocale } from "@/lib/locale";
+import { SITE_NAME, SITE_URL, SOCIAL_LINKS } from "@/constants/site";
 
 const quicksand = Quicksand({
     subsets: ["latin"],
@@ -25,7 +26,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export async function generateMetadata({ params }) {
-    const { lang = "es" } = await params;
+    const lang = await resolveLocale(params);
     const copy = getPreviewCopy(lang);
 
     return buildMetadata({
@@ -37,18 +38,18 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function RootLayout({ children, params }) {
-    const { lang = "es" } = await params;
+    const lang = await resolveLocale(params);
     const copy = getPreviewCopy(lang);
     const jsonLd = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "Person",
-                "@id": `${siteUrl}/#person`,
+                "@id": `${SITE_URL}/#person`,
                 name: copy.hero.name,
                 jobTitle: copy.hero.role,
-                url: `${siteUrl}/${lang}`,
-                sameAs: [previewLinks.github, previewLinks.linkedin],
+                url: `${SITE_URL}/${lang}`,
+                sameAs: [SOCIAL_LINKS.github, SOCIAL_LINKS.linkedin],
                 knowsAbout: [
                     "React",
                     "Next.js",
@@ -60,11 +61,11 @@ export default async function RootLayout({ children, params }) {
             },
             {
                 "@type": "WebSite",
-                "@id": `${siteUrl}/#website`,
-                name: siteName,
-                url: `${siteUrl}/${lang}`,
+                "@id": `${SITE_URL}/#website`,
+                name: SITE_NAME,
+                url: `${SITE_URL}/${lang}`,
                 inLanguage: lang,
-                author: { "@id": `${siteUrl}/#person` },
+                author: { "@id": `${SITE_URL}/#person` },
             },
         ],
     };

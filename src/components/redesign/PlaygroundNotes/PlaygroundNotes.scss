@@ -1,0 +1,35 @@
+.playground-notes {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+}
+.playground-notes h2 {
+    margin: 0 0 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+.playground-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 32px;
+}
+.playground-notes-grid p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+}
+@media (max-width: 960px) {
+    .playground-notes-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 600px) {
+    .playground-notes {
+        margin-top: 28px;
+    }
+}

@@ -1,5 +1,4 @@
-import { CELL_AMOUNT } from "../../maze";
-import Graph from "../graphs/Graph";
+import Graph from "@/components/miniprojects/classes/graphs/Graph";
 
 export default class Maze extends Graph {
     currentCell = null;
@@ -7,16 +6,22 @@ export default class Maze extends Graph {
 
     currentCellMinPath = 0;
 
+    constructor(size, isDirectional = false) {
+        super(isDirectional);
+        this.size = size;
+        this.cellIndex = null;
+    }
+
     getCell(x, y) {
-        let cell = null;
-        this.vertices.forEach((vertex) => {
-            if (
-                JSON.stringify(vertex.getValue()) === JSON.stringify({ x, y })
-            ) {
-                cell = vertex;
-            }
-        });
-        return cell;
+        if (!this.cellIndex || this.cellIndex.size !== this.vertices.length) {
+            this.cellIndex = new Map(
+                this.vertices.map((vertex) => {
+                    const value = vertex.getValue();
+                    return [`${value.x}:${value.y}`, vertex];
+                })
+            );
+        }
+        return this.cellIndex.get(`${x}:${y}`) ?? null;
     }
 
     getCurrentCell() {
@@ -69,7 +74,7 @@ export default class Maze extends Graph {
                     vertexValue
                 );
             }
-            if (vertex.bottomWall && vertex.row !== CELL_AMOUNT) {
+            if (vertex.bottomWall && vertex.row !== this.size) {
                 this.removeUnnecesaryEdge(
                     { x: vertex.getRow(), y: vertex.getCol() + 1 },
                     vertex,
@@ -83,7 +88,7 @@ export default class Maze extends Graph {
                     vertexValue
                 );
             }
-            if (vertex.rightWall && vertex.row !== CELL_AMOUNT) {
+            if (vertex.rightWall && vertex.row !== this.size) {
                 this.removeUnnecesaryEdge(
                     { x: vertex.getRow() + 1, y: vertex.getCol() },
                     vertex,
@@ -94,7 +99,7 @@ export default class Maze extends Graph {
     }
 
     setEnd() {
-        this.getCell(CELL_AMOUNT - 1, CELL_AMOUNT - 1).setIsEnd();
+        this.getCell(this.size - 1, this.size - 1).setIsEnd();
     }
 
     create() {

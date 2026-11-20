@@ -1,6 +1,0 @@
-@import "./_vars.scss";
-
-@import "desktop/_d_home.scss";
-@media (max-width: $breakpoint-mobile) {
-    @import "mobile/_m_home.scss";
-}

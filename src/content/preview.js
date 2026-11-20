@@ -1,9 +1,3 @@
-export const previewLinks = {
-    github: "https://github.com/lore64210",
-    linkedin: "https://www.linkedin.com/in/lorenzo-matias-lopez/",
-    email: "mailto:lore64210@gmail.com",
-};
-
 export const skillGroups = [
     {
         key: "frontend",
@@ -198,6 +192,7 @@ const copy = {
             cv: "CV",
             menu: "Abrir menú",
             language: "EN",
+            primary: "Navegación principal",
         },
         cvOptions: {
             es: "Español (ES)",
@@ -415,10 +410,6 @@ const copy = {
             eyebrow: "05 — Playground",
             back: "Volver al playground",
             notes: "Cómo funciona",
-            secondExperiment: "Experimento",
-            ballTitle: "Ball Ecosystem",
-            ballLead:
-                "Un ecosistema de agentes que se mueven, comen y evolucionan generación tras generación.",
             iteration: {
                 title: "Fin de la iteración",
                 generation: "Generación",
@@ -476,6 +467,7 @@ const copy = {
             cv: "Resume",
             menu: "Open menu",
             language: "ES",
+            primary: "Main navigation",
         },
         cvOptions: {
             es: "Español (ES)",
@@ -693,10 +685,6 @@ const copy = {
             eyebrow: "05 — Playground",
             back: "Back to playground",
             notes: "How it works",
-            secondExperiment: "Experiment",
-            ballTitle: "Ball Ecosystem",
-            ballLead:
-                "An ecosystem of agents that move, eat and evolve generation after generation.",
             iteration: {
                 title: "Iteration complete",
                 generation: "Generation",

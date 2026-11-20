@@ -5,7 +5,7 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
-import { PixelateShader } from "./pixelateShader";
+import { PixelateShader } from "@/components/dancer/pixelateShader";
 
 const MODEL_URL = "/static/models/meshy-lore.glb";
 const DANCES_URL = "/static/data/winston-dances.json";

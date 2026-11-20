@@ -1,7 +1,7 @@
-import { BREAKPOINT_MOBILE } from "@/constants/constants";
-import useWindowSize from "./useWindowSize";
+import { isMobileViewport } from "@/constants/layout";
+import useWindowSize from "@/hooks/useWindowSize";
 
 export default function useIsMobile() {
     const { width } = useWindowSize();
-    return width <= BREAKPOINT_MOBILE;
+    return isMobileViewport(width);
 }

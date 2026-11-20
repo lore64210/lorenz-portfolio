@@ -1,4 +1,4 @@
-import { siteUrl } from "@/content/site";
+import { SITE_URL } from "@/constants/site";
 
 export default function robots() {
     return {
@@ -9,7 +9,7 @@ export default function robots() {
                 disallow: ["/api/"],
             },
         ],
-        sitemap: `${siteUrl}/sitemap.xml`,
-        host: siteUrl,
+        sitemap: `${SITE_URL}/sitemap.xml`,
+        host: SITE_URL,
     };
 }

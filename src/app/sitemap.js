@@ -1,4 +1,5 @@
-import { siteUrl } from "@/content/site";
+import { SITE_URL } from "@/constants/site";
+import { LOCALES } from "@/constants/i18n";
 
 const routes = [
     { path: "", priority: 1, changeFrequency: "monthly" },
@@ -9,22 +10,20 @@ const routes = [
     { path: "/terrain", priority: 0.6, changeFrequency: "yearly" },
 ];
 
-const locales = ["es", "en"];
-
 export default function sitemap() {
     const lastModified = new Date();
 
-    return locales.flatMap((lang) =>
+    return LOCALES.flatMap((lang) =>
         routes.map(({ path, priority, changeFrequency }) => ({
-            url: `${siteUrl}/${lang}${path}`,
+            url: `${SITE_URL}/${lang}${path}`,
             lastModified,
             changeFrequency,
             priority,
             alternates: {
                 languages: Object.fromEntries(
-                    locales.map((locale) => [
+                    LOCALES.map((locale) => [
                         locale,
-                        `${siteUrl}/${locale}${path}`,
+                        `${SITE_URL}/${locale}${path}`,
                     ])
                 ),
             },

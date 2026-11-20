@@ -1,0 +1,49 @@
+.motion-word-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+}
+.motion-word {
+    display: inline-block;
+}
+
+/* The stagger index lives in the stylesheet: no inline style per word. */
+@for $i from 1 through 30 {
+    .motion-word-mask:nth-child(#{$i}) .motion-word {
+        --word-index: #{$i - 1};
+    }
+}
+.motion-words-play .motion-word {
+    animation: word-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(
+        var(--word-index) * 80ms + var(--word-delay, 0ms) + 100ms
+    );
+}
+.motion-words.is-armed:not(.is-visible) .motion-word {
+    opacity: 0;
+    transform: translateY(110%);
+}
+.motion-words.is-visible .motion-word {
+    animation: word-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--word-index) * 80ms + var(--word-delay, 0ms));
+}
+@keyframes word-up {
+    from {
+        opacity: 0;
+        transform: translateY(110%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .motion-word {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+    }
+}

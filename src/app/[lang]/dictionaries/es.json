@@ -1,60 +1,4 @@
 {
-    "header": {
-        "home": "Home",
-        "about-me": "Sobre mi",
-        "projects": "Proyectos",
-        "playground": "Playground",
-        "my-repos": "Mis Repositorios"
-    },
-    "cv": {
-        "download": "Mi Curriculum"
-    },
-    "about": {
-        "content": [
-            "Soy desarrollador de paginas web hace un par de años",
-            "Cuando le cuento a la gente sobre lo que hago estoy bastante seguro de que piensan 'Que aburrido por dios', pero la verdad es que mas allá de la frustración y el estrés que pueda generar este oficio, creo que pude transformar el habito de crear software en algo bastante entretenido y divertido",
-            "Hice esta pagina web para mostrar un poco lo que puedo hacer, y las ganas que le pongo. No soy una persona muy original, ni rapida; pero con ganas y tiempo termino armando cosas que me hacen sentir orgulloso, de ahi la motivacion de mostrar mi trabajo con este espacio",
-            "",
-            "Trabajo mas que nada con React, pero me gusta ir probando cosas distintas a cada rato para tener una pequeña nocion sobre que puede hacer cada herramienta",
-            "",
-            "Trabaje ya en varios lugares, de cada uno aprendi algo nuevo ya sea en como moverme socialmente, como aprender cosas nuevas, como pensar distintas situaciones, solo o en equipo.",
-            "Ademas por supuesto me encontré con muchas formas distintas de trabajar, con distintas herramientas, lenguajes, frameworks que con el paso del tiempo la sociedad de programadores va marcando como obsoletos pero todos sirven para cumplir con la creacion de alguna funcionalidad",
-            "El stack que manejo es variado, trabaje y jugue usando SpringBoot con Java, Django con Python, NodeJS, y alguno mas que me olvido en el Backend",
-            "En el Frontend como mencione antes uso mas que nada React, junto con Next. Tambien conozco VueJS y algunos lenguajes de view-templates que manejan SpringBoot y Django",
-            "",
-            "Si llegaste hasta aca, gracias por haberme leido. Y si viste alguna de las cosas que hice, tambien, mil gracias por tomarte el tiempo. Espero que te haya gustado"
-        ]
-    },
-    "technologies": {
-        "title": "Tecnologias que uso"
-    },
-    "projects": {
-        "title": "Mis Proyectos",
-        "portfolio-maker": {
-            "title": "Portfolio Maker",
-            "description": "Una herramienta para hacer tu propio Portfolio con multiples paginas, distintos tipos de galerias, y varias configuraciones de estilo"
-        },
-        "historia-humo": {
-            "title": "Historia y Humo",
-            "description": "Un blog dedicado a las personas y eventos mas importantes de la historia Argentina"
-        },
-        "organizer": {
-            "title": "Organizer",
-            "description": "Una app mobile que es el clasico del dev que esta aprendiendo a programar: Una TODO-app con varias funciones como sacar fotos, grabar audios entre otras"
-        },
-        "spring-crud-initializr": {
-            "title": "Spring CRUD Initializr",
-            "description": "Una herramienta sencilla para agilizar la creacion de APIs CRUD hechas con Spring, generando las distintas entidades de dominio, los servicios, controladores, tests, schema.sql, entre otros"
-        }
-    },
-    "playground": {
-        "title": "Algunos mini-proyectitos que fui armando cada tanto",
-        "maze-generator": "Maze Generator",
-        "balls-ecosystem": "Ball Ecosystem",
-        "path-finder": "Path Finder",
-        "traveling-salesman": "Traveling Salesman",
-        "terrain": "Terrain"
-    },
     "projects-content": {
         "maze-generator": {
             "title": "Laberintos aleatorios",
@@ -111,7 +55,7 @@
                 "Se usan los ejes x e y para dibujar los triángulos, y el eje z para elevar dichos triángulos.",
                 "El canvas está rotado y trasladado para que se pueda visualizar mejor cómo sube y baja z.",
                 "La forma en que sube y baja z es a través del \"ruido de Perlin\", una forma especial de usar el algoritmo RANDOM: en lugar de una subida y bajada errática de 0 a 100, la curva de cambio es muchísimo más tenue.",
-                "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z, que va incrementándose un poquito después de cada iteración; eso hace que parezca que estamos sobrevolando unas montañas en lugar de rebotando en una gelatina."
+                "Guardo un valor por fuera del algoritmo que calcula la aleatoriedad de z, que va incrementándose un poquito después de cada iteración; eso hace que parezca que estamos sobrevolando unas montañas en lugar de rebotar en una gelatina."
             ],
             "labels": {
                 "speed": "Velocidad",

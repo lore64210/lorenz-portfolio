@@ -1,15 +1,16 @@
-import SnapContainer from "@/components/motion/SnapContainer";
-import Hero from "@/components/redesign/Hero";
-import AboutSection from "@/components/redesign/AboutSection";
-import SkillsSection from "@/components/redesign/SkillsSection";
-import ExperienceSection from "@/components/redesign/ExperienceSection";
-import ProjectsSection from "@/components/redesign/ProjectsSection";
-import PlaygroundSection from "@/components/redesign/PlaygroundSection";
-import ContactSection from "@/components/redesign/ContactSection";
+import SnapContainer from "@/components/motion/SnapContainer/SnapContainer";
+import Hero from "@/components/redesign/Hero/Hero";
+import AboutSection from "@/components/redesign/AboutSection/AboutSection";
+import SkillsSection from "@/components/redesign/SkillsSection/SkillsSection";
+import ExperienceSection from "@/components/redesign/ExperienceSection/ExperienceSection";
+import ProjectsSection from "@/components/redesign/ProjectsSection/ProjectsSection";
+import PlaygroundSection from "@/components/redesign/PlaygroundSection/PlaygroundSection";
+import ContactSection from "@/components/redesign/ContactSection/ContactSection";
 import { getPreviewCopy } from "@/content/preview";
+import { resolveLocale } from "@/lib/locale";
 
 export default async function Home({ params }) {
-    const { lang = "es" } = await params;
+    const lang = await resolveLocale(params);
     const copy = getPreviewCopy(lang);
 
     return (

@@ -1,0 +1,76 @@
+.project-logo-catarsis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(88%, 780px);
+    text-align: center;
+}
+.project-logo-catarsis-eyebrow {
+    margin-bottom: clamp(10px, 1.5vw, 18px);
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 0.9vw, 12px);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+}
+.project-logo-catarsis-word {
+    display: inline-flex;
+    align-items: flex-end;
+    column-gap: var(--catarsis-gap, 0);
+    line-height: 1;
+    transition: transform 0.6s ease;
+}
+.project-logo-catarsis-letter {
+    display: block;
+    flex: 0 0 auto;
+    width: var(--letter-width, 0);
+    height: var(--letter-height, 0);
+    margin-right: var(--letter-margin, 0);
+    background-image: var(--catarsis-image, none);
+    background-repeat: no-repeat;
+    background-size: var(--catarsis-image-size, auto);
+    background-position: var(--letter-x, 0) var(--letter-y, 0);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.project-logo-catarsis-letter.is-visible {
+    opacity: 1;
+}
+.project-logo-catarsis-rule {
+    width: 72%;
+    height: clamp(4px, 0.7vw, 8px);
+    margin-top: clamp(12px, 1.8vw, 22px);
+    border-radius: 999px;
+    background: #ef2f86;
+    opacity: 0.9;
+    transform: rotate(-1.5deg) scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-logo-catarsis-rule.is-seated {
+    transform: rotate(-1.5deg) scaleX(1);
+}
+.project-media:hover
+    .project-carousel-slide-catarsis.is-active
+    .project-logo-catarsis-word,
+.project-media:focus-within
+    .project-carousel-slide-catarsis.is-active
+    .project-logo-catarsis-word {
+    transform: scale(1.05);
+}
+@media (prefers-reduced-motion: reduce) {
+    .project-logo-catarsis-word,
+    .project-logo-catarsis-letter,
+    .project-logo-catarsis-rule {
+        transition: none;
+    }
+
+    .project-media:hover
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word,
+    .project-media:focus-within
+        .project-carousel-slide-catarsis.is-active
+        .project-logo-catarsis-word {
+        transform: none;
+    }
+}
