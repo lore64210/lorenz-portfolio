@@ -80,6 +80,29 @@ export const projectItems = [
         tone: "mint",
     },
     {
+        key: "catarsis",
+        images: [
+            {
+                type: "catarsis-logo",
+            },
+            {
+                src: "/static/images/catarsis/origen.webp",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/catarsis/comunidad.webp",
+                fit: "cover",
+            },
+            {
+                src: "/static/images/catarsis/donde-estamos.webp",
+                fit: "cover",
+            },
+        ],
+        href: "https://catarsisfanzine.vercel.app/",
+        stack: "React · TypeScript · Firebase · Leaflet",
+        tone: "sky",
+    },
+    {
         key: "musikit",
         images: [
             {
@@ -102,29 +125,6 @@ export const projectItems = [
         stack: "React · Tone.js",
         tone: "ink",
         wide: true,
-    },
-    {
-        key: "catarsis",
-        images: [
-            {
-                type: "catarsis-logo",
-            },
-            {
-                src: "/static/images/catarsis/origen.webp",
-                fit: "cover",
-            },
-            {
-                src: "/static/images/catarsis/comunidad.webp",
-                fit: "cover",
-            },
-            {
-                src: "/static/images/catarsis/donde-estamos.webp",
-                fit: "cover",
-            },
-        ],
-        href: "https://catarsisfanzine.vercel.app/",
-        stack: "React · TypeScript · Firebase · Leaflet",
-        tone: "sky",
     },
     {
         key: "organizer",
