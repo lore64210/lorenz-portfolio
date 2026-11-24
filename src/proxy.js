@@ -1,16 +1,5 @@
 import { NextResponse } from "next/server";
-import { match } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
 import { DEFAULT_LOCALE, LOCALES } from "@/constants/i18n";
-
-function getLocale(request) {
-    const headers = {
-        "accept-language":
-            request.headers.get("accept-language") ?? DEFAULT_LOCALE,
-    };
-    const languages = new Negotiator({ headers }).languages();
-    return match(languages, LOCALES, DEFAULT_LOCALE);
-}
 
 export function proxy(request) {
     const { pathname } = request.nextUrl;
@@ -21,8 +10,9 @@ export function proxy(request) {
 
     if (pathnameHasLocale) return;
 
-    const locale = getLocale(request);
-    request.nextUrl.pathname = `/${locale}${pathname}`;
+    // No locale in the URL: always send visitors to the default locale,
+    // regardless of their Accept-Language header.
+    request.nextUrl.pathname = `/${DEFAULT_LOCALE}${pathname}`;
     return NextResponse.redirect(request.nextUrl);
 }
 

@@ -4,9 +4,13 @@ import "./SiteHeader.scss";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGlobe, FaGithub, FaLinkedin } from "react-icons/fa";
 import { getCvFile } from "@/constants/cv";
-import { getOtherLocale, localizePath } from "@/constants/i18n";
+import {
+    getLocaleLabel,
+    getOtherLocale,
+    localizePath,
+} from "@/constants/i18n";
 import { SITE_NAME, SOCIAL_LINKS } from "@/constants/site";
 import { NAV_ITEMS } from "./constants";
 
@@ -19,6 +23,8 @@ export default function SiteHeader({ lang, copy }) {
     const otherLang = getOtherLocale(lang);
     const pathWithoutLang = pathname?.replace(/^\/(es|en)(?=\/|$)/, "") ?? "";
     const otherLangHref = localizePath(pathWithoutLang, otherLang);
+    const otherLangLabel = getLocaleLabel(otherLang);
+    const switchLanguageLabel = `${copy.nav.switchLanguage} ${otherLangLabel}`;
     const cv = getCvFile(lang);
     const links = NAV_ITEMS.map((item) => ({
         href: item.href ? `/${lang}${item.href}` : `/${lang}#${item.hash}`,
@@ -44,9 +50,6 @@ export default function SiteHeader({ lang, copy }) {
                             {link.label}
                         </a>
                     ))}
-                    <Link href={otherLangHref} className="lang-switch">
-                        {copy.nav.language}
-                    </Link>
                     <div className="site-nav-social">
                         <a
                             href={SOCIAL_LINKS.github}
@@ -76,17 +79,29 @@ export default function SiteHeader({ lang, copy }) {
                     </a>
                 </nav>
 
-                <button
-                    type="button"
-                    className="nav-toggle"
-                    onClick={() => setOpen((value) => !value)}
-                    aria-label={copy.nav.menu}
-                    aria-expanded={open}
-                >
-                    <span />
-                    <span />
-                    <span />
-                </button>
+                <div className="site-header-actions">
+                    <Link
+                        href={otherLangHref}
+                        className="lang-switch"
+                        aria-label={switchLanguageLabel}
+                        title={switchLanguageLabel}
+                    >
+                        <FaGlobe aria-hidden="true" />
+                        <span>{otherLangLabel}</span>
+                    </Link>
+
+                    <button
+                        type="button"
+                        className="nav-toggle"
+                        onClick={() => setOpen((value) => !value)}
+                        aria-label={copy.nav.menu}
+                        aria-expanded={open}
+                    >
+                        <span />
+                        <span />
+                        <span />
+                    </button>
+                </div>
             </div>
 
             {open && (
@@ -101,13 +116,6 @@ export default function SiteHeader({ lang, copy }) {
                             {link.label}
                         </a>
                     ))}
-                    <Link
-                        href={otherLangHref}
-                        onClick={close}
-                        className="nav-mobile-link"
-                    >
-                        {copy.nav.language}
-                    </Link>
                     <a
                         href={cv.href}
                         target="_blank"

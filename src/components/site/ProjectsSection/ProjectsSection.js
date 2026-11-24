@@ -5,6 +5,7 @@ import RevealText from "@/components/motion/RevealText/RevealText";
 import SectionHeading from "@/components/site/SectionHeading/SectionHeading";
 import ProjectCarousel from "@/components/site/ProjectCarousel/ProjectCarousel";
 import { getProjectHref, projectItems } from "@/content/preview";
+import { DEFAULT_LOCALE } from "@/constants/i18n";
 import { CONTENT_DELAY } from "./constants";
 
 function ProjectRow({ project, index, copy }) {
@@ -52,7 +53,7 @@ function ProjectRow({ project, index, copy }) {
     );
 }
 
-export default function ProjectsSection({ copy, lang = "es" }) {
+export default function ProjectsSection({ copy, lang = DEFAULT_LOCALE }) {
     const projects = projectItems.map((project) => ({
         ...project,
         href: getProjectHref(project, lang),

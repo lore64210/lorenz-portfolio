@@ -191,7 +191,7 @@ const copy = {
             contact: "Contacto",
             cv: "CV",
             menu: "Abrir menú",
-            language: "EN",
+            switchLanguage: "Cambiar idioma a",
             primary: "Navegación principal",
         },
         cvOptions: {
@@ -466,7 +466,7 @@ const copy = {
             contact: "Contact",
             cv: "Resume",
             menu: "Open menu",
-            language: "ES",
+            switchLanguage: "Switch language to",
             primary: "Main navigation",
         },
         cvOptions: {
@@ -732,7 +732,7 @@ const copy = {
     },
 };
 
-export const getPreviewCopy = (lang) => copy[lang] ?? copy.es;
+export const getPreviewCopy = (lang) => copy[lang] ?? copy.en;
 
 export const getProjectHref = (project, lang) => {
     if (typeof project?.href === "string") return project.href;
