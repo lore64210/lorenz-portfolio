@@ -10,7 +10,7 @@ const contact = (lang) => ({
         lang === "es"
             ? "Buenos Aires, Argentina (GMT-3) · Abierto a trabajo remoto"
             : "Buenos Aires, Argentina (GMT-3) · Open to remote work",
-    phone: "+54 11 5690-4930",
+    phone: "+54 9 11 5690-4930",
     email: "lore64210@gmail.com",
     linkedin: "https://www.linkedin.com/in/lorenzo-matias-lopez/",
     linkedinLabel: "linkedin.com/in/lorenzo-matias-lopez",
